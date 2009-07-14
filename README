@@ -1,0 +1,13 @@
+Design Goals
+
+* Reduced dependencies: Checks for optional packages and only creates the fields if they are there.
+
+* Pluggable markup and GUI for content: The markups that are available are configurable and can define a GUI that appears when selected. (Doesn't handle translation from one markup to another, though)
+
+* Rich content embedding from GUI: For embedded content, the markup language's GUI can do everything it needs.
+
+* Flexible dependencies: Can pick from several applications that provide similar service, for example django-staff vs. User, massmedia vs. photologue
+
+* Revision tracking: Keeps track of saved versions and allows a user to revert to a previous version.
+
+* Related items: Can set any configured item to be related to the story. These are for Photos, Videos, other stories, etc.
