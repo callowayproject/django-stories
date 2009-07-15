@@ -6,7 +6,7 @@ from django.conf.urls.defaults import *
 from models import Story
 
 info_dict = {
-    'queryset': Story.published_on_site.all(),
+    'queryset': Story.published.all(),
     'template_object_name': 'story',
     'date_field': 'publish_date'
 }
