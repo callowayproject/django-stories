@@ -104,10 +104,9 @@ class StoryOptions(admin.ModelAdmin):
     )
     class Media:
         js = (
-            '/static/js/genericcollections.js', 
-            '/static/tiny_mce/tiny_mce.js',
-            '/static/js/lazyload.js', 
-            '/static/js/dataload.js',
+            '/media/js/genericcollections.js', 
+            '/media/fckeditor/fckeditor.js',
+            '/media/fckeditor/fckareas.js'
         )
 
 admin.site.register(Story, StoryOptions)
