@@ -1,0 +1,29 @@
+{% extends "admin/change_form.html" %}
+
+{% load i18n %}
+
+{% block breadcrumbs %}
+	<ul id="crumbs">
+		<li><a href="/">Home</a></li>
+		<li><a href="../../../">Stories</a></li>
+		<li><a href="../../">Stories</a></li>
+		<li><a href="../">{{ story.headline }}</a></li>
+		<li>Revert</li>
+	</ul>
+{% endblock %}
+
+{% block content %}
+	Are you sure you want to revert this story to revision # {{ changeset.revision }}?
+	<form method="POST" action=".">
+		<button type="submit" name="confirm" class="button">
+			Yes
+		</button>
+		<button type="submit" name="cancel" class="button">
+			Cancel
+		</button>
+	</form>
+	{% for change in changesets %}
+		#{{ change.revision }} - <a href="../revert_to/{{ change.revision }}/">revert</a><br/>
+		{{ change.display_diff|safe }}
+	{% endfor %}
+{% endblock %}

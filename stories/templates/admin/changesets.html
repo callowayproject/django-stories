@@ -1,0 +1,22 @@
+{% extends "admin/change_form.html" %}
+
+{% load i18n %}
+
+{% block breadcrumbs %}
+	<ul id="crumbs">
+		<li><a href="/">Home</a></li>
+		<li><a href="../../../">Stories</a></li>
+		<li><a href="../../">Stories</a></li>
+		<li><a href="../">{{ story.headline }}</a></li>
+		<li>Change Sets</li>
+	</ul>
+{% endblock %}
+
+{% block content %}
+	{% for change in changesets %}
+		#{{ change.revision }} {% if change.reverted %}REVERTED{% endif %}
+		{% if not forloop.first %} - <a href="../revert_to/{{ change.revision }}/">revert to these changes.</a>{% endif %}
+		<br/>
+		{{ change.display_diff|safe }}
+	{% endfor %}
+{% endblock %}

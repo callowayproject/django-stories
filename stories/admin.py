@@ -33,6 +33,35 @@ class StoryForm(forms.ModelForm):
         super(StoryForm, self).__init__(data, files, auto_id, prefix, initial, 
                                         error_class, label_suffix, 
                                         empty_permitted, instance)
+                                        
+    def save(self, **kw):
+        # 1 - Get the old stuff before saving
+        if self.instance.id is None:
+            old_headline = old_body = old_markup = ''
+            new = True
+        else:
+            old_headline = self.instance.headline
+            old_body = self.instance.body
+            old_markup = self.instance.markup
+            new = False
+
+        # 2 - Save the Article
+        story = super(StoryForm, self).save(**kw)
+
+        # 3 - Set creator
+        # editor = getattr(self, 'editor', None)
+        if new:
+            # if editor is not None:
+            #     article.creator = editor
+            #     article.group = group
+            story.save()
+
+        # 4 - Create new revision
+        if not old_body == story.body:
+            changeset = story.new_revision(
+                old_body, old_headline, old_markup, None)
+
+        return story#, changeset
 
 
 
