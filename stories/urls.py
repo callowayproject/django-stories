@@ -18,46 +18,46 @@ urlpatterns = patterns('',
         regex  = '^$',
         view   = 'django.views.generic.date_based.archive_index',
         kwargs = info_dict,
-        name   = 'news-archive_index'
+        name   = 'news_archive_index'
     ),
     # news archive year list
     url(
         regex  = '^(?P<year>\d{4})/$',
         view   = 'django.views.generic.date_based.archive_year',
         kwargs = info_dict,
-        name   = 'news-archive_year'
+        name   = 'news_archive_year'
     ),
     # news archive month list
     url(
         regex  = '^(?P<year>\d{4})/(?P<month>\w{3})/$',
         view   = 'django.views.generic.date_based.archive_month',
         kwargs = info_dict,
-        name   = 'news-archive_month'
+        name   = 'news_archive_month'
     ),
     # news archive week list
     url(
         regex  = '^(?P<year>\d{4})/(?P<week>\d{1,2})/$',
         view   = 'django.views.generic.date_based.archive_week',
         kwargs = info_dict,
-        name   = 'news-archive_week'
+        name   = 'news_archive_week'
     ),
     # news archive day list
     url(
         regex  = '^(?P<year>\d{4})/(?P<month>\w{3})/(?P<day>\d{2})/$',
         view   = 'django.views.generic.date_based.archive_day',
         kwargs = info_dict,
-        name   = 'news-archive_day'
+        name   = 'news_archive_day'
     ),
     url(
         regex  = '^today/$',
         view   = 'django.views.generic.date_based.archive_today',
         kwargs = info_dict,
-        name   = 'news-archive_day'
+        name   = 'news_archive_day'
     ),
     url(
-        regex  = '^(?P<year>\d{4})/(?P<month>\w{3})/(?P<day>\d{2})/(?P<slug>[\w_-]+)/$',
+        regex  = '^(?P<year>\d{4})/(?P<month>\w{3})/(?P<day>\d{2})/(?P<slug>[-\w]+)/$',
         view   = 'django.views.generic.date_based.object_detail',
         kwargs = dict(info_dict,slug_field="slug"),
-        name   = 'news-archive_day'
+        name   = 'news_detail'
     ),
 )

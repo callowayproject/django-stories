@@ -5,7 +5,6 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
-from django.db.models import permalink
 from datetime import datetime
 from django.contrib.sites.managers import CurrentSiteManager
 from django.contrib.sites.models import Site
@@ -117,15 +116,14 @@ class Story(models.Model):
         get_latest_by = 'publish_date'
         unique_together = ('publish_date','slug')
     
+    @models.permalink
     def get_absolute_url(self):
-        return ('story_detail', (), {
-            'section':self.section,
-            'year':self.pub_date.year,
-            'month':self.pub_date.strftime('%b').lower(),
-            'day':self.pubish_date.day,
+        return ('news_detail', None, {
+            'year':self.publish_date.year,
+            'month':self.publish_date.strftime('%b').lower(),
+            'day':self.publish_date.day,
             'slug':self.slug
         }) 
-    get_absolute_url = permalink(get_absolute_url)
     
     def __unicode__(self):
         return "%s : %s" % (self.headline, self.publish_date)
@@ -230,10 +228,10 @@ class ChangeSet(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('story_changeset', (),
-                {'slug': self.story.slug,
-                 'revision': self.revision})
-
+        return ('story_changeset', None, {
+            'slug': self.story.slug,
+            'revision': self.revision
+        })
 
     def is_anonymous_change(self):
         return self.editor is None
