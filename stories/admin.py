@@ -12,7 +12,7 @@ from mptt.forms import TreeNodeChoiceField
 from settings import MARKUP_CHOICES
 
 class StoryForm(forms.ModelForm):
-    markup = forms.CharField(max_length=3, 
+    markup = forms.CharField(max_length=3, required=False,
                              widget=forms.Select(choices=MARKUP_CHOICES, 
                              attrs={'onchange':'changeMarkup(this)'}))
     primary_category = TreeNodeChoiceField(queryset=Story.objects.get_category_list(),
@@ -81,10 +81,7 @@ class StoryOptions(admin.ModelAdmin):
     inlines = [InlineStoryRelation,]
     fieldsets = (
         (None,{
-            'fields': ('headline', 'subhead', 'authors', 'non_staff_author')
-        }),
-        ('Content',{
-            'fields': ('teaser', 'body', 'markup',)
+            'fields': ('headline', 'subhead', 'authors', 'non_staff_author', 'teaser', 'body')
         }), 
         ('Story data', {
             'fields': ('status', 'primary_category', 'comments', )
