@@ -104,7 +104,7 @@ class Story(models.Model):
         verbose_name=_('Categories'), 
         blank=True, 
         null=True)
-    site = models.ManyToManyField(Site, verbose_name=_('Sites'))
+    site = models.ForeignKey(Site, verbose_name=_('Site'))
     
     objects = StoryManager()
     published = CurrentSitePublishedManager()
@@ -116,14 +116,14 @@ class Story(models.Model):
         get_latest_by = 'publish_date'
         unique_together = ('publish_date','slug')
     
-    @models.permalink
     def get_absolute_url(self):
-        return ('news_detail', None, {
-            'year':self.publish_date.year,
-            'month':self.publish_date.strftime('%b').lower(),
-            'day':self.publish_date.day,
-            'slug':self.slug
-        }) 
+        return 'http://%s/news/%s/%s/%s/%s' % (
+            self.site.domain,
+            self.publish_date.year,
+            self.publish_date.strftime('%b').lower(),
+            self.publish_date.day,
+            self.slug
+        ) 
     
     def __unicode__(self):
         return "%s : %s" % (self.headline, self.publish_date)
