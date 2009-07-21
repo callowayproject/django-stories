@@ -125,6 +125,13 @@ class Story(models.Model):
             self.slug
         ) 
     
+    def base(self):
+        try:
+            from base.models import Base
+            return Base.objects.filter(site=self.site)[0]
+        except:
+            pass
+    
     def __unicode__(self):
         return "%s : %s" % (self.headline, self.publish_date)
     
