@@ -67,6 +67,7 @@ class StoryForm(forms.ModelForm):
 
 class InlineStoryRelation(GenericCollectionTabularInline):
     model = StoryRelation
+    exclude = ('relation_type',)
 
 
 class StoryOptions(admin.ModelAdmin):

@@ -167,7 +167,7 @@ class StoryRelation(models.Model):
     content_type = models.ForeignKey(ContentType, limit_choices_to=story_relation_limits)
     object_id = models.PositiveIntegerField()
     content_object = generic.GenericForeignKey('content_type', 'object_id')
-    relation_type = models.IntegerField(_("Relation Type"))
+    relation_type = models.IntegerField(_("Relation Type"), blank=True, null=True)
 
     def __unicode__(self):
         return u"StoryRelation"
