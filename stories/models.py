@@ -205,7 +205,7 @@ class ChangeSet(models.Model):
     revision = models.IntegerField(_(u"Revision Number"))
 
     # How to recreate this version
-    old_headline = models.CharField(_(u"Old Headline"), max_length=50, blank=True)
+    old_headline = models.CharField(_(u"Old Headline"), max_length=100, blank=True)
     old_markup = models.CharField(_(u"Story Content Markup"), max_length=3,
                                   choices=MARKUP_CHOICES,
                                   null=True, blank=True)
