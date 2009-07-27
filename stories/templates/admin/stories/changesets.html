@@ -12,11 +12,34 @@
 	</ul>
 {% endblock %}
 
+{% block footerscripts %}
+	<script type="text/javascript">
+		$("#changesets").accordion({autoHeight:false});
+	</script>
+{% endblock %}
+
+{% block cols %}
+	13
+{% endblock %}
+
 {% block content %}
-	{% for change in changesets %}
-		#{{ change.revision }} {% if change.reverted %}REVERTED{% endif %}
-		{% if not forloop.first %} - <a href="../revert_to/{{ change.revision }}/">revert to these changes.</a>{% endif %}
-		<br/>
-		{{ change.display_diff|safe }}
-	{% endfor %}
+	<div class="grid_13 module toppad">
+		<div class="inner">
+		<div id="changesets">
+			{% for change in changesets %}
+				<h5>
+					{% if forloop.first %}
+						Latest Revision
+					{% else %}
+						Revision {{ change.revision }}
+					{% endif %}
+				</h5>
+				<div>
+					<div>{% if not forloop.first %} <span><a href="../revert_to/{{ change.revision }}/">revert to these changes</a></span>{% endif %}</div>
+					{{ change.display_diff|safe }}
+				</div>
+			{% endfor %}
+		</div>
+		</div>
+	</div>
 {% endblock %}

@@ -12,7 +12,40 @@
 	</ul>
 {% endblock %}
 
+{% block footerscripts %}
+	<script type="text/javascript">
+		$("#changesets").accordion({autoHeight:false});
+	</script>
+{% endblock %}
+
 {% block content %}
+	<div class="grid_13 module alpha toppad">
+		<div class="inner">
+			<h5>Are you sure you want to revert this story to revision # {{ changeset.revision }}?</h5>
+			<form method="POST" action=".">
+				<button type="submit" name="confirm" class="button">
+					Yes
+				</button>
+				<button type="submit" name="cancel" class="button">
+					Cancel
+				</button>
+			</form>
+			<div id="changesets">
+				{% for change in changesets %}
+					<h5>
+						Revision {{ change.revision }}
+					</h5>
+					<div>
+						<div>{% if not forloop.first %} <span><a href="../revert_to/{{ change.revision }}/">revert to these changes</a></span>{% endif %}</div>
+						{{ change.display_diff|safe }}
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block constent %}
 	Are you sure you want to revert this story to revision # {{ changeset.revision }}?
 	<form method="POST" action=".">
 		<button type="submit" name="confirm" class="button">
