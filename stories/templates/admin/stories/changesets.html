@@ -23,8 +23,21 @@
 {% endblock %}
 
 {% block content %}
-	<div class="grid_13 module toppad">
-		<div class="inner">
+	<div class="grid_13">
+		{% block object-tools %}
+			{% if not is_popup %}
+				<ul class="object-tools">
+					<li><a href="../">Add/Edit {{ app_label|capfirst }}</a></li>
+					<li class="active">Content Revisions</li>
+					<li><a href="../history/">{% trans "History" %}</a></li>
+	  				{% if has_absolute_url %}
+						<li><a href="../../../r/{{ content_type_id }}/{{ object_id }}/" class="viewsitelink">{% trans "View on site" %}</a></li>
+					{% endif%}
+				</ul>
+			{% endif %}
+		{% endblock %}
+		<div class="inner module">
+			<div class="toppa">
 		<div id="changesets">
 			{% for change in changesets %}
 				<h5>
