@@ -132,7 +132,7 @@ class Story(models.Model):
         Easy way to get a combination of authors without having to worry which
         fields are set (author/one-off author)
         """
-        authors = ["%s %s" % (i.first_name, i.last_name for i in self.authors.all()]
+        authors = ["%s %s" % (i.first_name, i.last_name) for i in self.authors.all()]
         authors.append(self.non_staff_author)
         output = ", ".join(authors)
         return output
