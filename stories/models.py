@@ -27,7 +27,8 @@ def diff(txt1, txt2):
     patch = dmp.patch_make(txt1, txt2)
     return dmp.patch_toText(patch)
 
-class CurrentSitePublishedManager(CurrentSiteManager):
+#class CurrentSitePublishedManager(CurrentSiteManager):
+class CurrentSitePublishedManager(models.Manager):
     def get_query_set(self):
         queryset = super(CurrentSitePublishedManager, self).get_query_set()
         return queryset.filter(publish_date__lte=datetime.now()).filter(status__exact=PUBLISHED_STATUS)
