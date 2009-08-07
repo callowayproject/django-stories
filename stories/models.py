@@ -10,7 +10,7 @@ from django.contrib.sites.managers import CurrentSiteManager
 from django.contrib.sites.models import Site
 from categories.models import Category
 try:
-    from staff.models import Staff as AuthorModel
+    from staff.models import StaffMember as AuthorModel
 except ImportError:
     from django.contrib.auth.models import User as AuthorModel
 
@@ -125,6 +125,17 @@ class Story(models.Model):
             self.publish_date.day,
             self.slug
         ) 
+    
+    @property
+    def author(self):
+        """
+        Easy way to get a combination of authors without having to worry which
+        fields are set (author/one-off author)
+        """
+        authors = ["%s %s" % (i.first_name, i.last_name for i in self.authors.all()]
+        authors.append(self.non_staff_author)
+        output = ", ".join(authors)
+        return output
     
     def base(self):
         try:
