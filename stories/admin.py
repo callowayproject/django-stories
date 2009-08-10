@@ -74,7 +74,7 @@ class StoryOptions(admin.ModelAdmin):
     form = StoryForm
     list_display = ('headline', 'status', 'publish_date', 'modified_date')
     list_filter = ('site', 'publish_date')
-    search_fields = ('headline', 'summary', 'body')
+    search_fields = ('headline', 'teaser', 'body')
     date_hierarchy = 'publish_date'
     list_per_page = 25
     prepopulated_fields = {'slug': ('headline',)}
