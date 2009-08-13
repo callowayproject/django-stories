@@ -118,7 +118,7 @@ class Story(models.Model):
         unique_together = ('publish_date','slug')
     
     def get_absolute_url(self):
-        return 'http://%s/news/%s/%s/%s/%s' % (
+        return 'http://%s/news/%s/%s/%02d/%s' % (
             self.site.domain,
             self.publish_date.year,
             self.publish_date.strftime('%b').lower(),
