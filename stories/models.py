@@ -1,25 +1,22 @@
 """This module provides the Story model for reporting news
 """
+import diff_match_patch
 from django.db import models
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 from django.utils.translation import ugettext as _
 from datetime import datetime
 from django.contrib.sites.models import Site
-from categories.models import Category
-
-
 from django.conf import settings
+
 if 'staff' in settings.INSTALLED_APPS:
     from staff.models import StaffMember as AuthorModel
 else:
     from django.contrib.auth.models import User as AuthorModel
 
 from settings import MARKUP_CHOICES, STATUS_CHOICES, PUBLISHED_STATUS, \
-                    DEFAULT_STATUS, DEFAULT_MARKUP, ORIGIN_CHOICES, \
-                    DEFAULT_ORIGIN, CATEGORY_TREE
+                    DEFAULT_STATUS, DEFAULT_MARKUP, ORIGIN_CHOICES, DEFAULT_ORIGIN
 
-import diff_match_patch
 
 dmp = diff_match_patch.diff_match_patch()
 
@@ -32,12 +29,6 @@ class CurrentSitePublishedManager(models.Manager):
     def get_query_set(self):
         queryset = super(CurrentSitePublishedManager, self).get_query_set()
         return queryset.filter(publish_date__lte=datetime.now()).filter(status__exact=PUBLISHED_STATUS)
-
-class StoryManager(models.Manager):
-    def get_category_list(self):
-        if CATEGORY_TREE:
-            return Category.objects.get(name=CATEGORY_TREE, parent__isnull=True).get_children()
-        return Category.tree.all()
 
 class Story(models.Model):
     """
@@ -109,16 +100,8 @@ class Story(models.Model):
     origin = models.IntegerField(_("Origin"),
         choices=ORIGIN_CHOICES,
         default=DEFAULT_ORIGIN,)
-    primary_category = models.ForeignKey(Category, 
-        verbose_name=_('Primary Category'),
-        related_name='primary_category')
-    categories = models.ManyToManyField(Category, 
-        verbose_name=_('Categories'), 
-        blank=True, 
-        null=True)
     site = models.ForeignKey(Site, verbose_name=_('Site'))
     
-    objects = StoryManager()
     published = CurrentSitePublishedManager()
     
     class Meta:
