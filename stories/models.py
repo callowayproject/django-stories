@@ -3,15 +3,16 @@
 from django.db import models
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
-from django.conf import settings
 from django.utils.translation import ugettext as _
 from datetime import datetime
-from django.contrib.sites.managers import CurrentSiteManager
 from django.contrib.sites.models import Site
 from categories.models import Category
-try:
+
+
+from django.conf import settings
+if 'staff' in settings.INSTALLED_APPS:
     from staff.models import StaffMember as AuthorModel
-except ImportError:
+else:
     from django.contrib.auth.models import User as AuthorModel
 
 from settings import MARKUP_CHOICES, STATUS_CHOICES, PUBLISHED_STATUS, \
@@ -27,7 +28,6 @@ def diff(txt1, txt2):
     patch = dmp.patch_make(txt1, txt2)
     return dmp.patch_toText(patch)
 
-#class CurrentSitePublishedManager(CurrentSiteManager):
 class CurrentSitePublishedManager(models.Manager):
     def get_query_set(self):
         queryset = super(CurrentSitePublishedManager, self).get_query_set()
@@ -40,6 +40,10 @@ class StoryManager(models.Manager):
         return Category.tree.all()
 
 class Story(models.Model):
+    """
+    A newspaper or magazine type story or document that was possibly also printed
+    in a periodical.
+    """
     headline = models.CharField(_("Headline"), 
         max_length=100)
     subhead = models.CharField(_("Subheadline"), 
@@ -207,7 +211,7 @@ class ChangeSetManager(models.Manager):
 class NonRevertedChangeSetManager(ChangeSetManager):
 
     def get_default_queryset(self):
-        super(PublishedBookManager, self).get_query_set().filter(
+        super(NonRevertedChangeSetManager, self).get_query_set().filter(
             reverted=False)
 
 
