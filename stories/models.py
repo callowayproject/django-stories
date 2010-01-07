@@ -61,7 +61,14 @@ class Story(models.Model):
         blank=True, 
         null=True,
         help_text=_("An HTML-formatted rendering of the author(s)."))
-    publish_date = models.DateTimeField(_('Time to Publish'))
+    publish_date = models.DateField(_('Time to Publish (Date)'),
+        help_text=_("The update date to display to the user"), 
+        blank=True, 
+        null=True)
+    publish_time = models.TimeField(_('Time to Publish (Time)'),
+        help_text=_("The update time to display to the user"), 
+        blank=True, 
+        null=True)
     update_date = models.DateTimeField(_('Update Date'), 
         help_text=_("The update date to display to the user"), 
         blank=True, 
