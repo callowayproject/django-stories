@@ -17,7 +17,7 @@ class StoryForm(forms.ModelForm):
                      empty_permitted=False, instance=None):
         # Set a default publish time and the current site if it is a new object
         if not instance and (initial is not None and not initial.has_key('publish_date')):
-            initial['publish_date'] = datetime.datetime.now()
+            initial['publish_date'] = datetime.datetime.now().date
         if not instance and (initial is not None and not initial.has_key('site')):
             initial['site'] = [Site.objects.get_current().id,]
         super(StoryForm, self).__init__(data, files, auto_id, prefix, initial, 
