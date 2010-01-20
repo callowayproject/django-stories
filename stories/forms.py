@@ -19,7 +19,6 @@ class StoryForm(forms.ModelForm):
         if not instance and (initial is not None and not initial.has_key('publish_date')):
             initial['publish_date'] = datetime.datetime.now().date
         if not instance and (initial is not None and not initial.has_key('site')):
-            print 'wtf'
             initial['site'] = Site.objects.get_current().id
         super(StoryForm, self).__init__(data, files, auto_id, prefix, initial, 
                                         error_class, label_suffix, 
