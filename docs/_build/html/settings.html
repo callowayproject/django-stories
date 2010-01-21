@@ -1,0 +1,204 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Settings &mdash; Django Stories v0.2 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.2',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Django Stories v0.2 documentation" href="index.html" />
+    <link rel="prev" title="Installation" href="install.html" /> 
+  </head>
+  <body>
+<div id="docstitle">
+	<p>Django Stories v0.2 documentation</p>
+</div>
+<div id="header">
+	<div id="title"><h1>Settings</h1></div>
+	<ul id="headerButtons">
+		<li id="toc_button"><div class="headerButton"><a href="#">Table of Contents</a></div></li>
+		<li id="page_buttons">
+			<div class="headerButton"><a href="genindex.html" title="General Index" accesskey="I">index</a></div>
+			<div class="headerButton"><a href="install.html" title="Installation" accesskey="P">previous</a></div>
+		</li>
+	</ul>
+</div>
+
+<div id="sphinxsidebar">
+  <div class="sphinxsidebarwrapper">
+	<ul><li class="toctree-l1"><a href="index.html">Main Page</a></li></ul>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference external" href="install.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference external" href="">Settings</a><ul>
+<li class="toctree-l2"><a class="reference external" href="#story-status-choices">STORY_STATUS_CHOICES</a></li>
+<li class="toctree-l2"><a class="reference external" href="#story-default-status">STORY_DEFAULT_STATUS</a></li>
+<li class="toctree-l2"><a class="reference external" href="#story-published-status">STORY_PUBLISHED_STATUS</a></li>
+<li class="toctree-l2"><a class="reference external" href="#story-markup-choices">STORY_MARKUP_CHOICES</a></li>
+<li class="toctree-l2"><a class="reference external" href="#story-default-markup">STORY_DEFAULT_MARKUP</a></li>
+<li class="toctree-l2"><a class="reference external" href="#story-origin-choices">STORY_ORIGIN_CHOICES</a></li>
+<li class="toctree-l2"><a class="reference external" href="#story-default-origin">STORY_DEFAULT_ORIGIN</a></li>
+<li class="toctree-l2"><a class="reference external" href="#story-relation-models">STORY_RELATION_MODELS</a></li>
+</ul>
+</li>
+</ul>
+
+      <h3>This Page</h3>
+      <ul class="this-page-menu">
+        <li><a href="_sources/settings.txt"
+               rel="nofollow">Show Source</a></li>
+      </ul>
+    <div id="searchbox" style="display: none">
+      
+        <form class="search" action="search.html" method="get">
+			<div class="search-wrapper">
+			<span class="search-left"></span>
+			<input class="prettysearch" type="text" name="q" size="18" />
+			<span class="search-right">&nbsp;</span>
+			</div>
+          <input type="submit" value="Search" class="searchbutton" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </form>
+        <p class="searchtip" style="font-size: 90%">
+        Enter search terms or a module, class or function name.
+        </p>
+    </div>
+    <script type="text/javascript">$('#searchbox').show(0);</script>
+  </div>
+</div>
+
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="settings">
+<span id="id1"></span><h1>Settings<a class="headerlink" href="#settings" title="Permalink to this headline">¶</a></h1>
+<p>Here are several settings that you can use to customize Stories.</p>
+<div class="section" id="story-status-choices">
+<span id="id2"></span><h2>STORY_STATUS_CHOICES<a class="headerlink" href="#story-status-choices" title="Permalink to this headline">¶</a></h2>
+<p>A story can be in several different states, for example draft vs. live. Your workflow might have several states that a story goes through, but there can only be one choice that is considered &#8220;Published&#8221;.</p>
+<p>Choices are specified as a <tt class="docutils literal"><span class="pre">list</span></tt> or <tt class="docutils literal"><span class="pre">tuple</span></tt> of <tt class="docutils literal"><span class="pre">integer</span></tt> - <tt class="docutils literal"><span class="pre">string</span></tt> tuples. The <tt class="docutils literal"><span class="pre">integer</span></tt> is the code for the choice and the <tt class="docutils literal"><span class="pre">string</span></tt> is the description that the user sees.</p>
+<p><strong>Defaults:</strong></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">STORY_STATUS_CHOICES</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s">&#39;DRAFT&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s">&#39;READY FOR EDITING&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s">&#39;READY TO PUBLISH&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s">&#39;PUBLISHED&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="s">&#39;REJECTED&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="s">&#39;UN-PUBLISHED&#39;</span><span class="p">),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><em>Draft:</em> A work-in-progress.</p>
+<p><em>Ready for Editing:</em> The story is ready for an editor&#8217;s touch.</p>
+<p><em>Ready to Publish:</em> The editing is finished and the story is ready to go on to the web site.</p>
+<p><em>Published:</em> The story is on the web site, as long as it is past the story&#8217;s publish date and time.</p>
+<p><em>Rejected:</em> The editor didn&#8217;t like something and the author needs to work on it some more.</p>
+<p><em>Un-published:</em> The story has been removed from the site for some reason.</p>
+</div>
+<div class="section" id="story-default-status">
+<span id="id3"></span><h2>STORY_DEFAULT_STATUS<a class="headerlink" href="#story-default-status" title="Permalink to this headline">¶</a></h2>
+<p>When a story is created, what should the the status default to?</p>
+<p><strong>Default:</strong></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">STORY_DEFAULT_STATUS</span> <span class="o">=</span> <span class="mi">1</span> <span class="c"># Draft</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="story-published-status">
+<span id="id4"></span><h2>STORY_PUBLISHED_STATUS<a class="headerlink" href="#story-published-status" title="Permalink to this headline">¶</a></h2>
+<p>Which one of the possible statuses is considered &#8220;On Site.&#8221;</p>
+<p><strong>Default:</strong></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">STORY_PUBLISHED_STATUS</span> <span class="o">=</span> <span class="mi">4</span> <span class="c"># Published</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="story-markup-choices">
+<span id="id5"></span><h2>STORY_MARKUP_CHOICES<a class="headerlink" href="#story-markup-choices" title="Permalink to this headline">¶</a></h2>
+<p>The Story app endeavors to have a pluggable markup system for the content of the each story. This allows a variety of ways to markup content, depending on end user or source of the content.</p>
+<p>It is also possible to have a WYSIWYG editor in the admin that stores the resulting content in the correct format.</p>
+<p>Choices are specified as a <tt class="docutils literal"><span class="pre">list</span></tt> or <tt class="docutils literal"><span class="pre">tuple</span></tt> of <tt class="docutils literal"><span class="pre">integer</span></tt> - <tt class="docutils literal"><span class="pre">string</span></tt> tuples. The <tt class="docutils literal"><span class="pre">integer</span></tt> is the code for the choice and the <tt class="docutils literal"><span class="pre">string</span></tt> is the description that the user sees.</p>
+<p><strong>Defaults:</strong></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">STORY_MARKUP_CHOICES</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s">&#39;None&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s">&#39;Creole&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s">&#39;reStructuredText&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s">&#39;Textile&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s">&#39;Markdown&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="s">&#39;HTML&#39;</span><span class="p">),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="story-default-markup">
+<span id="id6"></span><h2>STORY_DEFAULT_MARKUP<a class="headerlink" href="#story-default-markup" title="Permalink to this headline">¶</a></h2>
+<p>To make it easy on authors, you can specify which of the formats available is the default.</p>
+<p><strong>Default:</strong></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">STORY_DEFAULT_MARKUP</span> <span class="o">=</span> <span class="mi">0</span> <span class="c"># None</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="story-origin-choices">
+<span id="id7"></span><h2>STORY_ORIGIN_CHOICES<a class="headerlink" href="#story-origin-choices" title="Permalink to this headline">¶</a></h2>
+<p>It is possible that stories could be coming in from several sources, such as a wire service, an editorial front end, or an FTP site. This settings allows you to mark which stories originated from which source, so you can potentially do something different depending on the source. For example, include all stories in the RSS feed, except ones that came from a wire service.</p>
+<p>Choices are specified as a <tt class="docutils literal"><span class="pre">list</span></tt> or <tt class="docutils literal"><span class="pre">tuple</span></tt> of <tt class="docutils literal"><span class="pre">integer</span></tt> - <tt class="docutils literal"><span class="pre">string</span></tt> tuples. The <tt class="docutils literal"><span class="pre">integer</span></tt> is the code for the choice and the <tt class="docutils literal"><span class="pre">string</span></tt> is the description that the user sees.</p>
+<p><strong>Default:</strong></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">STORY_ORIGIN_CHOICES</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s">&#39;Admin&#39;</span><span class="p">),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="story-default-origin">
+<span id="id8"></span><h2>STORY_DEFAULT_ORIGIN<a class="headerlink" href="#story-default-origin" title="Permalink to this headline">¶</a></h2>
+<p>When a story is created from the Django Admin, which choice of origin should it default to?</p>
+<p><strong>Default:</strong></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">STORY_DEFAULT_ORIGIN</span> <span class="o">=</span> <span class="mi">0</span> <span class="c"># Admin</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="story-relation-models">
+<span id="id9"></span><h2>STORY_RELATION_MODELS<a class="headerlink" href="#story-relation-models" title="Permalink to this headline">¶</a></h2>
+<p>A story can relate to several other things, such as other stories, photographs, photo galleries, and external links. Stories links to the Django Content Types application, which would normally show all sorts of things that don&#8217;t matter to the author and end users. This setting specifies which specific models are relatable to a story.</p>
+<p>If this setting is empty or <tt class="xref docutils literal"><span class="pre">None</span></tt>, the story relations are not available in the admin. If at a later time you decide to set this, you must <tt class="docutils literal"><span class="pre">syncdb</span></tt> before it will work properly.</p>
+<p><strong>Default:</strong></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">STORY_RELATION_MODELS</span> <span class="o">=</span> <span class="bp">None</span> <span class="c"># Not enabled</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div> 
+        </div>
+      </div>
+    <div class="footer">
+    <p>
+      &copy; Copyright 2009, The Washington Times.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.3.
+	</p>
+    </div>
+      <div class="clearer"></div>
+    </div>
+	<div id="breadcrumbs">
+		Settings
+		</ul>
+	</div>
+	<script type="text/javascript" charset="utf-8" src="_static/toc.js"></script>
+  </body>
+</html>
