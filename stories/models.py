@@ -7,15 +7,16 @@ from django.contrib.contenttypes import generic
 from django.utils.translation import ugettext as _
 from datetime import datetime
 from django.contrib.sites.models import Site
-from django.conf import settings
+from django.conf import settings as global_settings
 
-if 'staff' in settings.INSTALLED_APPS:
+if 'staff' in global_settings.INSTALLED_APPS:
     from staff.models import StaffMember as AuthorModel
 else:
     from django.contrib.auth.models import User as AuthorModel
 
 from settings import MARKUP_CHOICES, STATUS_CHOICES, PUBLISHED_STATUS, \
-                    DEFAULT_STATUS, DEFAULT_MARKUP, ORIGIN_CHOICES, DEFAULT_ORIGIN
+                    DEFAULT_STATUS, DEFAULT_MARKUP, ORIGIN_CHOICES, DEFAULT_ORIGIN, \
+                    RELATION_MODELS
 
 
 dmp = diff_match_patch.diff_match_patch()
@@ -102,6 +103,7 @@ class Story(models.Model):
         default=DEFAULT_ORIGIN,)
     site = models.ForeignKey(Site, verbose_name=_('Site'))
     
+    objects = models.Manager()
     published = CurrentSitePublishedManager()
     
     class Meta:
@@ -173,17 +175,18 @@ class Story(models.Model):
         changeset.reapply(editor)
         
 
-story_relation_limits = {'model__in':('story', 'photo', 'gallery')}
-class StoryRelation(models.Model):
-    """Related story item"""
-    story = models.ForeignKey(Story)
-    content_type = models.ForeignKey(ContentType, limit_choices_to=story_relation_limits)
-    object_id = models.PositiveIntegerField()
-    content_object = generic.GenericForeignKey('content_type', 'object_id')
-    relation_type = models.IntegerField(_("Relation Type"), blank=True, null=True)
+if RELATION_MODELS:
+    story_relation_limits = {'model__in': RELATION_MODELS}
+    class StoryRelation(models.Model):
+        """Related story item"""
+        story = models.ForeignKey(Story)
+        content_type = models.ForeignKey(ContentType, limit_choices_to=story_relation_limits)
+        object_id = models.PositiveIntegerField()
+        content_object = generic.GenericForeignKey('content_type', 'object_id')
+        relation_type = models.IntegerField(_("Relation Type"), blank=True, null=True)
 
-    def __unicode__(self):
-        return u"StoryRelation"
+        def __unicode__(self):
+            return u"StoryRelation"
 
 
 # Borrowed from wiki-app

@@ -1,16 +1,19 @@
 import os
 from django.contrib import admin
-from django.conf import settings
+#from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from genericcollection import *
 
-from models import Story, StoryRelation
+from models import Story
+from settings import RELATION_MODELS
 from forms import StoryForm
 
+if RELATION_MODELS:
+    from models import StoryRelation
 
-class InlineStoryRelation(GenericCollectionTabularInline):
-    model = StoryRelation
-    exclude = ('relation_type',)
+    class InlineStoryRelation(GenericCollectionTabularInline):
+        model = StoryRelation
+        exclude = ('relation_type',)
 
 class StoryOptions(admin.ModelAdmin):
     form = StoryForm
@@ -21,7 +24,8 @@ class StoryOptions(admin.ModelAdmin):
     list_per_page = 25
     prepopulated_fields = {'slug': ('headline',)}
     filter_horizontal = ('authors',)
-    inlines = [InlineStoryRelation,]
+    if RELATION_MODELS:
+        inlines = [InlineStoryRelation,]
     fieldsets = (
         (None,{
             'fields': ('headline', 'subhead', 'authors', 'non_staff_author', 'teaser', 'body')
