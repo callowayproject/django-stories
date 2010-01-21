@@ -23,6 +23,24 @@ class StoryForm(forms.ModelForm):
         super(StoryForm, self).__init__(data, files, auto_id, prefix, initial, 
                                         error_class, label_suffix, 
                                         empty_permitted, instance)
+
+    def clean_slug(self):
+        if 'publish_date' in self.cleaned_data:
+            publish_date = self.cleaned_data['publish_date']
+            try:
+                s = Story.objects.get(slug=self.cleaned_data['slug'],
+                                      publish_date__year=publish_date.year,
+                                      publish_date__month=publish_date.month,
+                                      publish_date__day=publish_date.day)
+                if s.id != self.instance.id:
+                    raise forms.ValidationError(u"Please enter a different slug. The one you entered is already being used for %s" % publish_date.strftime("%Y-%m-%d"))
+                else:
+                    return self.cleaned_data['slug']
+            except Story.DoesNotExist:
+                pass
+            else:
+                raise forms.ValidationError(u"Please enter a different slug. The one you entered is already being used for %s" % publish_date.strftime("%Y-%m-%d"))
+        return self.cleaned_data['slug']
                                         
     def save(self, **kw):
         # 1 - Get the old stuff before saving
