@@ -4,7 +4,7 @@ from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from genericcollection import *
 
-from models import Story, StoryRelation    
+from models import Story, StoryRelation
 from forms import StoryForm
 
 
@@ -43,7 +43,6 @@ class StoryOptions(admin.ModelAdmin):
         })
     )
     class Media:
-        js = (
-        )
+        js = ('js/genericcollections.js')
 
 admin.site.register(Story, StoryOptions)
