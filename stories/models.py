@@ -113,14 +113,14 @@ class Story(models.Model):
         get_latest_by = 'publish_date'
         unique_together = ('publish_date','slug')
     
+    @models.permalink
     def get_absolute_url(self):
-        return 'http://%s/news/%s/%s/%02d/%s' % (
-            self.site.domain,
+        return ('news_detail', (
             self.publish_date.year,
             self.publish_date.strftime('%b').lower(),
             self.publish_date.day,
             self.slug
-        ) 
+        )) 
     
     @property
     def author(self):
