@@ -19,19 +19,6 @@ DEFAULT_STATUS = getattr(settings, 'STORY_DEFAULT_STATUS', DEFAULT_DEFAULT_STATU
 DEFAULT_PUBLISHED_STATUS = 4
 PUBLISHED_STATUS = getattr(settings, 'STORY_PUBLISHED_STATUS', DEFAULT_PUBLISHED_STATUS)
 
-DEFAULT_MARKUP_CHOICES = (
-    (0, _(u'None')),
-    (1, _(u'Creole')),
-    (2, _(u'reStructuredText')),
-    (3, _(u'Textile')),
-    (4, _(u'Markdown')),
-    (5, _(u'HTML')),
-)
-MARKUP_CHOICES = getattr(settings, 'STORY_MARKUP_CHOICES', DEFAULT_MARKUP_CHOICES)
-
-DEFAULT_DEFAULT_MARKUP = 0
-DEFAULT_MARKUP = getattr(settings, 'STORY_DEFAULT_MARKUP', DEFAULT_DEFAULT_MARKUP)
-
 DEFAULT_ORIGIN_CHOICES = (
     (0, _('Admin')),
 )
