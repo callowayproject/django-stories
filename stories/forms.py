@@ -5,6 +5,19 @@ from django.contrib.sites.models import Site
 from models import Story
 
 class StoryForm(forms.ModelForm):
+    headline = forms.CharField(
+        widget=forms.TextInput(attrs={'size':'85'}),
+        max_length=100)
+    subhead = forms.CharField(
+        widget=forms.TextInput(attrs={'size':'85'}), 
+        max_length=200, 
+        required=False)
+    non_staff_author = forms.CharField(
+        widget=forms.TextInput(attrs={'size':'85'}),
+        help_text="An HTML-formatted rendering of the author(s) not on staff.",
+        max_length=200, 
+        required=False)
+    
     class Meta:
         model = Story
     

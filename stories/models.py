@@ -52,7 +52,7 @@ class Story(models.Model):
         max_length=200, 
         blank=True, 
         null=True,
-        help_text=_("An HTML-formatted rendering of the author(s)."))
+        help_text=_("An HTML-formatted rendering of the author(s) not on staff."))
     publish_date = models.DateField(_('Time to Publish (Date)'),
         help_text=_("The update date to display to the user"), 
         blank=True, 
@@ -85,16 +85,8 @@ class Story(models.Model):
     status = models.IntegerField(_('Published Status'), 
         choices=STATUS_CHOICES, 
         default=DEFAULT_STATUS)
-    source = models.CharField(_("Other Story Sources"), 
-        max_length=200,
-        blank=True, 
-        null=True,)
     teaser = models.TextField(_("Teaser Text"))
     body = models.TextField(_("Body"))
-    post_story_blurb = models.CharField(_('Post-story Blurb'), 
-        max_length=300, 
-        blank=True, 
-        help_text='Example: "John Smith contributed to this story."')
     origin = models.IntegerField(_("Origin"),
         choices=ORIGIN_CHOICES,
         default=DEFAULT_ORIGIN,)

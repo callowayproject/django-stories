@@ -35,21 +35,17 @@ class StoryOptions(AdminModel):
         inlines = [InlineStoryRelation,]
     fieldsets = (
         (None,{
-            'fields': ('headline', 'subhead', 'authors', 'non_staff_author', 'teaser', 'body')
+            'fields': ('headline', 'subhead', 'teaser', 'body')
         }), 
         ('Story data', {
-            'fields': ('status', 'comments', )
-        }),
-        ('Additional Story Info', {
-            'fields': ('source', 'post_story_blurb', 'origin'),
-            'classes': ('collapse',),
+            'fields': ('authors', 'non_staff_author', 'status', 'comments', )
         }),
         # ('Print Information', {
         #     'fields': ('print_pub_date', 'print_section', 'print_page'),
         #     'classes': ('collapse',),
         # }),
         ('Advanced Options',{
-            'fields': ('slug','publish_date', 'update_date', 'site', ),
+            'fields': ('origin','slug','publish_date', 'update_date', 'site', ),
             'classes': ('collapse',),
         })
     )
