@@ -1,14 +1,10 @@
 from django import forms
-from settings import MARKUP_CHOICES
 import datetime
 from django.contrib.sites.models import Site
 
 from models import Story
 
 class StoryForm(forms.ModelForm):
-    markup = forms.CharField(max_length=3, required=False,
-                             widget=forms.Select(choices=MARKUP_CHOICES, 
-                             attrs={'onchange':'changeMarkup(this)'}))
     class Meta:
         model = Story
     
@@ -42,31 +38,31 @@ class StoryForm(forms.ModelForm):
                 raise forms.ValidationError(u"Please enter a different slug. The one you entered is already being used for %s" % publish_date.strftime("%Y-%m-%d"))
         return self.cleaned_data['slug']
                                         
-    def save(self, **kw):
-        # 1 - Get the old stuff before saving
-        if self.instance.id is None:
-            old_headline = old_body = old_markup = ''
-            new = True
-        else:
-            old_headline = self.instance.headline
-            old_body = self.instance.body
-            old_markup = self.instance.markup
-            new = False
-
-        # 2 - Save the Article
-        story = super(StoryForm, self).save(**kw)
-
-        # 3 - Set creator
-        # editor = getattr(self, 'editor', None)
-        if new:
-            # if editor is not None:
-            #     article.creator = editor
-            #     article.group = group
-            story.save()
-
-        # 4 - Create new revision
-        if not old_body == story.body:
-            changeset = story.new_revision(
-                old_body, old_headline, old_markup, None)
-
-        return story#, changeset
+    # def save(self, **kw):
+    #     # 1 - Get the old stuff before saving
+    #     if self.instance.id is None:
+    #         old_headline = old_body = old_markup = ''
+    #         new = True
+    #     else:
+    #         old_headline = self.instance.headline
+    #         old_body = self.instance.body
+    #         old_markup = self.instance.markup
+    #         new = False
+    # 
+    #     # 2 - Save the Article
+    #     story = super(StoryForm, self).save(**kw)
+    # 
+    #     # 3 - Set creator
+    #     # editor = getattr(self, 'editor', None)
+    #     if new:
+    #         # if editor is not None:
+    #         #     article.creator = editor
+    #         #     article.group = group
+    #         story.save()
+    # 
+    #     # 4 - Create new revision
+    #     if not old_body == story.body:
+    #         changeset = story.new_revision(
+    #             old_body, old_headline, old_markup, None)
+    # 
+    #     return story#, changeset
