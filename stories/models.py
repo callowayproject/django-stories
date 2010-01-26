@@ -14,8 +14,8 @@ if 'staff' in global_settings.INSTALLED_APPS:
 else:
     from django.contrib.auth.models import User as AuthorModel
 
-from settings import MARKUP_CHOICES, STATUS_CHOICES, PUBLISHED_STATUS, \
-                    DEFAULT_STATUS, DEFAULT_MARKUP, ORIGIN_CHOICES, DEFAULT_ORIGIN, \
+from settings import STATUS_CHOICES, PUBLISHED_STATUS, \
+                    DEFAULT_STATUS, ORIGIN_CHOICES, DEFAULT_ORIGIN, \
                     RELATION_MODELS
 
 
@@ -91,9 +91,6 @@ class Story(models.Model):
         null=True,)
     teaser = models.TextField(_("Teaser Text"))
     body = models.TextField(_("Body"))
-    markup = models.IntegerField(_(u"Content Markup"), 
-        choices=MARKUP_CHOICES, 
-        default=DEFAULT_MARKUP)
     post_story_blurb = models.CharField(_('Post-story Blurb'), 
         max_length=300, 
         blank=True, 
@@ -142,38 +139,7 @@ class Story(models.Model):
     
     def __unicode__(self):
         return "%s : %s" % (self.headline, self.publish_date)
-    
-    # Borrowed from wiki-app
-    # http://code.google.com/p/django-wikiapp/
-    def latest_changeset(self):
-        try:
-            return self.changeset_set.filter(
-                reverted=False).order_by('-revision')[0]
-        except IndexError:
-            return ChangeSet.objects.none()
 
-    def new_revision(self, old_body, old_headline, old_markup, editor):
-        '''Create a new ChangeSet with the old content.'''
-
-        content_diff = diff(self.body, old_body)
-
-        cs = ChangeSet.objects.create(
-            story=self,
-            editor=editor,
-            old_headline=old_headline,
-            old_markup=old_markup,
-            content_diff=content_diff)
-
-        # TODO: Notification
-
-        return cs
-
-    def revert_to(self, revision, editor=None):
-        """ Revert the story to a previuos state, by revision number.
-        """
-        changeset = self.changeset_set.get(revision=revision)
-        changeset.reapply(editor)
-        
 
 if RELATION_MODELS:
     story_relation_limits = {'model__in': RELATION_MODELS}
@@ -189,137 +155,7 @@ if RELATION_MODELS:
             return u"StoryRelation"
 
 
-# Borrowed from wiki-app
-# http://code.google.com/p/django-wikiapp/
-
-class ChangeSetManager(models.Manager):
-
-    def all_later(self, revision):
-        """ Return all changes later to the given revision.
-        Util when we want to revert to the given revision.
-        """
-        return self.filter(revision__gt=int(revision))
-
-
-class NonRevertedChangeSetManager(ChangeSetManager):
-
-    def get_default_queryset(self):
-        super(NonRevertedChangeSetManager, self).get_query_set().filter(
-            reverted=False)
-
-
-class ChangeSet(models.Model):
-    """A report of an older version of some Story."""
-
-    story = models.ForeignKey(Story, verbose_name=_(u"Story"))
-
-    # Editor identification -- logged or anonymous
-    editor = models.ForeignKey(AuthorModel, verbose_name=_(u'Editor'),
-                               null=True)
-
-    # Revision number, starting from 1
-    revision = models.IntegerField(_(u"Revision Number"))
-
-    # How to recreate this version
-    old_headline = models.CharField(_(u"Old Headline"), max_length=100, blank=True)
-    old_markup = models.CharField(_(u"Story Content Markup"), max_length=3,
-                                  choices=MARKUP_CHOICES,
-                                  null=True, blank=True)
-    content_diff = models.TextField(_(u"Content Patch"), blank=True)
-
-    modified = models.DateTimeField(_(u"Modified at"), default=datetime.now)
-    reverted = models.BooleanField(_(u"Reverted Revision"), default=False)
-
-    objects = ChangeSetManager()
-    non_reverted_objects = NonRevertedChangeSetManager()
-
-    class Meta:
-        verbose_name = _(u'Change set')
-        verbose_name_plural = _(u'Change sets')
-        get_latest_by  = 'modified'
-        ordering = ('-revision',)
-
-    def __unicode__(self):
-        return u'#%s' % self.revision
-
-    @models.permalink
-    def get_absolute_url(self):
-        return ('story_changeset', None, {
-            'slug': self.story.slug,
-            'revision': self.revision
-        })
-
-    def is_anonymous_change(self):
-        return self.editor is None
-
-    def reapply(self, editor):
-        """ Return the Story to this revision.
-        """
-
-        # XXX Would be better to exclude reverted revisions
-        #     and revisions previous/next to reverted ones
-        next_changes = self.story.changeset_set.filter(
-            revision__gt=self.revision).order_by('-revision')
-
-        story = self.story
-
-        content = None
-        for changeset in next_changes:
-            if content is None:
-                content = story.body
-            patch = dmp.patch_fromText(changeset.content_diff)
-            content = dmp.patch_apply(patch, content)[0]
-
-            changeset.reverted = True
-            changeset.save()
-
-        old_body = story.body
-        old_headline = story.headline
-        old_markup = story.markup
-
-        story.body = content
-        story.headline = changeset.old_headline
-        story.markup = changeset.old_markup
-        story.save()
-
-        story.new_revision(
-            old_body=old_body, old_headline=old_headline,
-            old_markup=old_markup, editor=editor)
-
-        self.save()
-
-        # TODO: Notification
-
-    def save(self, force_insert=False, force_update=False):
-        """ Saves the story with a new revision.
-        """
-        if self.id is None:
-            try:
-                self.revision = ChangeSet.objects.filter(
-                    story=self.story).latest().revision + 1
-            except self.DoesNotExist:
-                self.revision = 1
-        super(ChangeSet, self).save(force_insert, force_update)
-
-    def display_diff(self):
-        ''' Returns a HTML representation of the diff.
-        '''
-
-        # well, it *will* be the old content
-        old_content = self.story.body
-
-        # newer non-reverted revisions of this story, starting from this
-        newer_changesets = ChangeSet.non_reverted_objects.filter(
-            story=self.story,
-            revision__gte=self.revision)
-
-        # apply all patches to get the content of this revision
-        for i, changeset in enumerate(newer_changesets):
-            patches = dmp.patch_fromText(changeset.content_diff)
-            if len(newer_changesets) == i+1:
-                # we need to compare with the next revision after the change
-                next_rev_content = old_content
-            old_content = dmp.patch_apply(patches, old_content)[0]
-
-        diffs = dmp.diff_main(old_content, next_rev_content)
-        return dmp.diff_prettyHtml(diffs)
+# Reversion integration
+if 'reversion' in global_settings.INSTALLED_APPS:
+    import reversion
+    reversion.register(Story)
