@@ -1,6 +1,6 @@
 import os
 from django.contrib import admin
-#from django.conf import settings
+from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from genericcollection import *
 
@@ -15,7 +15,14 @@ if RELATION_MODELS:
         model = StoryRelation
         exclude = ('relation_type',)
 
-class StoryOptions(admin.ModelAdmin):
+if 'reversion' in settings.INSTALLED_APPS:
+    from reversion.admin import VersionAdmin
+    AdminModel = VersionAdmin
+else:
+    AdminModel = admin.ModelAdmin
+
+class StoryOptions(AdminModel):
+    revision_form_template = "admin/stories/reversion_form.html"
     form = StoryForm
     list_display = ('headline', 'status', 'publish_date', 'modified_date')
     list_filter = ('site', 'publish_date')
@@ -47,6 +54,6 @@ class StoryOptions(admin.ModelAdmin):
         })
     )
     class Media:
-        js = ('js/genericcollections.js')
+        js = ('js/genericcollections.js',)
 
 admin.site.register(Story, StoryOptions)
