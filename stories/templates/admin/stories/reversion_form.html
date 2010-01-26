@@ -1,0 +1,21 @@
+{% extends "reversion/revision_form.html" %}
+{% load  i18n stories_admin %}
+{% block content %}
+<form {% if has_file_field %}enctype="multipart/form-data" {% endif %}action="{{ form_url }}" method="post" id="{{ opts.module_name }}_form">
+	{# {% csrf_token %} #}{% block form_top %}<p>{% blocktrans %}Press the save button below to revert to this version of the object.{% endblocktrans %}</p>{% endblock %}
+<div>
+	{% for fieldset in adminform %}
+	  {% include "admin/stories/fieldset.html" %}
+	{% endfor %}
+
+	{% block after_field_sets %}{% endblock %}
+
+	{% for inline_admin_formset in inline_admin_formsets %}
+	    {% include inline_admin_formset.opts.template %}
+	{% endfor %}
+
+	{% block after_related_objects %}{% endblock %}
+	
+	{% reversion_submit_row %}
+{% endblock %}
+

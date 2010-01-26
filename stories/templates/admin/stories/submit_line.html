@@ -1,0 +1,5 @@
+{% load i18n %}
+<div class="submit-row" {% if is_popup %}style="overflow: auto;"{% endif %}>
+<input type="submit" value="{% trans 'Revert to this version' %}" class="default" name="_save" {{ onclick_attrib }}/>
+<p><a href=".."  class="button">{% trans 'Cancel' %}</a></p>
+</div>
