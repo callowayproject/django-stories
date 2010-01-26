@@ -38,12 +38,12 @@ USE_I18N = True
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = ''
+MEDIA_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__),'media'))
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
-MEDIA_URL = ''
+MEDIA_URL = '/static/'
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
@@ -82,4 +82,23 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'stories',
     'reversion',
+    'tinymce',
 )
+
+TINYMCE_DEFAULT_CONFIG = {
+    'theme': "advanced",
+    'relative_urls': False,
+    'plugins': "safari,paste,advimage,preview",
+    'theme_advanced_toolbar_location' : "top",
+    'theme_advanced_toolbar_align' : "left",
+    'theme_advanced_buttons1' : "formatselect,bold,italic,underline,separator,bullist,numlist,separator,undo,separator,link,unlink,separator,charmap,image,paste,pasteword,separator,code,preview",
+    'theme_advanced_buttons2' : "",
+    'theme_advanced_buttons3' : "",
+    'theme_advanced_statusbar_location' : "bottom",
+    'width': "600",
+    'height': "600",
+}
+
+TINYMCE_ADMIN_FIELDS = {
+    'stories.story': ('body',),
+}
