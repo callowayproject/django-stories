@@ -1,2 +1,3 @@
-* Set up the pluggable GUI subclasses, especially HTML using FCKEditor
-* Make sure the integration with media is good (massmedia or other)
+Document category integration
+Document Kama Sutra integration
+Document Using Related Items

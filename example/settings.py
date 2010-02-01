@@ -81,6 +81,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'stories',
+    'categories',
+    'editor',
     'reversion',
     'tinymce',
 )
