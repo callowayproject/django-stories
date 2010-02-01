@@ -1,0 +1,180 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Integrating with Django TinyMCE &mdash; Django Stories v0.2 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.2',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Django Stories v0.2 documentation" href="../index.html" />
+    <link rel="up" title="Integration with Other Django Applications" href="index.html" />
+    <link rel="next" title="User Manual" href="../user/index.html" />
+    <link rel="prev" title="Integrating with Django Reversion" href="reversion_integration.html" /> 
+  </head>
+  <body>
+<div id="docstitle">
+	<p>Django Stories v0.2 documentation</p>
+</div>
+<div id="header">
+	<div id="title"><h1>Integrating with Django TinyMCE</h1></div>
+	<ul id="headerButtons">
+		<li id="toc_button"><div class="headerButton"><a href="#">Table of Contents</a></div></li>
+		<li id="page_buttons">
+			<div class="headerButton"><a href="../genindex.html" title="General Index" accesskey="I">index</a></div>
+			<div class="headerButton"><a href="../user/index.html" title="User Manual" accesskey="N">next</a></div>
+			<div class="headerButton"><a href="reversion_integration.html" title="Integrating with Django Reversion" accesskey="P">previous</a></div>
+		</li>
+	</ul>
+</div>
+
+<div id="sphinxsidebar">
+  <div class="sphinxsidebarwrapper">
+	<ul><li class="toctree-l1"><a href="../index.html">Main Page</a></li></ul>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference external" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference external" href="../settings.html">Settings</a></li>
+<li class="toctree-l1 current"><a class="reference external" href="index.html">Integration with Other Django Applications</a><ul class="current">
+<li class="toctree-l2"><a class="reference external" href="reversion_integration.html">Integrating with Django Reversion</a></li>
+<li class="toctree-l2 current"><a class="current reference external" href="">Integrating with Django TinyMCE</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="../user/index.html">User Manual</a></li>
+</ul>
+
+      <h3>This Page</h3>
+      <ul class="this-page-menu">
+        <li><a href="../_sources/integration/tinymce_integration.txt"
+               rel="nofollow">Show Source</a></li>
+      </ul>
+    <div id="searchbox" style="display: none">
+      
+        <form class="search" action="../search.html" method="get">
+			<div class="search-wrapper">
+			<span class="search-left"></span>
+			<input class="prettysearch" type="text" name="q" size="18" />
+			<span class="search-right">&nbsp;</span>
+			</div>
+          <input type="submit" value="Search" class="searchbutton" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </form>
+        <p class="searchtip" style="font-size: 90%">
+        Enter search terms or a module, class or function name.
+        </p>
+    </div>
+    <script type="text/javascript">$('#searchbox').show(0);</script>
+  </div>
+</div>
+
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="integrating-with-django-tinymce">
+<span id="tinymce-integration"></span><h1>Integrating with Django TinyMCE<a class="headerlink" href="#integrating-with-django-tinymce" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="install-django-tinymce">
+<h2>Install django-tinymce<a class="headerlink" href="#install-django-tinymce" title="Permalink to this headline">¶</a></h2>
+<p>Django-tinymce makes it very easy to include a GUI text editor for any textarea.</p>
+<ol class="arabic">
+<li><p class="first">Install a special fork of <a class="reference external" href="http://code.google.com/p/django-tinymce/">django-tinymce</a>  from <a class="reference external" href="http://github.com/justquick/django-tinymce">github</a></p>
+<div class="highlight-python"><pre>pip install git+http://github.com/justquick/django-tinymce.git#egg=tinymce</pre>
+</div>
+</li>
+<li><p class="first">Download <a class="reference external" href="http://tinymce.moxiecode.com/download.php">TinyMCE</a> and copy the contents of the <tt class="docutils literal"><span class="pre">jscript</span></tt> directory into a <tt class="docutils literal"><span class="pre">js</span></tt> directory within your <tt class="docutils literal"><span class="pre">MEDIA_ROOT</span></tt> directory.</p>
+<div class="highlight-python"><pre>/myproject
+    /apps
+    /static
+        /css
+        /img
+        /js
+            /tinymce</pre>
+</div>
+</li>
+<li><p class="first">Add <tt class="docutils literal"><span class="pre">tinymce</span></tt> to your <tt class="docutils literal"><span class="pre">INSTALLED_APPS</span></tt> setting.</p>
+<div class="highlight-python"><pre>INSTALLED_APPS = (
+    ...
+    'tinymce',
+)</pre>
+</div>
+</li>
+<li><p class="first">Add <tt class="docutils literal"><span class="pre">(r'^tinymce/',</span> <span class="pre">include('tinymce.urls')),</span></tt> to your <tt class="docutils literal"><span class="pre">urls.py</span></tt>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">urlpatterns</span> <span class="o">=</span> <span class="n">patterns</span><span class="p">(</span><span class="s">&#39;&#39;</span><span class="p">,</span>
+    <span class="o">...</span>
+    <span class="p">(</span><span class="s">r&#39;^tinymce/&#39;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="s">&#39;tinymce.urls&#39;</span><span class="p">)),</span>
+    <span class="o">...</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Add the settings for tinymce. The configuration of plugins and tools shown here is just an example. See the <a class="reference external" href="http://github.com/justquick/django-tinymce/blob/master/docs/installation.rst">django-tinymce docs</a> and <a class="reference external" href="http://wiki.moxiecode.com/index.php/TinyMCE:Configuration">TinyMCE Manual</a> for more information. For example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">TINYMCE_DEFAULT_CONFIG</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">&#39;theme&#39;</span><span class="p">:</span> <span class="s">&quot;advanced&quot;</span><span class="p">,</span>
+    <span class="s">&#39;relative_urls&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+    <span class="s">&#39;plugins&#39;</span><span class="p">:</span> <span class="s">&quot;safari,paste,advimage,preview&quot;</span><span class="p">,</span>
+    <span class="s">&#39;theme_advanced_toolbar_location&#39;</span> <span class="p">:</span> <span class="s">&quot;top&quot;</span><span class="p">,</span>
+    <span class="s">&#39;theme_advanced_toolbar_align&#39;</span> <span class="p">:</span> <span class="s">&quot;left&quot;</span><span class="p">,</span>
+    <span class="s">&#39;theme_advanced_buttons1&#39;</span> <span class="p">:</span> <span class="s">&quot;formatselect,bold,italic,underline,separator,bullist,numlist,separator,undo,separator,link,unlink,separator,charmap,image,paste,pasteword,separator,code,preview&quot;</span><span class="p">,</span>
+    <span class="s">&#39;theme_advanced_buttons2&#39;</span> <span class="p">:</span> <span class="s">&quot;&quot;</span><span class="p">,</span>
+    <span class="s">&#39;theme_advanced_buttons3&#39;</span> <span class="p">:</span> <span class="s">&quot;&quot;</span><span class="p">,</span>
+    <span class="c">#&#39;skin&#39;: &#39;thebigreason&#39;,</span>
+        <span class="s">&#39;theme_advanced_statusbar_location&#39;</span> <span class="p">:</span> <span class="s">&quot;bottom&quot;</span><span class="p">,</span>
+        <span class="s">&#39;width&#39;</span><span class="p">:</span> <span class="s">&quot;600&quot;</span><span class="p">,</span>
+        <span class="s">&#39;height&#39;</span><span class="p">:</span> <span class="s">&quot;600&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Add the <tt class="docutils literal"><span class="pre">TINYMCE_ADMIN_FIELDS</span></tt> setting:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">TINYMCE_ADMIN_FIELDS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">&#39;stories.story&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s">&#39;body&#39;</span><span class="p">,),</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>You can add other fields for other models in here as well, for example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">TINYMCE_ADMIN_FIELDS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">&#39;stories.story&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s">&#39;body&#39;</span><span class="p">,),</span>
+    <span class="s">&#39;flatpages.flatpage&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s">&#39;content&#39;</span><span class="p">,),</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+
+
+          </div> 
+        </div>
+      </div>
+    <div class="footer">
+    <p>
+      &copy; Copyright 2009, The Washington Times.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.3.
+	</p>
+    </div>
+      <div class="clearer"></div>
+    </div>
+	<div id="breadcrumbs">
+		<a href="index.html" accesskey="U">Integration with Other Django Applications</a><img src="../_static/triangle_closed.png" height="9" width="9" alt="&gt;">
+		Integrating with Django TinyMCE
+		</ul>
+	</div>
+	<script type="text/javascript" charset="utf-8" src="../_static/toc.js"></script>
+  </body>
+</html>
