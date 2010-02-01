@@ -1,0 +1,4 @@
+-e git+http://opensource.washingtontimes.com/git/public/django-categories.git/#egg=categories
+-e git+http://opensource.washingtontimes.com/git/public/django-tinymce.git/#egg=tinymce
+django-reversion
+django>=1.1
