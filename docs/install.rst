@@ -17,5 +17,11 @@ Installation
 
 Dependencies:
 
-  categories
   diff_match_patch (included in lib)
+
+
+Integration with django-tinymce
+
+Integration with django-reversion
+
+Integration with django-categories

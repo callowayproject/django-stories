@@ -13,6 +13,8 @@ Contents:
 
    install
    settings
+   integration/index
+   user/index
 
 Indices and tables
 ==================
