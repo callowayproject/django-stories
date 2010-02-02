@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+{% load add_attribute %}
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Test story pagination</title>
+</head>
+<body>
+{% if story_content.has_previous %}
+	<h3>{{ story.headline }}</h3>
+	<p><em>continued from page {{ story_content.previous_page_number }}</em></p>
+{% else %}
+	<h1>{{ story.headline }}</h1>
+	<h2>{{ story.subheadline }}</h2>
+{% endif %}
+{% for paragraph in story_content.object_list %}
+	{% if forloop.first %}
+		{{ paragraph|add_attribute:"class=dropcap"|safe }}
+	{% else %}
+		{{ paragraph|safe }}
+	{% endif %}
+{% endfor %}
+{% if story_content.has_next %}
+    <p><a href="?page={{ story_content.next_page_number }}"><em>Story Continues &rarr;</em></a>
+{% endif %}
+<hr>
+{% include "stories/pagination_widget.html" %}
+</body>
+</html>
