@@ -13,6 +13,7 @@ Contents:
 
    install
    settings
+   pagination
    integration/index
    user/index
 

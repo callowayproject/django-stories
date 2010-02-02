@@ -133,3 +133,36 @@ If this setting is empty or ``None``\ , the story relations are not available in
 
 	STORY_RELATION_MODELS = None # Not enabled
 
+.. _story_pagination:
+
+STORY_PAGINATION
+================
+
+Django Stories has a built-in :class:`Paginator` subclass that splits HTML-formatted text into paragraphs for paginating. If ``STORY_PAGINATION`` is ``True``\ , stories will be paginated in the template. See :ref:`pagination` for more information, and the 
+`Django Paginator docs <http://docs.djangoproject.com/en/dev/topics/pagination/#paginator-objects>`_ for more about pagination is general.
+
+**Default:** ::
+
+	STORY_PAGINATION = False
+
+.. _story_p_per_page:
+
+STORY_P_PER_PAGE
+================
+
+If ``STORY_PAGINATION`` is ``True``\ , then this setting sets the number of paragraphs per page for pagination.
+
+**Default:** ::
+
+	STORY_P_PER_PAGE = 20
+
+.. _story_orphans:
+
+STORY_ORPHANS
+=============
+
+If ``STORY_PAGINATION`` is ``True``\ , then this setting sets the minimum number of paragraphs allowed on the last page for pagination. This means that with ``STORY_P_PER_PAGE = 20`` and ``STORY_ORPHANS = 4`` a story with 24 paragraphs would only have one page, but a story with 25 paragraphs would have two pages.
+
+**Default:** ::
+
+	STORY_ORPHANS = 4

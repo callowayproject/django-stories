@@ -21,7 +21,7 @@ Django-tinymce makes it very easy to include a GUI text editor for any textarea.
 	        /css
 	        /img
 	        /js
-	            /tinymce
+	-------->   /tinymce
    
 #. Add ``tinymce`` to your ``INSTALLED_APPS`` setting. ::
 

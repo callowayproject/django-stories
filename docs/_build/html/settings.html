@@ -20,7 +20,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="Django Stories v0.2 documentation" href="index.html" />
-    <link rel="next" title="Integrating with Django Reversion" href="reversion_integration.html" />
+    <link rel="next" title="Pagination" href="pagination.html" />
     <link rel="prev" title="Installation" href="install.html" /> 
   </head>
   <body>
@@ -33,7 +33,7 @@
 		<li id="toc_button"><div class="headerButton"><a href="#">Table of Contents</a></div></li>
 		<li id="page_buttons">
 			<div class="headerButton"><a href="genindex.html" title="General Index" accesskey="I">index</a></div>
-			<div class="headerButton"><a href="reversion_integration.html" title="Integrating with Django Reversion" accesskey="N">next</a></div>
+			<div class="headerButton"><a href="pagination.html" title="Pagination" accesskey="N">next</a></div>
 			<div class="headerButton"><a href="install.html" title="Installation" accesskey="P">previous</a></div>
 		</li>
 	</ul>
@@ -53,9 +53,13 @@
 <li class="toctree-l2"><a class="reference external" href="#story-origin-choices">STORY_ORIGIN_CHOICES</a></li>
 <li class="toctree-l2"><a class="reference external" href="#story-default-origin">STORY_DEFAULT_ORIGIN</a></li>
 <li class="toctree-l2"><a class="reference external" href="#story-relation-models">STORY_RELATION_MODELS</a></li>
+<li class="toctree-l2"><a class="reference external" href="#story-pagination">STORY_PAGINATION</a></li>
+<li class="toctree-l2"><a class="reference external" href="#story-p-per-page">STORY_P_PER_PAGE</a></li>
+<li class="toctree-l2"><a class="reference external" href="#story-orphans">STORY_ORPHANS</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference external" href="reversion_integration.html">Integrating with Django Reversion</a></li>
+<li class="toctree-l1"><a class="reference external" href="pagination.html">Pagination</a></li>
+<li class="toctree-l1"><a class="reference external" href="integration/index.html">Integration with Other Django Applications</a></li>
 <li class="toctree-l1"><a class="reference external" href="user/index.html">User Manual</a></li>
 </ul>
 
@@ -182,6 +186,31 @@
 <p>If this setting is empty or <tt class="xref docutils literal"><span class="pre">None</span></tt>, the story relations are not available in the admin. If at a later time you decide to set this, you must <tt class="docutils literal"><span class="pre">syncdb</span></tt> before it will work properly.</p>
 <p><strong>Default:</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">STORY_RELATION_MODELS</span> <span class="o">=</span> <span class="bp">None</span> <span class="c"># Not enabled</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="story-pagination">
+<span id="id10"></span><h2>STORY_PAGINATION<a class="headerlink" href="#story-pagination" title="Permalink to this headline">¶</a></h2>
+<p>Django Stories has a built-in <tt class="xref docutils literal"><span class="pre">Paginator</span></tt> subclass that splits HTML-formatted text into paragraphs for paginating. If <tt class="docutils literal"><span class="pre">STORY_PAGINATION</span></tt> is <tt class="xref docutils literal"><span class="pre">True</span></tt>, stories will be paginated in the template. See <a class="reference external" href="pagination.html#pagination"><em>Pagination</em></a> for more information, and the
+<a class="reference external" href="http://docs.djangoproject.com/en/dev/topics/pagination/#paginator-objects">Django Paginator docs</a> for more about pagination is general.</p>
+<p><strong>Default:</strong></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">STORY_PAGINATION</span> <span class="o">=</span> <span class="bp">False</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="story-p-per-page">
+<span id="id11"></span><h2>STORY_P_PER_PAGE<a class="headerlink" href="#story-p-per-page" title="Permalink to this headline">¶</a></h2>
+<p>If <tt class="docutils literal"><span class="pre">STORY_PAGINATION</span></tt> is <tt class="xref docutils literal"><span class="pre">True</span></tt>, then this setting sets the number of paragraphs per page for pagination.</p>
+<p><strong>Default:</strong></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">STORY_P_PER_PAGE</span> <span class="o">=</span> <span class="mi">20</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="story-orphans">
+<span id="id12"></span><h2>STORY_ORPHANS<a class="headerlink" href="#story-orphans" title="Permalink to this headline">¶</a></h2>
+<p>If <tt class="docutils literal"><span class="pre">STORY_PAGINATION</span></tt> is <tt class="xref docutils literal"><span class="pre">True</span></tt>, then this setting sets the minimum number of paragraphs allowed on the last page for pagination. This means that with <tt class="docutils literal"><span class="pre">STORY_P_PER_PAGE</span> <span class="pre">=</span> <span class="pre">20</span></tt> and <tt class="docutils literal"><span class="pre">STORY_ORPHANS</span> <span class="pre">=</span> <span class="pre">4</span></tt> a story with 24 paragraphs would only have one page, but a story with 25 paragraphs would have two pages.</p>
+<p><strong>Default:</strong></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">STORY_ORPHANS</span> <span class="o">=</span> <span class="mi">4</span>
 </pre></div>
 </div>
 </div>
