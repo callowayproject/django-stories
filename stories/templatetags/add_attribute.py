@@ -20,5 +20,5 @@ def add_attribute(tag, arg):
         attr, val = arg.split('=')
         tag[attr] = val
     except Exception, e:
-        print "Exception!",e
+        pass
     return tag
