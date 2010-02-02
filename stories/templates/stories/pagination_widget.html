@@ -1,0 +1,17 @@
+<div class="pagination">
+{% if story_content.has_previous %}
+	<a href="?page={{ story_content.previous_page_number }}" class="previous">&larr; Previous</a>
+{% endif %}
+
+{% for page in story_content.paginator.page_range %}
+	{% ifequal page story_content.number %}
+		<span class="current">{{ page }}</span>
+	{% else %}
+		<a href="?page={{ page }}" class="page">{{ page }}</a>
+	{% endifequal %}
+{% endfor %}
+
+{% if story_content.has_next %}
+	<a href="?page={{ story_content.next_page_number }}" class="next">Next &rarr;</a>
+{% endif %}
+</div>
