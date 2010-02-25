@@ -14,9 +14,15 @@ if 'staff' in global_settings.INSTALLED_APPS:
 else:
     from django.contrib.auth.models import User as AuthorModel
 
+if 'categories' in global_settings.INSTALLED_APPS:
+    HAS_CATEGORIES = True
+    from categories.fields import CategoryM2MField, CategoryFKField
+else:
+    HAS_CATEGORIES = False
+
 from settings import STATUS_CHOICES, PUBLISHED_STATUS, \
                     DEFAULT_STATUS, ORIGIN_CHOICES, DEFAULT_ORIGIN, \
-                    RELATION_MODELS
+                    RELATION_MODELS, RELATIONS
 
 
 dmp = diff_match_patch.diff_match_patch()
@@ -92,6 +98,10 @@ class Story(models.Model):
         default=DEFAULT_ORIGIN,)
     site = models.ForeignKey(Site, verbose_name=_('Site'))
     
+    if HAS_CATEGORIES:
+        primary_category = CategoryFKField(related_name='primary_story_set')
+        categories = CategoryM2MField(blank=True)
+    
     objects = models.Manager()
     published = CurrentSitePublishedManager()
     
@@ -122,19 +132,12 @@ class Story(models.Model):
         output = ", ".join(authors)
         return output
     
-    def base(self):
-        try:
-            from base.models import Base
-            return Base.objects.filter(site=self.site)[0]
-        except:
-            pass
-    
     def __unicode__(self):
         return "%s : %s" % (self.headline, self.publish_date)
 
 
 if RELATION_MODELS:
-    story_relation_limits = {'model__in': RELATION_MODELS}
+    story_relation_limits = reduce(lambda x,y: x|y, RELATIONS)
     class StoryRelation(models.Model):
         """Related story item"""
         story = models.ForeignKey(Story)
