@@ -21,6 +21,8 @@ if 'reversion' in settings.INSTALLED_APPS:
 else:
     AdminModel = admin.ModelAdmin
 
+HAS_CATEGORIES = 'categories' in settings.INSTALLED_APPS
+
 class StoryOptions(AdminModel):
     revision_form_template = "admin/stories/reversion_form.html"
     form = StoryForm
@@ -39,16 +41,22 @@ class StoryOptions(AdminModel):
         }), 
         ('Story data', {
             'fields': ('authors', 'non_staff_author', 'status', 'comments', )
-        }),
+        }),)
+    if HAS_CATEGORIES:
+        fieldsets = fieldsets + (
+            ('Categories', {
+                'fields': ('primary_category','categories')
+            }),
+        )
         # ('Print Information', {
         #     'fields': ('print_pub_date', 'print_section', 'print_page'),
         #     'classes': ('collapse',),
         # }),
-        ('Advanced Options',{
+    fieldsets = fieldsets + (('Advanced Options',{
             'fields': ('origin','slug','publish_date', 'update_date', 'site', ),
             'classes': ('collapse',),
-        })
-    )
+        }),)
+    
     class Media:
         js = ('js/genericcollections.js',)
 
