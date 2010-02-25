@@ -83,10 +83,12 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'stories',
-    #'categories',
+    'categories',
     'editor',
     'reversion',
     'tinymce',
+    'mptt',
+    'simpleapp',
 )
 
 TINYMCE_DEFAULT_CONFIG = {
@@ -106,3 +108,7 @@ TINYMCE_DEFAULT_CONFIG = {
 TINYMCE_ADMIN_FIELDS = {
     'stories.story': ('body',),
 }
+STORY_RELATION_MODELS = (
+    'simpleapp.basicthing',
+    'stories.story',
+)
