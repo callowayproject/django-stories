@@ -183,6 +183,7 @@
 <div class="section" id="story-relation-models">
 <span id="id9"></span><h2>STORY_RELATION_MODELS<a class="headerlink" href="#story-relation-models" title="Permalink to this headline">¶</a></h2>
 <p>A story can relate to several other things, such as other stories, photographs, photo galleries, and external links. Stories links to the Django Content Types application, which would normally show all sorts of things that don&#8217;t matter to the author and end users. This setting specifies which specific models are relatable to a story.</p>
+<p>The value should be a tuple of <cite>&#8216;appname.modelname&#8217;</cite> strings.</p>
 <p>If this setting is empty or <tt class="xref docutils literal"><span class="pre">None</span></tt>, the story relations are not available in the admin. If at a later time you decide to set this, you must <tt class="docutils literal"><span class="pre">syncdb</span></tt> before it will work properly.</p>
 <p><strong>Default:</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">STORY_RELATION_MODELS</span> <span class="o">=</span> <span class="bp">None</span> <span class="c"># Not enabled</span>

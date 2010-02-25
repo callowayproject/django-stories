@@ -127,6 +127,8 @@ STORY_RELATION_MODELS
 
 A story can relate to several other things, such as other stories, photographs, photo galleries, and external links. Stories links to the Django Content Types application, which would normally show all sorts of things that don't matter to the author and end users. This setting specifies which specific models are relatable to a story.
 
+The value should be a tuple of `'appname.modelname'` strings.
+
 If this setting is empty or ``None``\ , the story relations are not available in the admin. If at a later time you decide to set this, you must ``syncdb`` before it will work properly.
 
 **Default:** ::
