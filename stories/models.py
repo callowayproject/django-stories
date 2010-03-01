@@ -144,7 +144,11 @@ if RELATION_MODELS:
         content_type = models.ForeignKey(ContentType, limit_choices_to=story_relation_limits)
         object_id = models.PositiveIntegerField()
         content_object = generic.GenericForeignKey('content_type', 'object_id')
-        relation_type = models.IntegerField(_("Relation Type"), blank=True, null=True)
+        relation_type = models.CharField(_("Relation Type"), 
+            max_length="200", 
+            blank=True, 
+            null=True,
+            help_text=_("A generic text field to tag a relation, like 'leadphoto'."))
 
         def __unicode__(self):
             return u"StoryRelation"

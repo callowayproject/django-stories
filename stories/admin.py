@@ -13,7 +13,7 @@ if RELATION_MODELS:
 
     class InlineStoryRelation(GenericCollectionTabularInline):
         model = StoryRelation
-        exclude = ('relation_type',)
+        # exclude = ('relation_type',)
 
 if 'reversion' in settings.INSTALLED_APPS:
     from reversion.admin import VersionAdmin

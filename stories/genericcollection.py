@@ -4,7 +4,7 @@ from django.contrib.contenttypes.models import ContentType
 class GenericCollectionInlineModelAdmin(admin.options.InlineModelAdmin):
     ct_field = "content_type"
     ct_fk_field = "object_id"
-    # valid_contenttype_names = ('story', 'photo', 'gallery')
+    
     def __init__(self, parent_model, admin_site):
         super(GenericCollectionInlineModelAdmin, self).__init__(parent_model, admin_site)
         ctypes = ContentType.objects.all().order_by('id').values_list('id', 'app_label', 'model')
