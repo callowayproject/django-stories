@@ -53,7 +53,7 @@ class StoryOptions(AdminModel):
         #     'classes': ('collapse',),
         # }),
     fieldsets = fieldsets + (('Advanced Options',{
-            'fields': ('origin','slug','publish_date', 'update_date', 'site', ),
+            'fields': ('origin','slug',('publish_date', 'publish_time'), 'update_date', 'site', ),
             'classes': ('collapse',),
         }),)
     
