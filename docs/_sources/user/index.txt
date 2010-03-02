@@ -8,4 +8,5 @@ User Manual
 .. toctree::
    :maxdepth: 2
    
+   storyentry
    revisions
