@@ -48,10 +48,9 @@
 <li class="toctree-l2"><a class="reference external" href="#story-status-choices">STORY_STATUS_CHOICES</a></li>
 <li class="toctree-l2"><a class="reference external" href="#story-default-status">STORY_DEFAULT_STATUS</a></li>
 <li class="toctree-l2"><a class="reference external" href="#story-published-status">STORY_PUBLISHED_STATUS</a></li>
-<li class="toctree-l2"><a class="reference external" href="#story-markup-choices">STORY_MARKUP_CHOICES</a></li>
-<li class="toctree-l2"><a class="reference external" href="#story-default-markup">STORY_DEFAULT_MARKUP</a></li>
 <li class="toctree-l2"><a class="reference external" href="#story-origin-choices">STORY_ORIGIN_CHOICES</a></li>
 <li class="toctree-l2"><a class="reference external" href="#story-default-origin">STORY_DEFAULT_ORIGIN</a></li>
+<li class="toctree-l2"><a class="reference external" href="#story-include-print">STORY_INCLUDE_PRINT</a></li>
 <li class="toctree-l2"><a class="reference external" href="#story-relation-models">STORY_RELATION_MODELS</a></li>
 <li class="toctree-l2"><a class="reference external" href="#story-pagination">STORY_PAGINATION</a></li>
 <li class="toctree-l2"><a class="reference external" href="#story-p-per-page">STORY_P_PER_PAGE</a></li>
@@ -136,33 +135,8 @@
 </pre></div>
 </div>
 </div>
-<div class="section" id="story-markup-choices">
-<span id="id5"></span><h2>STORY_MARKUP_CHOICES<a class="headerlink" href="#story-markup-choices" title="Permalink to this headline">¶</a></h2>
-<p>The Story app endeavors to have a pluggable markup system for the content of the each story. This allows a variety of ways to markup content, depending on end user or source of the content.</p>
-<p>It is also possible to have a WYSIWYG editor in the admin that stores the resulting content in the correct format.</p>
-<p>Choices are specified as a <tt class="docutils literal"><span class="pre">list</span></tt> or <tt class="docutils literal"><span class="pre">tuple</span></tt> of <tt class="docutils literal"><span class="pre">integer</span></tt> - <tt class="docutils literal"><span class="pre">string</span></tt> tuples. The <tt class="docutils literal"><span class="pre">integer</span></tt> is the code for the choice and the <tt class="docutils literal"><span class="pre">string</span></tt> is the description that the user sees.</p>
-<p><strong>Defaults:</strong></p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">STORY_MARKUP_CHOICES</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s">&#39;None&#39;</span><span class="p">),</span>
-    <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s">&#39;Creole&#39;</span><span class="p">),</span>
-    <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s">&#39;reStructuredText&#39;</span><span class="p">),</span>
-    <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s">&#39;Textile&#39;</span><span class="p">),</span>
-    <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s">&#39;Markdown&#39;</span><span class="p">),</span>
-    <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="s">&#39;HTML&#39;</span><span class="p">),</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="story-default-markup">
-<span id="id6"></span><h2>STORY_DEFAULT_MARKUP<a class="headerlink" href="#story-default-markup" title="Permalink to this headline">¶</a></h2>
-<p>To make it easy on authors, you can specify which of the formats available is the default.</p>
-<p><strong>Default:</strong></p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">STORY_DEFAULT_MARKUP</span> <span class="o">=</span> <span class="mi">0</span> <span class="c"># None</span>
-</pre></div>
-</div>
-</div>
 <div class="section" id="story-origin-choices">
-<span id="id7"></span><h2>STORY_ORIGIN_CHOICES<a class="headerlink" href="#story-origin-choices" title="Permalink to this headline">¶</a></h2>
+<span id="id5"></span><h2>STORY_ORIGIN_CHOICES<a class="headerlink" href="#story-origin-choices" title="Permalink to this headline">¶</a></h2>
 <p>It is possible that stories could be coming in from several sources, such as a wire service, an editorial front end, or an FTP site. This settings allows you to mark which stories originated from which source, so you can potentially do something different depending on the source. For example, include all stories in the RSS feed, except ones that came from a wire service.</p>
 <p>Choices are specified as a <tt class="docutils literal"><span class="pre">list</span></tt> or <tt class="docutils literal"><span class="pre">tuple</span></tt> of <tt class="docutils literal"><span class="pre">integer</span></tt> - <tt class="docutils literal"><span class="pre">string</span></tt> tuples. The <tt class="docutils literal"><span class="pre">integer</span></tt> is the code for the choice and the <tt class="docutils literal"><span class="pre">string</span></tt> is the description that the user sees.</p>
 <p><strong>Default:</strong></p>
@@ -173,15 +147,23 @@
 </div>
 </div>
 <div class="section" id="story-default-origin">
-<span id="id8"></span><h2>STORY_DEFAULT_ORIGIN<a class="headerlink" href="#story-default-origin" title="Permalink to this headline">¶</a></h2>
+<span id="id6"></span><h2>STORY_DEFAULT_ORIGIN<a class="headerlink" href="#story-default-origin" title="Permalink to this headline">¶</a></h2>
 <p>When a story is created from the Django Admin, which choice of origin should it default to?</p>
 <p><strong>Default:</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">STORY_DEFAULT_ORIGIN</span> <span class="o">=</span> <span class="mi">0</span> <span class="c"># Admin</span>
 </pre></div>
 </div>
 </div>
+<div class="section" id="story-include-print">
+<span id="id7"></span><h2>STORY_INCLUDE_PRINT<a class="headerlink" href="#story-include-print" title="Permalink to this headline">¶</a></h2>
+<p>Should the fields related to print production be included in the database. The fields are <tt class="docutils literal"><span class="pre">print_pub_date</span></tt>, <tt class="docutils literal"><span class="pre">print_section</span></tt>, and <tt class="docutils literal"><span class="pre">print_page</span></tt>.</p>
+<p><strong>Default:</strong></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">STORY_INCLUDE_PRINT</span> <span class="o">=</span> <span class="bp">False</span>
+</pre></div>
+</div>
+</div>
 <div class="section" id="story-relation-models">
-<span id="id9"></span><h2>STORY_RELATION_MODELS<a class="headerlink" href="#story-relation-models" title="Permalink to this headline">¶</a></h2>
+<span id="id8"></span><h2>STORY_RELATION_MODELS<a class="headerlink" href="#story-relation-models" title="Permalink to this headline">¶</a></h2>
 <p>A story can relate to several other things, such as other stories, photographs, photo galleries, and external links. Stories links to the Django Content Types application, which would normally show all sorts of things that don&#8217;t matter to the author and end users. This setting specifies which specific models are relatable to a story.</p>
 <p>The value should be a tuple of <cite>&#8216;appname.modelname&#8217;</cite> strings.</p>
 <p>If this setting is empty or <tt class="xref docutils literal"><span class="pre">None</span></tt>, the story relations are not available in the admin. If at a later time you decide to set this, you must <tt class="docutils literal"><span class="pre">syncdb</span></tt> before it will work properly.</p>
@@ -191,7 +173,7 @@
 </div>
 </div>
 <div class="section" id="story-pagination">
-<span id="id10"></span><h2>STORY_PAGINATION<a class="headerlink" href="#story-pagination" title="Permalink to this headline">¶</a></h2>
+<span id="id9"></span><h2>STORY_PAGINATION<a class="headerlink" href="#story-pagination" title="Permalink to this headline">¶</a></h2>
 <p>Django Stories has a built-in <tt class="xref docutils literal"><span class="pre">Paginator</span></tt> subclass that splits HTML-formatted text into paragraphs for paginating. If <tt class="docutils literal"><span class="pre">STORY_PAGINATION</span></tt> is <tt class="xref docutils literal"><span class="pre">True</span></tt>, stories will be paginated in the template. See <a class="reference external" href="pagination.html#pagination"><em>Pagination</em></a> for more information, and the
 <a class="reference external" href="http://docs.djangoproject.com/en/dev/topics/pagination/#paginator-objects">Django Paginator docs</a> for more about pagination is general.</p>
 <p><strong>Default:</strong></p>
@@ -200,7 +182,7 @@
 </div>
 </div>
 <div class="section" id="story-p-per-page">
-<span id="id11"></span><h2>STORY_P_PER_PAGE<a class="headerlink" href="#story-p-per-page" title="Permalink to this headline">¶</a></h2>
+<span id="id10"></span><h2>STORY_P_PER_PAGE<a class="headerlink" href="#story-p-per-page" title="Permalink to this headline">¶</a></h2>
 <p>If <tt class="docutils literal"><span class="pre">STORY_PAGINATION</span></tt> is <tt class="xref docutils literal"><span class="pre">True</span></tt>, then this setting sets the number of paragraphs per page for pagination.</p>
 <p><strong>Default:</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">STORY_P_PER_PAGE</span> <span class="o">=</span> <span class="mi">20</span>
@@ -208,7 +190,7 @@
 </div>
 </div>
 <div class="section" id="story-orphans">
-<span id="id12"></span><h2>STORY_ORPHANS<a class="headerlink" href="#story-orphans" title="Permalink to this headline">¶</a></h2>
+<span id="id11"></span><h2>STORY_ORPHANS<a class="headerlink" href="#story-orphans" title="Permalink to this headline">¶</a></h2>
 <p>If <tt class="docutils literal"><span class="pre">STORY_PAGINATION</span></tt> is <tt class="xref docutils literal"><span class="pre">True</span></tt>, then this setting sets the minimum number of paragraphs allowed on the last page for pagination. This means that with <tt class="docutils literal"><span class="pre">STORY_P_PER_PAGE</span> <span class="pre">=</span> <span class="pre">20</span></tt> and <tt class="docutils literal"><span class="pre">STORY_ORPHANS</span> <span class="pre">=</span> <span class="pre">4</span></tt> a story with 24 paragraphs would only have one page, but a story with 25 paragraphs would have two pages.</p>
 <p><strong>Default:</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">STORY_ORPHANS</span> <span class="o">=</span> <span class="mi">4</span>

@@ -5,8 +5,9 @@ from django.utils.translation import ugettext_lazy as _
 from genericcollection import *
 
 from models import Story
-from settings import RELATION_MODELS
+from stories.settings import RELATION_MODELS, INCLUDE_PRINT
 from forms import StoryForm
+
 
 if RELATION_MODELS:
     from models import StoryRelation
@@ -40,7 +41,7 @@ class StoryOptions(AdminModel):
             'fields': ('headline', 'subhead', 'teaser', 'body')
         }), 
         ('Story data', {
-            'fields': ('authors', 'non_staff_author', 'status', 'comments', )
+            'fields': ('kicker', 'authors', 'non_staff_author', 'status', 'comments', )
         }),)
     if HAS_CATEGORIES:
         fieldsets = fieldsets + (
@@ -48,10 +49,11 @@ class StoryOptions(AdminModel):
                 'fields': ('primary_category','categories')
             }),
         )
-        # ('Print Information', {
-        #     'fields': ('print_pub_date', 'print_section', 'print_page'),
-        #     'classes': ('collapse',),
-        # }),
+    if INCLUDE_PRINT:
+        fieldsets = fieldsets + ('Print Information', {
+            'fields': ('print_pub_date', 'print_section', 'print_page'),
+            'classes': ('collapse',),
+        })
     fieldsets = fieldsets + (('Advanced Options',{
             'fields': ('origin','slug',('publish_date', 'publish_time'), 'update_date', 'site', ),
             'classes': ('collapse',),

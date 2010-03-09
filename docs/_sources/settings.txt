@@ -60,39 +60,6 @@ Which one of the possible statuses is considered "On Site."
 
 	STORY_PUBLISHED_STATUS = 4 # Published
 
-.. _story_markup_choices:
-
-STORY_MARKUP_CHOICES
-====================
-
-The Story app endeavors to have a pluggable markup system for the content of the each story. This allows a variety of ways to markup content, depending on end user or source of the content.
-
-It is also possible to have a WYSIWYG editor in the admin that stores the resulting content in the correct format.
-
-Choices are specified as a ``list`` or ``tuple`` of ``integer`` - ``string`` tuples. The ``integer`` is the code for the choice and the ``string`` is the description that the user sees.
-
-
-**Defaults:** ::
-
-	STORY_MARKUP_CHOICES = (
-	    (0, 'None'),
-	    (1, 'Creole'),
-	    (2, 'reStructuredText'),
-	    (3, 'Textile'),
-	    (4, 'Markdown'),
-	    (5, 'HTML'),
-	)
-
-.. _story_default_markup:
-
-STORY_DEFAULT_MARKUP
-====================
-
-To make it easy on authors, you can specify which of the formats available is the default.
-
-**Default:** ::
-
-	STORY_DEFAULT_MARKUP = 0 # None
 
 .. _story_origin_choices:
 
@@ -119,6 +86,17 @@ When a story is created from the Django Admin, which choice of origin should it 
 **Default:** ::
 
 	STORY_DEFAULT_ORIGIN = 0 # Admin
+
+.. _story_include_print:
+
+STORY_INCLUDE_PRINT
+===================
+
+Should the fields related to print production be included in the database. The fields are ``print_pub_date``\ , ``print_section``\ , and ``print_page``\ .
+
+**Default:** ::
+
+	STORY_INCLUDE_PRINT = False
 
 .. _story_relation_models:
 
