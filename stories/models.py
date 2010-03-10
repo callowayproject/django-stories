@@ -22,7 +22,7 @@ else:
 
 from settings import STATUS_CHOICES, PUBLISHED_STATUS, \
                     DEFAULT_STATUS, ORIGIN_CHOICES, DEFAULT_ORIGIN, \
-                    RELATION_MODELS, RELATIONS
+                    RELATION_MODELS, RELATIONS, INCLUDE_PRINT
 
 
 dmp = diff_match_patch.diff_match_patch()
