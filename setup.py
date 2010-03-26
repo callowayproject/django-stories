@@ -1,9 +1,19 @@
 from distutils.core import setup
 
+import stories
+version = stories.__version__
+
+try:
+    f = open('README')
+    long_desc = f.read()
+    f.close()
+except:
+    long_desc = ""
+
 setup(name='django-stories',
-      version='0.1',
+      version=version,
       description='An application for handling newspaper-like stories on a web site',
-      long_description='This app is designed to be flexible to configure, but still simple to the writers and editors. It has revisions, related items, configurable markup and pluggable GUI.',
+      long_description=long_desc,
       author='Corey Oordt',
       author_email='coordt@washingtontimes.com',
       url='http://opensource.washingtontimes.com/projects/django-stories/',

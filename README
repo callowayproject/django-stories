@@ -1,3 +1,5 @@
+This app is designed to be flexible to configure, but still simple to the writers and editors.
+
 Design Goals
 
 * Reduced dependencies: Checks for optional packages and only creates the fields if they are there.
