@@ -47,11 +47,15 @@ class StoryOptions(AdminModel):
     form = StoryForm
     list_display = ('headline', 'status', 'publish_date', 'modified_date')
     list_filter = ('site', 'publish_date')
+    list_editable = ('status',)
+    list_per_page = 25
     search_fields = ('headline', 'teaser', 'body')
     date_hierarchy = 'publish_date'
-    list_per_page = 25
     prepopulated_fields = {'slug': ('headline',)}
-    filter_horizontal = ('authors',)
+    if HAS_CATEGORIES:
+        filter_horizontal = ('authors', 'categories')
+    else:
+        filter_horizontal = ('authors',)
     actions = admin_actions
     if RELATION_MODELS:
         inlines = [InlineStoryRelation,]
