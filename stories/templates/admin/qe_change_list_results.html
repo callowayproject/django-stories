@@ -35,6 +35,25 @@
 		float: left;
 	}
 </style>
+<script src="http://www.google.com/jsapi"></script>
+<script type="text/javascript">
+	if (typeof jQuery == 'undefined') {
+		google.load("jquery", "1.4.2");
+	}
+</script>
+<script type="text/javascript">
+	$(function(){
+		$('.quickedit').each(function(){
+			$(this).click(function(){
+				var target = "#qe-form-" + $(this).attr('id').replace('quickedit-','');
+				$(target).show();
+				$('.qe-reset',target).click(function(){
+					$(target).hide();
+				})
+			})
+		});
+	})
+</script>
 <table cellspacing="0">
 <thead>
 <tr>
@@ -90,6 +109,7 @@
 		</tr>
 		<tr>
 			<td colspan="2">
+				<input type="reset" value="Reset" class="qe-reset">
 				<input type="submit" value="Save" class="qe-button" name="_save">
 			</td>
 		</tr>
