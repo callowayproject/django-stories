@@ -137,6 +137,15 @@ class Story(models.Model):
         output = ", ".join(authors)
         return output
     
+    @property
+    def paragraphs(self):
+        """
+        Return the paragraphs as a list
+        """
+        import re
+        
+        return re.findall("(<p>.+?</p>)", self.body, re.I | re.S)
+    
     def __unicode__(self):
         return "%s : %s" % (self.headline, self.publish_date)
 
