@@ -43,6 +43,14 @@
 </script>
 <script type="text/javascript">
 	$(function(){
+		$('.qe-buttons').hide(0,function(){
+			var qe = $(this);
+			$(this).parent().parent().hover(function(){
+				qe.show();
+			},function(){
+				qe.hide();
+			});
+		});
 		$('.quickedit').each(function(){
 			$(this).click(function(){
 				var target = "#qe-form-" + $(this).attr('id').replace('quickedit-','');
