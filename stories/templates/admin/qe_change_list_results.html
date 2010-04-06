@@ -78,9 +78,9 @@
 <tr class="{% cycle 'row1' 'row2' %}">
 	<td>
 		<div class="qe-buttons">
-			<a href="{{ change_url }}">Edit</a> |
-			<a href="#" class="quickedit" id="quickedit-{{result.quickedit.instance.pk}}">Quick Edit</a> | 
-			<a href="{{result.quickedit.instance.get_absolute_url}}" target="_blank">View on site</a>
+			<a href="{{ change_url }}"><img src="{{ STATIC_URL }}img/019.png" alt="Edit" title="Edit this item" width="10" height="10"></a> 
+			<a href="#" class="quickedit" id="quickedit-{{result.quickedit.instance.pk}}"><img src="{{STATIC_URL }}img/133.png" alt="Quick Edit" title="Show Quick Edit form" width="10" height="10"></a> 
+			<a href="{{result.quickedit.instance.get_absolute_url}}" target="_blank"><img src="{{ STATIC_URL }}img/049.png" alt="View on site" title="View on site" width="10" height="10"></a>
 		</div>
 	</td>{% for item in result.fields %}{{ item }}{% endfor %}
 </tr>

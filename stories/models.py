@@ -146,12 +146,29 @@ class Story(models.Model):
         
         return re.findall("(<p>.+?</p>)", self.body, re.I | re.S)
     
+    if RELATION_MODELS:
+        def get_related_content_type(self, content_type):
+            return self.storyrelation_set.filter(content_type__name=content_type)
+        
+        def get_relation_type(self, relation_type):
+            return self.storyrelation_set.filter(relation_type=relation_type)
+    
     def __unicode__(self):
         return "%s : %s" % (self.headline, self.publish_date)
 
 
 if RELATION_MODELS:
     story_relation_limits = reduce(lambda x,y: x|y, RELATIONS)
+    class StoryRelationManager(models.Manager):
+        def get_content_type(self, content_type):
+            qs = self.get_query_set()
+            return qs.filter(content_type__name=content_type)
+        
+        def get_relation_type(self, relation_type):
+            qs = self.get_query_set()
+            return qs.filter(relation_type=relation_type)
+    
+    
     class StoryRelation(models.Model):
         """Related story item"""
         story = models.ForeignKey(Story)
@@ -163,7 +180,9 @@ if RELATION_MODELS:
             blank=True, 
             null=True,
             help_text=_("A generic text field to tag a relation, like 'leadphoto'."))
-
+        
+        objects = StoryRelationManager()
+        
         def __unicode__(self):
             return u"StoryRelation"
 

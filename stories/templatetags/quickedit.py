@@ -28,8 +28,13 @@ def results(cl):
             for res in cl.result_list:
                 yield list(items_for_result(cl, res, None))
 
-def qe_result_list(cl):
+def qe_result_list(context, cl):
+    if context.has_key('STATIC_URL'):
+        static_url = 'STATIC_URL'
+    else:
+        static_url = 'MEDIA_URL'
     return {'cl': cl,
             'result_headers': list(result_headers(cl)),
-            'results': list(results(cl)),}
-qe_result_list = register.inclusion_tag("admin/qe_change_list_results.html")(qe_result_list)
+            'results': list(results(cl)),
+            'STATIC_URL': context[static_url]}
+qe_result_list = register.inclusion_tag("admin/qe_change_list_results.html", takes_context=True)(qe_result_list)
