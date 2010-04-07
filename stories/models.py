@@ -4,6 +4,7 @@ import diff_match_patch
 from django.db import models
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
+from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
 from datetime import datetime
 from django.contrib.sites.models import Site
@@ -132,10 +133,16 @@ class Story(models.Model):
         Easy way to get a combination of authors without having to worry which
         fields are set (author/one-off author)
         """
-        authors = ["%s %s" % (i.first_name, i.last_name) for i in self.authors.all()]
-        authors.append(self.non_staff_author)
-        output = ", ".join(authors)
-        return output
+        link = '<a href="%s">%s %s</a>'
+        if AuthorModel.__module__ == 'django.contrib.auth.models':
+            authors = [link % (i.get_profile().get_absolute_url(), i.first_name, i.last_name)
+                       for i in self.authors.all()]
+        else:
+            authors = [link % (i.get_absolute_url(), i.first_name, i.last_name)
+                       for i in self.authors.all()]
+        if self.non_staff_author:
+            authors.append(self.non_staff_author)
+        return mark_safe(", ".join(authors))
     
     def __unicode__(self):
         return "%s : %s" % (self.headline, self.publish_date)
