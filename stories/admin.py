@@ -2,6 +2,9 @@ import os
 from django.contrib import admin
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
+from django.utils.functional import curry
+from django.forms.models import modelformset_factory, modelform_factory
+
 from genericcollection import *
 
 from models import Story
@@ -46,8 +49,9 @@ class StoryOptions(AdminModel):
     revision_form_template = "admin/stories/reversion_form.html"
     form = StoryForm
     list_display = ('headline', 'status', 'publish_date', 'modified_date')
-    list_filter = ('site', 'publish_date')
     list_editable = ('status',)
+    list_filter = ('site', 'publish_date')
+    quick_editable = ('headline','subhead','kicker','status','teaser',)
     list_per_page = 25
     search_fields = ('headline', 'teaser', 'body')
     date_hierarchy = 'publish_date'
@@ -81,9 +85,20 @@ class StoryOptions(AdminModel):
             'fields': ('origin','slug',('publish_date', 'publish_time'), 'update_date', 'site', ),
             'classes': ('collapse',),
         }),)
-    
+    change_list_template = 'admin/stories/change_list.html'
     class Media:
         js = ('js/genericcollections.js',)
+    
+    def get_changelist_formset(self, request, **kwargs):
+        """
+        Returns the quickedit formset for the row
+        """
+        defaults = {
+            "formfield_callback": curry(self.formfield_for_dbfield, request=request),
+        }
+        defaults.update(kwargs)
+        QEForm = modelform_factory(self.model)
+        return modelformset_factory(self.model, QEForm, extra=0, fields=self.quick_editable, **defaults)
 
 
 admin.site.register(Story, StoryOptions)
