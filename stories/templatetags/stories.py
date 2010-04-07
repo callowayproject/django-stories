@@ -12,7 +12,7 @@ def do_get_related_content_type(parser, token):
     {% get_related_content_type object Image as photo %}
     """
     try:
-        tag_name, obj, content_type, var = token.split_contents()
+        tag_name, obj, content_type, as_txt, var = token.split_contents()
     except ValueError:
         raise template.TemplateSyntaxError("'get_related_content_type' requires an object, content_type and a variable name.")
     return RelatedNode(obj, var, content_type=content_type)
@@ -27,7 +27,7 @@ def do_get_relation_type(parser, token):
     {% get_relation_type object leadphoto as leadphoto %}
     """
     try:
-        tag_name, obj, relation_type, var = token.split_contents()
+        tag_name, obj, relation_type, as_txt, var = token.split_contents()
     except ValueError:
         raise template.TemplateSyntaxError("'get_relation_type' requires an object, relation_type and a variable name.")
     return RelatedNode(obj, var, relation_type=relation_type)
