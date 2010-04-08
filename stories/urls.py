@@ -55,10 +55,8 @@ urlpatterns = patterns('',
         name   = 'news_archive_day'
     ),
     url(
-        regex  = '^(?P<year>\d{4})/(?P<month>\w{3})/(?P<day>\d{2})/(?P<slug>[-\w]+)/$',
-        #view   = 'django.views.generic.date_based.object_detail',
+        regex  = '^(?P<year>\d{4})/(?P<month>\w{3})/(?P<day>\d{1,2})/(?P<slug>[-\w]+)/$',
         view   = 'stories.views.pag_story_detail',
-        #kwargs = dict(info_dict,slug_field="slug"),
         name   = 'news_detail'
     ),
 )
