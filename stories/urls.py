@@ -49,6 +49,12 @@ urlpatterns = patterns('',
         name   = 'news_archive_day'
     ),
     url(
+        regex  = '^(?P<year>\d{4})/(?P<month>\w{3})/(?P<day>\d{1,2})/(?P<slug>[-\w]+)/print/$',
+        view   = 'stories.views.pag_story_detail',
+        name   = 'news_detail',
+        kwargs = {'template_name': 'stories/pag_story_print.html'}
+    ),        
+    url(
         regex  = '^today/$',
         view   = 'django.views.generic.date_based.archive_today',
         kwargs = info_dict,
