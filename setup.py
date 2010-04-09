@@ -25,6 +25,7 @@ setup(name='django-stories',
       packages=['stories'],
       install_requires=reqs,
       dependency_links=[
+        'http://opensource.washingtontimes.com/pypi/simple/',
         'http://opensource.washingtontimes.com/pypi/simple/django-categories/',
       ],
       include_package_data=True,

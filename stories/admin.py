@@ -89,6 +89,17 @@ class StoryOptions(AdminModel):
     class Media:
         js = ('js/genericcollections.js',)
     
+    def queryset(self, request):
+        """
+        Need to override to show all the stories. Default manager only shows published stories
+        """
+        qs = self.model.objects.get_query_set()
+        ordering = self.ordering or () # otherwise we might try to *None, which is bad ;)
+        if ordering:
+            qs = qs.order_by(*ordering)
+        return qs
+    
+    
     def get_changelist_formset(self, request, **kwargs):
         """
         Returns the quickedit formset for the row
