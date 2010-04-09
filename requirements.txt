@@ -1,6 +1,6 @@
 #--extra-index http://opensource.washingtontimes.com/pypi/
 django-categories
-#-e git+http://opensource.washingtontimes.com/git/public/django-tinymce.git/#egg=tinymce
+django-tinymce>=1.5.1
 django-reversion==1.2.1
 django==1.1.1
 BeautifulSoup==3.0.8
