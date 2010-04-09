@@ -4,6 +4,7 @@ import diff_match_patch
 from django.db import models
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
+from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
 from datetime import datetime
 from django.contrib.sites.models import Site
@@ -132,10 +133,32 @@ class Story(models.Model):
         Easy way to get a combination of authors without having to worry which
         fields are set (author/one-off author)
         """
-        authors = ["%s %s" % (i.first_name, i.last_name) for i in self.authors.all()]
-        authors.append(self.non_staff_author)
-        output = ", ".join(authors)
-        return output
+        link = '<a href="%s">%s %s</a>'
+        if AuthorModel.__module__ == 'django.contrib.auth.models':
+            authors = [link % (i.get_profile().get_absolute_url(), i.first_name, i.last_name)
+                       for i in self.authors.all()]
+        else:
+            authors = [link % (i.get_absolute_url(), i.first_name, i.last_name)
+                       for i in self.authors.all()]
+        if self.non_staff_author:
+            authors.append(self.non_staff_author)
+        return mark_safe(", ".join(authors))
+    
+    @property
+    def paragraphs(self):
+        """
+        Return the paragraphs as a list
+        """
+        import re
+        
+        return re.findall("(<p>.+?</p>)", self.body, re.I | re.S)
+    
+    if RELATION_MODELS:
+        def get_related_content_type(self, content_type):
+            return self.storyrelation_set.filter(content_type__name=content_type)
+        
+        def get_relation_type(self, relation_type):
+            return self.storyrelation_set.filter(relation_type=relation_type)
     
     def __unicode__(self):
         return "%s : %s" % (self.headline, self.publish_date)
@@ -143,6 +166,16 @@ class Story(models.Model):
 
 if RELATION_MODELS:
     story_relation_limits = reduce(lambda x,y: x|y, RELATIONS)
+    class StoryRelationManager(models.Manager):
+        def get_content_type(self, content_type):
+            qs = self.get_query_set()
+            return qs.filter(content_type__name=content_type)
+        
+        def get_relation_type(self, relation_type):
+            qs = self.get_query_set()
+            return qs.filter(relation_type=relation_type)
+    
+    
     class StoryRelation(models.Model):
         """Related story item"""
         story = models.ForeignKey(Story)
@@ -154,7 +187,9 @@ if RELATION_MODELS:
             blank=True, 
             null=True,
             help_text=_("A generic text field to tag a relation, like 'leadphoto'."))
-
+        
+        objects = StoryRelationManager()
+        
         def __unicode__(self):
             return u"StoryRelation"
 
