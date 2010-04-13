@@ -14,7 +14,7 @@ try:
     reqs = open('requirements.txt').read()
 except:
     reqs = ''
-print "reqs: ", reqs
+
 setup(name='django-stories',
       version=version,
       description='An application for handling newspaper-like stories on a web site',
@@ -26,6 +26,7 @@ setup(name='django-stories',
       install_requires=reqs,
       dependency_links=[
         'http://opensource.washingtontimes.com/pypi/simple/',
+        'http://opensource.washingtontimes.com/pypi/simple/django-tinymce/',
         'http://opensource.washingtontimes.com/pypi/simple/django-categories/',
       ],
       include_package_data=True,

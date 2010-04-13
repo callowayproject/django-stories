@@ -1,5 +1,5 @@
 #--extra-index http://opensource.washingtontimes.com/pypi/
 django-categories
-django-tinymce>=1.5.1
+django-tinymce==1.5.1beta4
 django-reversion==1.2.1
 BeautifulSoup
