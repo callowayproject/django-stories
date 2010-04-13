@@ -2,5 +2,4 @@
 django-categories
 django-tinymce>=1.5.1
 django-reversion==1.2.1
-django==1.1.1
-BeautifulSoup==3.0.8
+BeautifulSoup
