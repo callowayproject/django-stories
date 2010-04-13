@@ -89,6 +89,7 @@ INSTALLED_APPS = (
     'tinymce',
     'mptt',
     'simpleapp',
+    'simpleprofile',
 )
 
 TINYMCE_DEFAULT_CONFIG = {
@@ -112,3 +113,5 @@ STORY_RELATION_MODELS = (
     'simpleapp.basicthing',
     'stories.story',
 )
+
+AUTH_PROFILE_MODULE = 'simpleprofile.Profile'

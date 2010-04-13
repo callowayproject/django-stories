@@ -12,7 +12,8 @@
 	<p><em>continued from page {{ story_content.previous_page_number }}</em></p>
 {% else %}
 	<h1>{{ story.headline }}</h1>
-	<h2>{{ story.subheadline }}</h2>
+	{% if story.subheadline %}<h2>{{ story.subheadline }}</h2>{% endif %}
+	<p class="byline">By {{ story.author }}</p>
 {% endif %}
 {% for paragraph in story_content.object_list %}
 	{% if forloop.first %}
