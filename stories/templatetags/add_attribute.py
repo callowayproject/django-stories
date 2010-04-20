@@ -10,9 +10,11 @@ def add_attribute(tag, arg):
 
     {% for obj in paginator.object_list %}
         {% if forloop.first %}
-        {{ obj|add_attribute:"class=dropcap" }}
+            {% ifequal page.number 1 %}
+            {{ obj|add_attribute:"class=dropcap" }}
+            {% endifequal %}
         {% else %}
-        {{ obj }}
+            {{ obj }}
         {% endif %}
     {% endfor %}
     """
