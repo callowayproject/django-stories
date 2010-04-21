@@ -1,0 +1,22 @@
+\BOOKMARK [0][-]{chapter.1}{Installation}{}
+\BOOKMARK [0][-]{chapter.2}{Settings}{}
+\BOOKMARK [1][-]{section.2.1}{STORY\137STATUS\137CHOICES}{chapter.2}
+\BOOKMARK [1][-]{section.2.2}{STORY\137DEFAULT\137STATUS}{chapter.2}
+\BOOKMARK [1][-]{section.2.3}{STORY\137PUBLISHED\137STATUS}{chapter.2}
+\BOOKMARK [1][-]{section.2.4}{STORY\137ORIGIN\137CHOICES}{chapter.2}
+\BOOKMARK [1][-]{section.2.5}{STORY\137DEFAULT\137ORIGIN}{chapter.2}
+\BOOKMARK [1][-]{section.2.6}{STORY\137INCLUDE\137PRINT}{chapter.2}
+\BOOKMARK [1][-]{section.2.7}{STORY\137RELATION\137MODELS}{chapter.2}
+\BOOKMARK [1][-]{section.2.8}{STORY\137PAGINATION}{chapter.2}
+\BOOKMARK [1][-]{section.2.9}{STORY\137P\137PER\137PAGE}{chapter.2}
+\BOOKMARK [1][-]{section.2.10}{STORY\137ORPHANS}{chapter.2}
+\BOOKMARK [0][-]{chapter.3}{Pagination}{}
+\BOOKMARK [1][-]{section.3.1}{Settings that affect pagination}{chapter.3}
+\BOOKMARK [1][-]{section.3.2}{Using pagination in templates}{chapter.3}
+\BOOKMARK [0][-]{chapter.4}{Integration with Other Django Applications}{}
+\BOOKMARK [1][-]{section.4.1}{Integrating with Django Reversion}{chapter.4}
+\BOOKMARK [1][-]{section.4.2}{Integrating with Django TinyMCE}{chapter.4}
+\BOOKMARK [0][-]{chapter.5}{User Manual}{}
+\BOOKMARK [1][-]{section.5.1}{Entering a Story}{chapter.5}
+\BOOKMARK [1][-]{section.5.2}{Revisions}{chapter.5}
+\BOOKMARK [0][-]{chapter.6}{Indices and tables}{}

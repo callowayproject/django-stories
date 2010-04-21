@@ -1,3 +1,21 @@
 # Sphinx inventory version 1
 # Project: Django Stories
-# Version: 0.2
+# Version: 0.3.3beta1
+stories.models mod reference/models.html
+stories.models.Story class reference/models.html
+stories.models.Story.author attribute reference/models.html
+stories.models.Story.get_previous_by_modified_date method reference/models.html
+stories.models.Story.get_relation_type method reference/models.html
+stories.models.Story.paragraphs attribute reference/models.html
+stories.models.Story.get_related_content_type method reference/models.html
+stories.models.Story.get_next_by_modified_date method reference/models.html
+stories.models.Story.primary_category attribute reference/models.html
+stories.models.Story.get_absolute_url method reference/models.html
+stories.models.Story.site attribute reference/models.html
+stories.models.Story.get_status_display method reference/models.html
+stories.models.Story.storyrelation_set attribute reference/models.html
+stories.models.Story.get_origin_display method reference/models.html
+stories.models.Story.DoesNotExist exception reference/models.html
+stories.models.Story.categories attribute reference/models.html
+stories.models.Story.authors attribute reference/models.html
+stories.models.Story.MultipleObjectsReturned exception reference/models.html

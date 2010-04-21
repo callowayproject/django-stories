@@ -1,0 +1,200 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Models &mdash; Django Stories v0.3.3beta1 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.3.3beta1',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Django Stories v0.3.3beta1 documentation" href="../index.html" />
+    <link rel="up" title="Reference Manual" href="index.html" />
+    <link rel="prev" title="Reference Manual" href="index.html" /> 
+  </head>
+  <body>
+<div id="docstitle">
+	<p>Django Stories v0.3.3beta1 documentation</p>
+</div>
+<div id="header">
+	<div id="title"><h1>Models</h1></div>
+	<ul id="headerButtons">
+		<li id="toc_button"><div class="headerButton"><a href="#">Table of Contents</a></div></li>
+		<li id="page_buttons">
+			<div class="headerButton"><a href="../genindex.html" title="General Index" accesskey="I">index</a></div>
+			<div class="headerButton"><a href="../modindex.html" title="Global Module Index" accesskey="M">modules</a></div>
+			<div class="headerButton"><a href="index.html" title="Reference Manual" accesskey="P">previous</a></div>
+		</li>
+	</ul>
+</div>
+
+<div id="sphinxsidebar">
+  <div class="sphinxsidebarwrapper">
+	<ul><li class="toctree-l1"><a href="../index.html">Main Page</a></li></ul>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference external" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference external" href="../settings.html">Settings</a></li>
+<li class="toctree-l1"><a class="reference external" href="../pagination.html">Pagination</a></li>
+<li class="toctree-l1"><a class="reference external" href="../integration/index.html">Integration with Other Django Applications</a></li>
+<li class="toctree-l1"><a class="reference external" href="../user/index.html">User Manual</a></li>
+<li class="toctree-l1 current"><a class="reference external" href="index.html">Reference Manual</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference external" href="">Models</a></li>
+</ul>
+</li>
+</ul>
+
+      <h3>This Page</h3>
+      <ul class="this-page-menu">
+        <li><a href="../_sources/reference/models.txt"
+               rel="nofollow">Show Source</a></li>
+      </ul>
+    <div id="searchbox" style="display: none">
+      
+        <form class="search" action="../search.html" method="get">
+			<div class="search-wrapper">
+			<span class="search-left"></span>
+			<input class="prettysearch" type="text" name="q" size="18" />
+			<span class="search-right">&nbsp;</span>
+			</div>
+          <input type="submit" value="Search" class="searchbutton" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </form>
+        <p class="searchtip" style="font-size: 90%">
+        Enter search terms or a module, class or function name.
+        </p>
+    </div>
+    <script type="text/javascript">$('#searchbox').show(0);</script>
+  </div>
+</div>
+
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-stories.models">
+<span id="reference-models"></span><h1>Models<a class="headerlink" href="#module-stories.models" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="stories.models.Story">
+<em class="property">class </em><tt class="descclassname">stories.models.</tt><tt class="descname">Story</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#stories.models.Story" title="Permalink to this definition">¶</a></dt>
+<dd><p>A newspaper or magazine type story or document that was possibly also printed
+in a periodical.</p>
+<dl class="exception">
+<dt id="stories.models.Story.DoesNotExist">
+<em class="property">exception </em><tt class="descname">DoesNotExist</tt><a class="headerlink" href="#stories.models.Story.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="exception">
+<dt id="stories.models.Story.MultipleObjectsReturned">
+<em class="property">exception </em><tt class="descclassname">Story.</tt><tt class="descname">MultipleObjectsReturned</tt><a class="headerlink" href="#stories.models.Story.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="stories.models.Story.author">
+<tt class="descclassname">Story.</tt><tt class="descname">author</tt><a class="headerlink" href="#stories.models.Story.author" title="Permalink to this definition">¶</a></dt>
+<dd>Easy way to get a combination of authors without having to worry which
+fields are set (author/one-off author)</dd></dl>
+
+<dl class="attribute">
+<dt id="stories.models.Story.authors">
+<tt class="descclassname">Story.</tt><tt class="descname">authors</tt><a class="headerlink" href="#stories.models.Story.authors" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="stories.models.Story.categories">
+<tt class="descclassname">Story.</tt><tt class="descname">categories</tt><a class="headerlink" href="#stories.models.Story.categories" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="stories.models.Story.get_absolute_url">
+<tt class="descclassname">Story.</tt><tt class="descname">get_absolute_url</tt><big>(</big><em>*moreargs</em>, <em>**morekwargs</em><big>)</big><a class="headerlink" href="#stories.models.Story.get_absolute_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="stories.models.Story.get_next_by_modified_date">
+<tt class="descclassname">Story.</tt><tt class="descname">get_next_by_modified_date</tt><big>(</big><em>*moreargs</em>, <em>**morekwargs</em><big>)</big><a class="headerlink" href="#stories.models.Story.get_next_by_modified_date" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="stories.models.Story.get_origin_display">
+<tt class="descclassname">Story.</tt><tt class="descname">get_origin_display</tt><big>(</big><em>*moreargs</em>, <em>**morekwargs</em><big>)</big><a class="headerlink" href="#stories.models.Story.get_origin_display" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="stories.models.Story.get_previous_by_modified_date">
+<tt class="descclassname">Story.</tt><tt class="descname">get_previous_by_modified_date</tt><big>(</big><em>*moreargs</em>, <em>**morekwargs</em><big>)</big><a class="headerlink" href="#stories.models.Story.get_previous_by_modified_date" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="stories.models.Story.get_related_content_type">
+<tt class="descclassname">Story.</tt><tt class="descname">get_related_content_type</tt><big>(</big><em>content_type</em><big>)</big><a class="headerlink" href="#stories.models.Story.get_related_content_type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="stories.models.Story.get_relation_type">
+<tt class="descclassname">Story.</tt><tt class="descname">get_relation_type</tt><big>(</big><em>relation_type</em><big>)</big><a class="headerlink" href="#stories.models.Story.get_relation_type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="stories.models.Story.get_status_display">
+<tt class="descclassname">Story.</tt><tt class="descname">get_status_display</tt><big>(</big><em>*moreargs</em>, <em>**morekwargs</em><big>)</big><a class="headerlink" href="#stories.models.Story.get_status_display" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="stories.models.Story.paragraphs">
+<tt class="descclassname">Story.</tt><tt class="descname">paragraphs</tt><a class="headerlink" href="#stories.models.Story.paragraphs" title="Permalink to this definition">¶</a></dt>
+<dd>Return the paragraphs as a list</dd></dl>
+
+<dl class="attribute">
+<dt id="stories.models.Story.primary_category">
+<tt class="descclassname">Story.</tt><tt class="descname">primary_category</tt><a class="headerlink" href="#stories.models.Story.primary_category" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="stories.models.Story.site">
+<tt class="descclassname">Story.</tt><tt class="descname">site</tt><a class="headerlink" href="#stories.models.Story.site" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="stories.models.Story.storyrelation_set">
+<tt class="descclassname">Story.</tt><tt class="descname">storyrelation_set</tt><a class="headerlink" href="#stories.models.Story.storyrelation_set" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div> 
+        </div>
+      </div>
+    <div class="footer">
+    <p>
+      &copy; Copyright 2009, The Washington Times.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.5.
+	</p>
+    </div>
+      <div class="clearer"></div>
+    </div>
+	<div id="breadcrumbs">
+		<a href="index.html" accesskey="U">Reference Manual</a><img src="../_static/triangle_closed.png" height="9" width="9" alt="&gt;">
+		Models
+		</ul>
+	</div>
+	<script type="text/javascript" charset="utf-8" src="../_static/toc.js"></script>
+  </body>
+</html>
