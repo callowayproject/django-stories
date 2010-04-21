@@ -8,8 +8,17 @@ from models import Story
 info_dict = {
     'queryset': Story.published.all(),
     'template_object_name': 'story',
-    'date_field': 'publish_date'
+    'date_field': 'publish_date',
+    'allow_empty': True
 }
+
+print_info_dict = {
+    'queryset': Story.published.all(),
+    'template_object_name': 'story',
+    'date_field': 'publish_date',
+    'template_name': 'stories/story_print.html',
+}
+
 
 urlpatterns = patterns('',
                       
@@ -64,8 +73,8 @@ urlpatterns = patterns('',
     #story print detail
     url(
         regex  = '^(?P<year>\d{4})/(?P<month>\w{3})/(?P<day>\d{1,2})/(?P<slug>[-\w]+)/print/$',
-        view   = 'django.views.generic.list_detail.object_detail',
-        kwargs = info_dict.update({'template_name': 'stories/story_print.html'}),
+        view   = 'django.views.generic.date_based.object_detail',
+        kwargs = print_info_dict,
         name   = 'news_detail_print',
     ),
 )

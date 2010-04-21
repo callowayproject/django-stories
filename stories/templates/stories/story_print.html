@@ -1,0 +1,9 @@
+{% extends "stories/stories_base.html" %}
+
+{% block content %}
+	<h1>{{ story.headline }}</h1>
+	{% if story.subheadline %}<h2>{{ story.subheadline|safe }}</h2>{% endif %}
+	<p class="byline">By {{ story.author }}</p>
+	<hr>
+	{{ story.body|safe }}
+{% endblock %}
