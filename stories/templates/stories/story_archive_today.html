@@ -1,0 +1,10 @@
+{% extends "stories/stories_base.html" %}
+
+{% block content %}
+	<h1>Story Archive {{ day|date:"F d Y" }}</h1>
+	<ul>
+	{% for story in story_list %}
+		<li><a href="{{ story.get_absolute_url }}">{{ story.headline }}</a></li>
+	{% endfor %}
+	</ul>
+{% endblock %}

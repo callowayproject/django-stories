@@ -1,0 +1,13 @@
+{% extends "stories/stories_base.html" %}
+
+{% block content %}
+	<h1>Story Archive for week of {{ week|date:"F d Y" }}</h1>
+	{% for story in story_list %}
+		{% ifchanged story.publish_date %}
+			{% if not forloop.first %}</ul>{% endif %}
+			<h2>{{ story.publish_date|date:"F d Y"}}</h2>
+			<ul>{% endifchanged %}
+		<li><a href="{{ story.get_absolute_url }}">{{ story.headline }}</a></li>
+	{% endfor %}
+	</ul>
+{% endblock %}
