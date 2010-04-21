@@ -15,6 +15,7 @@ info_dict = {
 print_info_dict = dict(info_dict.items() + [('template_name','stories/story_print.html')])
 
 comment_info_dict = dict(info_dict.items() + [('template_name','stories/story_comments.html')])
+comment_info_dict.pop('allow_empty')
 
 urlpatterns = patterns('',
                       
