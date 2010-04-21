@@ -1,0 +1,12 @@
+{% extends "stories/stories_base.html" %}
+
+{% block content %}
+	<h1>Latest Stories</h1>
+	<ul>
+	{% for item in story %}
+		<li><a href="{{ item.get_absolute_url }}/"><em>{% if item.update_date %}{{ item.update_date|date:"m/d/y P" }}
+			{% else %}{{ item.publish_date|date:"m/d/y"}} {{ item.publish_time|date:"P"}}{% endif %}</em> 
+			{{ item.headline }}</a></li>
+	{% endfor %}
+	</ul>
+{% endblock %}
