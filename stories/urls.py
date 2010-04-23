@@ -12,13 +12,10 @@ info_dict = {
     'allow_empty': True
 }
 
-print_info_dict = {
-    'queryset': Story.published.all(),
-    'template_object_name': 'story',
-    'date_field': 'publish_date',
-    'template_name': 'stories/story_print.html',
-}
+print_info_dict = dict(info_dict.items() + [('template_name','stories/story_print.html')])
 
+comment_info_dict = dict(info_dict.items() + [('template_name','stories/story_comments.html')])
+comment_info_dict.pop('allow_empty')
 
 urlpatterns = patterns('',
                       
@@ -77,4 +74,12 @@ urlpatterns = patterns('',
         kwargs = print_info_dict,
         name   = 'news_detail_print',
     ),
+    #story comments
+    url(
+        regex  = '^(?P<year>\d{4})/(?P<month>\w{3})/(?P<day>\d{1,2})/(?P<slug>[-\w]+)/comments/$',
+        view   = 'django.views.generic.date_based.object_detail',
+        kwargs = comment_info_dict,
+        name   = 'news_detail_comments',
+    ),
+    
 )
