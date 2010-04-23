@@ -5,13 +5,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Pagination &mdash; Django Stories v0.2 documentation</title>
+    <title>Pagination &mdash; Django Stories v0.3.3beta1 documentation</title>
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
-        VERSION:     '0.2',
+        URL_ROOT:    '#',
+        VERSION:     '0.3.3beta1',
         COLLAPSE_MODINDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -19,13 +19,13 @@
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Django Stories v0.2 documentation" href="index.html" />
+    <link rel="top" title="Django Stories v0.3.3beta1 documentation" href="index.html" />
     <link rel="next" title="Integration with Other Django Applications" href="integration/index.html" />
     <link rel="prev" title="Settings" href="settings.html" /> 
   </head>
   <body>
 <div id="docstitle">
-	<p>Django Stories v0.2 documentation</p>
+	<p>Django Stories v0.3.3beta1 documentation</p>
 </div>
 <div id="header">
 	<div id="title"><h1>Pagination</h1></div>
@@ -33,6 +33,7 @@
 		<li id="toc_button"><div class="headerButton"><a href="#">Table of Contents</a></div></li>
 		<li id="page_buttons">
 			<div class="headerButton"><a href="genindex.html" title="General Index" accesskey="I">index</a></div>
+			<div class="headerButton"><a href="modindex.html" title="Global Module Index" accesskey="M">modules</a></div>
 			<div class="headerButton"><a href="integration/index.html" title="Integration with Other Django Applications" accesskey="N">next</a></div>
 			<div class="headerButton"><a href="settings.html" title="Settings" accesskey="P">previous</a></div>
 		</li>
@@ -52,6 +53,7 @@
 </li>
 <li class="toctree-l1"><a class="reference external" href="integration/index.html">Integration with Other Django Applications</a></li>
 <li class="toctree-l1"><a class="reference external" href="user/index.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference external" href="reference/index.html">Reference Manual</a></li>
 </ul>
 
       <h3>This Page</h3>
@@ -127,11 +129,13 @@
 <h3>Looping through the paragraphs<a class="headerlink" href="#looping-through-the-paragraphs" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python"><pre>{% load add_attribute %}
 {% for paragraph in story_content.object_list %}
-        {% if forloop.first %}
-                {{ paragraph|add_attribute:"class=dropcap"|safe }}
-        {% else %}
-                {{ paragraph|safe }}
-        {% endif %}
+        {% ifequal story_content.number 1 %}
+                {% if forloop.first %}
+                        {{ paragraph|add_attribute:"class=dropcap"|safe }}
+                {% else %}
+                        {{ paragraph|safe }}
+                        {% endif %}
+        {% endifequal %}
 {% endfor %}</pre>
 </div>
 <p><tt class="docutils literal"><span class="pre">add_attribute</span></tt> is a filter that is included in Django Stories. It adds any attribute to the paragraph. In this example, it checks if it is the first paragraph and adds the attribute <tt class="docutils literal"><span class="pre">class</span></tt> with a value of <tt class="docutils literal"><span class="pre">dropcap</span></tt> to the <tt class="docutils literal"><span class="pre">&lt;p&gt;</span></tt> tag. That part is unnecessary, but allows you some artistic freedom.</p>
@@ -185,7 +189,7 @@
     <div class="footer">
     <p>
       &copy; Copyright 2009, The Washington Times.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.3.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.5.
 	</p>
     </div>
       <div class="clearer"></div>

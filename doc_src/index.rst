@@ -16,6 +16,7 @@ Contents:
    pagination
    integration/index
    user/index
+   reference/index
 
 Indices and tables
 ==================

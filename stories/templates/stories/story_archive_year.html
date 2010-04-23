@@ -1,0 +1,16 @@
+{% extends "stories/stories_base.html" %}
+
+{% block content %}
+	<div id="date_nav">
+		<strong>Change Year:</strong>
+		<ul id="year_list">{% for date in date_list %}
+			<li><a href="../{{ date|date:"Y" }}/">{{ date|date:"Y" }}</a></li>
+		{% endfor %}</ul>
+	</div>
+	<h1>Story Archive {{ year }}</h1>
+	<ul>
+	{% for month in date_list %}
+		<li><a href="{{ month|date:"M"|lower }}/">{{ month|date:"F Y" }}</a></li>
+	{% endfor %}
+	</ul>
+{% endblock %}

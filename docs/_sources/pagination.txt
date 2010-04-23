@@ -55,11 +55,13 @@ Looping through the paragraphs
 
 	{% load add_attribute %}
 	{% for paragraph in story_content.object_list %}
-		{% if forloop.first %}
-			{{ paragraph|add_attribute:"class=dropcap"|safe }}
-		{% else %}
-			{{ paragraph|safe }}
-		{% endif %}
+		{% ifequal story_content.number 1 %}
+			{% if forloop.first %}
+				{{ paragraph|add_attribute:"class=dropcap"|safe }}
+			{% else %}
+				{{ paragraph|safe }}
+				{% endif %}
+		{% endifequal %}
 	{% endfor %}
 
 ``add_attribute`` is a filter that is included in Django Stories. It adds any attribute to the paragraph. In this example, it checks if it is the first paragraph and adds the attribute ``class`` with a value of ``dropcap`` to the ``<p>`` tag. That part is unnecessary, but allows you some artistic freedom.
