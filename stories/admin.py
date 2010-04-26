@@ -7,7 +7,7 @@ from django.forms.models import modelformset_factory, modelform_factory
 
 from genericcollection import *
 
-from models import Story
+from models import Story, HAS_CATEGORIES
 from stories.settings import RELATION_MODELS, INCLUDE_PRINT, STATUS_CHOICES
 from forms import StoryForm
 
@@ -51,6 +51,8 @@ class StoryOptions(AdminModel):
     list_display = ('headline', 'status', 'publish_date', 'modified_date')
     list_editable = ('status',)
     list_filter = ('site', 'publish_date')
+    if HAS_CATEGORIES:
+        list_filter += ('primary_category',)
     quick_editable = ('headline','subhead','kicker','status','teaser',)
     list_per_page = 25
     search_fields = ('headline', 'teaser', 'body')
