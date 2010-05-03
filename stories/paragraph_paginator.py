@@ -1,5 +1,5 @@
 from django.core.paginator import Paginator
-from BeautifulSoup import BeautifulSoup
+from BeautifulSoup import BeautifulSoup, Tag
 
 class ParagraphPaginator(Paginator):
     """
@@ -12,8 +12,10 @@ class ParagraphPaginator(Paginator):
         """
         Instead of an ``object_list`` this object takes an HTML-formatted string
         """
+        text = "<html><head></head><body>" + text + "</body></html>"
         soup = BeautifulSoup(text)
-        self.object_list = soup.findAll('p')
+        blocks = [i for i in soup.body.childGenerator() if isinstance(i, Tag)]
+        self.object_list = blocks
         self.per_page = per_page
         self.orphans = orphans
         self.allow_empty_first_page = allow_empty_first_page
