@@ -201,4 +201,7 @@ if RELATION_MODELS:
 # Reversion integration
 if 'reversion' in global_settings.INSTALLED_APPS:
     import reversion
-    reversion.register(Story)
+    try:
+        reversion.register(Story)
+    except:
+        pass

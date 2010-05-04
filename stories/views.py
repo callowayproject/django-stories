@@ -50,7 +50,8 @@ def admin_changeset_revert(request, story_id, revision_id,
 
 def pag_story_detail(request, year, month, day, slug, 
         p_per_page=10, orphans=3, p_object_name="story_content",
-        template_object_name="story", template_name="stories/pag_story.html"):
+        template_object_name="story", template_name="stories/pag_story.html",
+        extra_context={}):
     """
     A detail view for stories that paginates the story by paragraph
     """
@@ -74,9 +75,11 @@ def pag_story_detail(request, year, month, day, slug,
         story_content = paginator.page(page)
     except (EmptyPage, InvalidPage):
         story_content = paginator.page(paginator.num_pages)
-
-    return render_to_response(template_name, {
-                            p_object_name: story_content, 
-                            template_object_name:story},
+    
+    context = {p_object_name: story_content, 
+                template_object_name:story}
+    if extra_context:
+        context.update(extra_context)
+    return render_to_response(template_name, context,
                             context_instance=RequestContext(request))
     
