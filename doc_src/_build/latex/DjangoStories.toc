@@ -34,4 +34,8 @@
 \contentsline {subsection}{\numberline {5.2.1}Accessing Revisions}{16}{subsection.5.2.1}
 \contentsline {subsection}{\numberline {5.2.2}Reverting to a Previous Version}{16}{subsection.5.2.2}
 \contentsline {subsection}{\numberline {5.2.3}Recovering a Deleted Story}{17}{subsection.5.2.3}
-\contentsline {chapter}{\numberline {6}Indices and tables}{19}{chapter.6}
+\contentsline {chapter}{\numberline {6}Reference Manual}{19}{chapter.6}
+\contentsline {section}{\numberline {6.1}Models}{19}{section.6.1}
+\contentsline {chapter}{\numberline {7}Indices and tables}{21}{chapter.7}
+\contentsline {chapter}{Module Index}{23}{section*.6}
+\contentsline {chapter}{Index}{25}{section*.7}

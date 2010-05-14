@@ -55,7 +55,7 @@ class StoryOptions(AdminModel):
         list_filter += ('primary_category',)
     quick_editable = ('headline','subhead','kicker','status','teaser',)
     list_per_page = 25
-    search_fields = ('headline', 'teaser', 'body')
+    search_fields = ('headline',)
     date_hierarchy = 'publish_date'
     prepopulated_fields = {'slug': ('headline',)}
     if HAS_CATEGORIES:

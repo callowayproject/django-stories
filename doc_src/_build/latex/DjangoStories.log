@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009) (format=pdflatex 2009.11.7)  20 APR 2010 13:10
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009) (format=pdflatex 2009.11.7)  10 MAY 2010 09:04
 entering extended mode
  %&-line parsing enabled.
 **DjangoStories.tex
@@ -766,28 +766,29 @@ Writing index file DjangoStories.idx
 (./DjangoStories.aux)
 \openout1 = `DjangoStories.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 98.
-LaTeX Font Info:    ... okay on input line 98.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 98.
-LaTeX Font Info:    ... okay on input line 98.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 98.
-LaTeX Font Info:    ... okay on input line 98.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 98.
-LaTeX Font Info:    ... okay on input line 98.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 98.
-LaTeX Font Info:    ... okay on input line 98.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 98.
-LaTeX Font Info:    ... okay on input line 98.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 98.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 98.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 104.
+LaTeX Font Info:    ... okay on input line 104.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 104.
+LaTeX Font Info:    ... okay on input line 104.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 104.
+LaTeX Font Info:    ... okay on input line 104.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 104.
+LaTeX Font Info:    ... okay on input line 104.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 104.
+LaTeX Font Info:    ... okay on input line 104.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 104.
+LaTeX Font Info:    ... okay on input line 104.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 104.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 104.
+
 
 (/usr/local/texlive/2009/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 98.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 98.
-LaTeX Font Info:    ... okay on input line 98.
-LaTeX Font Info:    Try loading font information for T1+ptm on input line 98.
+LaTeX Font Info:    ... okay on input line 104.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 104.
+LaTeX Font Info:    ... okay on input line 104.
+LaTeX Font Info:    Try loading font information for T1+ptm on input line 104.
 
 (/usr/local/texlive/2009/texmf-dist/tex/latex/psnfss/t1ptm.fd
 File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
@@ -805,7 +806,7 @@ File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
 \MPnumerator=\count125
 \everyMPtoPDFconversion=\toks32
 )
-Package hyperref Info: Link coloring ON on input line 98.
+Package hyperref Info: Link coloring ON on input line 104.
  (/usr/local/texlive/2009/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2007/05/29 v2.31 Cross-referencing by name of section
 
@@ -814,29 +815,29 @@ Package: refcount 2008/08/11 v3.1 Data extraction from references (HO)
 )
 \c@section@level=\count126
 )
-LaTeX Info: Redefining \ref on input line 98.
-LaTeX Info: Redefining \pageref on input line 98.
+LaTeX Info: Redefining \ref on input line 104.
+LaTeX Info: Redefining \pageref on input line 104.
 
 (./DjangoStories.out) (./DjangoStories.out)
 \@outlinefile=\write7
 \openout7 = `DjangoStories.out'.
 
 \AtBeginShipoutBox=\box41
-LaTeX Font Info:    Try loading font information for T1+phv on input line 101.
+LaTeX Font Info:    Try loading font information for T1+phv on input line 107.
 
 (/usr/local/texlive/2009/texmf-dist/tex/latex/psnfss/t1phv.fd
 File: t1phv.fd 2001/06/04 scalable font definitions for T1/phv.
 )
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <24.88> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 101.
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 107.
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <17.28> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 101.
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 107.
 LaTeX Font Info:    Font shape `T1/phv/bx/it' in size <17.28> not available
-(Font)              Font shape `T1/phv/b/it' tried instead on input line 101.
+(Font)              Font shape `T1/phv/b/it' tried instead on input line 107.
 LaTeX Font Info:    Font shape `T1/phv/b/it' in size <17.28> not available
-(Font)              Font shape `T1/phv/b/sl' tried instead on input line 101.
+(Font)              Font shape `T1/phv/b/sl' tried instead on input line 107.
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <17.28> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 101.
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 107.
  [1
 
 \openout6 = `modDjangoStories.idx'.
@@ -854,19 +855,19 @@ LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10> not available
 
 Adding blank page after the table of contents.
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <10> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 101.
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 107.
 pdfTeX warning (ext4): destination with the same identifier (name{page.i}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.101 \tableofcontents
+l.107 \tableofcontents
                        [1
 
 ]pdfTeX warning (ext4): destination with the same identifier (name{page.ii}) ha
 s been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.101 \tableofcontents
+l.107 \tableofcontents
                        [2] [1
 
 ] [2
@@ -874,8 +875,8 @@ l.101 \tableofcontents
 ]
 Chapter 1.
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 110.
-LaTeX Font Info:    Try loading font information for TS1+ptm on input line 114.
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 116.
+LaTeX Font Info:    Try loading font information for TS1+ptm on input line 120.
 
 (/usr/local/texlive/2009/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
@@ -883,24 +884,24 @@ File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 
 ]
 Chapter 2.
-LaTeX Font Info:    Try loading font information for T1+pcr on input line 155.
+LaTeX Font Info:    Try loading font information for T1+pcr on input line 161.
 (/usr/local/texlive/2009/texmf-dist/tex/latex/psnfss/t1pcr.fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 )
 LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <9> not available
-(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 190.
+(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 196.
  [5] [6] [7]
 [8
 
 ]
 Chapter 3.
 LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <10> not available
-(Font)              Font shape `T1/ptm/b/it' tried instead on input line 302.
+(Font)              Font shape `T1/ptm/b/it' tried instead on input line 308.
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <12> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 327.
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 333.
 [9]
 LaTeX Font Info:    Font shape `T1/pcr/bx/n' in size <10> not available
-(Font)              Font shape `T1/pcr/b/n' tried instead on input line 398.
+(Font)              Font shape `T1/pcr/b/n' tried instead on input line 404.
  [10] [11] [12
 
 ]
@@ -909,30 +910,30 @@ Chapter 4.
 Chapter 5.
 [15
 
-] <history_btn.png, id=258, 194.7275pt x 32.12pt>
+] <history_btn.png, id=278, 194.7275pt x 32.12pt>
 File: history_btn.png Graphic file (type png)
  <use history_btn.png>
 File: history_btn.png Graphic file (type png)
 
-<use history_btn.png> <history_list.png, id=259, 811.03pt x 173.64874pt>
+<use history_btn.png> <history_list.png, id=279, 811.03pt x 173.64874pt>
 File: history_list.png Graphic file (type png)
 
 <use history_list.png>
 File: history_list.png Graphic file (type png)
  <use history_list.png>
-<history_save_btn.png, id=260, 207.77625pt x 45.16875pt>
+<history_save_btn.png, id=280, 207.77625pt x 45.16875pt>
 File: history_save_btn.png Graphic file (type png)
 
 <use history_save_btn.png>
 File: history_save_btn.png Graphic file (type png)
  <use history_save_btn.png> [16 <./history_btn.png (PNG copy)> <./history_list.
 png (PNG copy)>]
-<recover_btn.png, id=271, 261.97874pt x 28.105pt>
+<recover_btn.png, id=291, 261.97874pt x 28.105pt>
 File: recover_btn.png Graphic file (type png)
  <use recover_btn.png>
 File: recover_btn.png Graphic file (type png)
 
-<use recover_btn.png> <recover_list.png, id=272, 808.01875pt x 100.375pt>
+<use recover_btn.png> <recover_list.png, id=292, 808.01875pt x 100.375pt>
 File: recover_list.png Graphic file (type png)
 
 <use recover_list.png>
@@ -942,28 +943,59 @@ png (PNG copy)> <./recover_list.png (PNG copy)>] [18
 
 ]
 Chapter 6.
-(./modDjangoStories.ind) (./DjangoStories.ind) [19] (./DjangoStories.aux) ) 
+[19] [20
+
+]
+Chapter 7.
+(./modDjangoStories.ind [21] [22
+
+] [23
+
+
+]) (./DjangoStories.ind [24
+
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 15--16
+[]\T1/ptm/m/n/10 get_next_by_modified_date() (sto-ries.models.Story
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 17--18
+[]\T1/ptm/m/n/10 get_previous_by_modified_date() (sto-ries.models.Story
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 18--19
+[]\T1/ptm/m/n/10 get_related_content_type() (sto-ries.models.Story
+ []
+
+[25
+
+
+]) (./DjangoStories.aux) ) 
 Here is how much of TeX's memory you used:
- 8021 strings out of 493848
- 109945 string characters out of 3149207
- 193427 words of memory out of 3000000
- 11008 multiletter control sequences out of 15000+200000
- 56907 words of font info for 59 fonts, out of 3000000 for 9000
+ 8066 strings out of 493848
+ 111701 string characters out of 3149207
+ 193457 words of memory out of 3000000
+ 11019 multiletter control sequences out of 15000+200000
+ 58061 words of font info for 60 fonts, out of 3000000 for 9000
  715 hyphenation exceptions out of 8191
  45i,12n,45p,481b,451s stack positions out of 5000i,500n,10000p,200000b,50000s
-{/us
-r/local/texlive/2009/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texlive
-/2009/texmf-dist/fonts/type1/urw/courier/ucrb8a.pfb></usr/local/texlive/2009/te
-xmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2009/texmf-dist
-/fonts/type1/urw/courier/ucrro8a.pfb></usr/local/texlive/2009/texmf-dist/fonts/
-type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/u
-rw/helvetic/uhvbo8a.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/urw/tim
-es/utmb8a.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/urw/times/utmbi8a
-.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr
-/local/texlive/2009/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on DjangoStories.pdf (23 pages, 204625 bytes).
+{/usr/local/texlive/2009/texmf-dist/fonts/enc/dvips/b
+ase/8r.enc}</usr/local/texlive/2009/texmf-dist/fonts/type1/urw/courier/ucrb8a.p
+fb></usr/local/texlive/2009/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr
+/local/texlive/2009/texmf-dist/fonts/type1/urw/courier/ucrro8a.pfb></usr/local/
+texlive/2009/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive
+/2009/texmf-dist/fonts/type1/urw/helvetic/uhvbo8a.pfb></usr/local/texlive/2009/
+texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2009/texmf-d
+ist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2009/texmf-dist/fonts/
+type1/urw/times/utmbi8a.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/urw
+/times/utmr8a.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/urw/times/utm
+ri8a.pfb>
+Output written on DjangoStories.pdf (29 pages, 229175 bytes).
 PDF statistics:
- 338 PDF objects out of 1000 (max. 8388607)
- 95 named destinations out of 1000 (max. 500000)
- 202 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 437 PDF objects out of 1000 (max. 8388607)
+ 128 named destinations out of 1000 (max. 500000)
+ 234 words of extra memory for PDF output out of 10000 (max. 10000000)
 

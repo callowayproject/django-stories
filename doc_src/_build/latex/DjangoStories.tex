@@ -10,8 +10,8 @@
 
 
 \title{Django Stories Documentation}
-\date{April 20, 2010}
-\release{0.2}
+\date{May 10, 2010}
+\release{0.3.3beta2}
 \author{The Washington Times}
 \newcommand{\sphinxlogo}{}
 \renewcommand{\releasename}{Release}
@@ -90,6 +90,12 @@
 \def\PYG@tok@se{\let\PYG@bf=\textbf\def\PYG@tc##1{\textcolor[rgb]{0.25,0.44,0.63}{##1}}}
 \def\PYG@tok@sd{\let\PYG@it=\textit\def\PYG@tc##1{\textcolor[rgb]{0.25,0.44,0.63}{##1}}}
 
+\def\PYGZbs{\char`\\}
+\def\PYGZus{\char`\_}
+\def\PYGZob{\char`\{}
+\def\PYGZcb{\char`\}}
+\def\PYGZca{\char`\^}
+% for compatibility with earlier versions
 \def\PYGZat{@}
 \def\PYGZlb{[}
 \def\PYGZrb{]}
@@ -156,15 +162,15 @@ Choices are specified as a \code{list} or \code{tuple} of \code{integer} - \code
 
 \textbf{Defaults:}
 
-\begin{Verbatim}[commandchars=@\[\]]
-@PYG[n][STORY@_STATUS@_CHOICES] @PYG[o][=] @PYG[p][(]
-    @PYG[p][(]@PYG[l+m+mi][1]@PYG[p][,] @PYG[l+s][']@PYG[l+s][DRAFT]@PYG[l+s][']@PYG[p][)]@PYG[p][,]
-    @PYG[p][(]@PYG[l+m+mi][2]@PYG[p][,] @PYG[l+s][']@PYG[l+s][READY FOR EDITING]@PYG[l+s][']@PYG[p][)]@PYG[p][,]
-    @PYG[p][(]@PYG[l+m+mi][3]@PYG[p][,] @PYG[l+s][']@PYG[l+s][READY TO PUBLISH]@PYG[l+s][']@PYG[p][)]@PYG[p][,]
-    @PYG[p][(]@PYG[l+m+mi][4]@PYG[p][,] @PYG[l+s][']@PYG[l+s][PUBLISHED]@PYG[l+s][']@PYG[p][)]@PYG[p][,]
-    @PYG[p][(]@PYG[l+m+mi][5]@PYG[p][,] @PYG[l+s][']@PYG[l+s][REJECTED]@PYG[l+s][']@PYG[p][)]@PYG[p][,]
-    @PYG[p][(]@PYG[l+m+mi][6]@PYG[p][,] @PYG[l+s][']@PYG[l+s][UN-PUBLISHED]@PYG[l+s][']@PYG[p][)]@PYG[p][,]
-@PYG[p][)]
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{STORY\PYGZus{}STATUS\PYGZus{}CHOICES} \PYG{o}{=} \PYG{p}{(}
+    \PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+s}{'}\PYG{l+s}{DRAFT}\PYG{l+s}{'}\PYG{p}{)}\PYG{p}{,}
+    \PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,} \PYG{l+s}{'}\PYG{l+s}{READY FOR EDITING}\PYG{l+s}{'}\PYG{p}{)}\PYG{p}{,}
+    \PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,} \PYG{l+s}{'}\PYG{l+s}{READY TO PUBLISH}\PYG{l+s}{'}\PYG{p}{)}\PYG{p}{,}
+    \PYG{p}{(}\PYG{l+m+mi}{4}\PYG{p}{,} \PYG{l+s}{'}\PYG{l+s}{PUBLISHED}\PYG{l+s}{'}\PYG{p}{)}\PYG{p}{,}
+    \PYG{p}{(}\PYG{l+m+mi}{5}\PYG{p}{,} \PYG{l+s}{'}\PYG{l+s}{REJECTED}\PYG{l+s}{'}\PYG{p}{)}\PYG{p}{,}
+    \PYG{p}{(}\PYG{l+m+mi}{6}\PYG{p}{,} \PYG{l+s}{'}\PYG{l+s}{UN-PUBLISHED}\PYG{l+s}{'}\PYG{p}{)}\PYG{p}{,}
+\PYG{p}{)}
 \end{Verbatim}
 
 \emph{Draft:} A work-in-progress.
@@ -186,8 +192,8 @@ When a story is created, what should the the status default to?
 
 \textbf{Default:}
 
-\begin{Verbatim}[commandchars=@\[\]]
-@PYG[n][STORY@_DEFAULT@_STATUS] @PYG[o][=] @PYG[l+m+mi][1] @PYG[c][@# Draft]
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{STORY\PYGZus{}DEFAULT\PYGZus{}STATUS} \PYG{o}{=} \PYG{l+m+mi}{1} \PYG{c}{\# Draft}
 \end{Verbatim}
 \hypertarget{story-published-status}{}
 
@@ -197,8 +203,8 @@ Which one of the possible statuses is considered ``On Site.''
 
 \textbf{Default:}
 
-\begin{Verbatim}[commandchars=@\[\]]
-@PYG[n][STORY@_PUBLISHED@_STATUS] @PYG[o][=] @PYG[l+m+mi][4] @PYG[c][@# Published]
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{STORY\PYGZus{}PUBLISHED\PYGZus{}STATUS} \PYG{o}{=} \PYG{l+m+mi}{4} \PYG{c}{\# Published}
 \end{Verbatim}
 \hypertarget{story-origin-choices}{}
 
@@ -210,10 +216,10 @@ Choices are specified as a \code{list} or \code{tuple} of \code{integer} - \code
 
 \textbf{Default:}
 
-\begin{Verbatim}[commandchars=@\[\]]
-@PYG[n][STORY@_ORIGIN@_CHOICES] @PYG[o][=] @PYG[p][(]
-    @PYG[p][(]@PYG[l+m+mi][0]@PYG[p][,] @PYG[l+s][']@PYG[l+s][Admin]@PYG[l+s][']@PYG[p][)]@PYG[p][,]
-@PYG[p][)]
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{STORY\PYGZus{}ORIGIN\PYGZus{}CHOICES} \PYG{o}{=} \PYG{p}{(}
+    \PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+s}{'}\PYG{l+s}{Admin}\PYG{l+s}{'}\PYG{p}{)}\PYG{p}{,}
+\PYG{p}{)}
 \end{Verbatim}
 \hypertarget{story-default-origin}{}
 
@@ -223,8 +229,8 @@ When a story is created from the Django Admin, which choice of origin should it 
 
 \textbf{Default:}
 
-\begin{Verbatim}[commandchars=@\[\]]
-@PYG[n][STORY@_DEFAULT@_ORIGIN] @PYG[o][=] @PYG[l+m+mi][0] @PYG[c][@# Admin]
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{STORY\PYGZus{}DEFAULT\PYGZus{}ORIGIN} \PYG{o}{=} \PYG{l+m+mi}{0} \PYG{c}{\# Admin}
 \end{Verbatim}
 \hypertarget{story-include-print}{}
 
@@ -234,8 +240,8 @@ Should the fields related to print production be included in the database. The f
 
 \textbf{Default:}
 
-\begin{Verbatim}[commandchars=@\[\]]
-@PYG[n][STORY@_INCLUDE@_PRINT] @PYG[o][=] @PYG[n+nb+bp][False]
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{STORY\PYGZus{}INCLUDE\PYGZus{}PRINT} \PYG{o}{=} \PYG{n+nb+bp}{False}
 \end{Verbatim}
 \hypertarget{story-relation-models}{}
 
@@ -249,8 +255,8 @@ If this setting is empty or \code{None}, the story relations are not available i
 
 \textbf{Default:}
 
-\begin{Verbatim}[commandchars=@\[\]]
-@PYG[n][STORY@_RELATION@_MODELS] @PYG[o][=] @PYG[n+nb+bp][None] @PYG[c][@# Not enabled]
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{STORY\PYGZus{}RELATION\PYGZus{}MODELS} \PYG{o}{=} \PYG{n+nb+bp}{None} \PYG{c}{\# Not enabled}
 \end{Verbatim}
 \hypertarget{story-pagination}{}
 
@@ -261,8 +267,8 @@ Django Stories has a built-in \code{Paginator} subclass that splits HTML-formatt
 
 \textbf{Default:}
 
-\begin{Verbatim}[commandchars=@\[\]]
-@PYG[n][STORY@_PAGINATION] @PYG[o][=] @PYG[n+nb+bp][False]
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{STORY\PYGZus{}PAGINATION} \PYG{o}{=} \PYG{n+nb+bp}{False}
 \end{Verbatim}
 \hypertarget{story-p-per-page}{}
 
@@ -272,8 +278,8 @@ If \code{STORY\_PAGINATION} is \code{True}, then this setting sets the number of
 
 \textbf{Default:}
 
-\begin{Verbatim}[commandchars=@\[\]]
-@PYG[n][STORY@_P@_PER@_PAGE] @PYG[o][=] @PYG[l+m+mi][20]
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{STORY\PYGZus{}P\PYGZus{}PER\PYGZus{}PAGE} \PYG{o}{=} \PYG{l+m+mi}{20}
 \end{Verbatim}
 \hypertarget{story-orphans}{}
 
@@ -283,8 +289,8 @@ If \code{STORY\_PAGINATION} is \code{True}, then this setting sets the minimum n
 
 \textbf{Default:}
 
-\begin{Verbatim}[commandchars=@\[\]]
-@PYG[n][STORY@_ORPHANS] @PYG[o][=] @PYG[l+m+mi][4]
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{STORY\PYGZus{}ORPHANS} \PYG{o}{=} \PYG{l+m+mi}{4}
 \end{Verbatim}
 
 \resetcurrentobjects
@@ -418,7 +424,7 @@ The anchor for the ``next'' link
 \hypertarget{integration-index}{}\chapter{Integration with Other Django Applications}
 
 \resetcurrentobjects
-\hypertarget{--doc-integration/reversion_integration}{}
+\hypertarget{--doc-integration/reversion\_integration}{}
 
 \hypertarget{reversion-integration}{}\section{Integrating with Django Reversion}
 \begin{enumerate}
@@ -440,7 +446,7 @@ Add \code{reversion} to your \code{INSTALLED\_APPS} setting.
 All the hooks are there to notice when reversion is installed. Versions are tracked from when reversion is first installed.
 
 \resetcurrentobjects
-\hypertarget{--doc-integration/tinymce_integration}{}
+\hypertarget{--doc-integration/tinymce\_integration}{}
 
 \hypertarget{tinymce-integration}{}\section{Integrating with Django TinyMCE}
 
@@ -482,50 +488,50 @@ INSTALLED@_APPS = (
 \item {} 
 Add \code{(r'\textasciicircum{}tinymce/', include('tinymce.urls')),} to your \code{urls.py}.
 
-\begin{Verbatim}[commandchars=@\[\]]
-@PYG[n][urlpatterns] @PYG[o][=] @PYG[n][patterns]@PYG[p][(]@PYG[l+s][']@PYG[l+s][']@PYG[p][,]
-    @PYG[o][.]@PYG[o][.]@PYG[o][.]
-    @PYG[p][(]@PYG[l+s][r']@PYG[l+s][@textasciicircum[]tinymce/]@PYG[l+s][']@PYG[p][,] @PYG[n][include]@PYG[p][(]@PYG[l+s][']@PYG[l+s][tinymce.urls]@PYG[l+s][']@PYG[p][)]@PYG[p][)]@PYG[p][,]
-    @PYG[o][.]@PYG[o][.]@PYG[o][.]
-@PYG[p][)]
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{urlpatterns} \PYG{o}{=} \PYG{n}{patterns}\PYG{p}{(}\PYG{l+s}{'}\PYG{l+s}{'}\PYG{p}{,}
+    \PYG{o}{.}\PYG{o}{.}\PYG{o}{.}
+    \PYG{p}{(}\PYG{l+s}{r'}\PYG{l+s}{\PYGZca{}tinymce/}\PYG{l+s}{'}\PYG{p}{,} \PYG{n}{include}\PYG{p}{(}\PYG{l+s}{'}\PYG{l+s}{tinymce.urls}\PYG{l+s}{'}\PYG{p}{)}\PYG{p}{)}\PYG{p}{,}
+    \PYG{o}{.}\PYG{o}{.}\PYG{o}{.}
+\PYG{p}{)}
 \end{Verbatim}
 
 \item {} 
 Add the settings for tinymce. The configuration of plugins and tools shown here is just an example. See the \href{http://github.com/justquick/django-tinymce/blob/master/docs/installation.rst}{django-tinymce docs} and \href{http://wiki.moxiecode.com/index.php/TinyMCE:Configuration}{TinyMCE Manual} for more information. For example:
 
-\begin{Verbatim}[commandchars=@\[\]]
-@PYG[n][TINYMCE@_DEFAULT@_CONFIG] @PYG[o][=] @PYG[p][{]
-    @PYG[l+s][']@PYG[l+s][theme]@PYG[l+s][']@PYG[p][:] @PYG[l+s]["]@PYG[l+s][advanced]@PYG[l+s]["]@PYG[p][,]
-    @PYG[l+s][']@PYG[l+s][relative@_urls]@PYG[l+s][']@PYG[p][:] @PYG[n+nb+bp][False]@PYG[p][,]
-    @PYG[l+s][']@PYG[l+s][plugins]@PYG[l+s][']@PYG[p][:] @PYG[l+s]["]@PYG[l+s][safari,paste,advimage,preview]@PYG[l+s]["]@PYG[p][,]
-    @PYG[l+s][']@PYG[l+s][theme@_advanced@_toolbar@_location]@PYG[l+s]['] @PYG[p][:] @PYG[l+s]["]@PYG[l+s][top]@PYG[l+s]["]@PYG[p][,]
-    @PYG[l+s][']@PYG[l+s][theme@_advanced@_toolbar@_align]@PYG[l+s]['] @PYG[p][:] @PYG[l+s]["]@PYG[l+s][left]@PYG[l+s]["]@PYG[p][,]
-    @PYG[l+s][']@PYG[l+s][theme@_advanced@_buttons1]@PYG[l+s]['] @PYG[p][:] @PYG[l+s]["]@PYG[l+s][formatselect,bold,italic,underline,separator,bullist,numlist,separator,undo,separator,link,unlink,separator,charmap,image,paste,pasteword,separator,code,preview]@PYG[l+s]["]@PYG[p][,]
-    @PYG[l+s][']@PYG[l+s][theme@_advanced@_buttons2]@PYG[l+s]['] @PYG[p][:] @PYG[l+s]["]@PYG[l+s]["]@PYG[p][,]
-    @PYG[l+s][']@PYG[l+s][theme@_advanced@_buttons3]@PYG[l+s]['] @PYG[p][:] @PYG[l+s]["]@PYG[l+s]["]@PYG[p][,]
-    @PYG[c][@#'skin': 'thebigreason',]
-        @PYG[l+s][']@PYG[l+s][theme@_advanced@_statusbar@_location]@PYG[l+s]['] @PYG[p][:] @PYG[l+s]["]@PYG[l+s][bottom]@PYG[l+s]["]@PYG[p][,]
-        @PYG[l+s][']@PYG[l+s][width]@PYG[l+s][']@PYG[p][:] @PYG[l+s]["]@PYG[l+s][600]@PYG[l+s]["]@PYG[p][,]
-        @PYG[l+s][']@PYG[l+s][height]@PYG[l+s][']@PYG[p][:] @PYG[l+s]["]@PYG[l+s][600]@PYG[l+s]["]@PYG[p][,]
-@PYG[p][}]
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{TINYMCE\PYGZus{}DEFAULT\PYGZus{}CONFIG} \PYG{o}{=} \PYG{p}{\PYGZob{}}
+    \PYG{l+s}{'}\PYG{l+s}{theme}\PYG{l+s}{'}\PYG{p}{:} \PYG{l+s}{"}\PYG{l+s}{advanced}\PYG{l+s}{"}\PYG{p}{,}
+    \PYG{l+s}{'}\PYG{l+s}{relative\PYGZus{}urls}\PYG{l+s}{'}\PYG{p}{:} \PYG{n+nb+bp}{False}\PYG{p}{,}
+    \PYG{l+s}{'}\PYG{l+s}{plugins}\PYG{l+s}{'}\PYG{p}{:} \PYG{l+s}{"}\PYG{l+s}{safari,paste,advimage,preview}\PYG{l+s}{"}\PYG{p}{,}
+    \PYG{l+s}{'}\PYG{l+s}{theme\PYGZus{}advanced\PYGZus{}toolbar\PYGZus{}location}\PYG{l+s}{'} \PYG{p}{:} \PYG{l+s}{"}\PYG{l+s}{top}\PYG{l+s}{"}\PYG{p}{,}
+    \PYG{l+s}{'}\PYG{l+s}{theme\PYGZus{}advanced\PYGZus{}toolbar\PYGZus{}align}\PYG{l+s}{'} \PYG{p}{:} \PYG{l+s}{"}\PYG{l+s}{left}\PYG{l+s}{"}\PYG{p}{,}
+    \PYG{l+s}{'}\PYG{l+s}{theme\PYGZus{}advanced\PYGZus{}buttons1}\PYG{l+s}{'} \PYG{p}{:} \PYG{l+s}{"}\PYG{l+s}{formatselect,bold,italic,underline,separator,bullist,numlist,separator,undo,separator,link,unlink,separator,charmap,image,paste,pasteword,separator,code,preview}\PYG{l+s}{"}\PYG{p}{,}
+    \PYG{l+s}{'}\PYG{l+s}{theme\PYGZus{}advanced\PYGZus{}buttons2}\PYG{l+s}{'} \PYG{p}{:} \PYG{l+s}{"}\PYG{l+s}{"}\PYG{p}{,}
+    \PYG{l+s}{'}\PYG{l+s}{theme\PYGZus{}advanced\PYGZus{}buttons3}\PYG{l+s}{'} \PYG{p}{:} \PYG{l+s}{"}\PYG{l+s}{"}\PYG{p}{,}
+    \PYG{c}{\#'skin': 'thebigreason',}
+        \PYG{l+s}{'}\PYG{l+s}{theme\PYGZus{}advanced\PYGZus{}statusbar\PYGZus{}location}\PYG{l+s}{'} \PYG{p}{:} \PYG{l+s}{"}\PYG{l+s}{bottom}\PYG{l+s}{"}\PYG{p}{,}
+        \PYG{l+s}{'}\PYG{l+s}{width}\PYG{l+s}{'}\PYG{p}{:} \PYG{l+s}{"}\PYG{l+s}{600}\PYG{l+s}{"}\PYG{p}{,}
+        \PYG{l+s}{'}\PYG{l+s}{height}\PYG{l+s}{'}\PYG{p}{:} \PYG{l+s}{"}\PYG{l+s}{600}\PYG{l+s}{"}\PYG{p}{,}
+\PYG{p}{\PYGZcb{}}
 \end{Verbatim}
 
 \item {} 
 Add the \code{TINYMCE\_ADMIN\_FIELDS} setting:
 
-\begin{Verbatim}[commandchars=@\[\]]
-@PYG[n][TINYMCE@_ADMIN@_FIELDS] @PYG[o][=] @PYG[p][{]
-    @PYG[l+s][']@PYG[l+s][stories.story]@PYG[l+s][']@PYG[p][:] @PYG[p][(]@PYG[l+s][']@PYG[l+s][body]@PYG[l+s][']@PYG[p][,]@PYG[p][)]@PYG[p][,]
-@PYG[p][}]
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{TINYMCE\PYGZus{}ADMIN\PYGZus{}FIELDS} \PYG{o}{=} \PYG{p}{\PYGZob{}}
+    \PYG{l+s}{'}\PYG{l+s}{stories.story}\PYG{l+s}{'}\PYG{p}{:} \PYG{p}{(}\PYG{l+s}{'}\PYG{l+s}{body}\PYG{l+s}{'}\PYG{p}{,}\PYG{p}{)}\PYG{p}{,}
+\PYG{p}{\PYGZcb{}}
 \end{Verbatim}
 
 You can add other fields for other models in here as well, for example:
 
-\begin{Verbatim}[commandchars=@\[\]]
-@PYG[n][TINYMCE@_ADMIN@_FIELDS] @PYG[o][=] @PYG[p][{]
-    @PYG[l+s][']@PYG[l+s][stories.story]@PYG[l+s][']@PYG[p][:] @PYG[p][(]@PYG[l+s][']@PYG[l+s][body]@PYG[l+s][']@PYG[p][,]@PYG[p][)]@PYG[p][,]
-    @PYG[l+s][']@PYG[l+s][flatpages.flatpage]@PYG[l+s][']@PYG[p][:] @PYG[p][(]@PYG[l+s][']@PYG[l+s][content]@PYG[l+s][']@PYG[p][,]@PYG[p][)]@PYG[p][,]
-@PYG[p][}]
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{TINYMCE\PYGZus{}ADMIN\PYGZus{}FIELDS} \PYG{o}{=} \PYG{p}{\PYGZob{}}
+    \PYG{l+s}{'}\PYG{l+s}{stories.story}\PYG{l+s}{'}\PYG{p}{:} \PYG{p}{(}\PYG{l+s}{'}\PYG{l+s}{body}\PYG{l+s}{'}\PYG{p}{,}\PYG{p}{)}\PYG{p}{,}
+    \PYG{l+s}{'}\PYG{l+s}{flatpages.flatpage}\PYG{l+s}{'}\PYG{p}{:} \PYG{p}{(}\PYG{l+s}{'}\PYG{l+s}{content}\PYG{l+s}{'}\PYG{p}{,}\PYG{p}{)}\PYG{p}{,}
+\PYG{p}{\PYGZcb{}}
 \end{Verbatim}
 
 \end{enumerate}
@@ -662,6 +668,81 @@ Then select a deleted story from the list by clicking on the timestamp.
 \includegraphics{recover_list.png}
 
 The deleted story will open up as if you were editing it. Click the ``Save'' button to finish the recovery.
+
+\resetcurrentobjects
+\hypertarget{--doc-reference/index}{}
+
+\hypertarget{reference-index}{}\chapter{Reference Manual}
+
+\resetcurrentobjects
+\hypertarget{--doc-reference/models}{}
+
+\hypertarget{reference-models}{}\section{Models}
+\index{stories.models (module)}
+\hypertarget{module-stories.models}{}
+\declaremodule[stories.models]{}{stories.models}
+\modulesynopsis{}\index{Story (class in stories.models)}
+
+\hypertarget{stories.models.Story}{}\begin{classdesc}{Story}{*args, **kwargs}
+A newspaper or magazine type story or document that was possibly also printed
+in a periodical.
+\index{Story.DoesNotExist}
+
+\hypertarget{stories.models.Story.DoesNotExist}{}\begin{excdesc}{DoesNotExist}\end{excdesc}
+\index{Story.MultipleObjectsReturned}
+
+\hypertarget{stories.models.Story.MultipleObjectsReturned}{}\begin{excdesc}{MultipleObjectsReturned}\end{excdesc}
+\index{author (stories.models.Story attribute)}
+
+\hypertarget{stories.models.Story.author}{}\begin{memberdesc}[Story]{author}
+Easy way to get a combination of authors without having to worry which
+fields are set (author/one-off author)
+\end{memberdesc}
+\index{authors (stories.models.Story attribute)}
+
+\hypertarget{stories.models.Story.authors}{}\begin{memberdesc}[Story]{authors}\end{memberdesc}
+\index{categories (stories.models.Story attribute)}
+
+\hypertarget{stories.models.Story.categories}{}\begin{memberdesc}[Story]{categories}\end{memberdesc}
+\index{get\_absolute\_url() (stories.models.Story method)}
+
+\hypertarget{stories.models.Story.get\_absolute\_url}{}\begin{methoddesc}[Story]{get\_absolute\_url}{*moreargs, **morekwargs}\end{methoddesc}
+\index{get\_next\_by\_modified\_date() (stories.models.Story method)}
+
+\hypertarget{stories.models.Story.get\_next\_by\_modified\_date}{}\begin{methoddesc}[Story]{get\_next\_by\_modified\_date}{*moreargs, **morekwargs}\end{methoddesc}
+\index{get\_origin\_display() (stories.models.Story method)}
+
+\hypertarget{stories.models.Story.get\_origin\_display}{}\begin{methoddesc}[Story]{get\_origin\_display}{*moreargs, **morekwargs}\end{methoddesc}
+\index{get\_previous\_by\_modified\_date() (stories.models.Story method)}
+
+\hypertarget{stories.models.Story.get\_previous\_by\_modified\_date}{}\begin{methoddesc}[Story]{get\_previous\_by\_modified\_date}{*moreargs, **morekwargs}\end{methoddesc}
+\index{get\_related\_content\_type() (stories.models.Story method)}
+
+\hypertarget{stories.models.Story.get\_related\_content\_type}{}\begin{methoddesc}[Story]{get\_related\_content\_type}{content\_type}\end{methoddesc}
+\index{get\_relation\_type() (stories.models.Story method)}
+
+\hypertarget{stories.models.Story.get\_relation\_type}{}\begin{methoddesc}[Story]{get\_relation\_type}{relation\_type}\end{methoddesc}
+\index{get\_status\_display() (stories.models.Story method)}
+
+\hypertarget{stories.models.Story.get\_status\_display}{}\begin{methoddesc}[Story]{get\_status\_display}{*moreargs, **morekwargs}\end{methoddesc}
+\index{paragraphs (stories.models.Story attribute)}
+
+\hypertarget{stories.models.Story.paragraphs}{}\begin{memberdesc}[Story]{paragraphs}
+Return the paragraphs as a list
+\end{memberdesc}
+\index{primary\_category (stories.models.Story attribute)}
+
+\hypertarget{stories.models.Story.primary\_category}{}\begin{memberdesc}[Story]{primary\_category}\end{memberdesc}
+\index{save() (stories.models.Story method)}
+
+\hypertarget{stories.models.Story.save}{}\begin{methoddesc}[Story]{save}{*a, **kw}\end{methoddesc}
+\index{site (stories.models.Story attribute)}
+
+\hypertarget{stories.models.Story.site}{}\begin{memberdesc}[Story]{site}\end{memberdesc}
+\index{storyrelation\_set (stories.models.Story attribute)}
+
+\hypertarget{stories.models.Story.storyrelation\_set}{}\begin{memberdesc}[Story]{storyrelation\_set}\end{memberdesc}
+\end{classdesc}
 
 
 \chapter{Indices and tables}
