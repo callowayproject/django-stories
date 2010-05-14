@@ -1,0 +1,37 @@
+\begin{theindex}
+\def\bigletter#1{{\Large\sffamily#1}\nopagebreak\vspace{1mm}}
+
+  \bigletter A
+  \item author (stories.models.Story attribute), \hyperpage{19}
+  \item authors (stories.models.Story attribute), \hyperpage{19}
+
+  \indexspace
+  \bigletter C
+  \item categories (stories.models.Story attribute), \hyperpage{19}
+
+  \indexspace
+  \bigletter G
+  \item get\_absolute\_url() (stories.models.Story method), \hyperpage{19}
+  \item get\_next\_by\_modified\_date() (stories.models.Story method), \hyperpage{19}
+  \item get\_origin\_display() (stories.models.Story method), \hyperpage{19}
+  \item get\_previous\_by\_modified\_date() (stories.models.Story method), \hyperpage{19}
+  \item get\_related\_content\_type() (stories.models.Story method), \hyperpage{19}
+  \item get\_relation\_type() (stories.models.Story method), \hyperpage{19}
+  \item get\_status\_display() (stories.models.Story method), \hyperpage{19}
+
+  \indexspace
+  \bigletter P
+  \item paragraphs (stories.models.Story attribute), \hyperpage{19}
+  \item primary\_category (stories.models.Story attribute), \hyperpage{19}
+
+  \indexspace
+  \bigletter S
+  \item save() (stories.models.Story method), \hyperpage{19}
+  \item site (stories.models.Story attribute), \hyperpage{19}
+  \item stories.models (module), \hyperpage{19}
+  \item Story (class in stories.models), \hyperpage{19}
+  \item Story.DoesNotExist, \hyperpage{19}
+  \item Story.MultipleObjectsReturned, \hyperpage{19}
+  \item storyrelation\_set (stories.models.Story attribute), \hyperpage{19}
+
+\end{theindex}
