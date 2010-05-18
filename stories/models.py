@@ -50,7 +50,7 @@ class Story(models.Model):
         blank=True, 
         null=True)
     slug = models.SlugField(_('Slug'), 
-        max_length=30)
+        max_length=50)
     authors = models.ManyToManyField(AuthorModel, 
         verbose_name=_('Authors'), 
         blank=True, 
