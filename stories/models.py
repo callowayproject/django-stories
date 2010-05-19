@@ -152,10 +152,6 @@ class Story(models.Model):
         import re
         
         return re.findall("(<p>.+?</p>)", self.body, re.I | re.S)
-        
-    def save(self, *a, **kw):
-        self.slug = self.slug[:30]
-        super(Story, self).save(*a, **kw)
     
     if RELATION_MODELS:
         def get_related_content_type(self, content_type):
