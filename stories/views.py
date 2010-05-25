@@ -61,7 +61,7 @@ def pag_story_detail(request, year, month, day, slug,
     except ValueError:
         raise Http404
     
-    story = Story.objects.get(publish_date=pub_date, slug=slug)
+    story = get_object_or_404(Story, publish_date=pub_date, slug=slug)
     paginator = ParagraphPaginator(story.body, p_per_page, orphans=orphans)
     
     # Make sure page request is an int. If not, deliver first page.
