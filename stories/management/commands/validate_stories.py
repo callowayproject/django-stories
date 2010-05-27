@@ -15,6 +15,5 @@ class Command(BaseCommand):
             try:
                 BeautifulSoup(story.body) # error that happens in paginator
             except HTMLParseError, e:
-                story.body = tidy_fragment(story.body) # tidy the frag
-                story.body.replace('\\n','').replace('\\r','') # weird tidy err
+                story.body = tidy_fragment(story.body)[0] # tidy the frag
                 story.save()
