@@ -11,7 +11,7 @@ except ImportError:
 
 class Command(BaseCommand):
     def handle(self, *args, **kwargs):
-         for story in Story.objects.filter(pk=366949):
+        for story in Story.objects.filter(status=4):
             try:
                 BeautifulSoup(story.body)
             except HTMLParseError, e:
