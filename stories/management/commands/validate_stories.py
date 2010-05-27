@@ -13,7 +13,8 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         for story in Story.objects.filter(status=4):
             try:
-                BeautifulSoup(story.body)
+                BeautifulSoup(story.body) # error that happens in paginator
             except HTMLParseError, e:
-                story.body = tidy_fragment(story.body)
+                story.body = tidy_fragment(story.body) # tidy the frag
+                story.body.replace('\\n','').replace('\\r','') # weird tidy err
                 story.save()
