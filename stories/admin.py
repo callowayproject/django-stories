@@ -52,7 +52,7 @@ class StoryOptions(AdminModel):
     list_editable = ('status',)
     list_filter = ('site', 'publish_date')
     if HAS_CATEGORIES:
-        list_filter += ('primary_category',)
+        list_filter += ('categories',)
     quick_editable = ('headline','subhead','kicker','status','teaser',)
     list_per_page = 25
     search_fields = ('headline',)
