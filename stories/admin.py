@@ -70,7 +70,7 @@ class StoryOptions(AdminModel):
             'fields': ('headline', 'subhead', 'teaser', 'body')
         }), 
         ('Story data', {
-            'fields': ('kicker', 'authors', 'non_staff_author', 'status', 'comments', )
+            'fields': ('kicker', 'authors', 'non_staff_author', 'status', 'origin', 'comments', )
         }),)
     if HAS_CATEGORIES:
         fieldsets = fieldsets + (
@@ -84,7 +84,7 @@ class StoryOptions(AdminModel):
             'classes': ('collapse',),
         })
     fieldsets = fieldsets + (('Advanced Options',{
-            'fields': ('origin','slug',('publish_date', 'publish_time'), 'update_date', 'site', ),
+            'fields': ('slug',('publish_date', 'publish_time'), 'update_date', 'site', ),
             'classes': ('collapse',),
         }),)
     change_list_template = 'admin/stories/change_list.html'
