@@ -17,6 +17,8 @@ if RELATION_MODELS:
 
     class InlineStoryRelation(GenericCollectionTabularInline):
         model = StoryRelation
+        if 'massmedia' in settings.INSTALLED_APPS:
+            template = 'admin/edit_inlines/gen_coll_tabular.html'
         # exclude = ('relation_type',)
 
 if 'reversion' in settings.INSTALLED_APPS:
