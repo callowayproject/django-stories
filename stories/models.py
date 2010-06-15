@@ -114,7 +114,7 @@ class Story(models.Model):
     class Meta:
         verbose_name = _("Story")
         verbose_name_plural = _("Stories")
-        ordering = ['-publish_date']
+        ordering = ['-modified_date']
         get_latest_by = 'publish_date'
         unique_together = ('publish_date','slug')
     
