@@ -144,8 +144,10 @@ class Story(models.Model):
             authors.append(self.non_staff_author)
         if len(authors) > 1:
             author_string = "%s and %s" % (", ".join(l[:-1]), l[-1])
-        else:
+        elif len(authors) == 1:
             author_string = authors[0]
+        else:
+            author_string = ''
         return mark_safe(author_string)
     
     @property
