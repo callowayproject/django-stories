@@ -143,7 +143,7 @@ class Story(models.Model):
         if self.non_staff_author:
             authors.append(self.non_staff_author)
         if len(authors) > 1:
-            author_string = "%s and %s" % (", ".join(l[:-1]), l[-1])
+            author_string = "%s and %s" % (", ".join(authors[:-1]), authors[-1])
         elif len(authors) == 1:
             author_string = authors[0]
         else:
