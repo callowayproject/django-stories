@@ -142,7 +142,11 @@ class Story(models.Model):
                        for i in self.authors.all()]
         if self.non_staff_author:
             authors.append(self.non_staff_author)
-        return mark_safe(", ".join(authors))
+        if len(authors) > 1:
+            author_string = "%s and %s" % (", ".join(l[:-1]), l[-1])
+        else:
+            author_string = authors[0]
+        return mark_safe(author_string)
     
     @property
     def paragraphs(self):
