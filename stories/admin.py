@@ -17,6 +17,8 @@ if RELATION_MODELS:
 
     class InlineStoryRelation(GenericCollectionTabularInline):
         model = StoryRelation
+        if 'massmedia' in settings.INSTALLED_APPS:
+            template = 'admin/edit_inlines/gen_coll_tabular.html'
         # exclude = ('relation_type',)
 
 if 'reversion' in settings.INSTALLED_APPS:
@@ -52,10 +54,10 @@ class StoryOptions(AdminModel):
     list_editable = ('status',)
     list_filter = ('site', 'publish_date')
     if HAS_CATEGORIES:
-        list_filter += ('primary_category',)
+        list_filter += ('categories',)
     quick_editable = ('headline','subhead','kicker','status','teaser',)
     list_per_page = 25
-    search_fields = ('headline', 'teaser', 'body')
+    search_fields = ('headline',)
     date_hierarchy = 'publish_date'
     prepopulated_fields = {'slug': ('headline',)}
     if HAS_CATEGORIES:
@@ -70,7 +72,7 @@ class StoryOptions(AdminModel):
             'fields': ('headline', 'subhead', 'teaser', 'body')
         }), 
         ('Story data', {
-            'fields': ('kicker', 'authors', 'non_staff_author', 'status', 'comments', )
+            'fields': ('kicker', 'authors', 'non_staff_author', 'status', 'origin', 'comments', )
         }),)
     if HAS_CATEGORIES:
         fieldsets = fieldsets + (
@@ -84,7 +86,7 @@ class StoryOptions(AdminModel):
             'classes': ('collapse',),
         })
     fieldsets = fieldsets + (('Advanced Options',{
-            'fields': ('origin','slug',('publish_date', 'publish_time'), 'update_date', 'site', ),
+            'fields': ('slug',('publish_date', 'publish_time'), 'update_date', 'site', ),
             'classes': ('collapse',),
         }),)
     change_list_template = 'admin/stories/change_list.html'

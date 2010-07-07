@@ -50,7 +50,7 @@ class Story(models.Model):
         blank=True, 
         null=True)
     slug = models.SlugField(_('Slug'), 
-        max_length=30)
+        max_length=50)
     authors = models.ManyToManyField(AuthorModel, 
         verbose_name=_('Authors'), 
         blank=True, 
@@ -114,7 +114,7 @@ class Story(models.Model):
     class Meta:
         verbose_name = _("Story")
         verbose_name_plural = _("Stories")
-        ordering = ['-publish_date']
+        ordering = ['-modified_date']
         get_latest_by = 'publish_date'
         unique_together = ('publish_date','slug')
     
@@ -142,7 +142,13 @@ class Story(models.Model):
                        for i in self.authors.all()]
         if self.non_staff_author:
             authors.append(self.non_staff_author)
-        return mark_safe(", ".join(authors))
+        if len(authors) > 1:
+            author_string = "%s and %s" % (", ".join(l[:-1]), l[-1])
+        elif len(authors) == 1:
+            author_string = authors[0]
+        else:
+            author_string = ''
+        return mark_safe(author_string)
     
     @property
     def paragraphs(self):
@@ -152,10 +158,6 @@ class Story(models.Model):
         import re
         
         return re.findall("(<p>.+?</p>)", self.body, re.I | re.S)
-        
-    def save(self, *a, **kw):
-        self.slug = self.slug[:30]
-        super(Story, self).save(*a, **kw)
     
     if RELATION_MODELS:
         def get_related_content_type(self, content_type):
