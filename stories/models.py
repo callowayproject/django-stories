@@ -45,6 +45,10 @@ class Story(models.Model):
     """
     headline = models.CharField(_("Headline"), 
         max_length=100)
+    tease_headline = models.CharField(_("Tease Headline"), 
+        max_length=100,
+        default="",
+        blank=True)
     subhead = models.CharField(_("Subheadline"), 
         max_length=200, 
         blank=True, 
