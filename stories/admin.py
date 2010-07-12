@@ -50,9 +50,9 @@ admin_actions = [ChangeStatus(x,y) for x, y in STATUS_CHOICES]
 class StoryOptions(AdminModel):
     revision_form_template = "admin/stories/reversion_form.html"
     form = StoryForm
-    list_display = ('headline', 'status', 'publish_date', 'modified_date')
+    list_display = ('headline', 'status', 'publish_date', 'modified_date', 'origin',)
     list_editable = ('status',)
-    list_filter = ('site', 'publish_date')
+    list_filter = ('site', 'publish_date', 'origin')
     if HAS_CATEGORIES:
         list_filter += ('categories',)
     quick_editable = ('headline','subhead','kicker','status','teaser',)
@@ -69,7 +69,7 @@ class StoryOptions(AdminModel):
         inlines = [InlineStoryRelation,]
     fieldsets = (
         (None,{
-            'fields': ('headline', 'subhead', 'teaser', 'body')
+            'fields': ('headline', 'subhead', 'tease_headline', 'teaser', 'body')
         }), 
         ('Story data', {
             'fields': ('kicker', 'authors', 'non_staff_author', 'status', 'origin', 'comments', )
