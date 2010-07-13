@@ -1,6 +1,11 @@
+==============
+Django Stories
+==============
+
 This app is designed to be flexible to configure, but still simple to the writers and editors.
 
 Design Goals
+============
 
 * Reduced dependencies: Checks for optional packages and only creates the fields if they are there.
 
@@ -8,6 +13,16 @@ Design Goals
 
 * Flexible dependencies: Can pick from several applications that provide similar service, for example django-staff vs. User, massmedia vs. photologue
 
-* Revision tracking: Keeps track of saved versions and allows a user to revert to a previous version.
 
-* Related items: Can set any configured item to be related to the story. These are for Photos, Videos, other stories, etc.
+Features
+========
+
+* **Revision tracking:** Keeps track of saved versions and allows a user to revert to a previous version.
+
+* **Related items:** Can set any configured item to be related to the story. These are for Photos, Videos, other stories, etc.
+
+* **Quick Edit:** Several fields can be changed in the list view including Headline, Subheadline, Teaser, Kicker and Published Status. A form is used and can be overridden by your project to include what ever fields you want.
+
+* **Optional 404 supressing:** Sometimes you may have to take down content. You can now return a page with an explanation instead of returning a 404 error.
+
+
