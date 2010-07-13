@@ -97,7 +97,7 @@ class Story(models.Model):
     status = models.IntegerField(_('Published Status'), 
         choices=STATUS_CHOICES, 
         default=DEFAULT_STATUS)
-    teaser = models.TextField(_("Teaser Text"))
+    teaser = models.TextField(_("Teaser Text"), blank=True)
     kicker = models.CharField(_('Kicker'), 
         max_length=50, 
         blank=True, 
