@@ -56,12 +56,23 @@ def pag_story_detail(request, year, month, day, slug,
     A detail view for stories that paginates the story by paragraph
     """
     import datetime, time
+    from stories.settings import DONT_THROW_404
+    
     try:
         pub_date = datetime.date(*time.strptime(year+month+day, '%Y%b%d')[:3])
     except ValueError:
         raise Http404
     
-    story = get_object_or_404(Story, publish_date=pub_date, slug=slug)
+    try:
+        story = Story.published.get(publish_date=pub_date, slug=slug)
+    except Story.DoesNotExist:
+        if DONT_THROW_404:
+            return render_to_response('stories/story_removed.html',
+                                      {},
+                                      context_instance=RequestContext(request))
+        else:
+            raise Http404
+            
     paginator = ParagraphPaginator(story.body, p_per_page, orphans=orphans)
     
     # Make sure page request is an int. If not, deliver first page.
