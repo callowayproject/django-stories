@@ -12,6 +12,13 @@ class StoryForm(forms.ModelForm):
         widget=forms.TextInput(attrs={'size':'85'}), 
         max_length=200, 
         required=False)
+    tease_headline = forms.CharField(
+        widget=forms.TextInput(attrs={'size':'85'}),
+        max_length=100, required=False)
+    kicker = forms.CharField(
+        widget=forms.TextInput(attrs={'size':'85'}),
+        max_length=50, required=False)
+    
     non_staff_author = forms.CharField(
         widget=forms.TextInput(attrs={'size':'85'}),
         help_text="An HTML-formatted rendering of the author(s) not on staff.",

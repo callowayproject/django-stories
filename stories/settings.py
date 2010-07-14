@@ -42,3 +42,5 @@ PAGINATE_STORIES = getattr(settings, 'STORY_PAGINATION', False)
 P_PER_PAGE = getattr(settings, 'STORY_P_PER_PAGE', 20)
 
 ORPHANS = getattr(settings, 'STORY_ORPHANS', 4)
+
+DONT_THROW_404 = getattr(settings, 'STORY_DONT_THROW_404', False)

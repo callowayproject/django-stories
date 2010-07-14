@@ -45,6 +45,10 @@ class Story(models.Model):
     """
     headline = models.CharField(_("Headline"), 
         max_length=100)
+    tease_headline = models.CharField(_("Tease Headline"), 
+        max_length=100,
+        default="",
+        blank=True)
     subhead = models.CharField(_("Subheadline"), 
         max_length=200, 
         blank=True, 
@@ -93,7 +97,7 @@ class Story(models.Model):
     status = models.IntegerField(_('Published Status'), 
         choices=STATUS_CHOICES, 
         default=DEFAULT_STATUS)
-    teaser = models.TextField(_("Teaser Text"))
+    teaser = models.TextField(_("Teaser Text"), blank=True)
     kicker = models.CharField(_('Kicker'), 
         max_length=50, 
         blank=True, 

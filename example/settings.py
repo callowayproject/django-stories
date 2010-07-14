@@ -123,5 +123,5 @@ STORY_RELATION_MODELS = (
     'simpleapp.basicthing',
     'stories.story',
 )
-
+STORY_DONT_THROW_404 = True
 AUTH_PROFILE_MODULE = 'simpleprofile.Profile'
