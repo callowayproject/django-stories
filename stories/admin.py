@@ -65,6 +65,7 @@ class StoryOptions(AdminModel):
     else:
         filter_horizontal = ('authors',)
     actions = admin_actions
+    actions_on_bottom = True
     if RELATION_MODELS:
         inlines = [InlineStoryRelation,]
     fieldsets = (
