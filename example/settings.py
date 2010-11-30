@@ -125,3 +125,8 @@ STORY_RELATION_MODELS = (
 )
 STORY_DONT_THROW_404 = True
 AUTH_PROFILE_MODULE = 'simpleprofile.Profile'
+
+try:
+    from local_settings import *
+except ImportError:
+    pass
