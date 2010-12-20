@@ -5,13 +5,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Entering a Story &mdash; Django Stories v0.3.3beta1 documentation</title>
+    <title>Entering a Story &mdash; Django Stories v0.5 documentation</title>
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.3.3beta1',
+        VERSION:     '0.5',
         COLLAPSE_MODINDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -19,14 +19,14 @@
     </script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Django Stories v0.3.3beta1 documentation" href="../index.html" />
+    <link rel="top" title="Django Stories v0.5 documentation" href="../index.html" />
     <link rel="up" title="User Manual" href="index.html" />
     <link rel="next" title="Revisions" href="revisions.html" />
     <link rel="prev" title="User Manual" href="index.html" /> 
   </head>
   <body>
 <div id="docstitle">
-	<p>Django Stories v0.3.3beta1 documentation</p>
+	<p>Django Stories v0.5 documentation</p>
 </div>
 <div id="header">
 	<div id="title"><h1>Entering a Story</h1></div>
@@ -112,8 +112,14 @@
 <dd>For authors that are not part of the organization, place the information here.</dd>
 <dt><strong>Published Status</strong></dt>
 <dd>Required. A workflow status indicator. Only certain stories are allowed on the site.</dd>
-<dt><strong>Enable Comments?</strong></dt>
-<dd>Should readers be allowed to comment on the story.</dd>
+<dt><strong>Comment Status</strong></dt>
+<dd><p class="first">Three states are possible:</p>
+<ul class="last simple">
+<li>Allow comments shows current comments and allows users to enter new comments.</li>
+<li>Disable comments does not display any comments and does not allow new comments.</li>
+<li>Frozen comments shows current comments, but does not allow any new comments.</li>
+</ul>
+</dd>
 </dl>
 </div>
 <div class="section" id="category-fields">

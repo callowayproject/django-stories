@@ -30,8 +30,14 @@ Story data
 **Published Status**
 	Required. A workflow status indicator. Only certain stories are allowed on the site.
 
-**Enable Comments?**
-	Should readers be allowed to comment on the story.
+**Comment Status**
+	Three states are possible: 
+	
+	* Allow comments shows current comments and allows users to enter new comments.
+	
+	* Disable comments does not display any comments and does not allow new comments.
+	
+	* Frozen comments shows current comments, but does not allow any new comments.
 
 Category Fields
 ***************
