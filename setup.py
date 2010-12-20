@@ -4,7 +4,7 @@ import stories
 version = stories.__version__
 
 try:
-    f = open('README')
+    f = open('README.rst')
     long_desc = f.read()
     f.close()
 except:
@@ -21,13 +21,13 @@ setup(name='django-stories',
       long_description=long_desc,
       author='Corey Oordt',
       author_email='coordt@washingtontimes.com',
-      url='http://opensource.washingtontimes.com/projects/django-stories/',
+      url='http://github.com/washingtontimes/django-stories/',
       packages=['stories'],
       install_requires=reqs,
       dependency_links=[
-        'http://opensource.washingtontimes.com/pypi/simple/',
-        'http://opensource.washingtontimes.com/pypi/simple/django-tinymce/',
-        'http://opensource.washingtontimes.com/pypi/simple/django-categories/',
+        'http://opensource.washingtontimes.com/simple/',
+        'http://opensource.washingtontimes.com/simple/django-tinymce/',
+        'http://opensource.washingtontimes.com/simple/django-categories/',
       ],
       include_package_data=True,
       classifiers=['Development Status :: 4 - Beta',
