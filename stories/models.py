@@ -25,6 +25,11 @@ from settings import STATUS_CHOICES, PUBLISHED_STATUS, \
                     DEFAULT_STATUS, ORIGIN_CHOICES, DEFAULT_ORIGIN, \
                     RELATION_MODELS, RELATIONS, INCLUDE_PRINT
 
+COMMENT_STATUSES = (
+    (1, _('Comments Enabled')),
+    (0, _('Comments Disabled')),
+    (2, _('Comments Frozen'))
+)
 
 dmp = diff_match_patch.diff_match_patch()
 
@@ -94,6 +99,10 @@ class Story(models.Model):
             null=True),
     comments = models.BooleanField(_('Enable Comments?'), 
         default=True)
+    comment_status = models.IntegerField(_('Comment Status'),
+        choices=COMMENT_STATUSES,
+        default=1
+    )
     status = models.IntegerField(_('Published Status'), 
         choices=STATUS_CHOICES, 
         default=DEFAULT_STATUS)
@@ -130,6 +139,12 @@ class Story(models.Model):
             self.publish_date.day,
             self.slug
         )) 
+    @property
+    def comments_frozen(self):
+        """
+        Simplified way to get the comment status == frozen
+        """
+        return self.comment_status == 2
     
     @property
     def author(self):
