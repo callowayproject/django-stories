@@ -25,4 +25,9 @@ Features
 
 * **Optional 404 supressing:** Sometimes you may have to take down content. You can now return a page with an explanation instead of returning a 404 error.
 
+Change Log
+==========
 
+In 0.5 a new field was added: comment_status. Comment status deprecates the comments flag as it allows for a third state of comments: Frozen (show old comments but don't allow new comments).
+
+There is a SQL script to add the new field and migrate the appropriate values from the old field. The old field is not removed from the table, but all references to it within the app are gone.

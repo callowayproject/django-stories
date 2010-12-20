@@ -35,8 +35,6 @@ DEFAULT_RELATION_MODELS = []
 RELATION_MODELS = getattr(settings, 'STORY_RELATION_MODELS', DEFAULT_RELATION_MODELS) or []
 RELATIONS = [Q(app_label=al, model=m) for al, m in [x.split('.') for x in RELATION_MODELS]]
 
-
-
 PAGINATE_STORIES = getattr(settings, 'STORY_PAGINATION', False)
 
 P_PER_PAGE = getattr(settings, 'STORY_P_PER_PAGE', 20)

@@ -73,7 +73,7 @@ class StoryOptions(AdminModel):
             'fields': ('headline', 'subhead', 'tease_headline', 'teaser', 'body')
         }), 
         ('Story data', {
-            'fields': ('kicker', 'authors', 'non_staff_author', 'status', 'origin', 'comments', )
+            'fields': ('kicker', 'authors', 'non_staff_author', 'status', 'origin', 'comment_status', )
         }),)
     if HAS_CATEGORIES:
         fieldsets = fieldsets + (

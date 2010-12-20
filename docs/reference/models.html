@@ -5,13 +5,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Models &mdash; Django Stories v0.3.3beta1 documentation</title>
+    <title>Models &mdash; Django Stories v0.5 documentation</title>
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.3.3beta1',
+        VERSION:     '0.5',
         COLLAPSE_MODINDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -19,13 +19,13 @@
     </script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Django Stories v0.3.3beta1 documentation" href="../index.html" />
+    <link rel="top" title="Django Stories v0.5 documentation" href="../index.html" />
     <link rel="up" title="Reference Manual" href="index.html" />
     <link rel="prev" title="Reference Manual" href="index.html" /> 
   </head>
   <body>
 <div id="docstitle">
-	<p>Django Stories v0.3.3beta1 documentation</p>
+	<p>Django Stories v0.5 documentation</p>
 </div>
 <div id="header">
 	<div id="title"><h1>Models</h1></div>
@@ -119,9 +119,19 @@ fields are set (author/one-off author)</dd></dl>
 <tt class="descclassname">Story.</tt><tt class="descname">categories</tt><a class="headerlink" href="#stories.models.Story.categories" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
+<dl class="attribute">
+<dt id="stories.models.Story.comments_frozen">
+<tt class="descclassname">Story.</tt><tt class="descname">comments_frozen</tt><a class="headerlink" href="#stories.models.Story.comments_frozen" title="Permalink to this definition">¶</a></dt>
+<dd>Simplified way to get the comment status == frozen</dd></dl>
+
 <dl class="method">
 <dt id="stories.models.Story.get_absolute_url">
 <tt class="descclassname">Story.</tt><tt class="descname">get_absolute_url</tt><big>(</big><em>*moreargs</em>, <em>**morekwargs</em><big>)</big><a class="headerlink" href="#stories.models.Story.get_absolute_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="stories.models.Story.get_comment_status_display">
+<tt class="descclassname">Story.</tt><tt class="descname">get_comment_status_display</tt><big>(</big><em>*moreargs</em>, <em>**morekwargs</em><big>)</big><a class="headerlink" href="#stories.models.Story.get_comment_status_display" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">

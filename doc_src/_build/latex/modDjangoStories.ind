@@ -1,7 +1,0 @@
-\begin{theindex}
-\def\bigletter#1{{\Large\sffamily#1}\nopagebreak\vspace{1mm}}
-
-  \bigletter S
-  \item {\texttt  {stories.models}}, \hyperpage{19}
-
-\end{theindex}
