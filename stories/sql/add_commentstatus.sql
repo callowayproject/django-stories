@@ -1,0 +1,1 @@
+ALTER TABLE stories_story ADD COLUMN "comment_status" integer NOT NULL DEFAULT 1;
