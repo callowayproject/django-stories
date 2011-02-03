@@ -63,8 +63,12 @@ def pag_story_detail(request, year, month, day, slug,
     except ValueError:
         raise Http404
     
+    qs = Story.published.get
+    if request.user.is_staff:
+        qs = Story.objects.get
+    
     try:
-        story = Story.published.get(publish_date=pub_date, slug=slug)
+        story = qs(publish_date=pub_date, slug=slug)
     except Story.DoesNotExist:
         if DONT_THROW_404:
             return render_to_response('stories/story_removed.html',
