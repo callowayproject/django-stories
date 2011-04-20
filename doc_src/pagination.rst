@@ -1,4 +1,4 @@
-.. _pagination:
+.. _story_pagination:
 
 ==========
 Pagination
@@ -6,18 +6,18 @@ Pagination
 
 Many sites wish to paginate long stories over multiple pages. Paginating text is a bit different from paginating a list of objects. Django Stories has a :class:`Paginator` subclass that takes an HTML-formatted string instead of a :class:`QuerySet`\ .
 
-The simplest way to use pagination with stories is to set :ref:`STORY_PAGINATION` to ``True``\ , which changes the view that handles the story rendering.
+The simplest way to use pagination with stories is to set :ref:`PAGINATE` to ``True``\ , which changes the view that handles the story rendering.
 
-Settings that affect pagination
-===============================
+PAGINATION settings
+===================
 
-:ref:`STORY_PAGINATION`
+:ref:`PAGINATE`
 	Enables or disables pagination altogether. It is disabled by default.
 
-:ref:`STORY_P_PER_PAGE`
+:ref:`P_PER_PAGE`
 	The number of paragraphs to show on each page. It shows 20 paragraphs by default, but only if story pagination is enabled.
 
-:ref:`STORY_ORPHANS`
+:ref:`ORPHANS`
 	The minimum number of paragraphs allowed allowed on the last page. It is set to 4 by default (meaning a minimum of 5 paragraphs on a page), but only if story pagination is enabled.
 
 Using pagination in templates
@@ -34,14 +34,14 @@ story_content
 Different heading on first page
 *******************************
 
-::
+.. code-block:: django
 
 	{% if story_content.has_previous %}
-		<h3>{{ story.headline }}</h3>
-		<p><em>continued from page {{ story_content.previous_page_number }}</em></p>
+	    <h3>{{ story.headline }}</h3>
+	    <p><em>continued from page {{ story_content.previous_page_number }}</em></p>
 	{% else %}
-		<h1>{{ story.headline }}</h1>
-		<h2>{{ story.subheadline }}</h2>
+	    <h1>{{ story.headline }}</h1>
+	    <h2>{{ story.subheadline }}</h2>
 	{% endif %}
 
 The above template snippet checks to see if this is a page other than 1 (meaning it has a previous page) and displays a small headline with a "continued from page x" below it.
@@ -51,17 +51,17 @@ If it is the first page, it displays the headline and subheadline in all their g
 Looping through the paragraphs
 ******************************
 
-::
+.. code-block:: django
 
 	{% load add_attribute %}
 	{% for paragraph in story_content.object_list %}
-		{% ifequal story_content.number 1 %}
-			{% if forloop.first %}
-				{{ paragraph|add_attribute:"class=dropcap"|safe }}
-			{% else %}
-				{{ paragraph|safe }}
-				{% endif %}
-		{% endifequal %}
+	    {% ifequal story_content.number 1 %}
+	        {% if forloop.first %}
+	            {{ paragraph|add_attribute:"class=dropcap"|safe }}
+	        {% else %}
+	            {{ paragraph|safe }}
+	        {% endif %}
+	    {% endifequal %}
 	{% endfor %}
 
 ``add_attribute`` is a filter that is included in Django Stories. It adds any attribute to the paragraph. In this example, it checks if it is the first paragraph and adds the attribute ``class`` with a value of ``dropcap`` to the ``<p>`` tag. That part is unnecessary, but allows you some artistic freedom.
@@ -71,7 +71,7 @@ Don't forget the ``|safe`` filter at the end. Django will automatically escape a
 Leading them to the next page
 *****************************
 
-::
+.. code-block:: django
 
 	{% if story_content.has_next %}
 		<p><a href="?page={{ story_content.next_page_number }}"><em>Story Continues &rarr;</em></a>
@@ -82,18 +82,22 @@ Before we hit the typical pagination anchors, it can be nice to add a simple lin
 The pagination widget
 *********************
 
-Django stories includes a template to show a list of pages with previous and next buttons. The template is in ``stories/pagination_widget.html`` and you can override it should you wish or simple include some styles in your CSS. Add the following line in your template::
+Django stories includes a template to show a list of pages with previous and next buttons. The template is in ``stories/pagination_widget.html`` and you can override it should you wish or simple include some styles in your CSS. Add the following line in your template:
+
+.. code-block:: django
 
 	{% include "stories/pagination_widget.html" %}
 
-and it will generate some HTML similar to::
+and it will generate some HTML similar to:
+
+.. code-block:: html
 
 	<div class="pagination">
-		<a href="?page=1" class="previous">&larr; Previous</a>
-		<a href="?page=1" class="page">1</a>
-		<span class="current">2</span>
-		<a href="?page=3" class="page">3</a>
-		<a href="?page=3" class="next">Next &rarr;</a>
+	    <a href="?page=1" class="previous">&larr; Previous</a>
+	    <a href="?page=1" class="page">1</a>
+	    <span class="current">2</span>
+	    <a href="?page=3" class="page">3</a>
+	    <a href="?page=3" class="next">Next &rarr;</a>
 	</div>
 
 Pagination widget CSS styles
