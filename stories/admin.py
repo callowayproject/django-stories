@@ -7,27 +7,26 @@ from django.forms.models import modelformset_factory, modelform_factory
 
 from genericcollection import *
 
-from models import Story, HAS_CATEGORIES
-from stories.settings import RELATION_MODELS, INCLUDE_PRINT, STATUS_CHOICES
+from models import Story
+from stories.settings import (RELATION_MODELS, INCLUDE_PRINT, STATUS_CHOICES, 
+    USE_CATEGORIES, USE_REVERSION)
 from forms import StoryForm
 
 
 if RELATION_MODELS:
     from models import StoryRelation
-
+    
     class InlineStoryRelation(GenericCollectionTabularInline):
         model = StoryRelation
         if 'massmedia' in settings.INSTALLED_APPS:
             template = 'admin/edit_inlines/gen_coll_tabular.html'
         # exclude = ('relation_type',)
 
-if 'reversion' in settings.INSTALLED_APPS:
+if USE_REVERSION:
     from reversion.admin import VersionAdmin
     AdminModel = VersionAdmin
 else:
     AdminModel = admin.ModelAdmin
-
-HAS_CATEGORIES = 'categories' in settings.INSTALLED_APPS
 
 class ChangeStatus(object):
     """A class to create objects that can dynamically set status from the admin"""
@@ -53,14 +52,14 @@ class StoryOptions(AdminModel):
     list_display = ('headline', 'status', 'publish_date', 'modified_date', 'origin',)
     list_editable = ('status',)
     list_filter = ('site', 'publish_date', 'origin')
-    if HAS_CATEGORIES:
+    if USE_CATEGORIES:
         list_filter += ('categories',)
     quick_editable = ('headline','subhead','kicker','status','teaser',)
     list_per_page = 25
     search_fields = ('headline',)
     date_hierarchy = 'publish_date'
     prepopulated_fields = {'slug': ('headline',)}
-    if HAS_CATEGORIES:
+    if USE_CATEGORIES:
         filter_horizontal = ('authors', 'categories')
     else:
         filter_horizontal = ('authors',)
@@ -75,7 +74,7 @@ class StoryOptions(AdminModel):
         ('Story data', {
             'fields': ('kicker', 'authors', 'non_staff_author', 'status', 'origin', 'comment_status', )
         }),)
-    if HAS_CATEGORIES:
+    if USE_CATEGORIES:
         fieldsets = fieldsets + (
             ('Categories', {
                 'fields': ('primary_category','categories')

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -5,27 +6,28 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Pagination &mdash; Django Stories v0.5 documentation</title>
+    <title>Pagination &mdash; Django Stories v0.5.1 documentation</title>
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '#',
-        VERSION:     '0.5',
-        COLLAPSE_MODINDEX: false,
+        URL_ROOT:    '',
+        VERSION:     '0.5.1',
+        COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Django Stories v0.5 documentation" href="index.html" />
+    <link rel="top" title="Django Stories v0.5.1 documentation" href="index.html" />
     <link rel="next" title="Integration with Other Django Applications" href="integration/index.html" />
     <link rel="prev" title="Settings" href="settings.html" /> 
   </head>
   <body>
 <div id="docstitle">
-	<p>Django Stories v0.5 documentation</p>
+	<p>Django Stories v0.5.1 documentation</p>
 </div>
 <div id="header">
 	<div id="title"><h1>Pagination</h1></div>
@@ -33,7 +35,7 @@
 		<li id="toc_button"><div class="headerButton"><a href="#">Table of Contents</a></div></li>
 		<li id="page_buttons">
 			<div class="headerButton"><a href="genindex.html" title="General Index" accesskey="I">index</a></div>
-			<div class="headerButton"><a href="modindex.html" title="Global Module Index" accesskey="M">modules</a></div>
+			<div class="headerButton"><a href="py-modindex.html" title="Python Module Index" >modules</a></div>
 			<div class="headerButton"><a href="integration/index.html" title="Integration with Other Django Applications" accesskey="N">next</a></div>
 			<div class="headerButton"><a href="settings.html" title="Settings" accesskey="P">previous</a></div>
 		</li>
@@ -44,16 +46,16 @@
   <div class="sphinxsidebarwrapper">
 	<ul><li class="toctree-l1"><a href="index.html">Main Page</a></li></ul>
 	<ul class="current">
-<li class="toctree-l1"><a class="reference external" href="install.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference external" href="settings.html">Settings</a></li>
-<li class="toctree-l1 current"><a class="current reference external" href="">Pagination</a><ul>
-<li class="toctree-l2"><a class="reference external" href="#settings-that-affect-pagination">Settings that affect pagination</a></li>
-<li class="toctree-l2"><a class="reference external" href="#using-pagination-in-templates">Using pagination in templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">Settings</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Pagination</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#pagination-settings">PAGINATION settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-pagination-in-templates">Using pagination in templates</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference external" href="integration/index.html">Integration with Other Django Applications</a></li>
-<li class="toctree-l1"><a class="reference external" href="user/index.html">User Manual</a></li>
-<li class="toctree-l1"><a class="reference external" href="reference/index.html">Reference Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="integration/index.html">Integration with Other Django Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user/index.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference/index.html">Reference Manual</a></li>
 </ul>
 
       <h3>This Page</h3>
@@ -89,17 +91,17 @@
           <div class="body">
             
   <div class="section" id="pagination">
-<span id="id1"></span><h1>Pagination<a class="headerlink" href="#pagination" title="Permalink to this headline">¶</a></h1>
-<p>Many sites wish to paginate long stories over multiple pages. Paginating text is a bit different from paginating a list of objects. Django Stories has a <tt class="xref docutils literal"><span class="pre">Paginator</span></tt> subclass that takes an HTML-formatted string instead of a <tt class="xref docutils literal"><span class="pre">QuerySet</span></tt>.</p>
-<p>The simplest way to use pagination with stories is to set <a class="reference external" href="settings.html#story-pagination"><em>STORY_PAGINATION</em></a> to <tt class="xref docutils literal"><span class="pre">True</span></tt>, which changes the view that handles the story rendering.</p>
-<div class="section" id="settings-that-affect-pagination">
-<h2>Settings that affect pagination<a class="headerlink" href="#settings-that-affect-pagination" title="Permalink to this headline">¶</a></h2>
+<span id="story-pagination"></span><h1>Pagination<a class="headerlink" href="#pagination" title="Permalink to this headline">¶</a></h1>
+<p>Many sites wish to paginate long stories over multiple pages. Paginating text is a bit different from paginating a list of objects. Django Stories has a <tt class="xref py py-class docutils literal"><span class="pre">Paginator</span></tt> subclass that takes an HTML-formatted string instead of a <tt class="xref py py-class docutils literal"><span class="pre">QuerySet</span></tt>.</p>
+<p>The simplest way to use pagination with stories is to set <a class="reference internal" href="settings.html#paginate"><em>PAGINATE</em></a> to <tt class="xref docutils literal"><span class="pre">True</span></tt>, which changes the view that handles the story rendering.</p>
+<div class="section" id="pagination-settings">
+<h2>PAGINATION settings<a class="headerlink" href="#pagination-settings" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
-<dt><a class="reference external" href="settings.html#story-pagination"><em>STORY_PAGINATION</em></a></dt>
+<dt><a class="reference internal" href="settings.html#paginate"><em>PAGINATE</em></a></dt>
 <dd>Enables or disables pagination altogether. It is disabled by default.</dd>
-<dt><a class="reference external" href="settings.html#story-p-per-page"><em>STORY_P_PER_PAGE</em></a></dt>
+<dt><a class="reference internal" href="settings.html#p-per-page"><em>P_PER_PAGE</em></a></dt>
 <dd>The number of paragraphs to show on each page. It shows 20 paragraphs by default, but only if story pagination is enabled.</dd>
-<dt><a class="reference external" href="settings.html#story-orphans"><em>STORY_ORPHANS</em></a></dt>
+<dt><a class="reference internal" href="settings.html#orphans"><em>ORPHANS</em></a></dt>
 <dd>The minimum number of paragraphs allowed allowed on the last page. It is set to 4 by default (meaning a minimum of 5 paragraphs on a page), but only if story pagination is enabled.</dd>
 </dl>
 </div>
@@ -108,60 +110,65 @@
 <p>The default name of the story template is <tt class="docutils literal"><span class="pre">stories/pag_story.html</span></tt>. Within the context there are two variables:</p>
 <dl class="docutils">
 <dt>story</dt>
-<dd>The <tt class="xref docutils literal"><span class="pre">Story</span></tt> object.</dd>
+<dd>The <tt class="xref py py-class docutils literal"><span class="pre">Story</span></tt> object.</dd>
 <dt>story_content</dt>
-<dd>The <tt class="xref docutils literal"><span class="pre">ParagraphPaginator</span></tt> class. It contains all the paragraphs of the <tt class="xref docutils literal"><span class="pre">Story</span></tt> that should be on this page. A detailed reference of all the methods is in the <a class="reference external" href="http://docs.djangoproject.com/en/dev/topics/pagination/#paginator-objects">Django Paginator docs</a>.</dd>
+<dd>The <tt class="xref py py-class docutils literal"><span class="pre">ParagraphPaginator</span></tt> class. It contains all the paragraphs of the <tt class="xref py py-class docutils literal"><span class="pre">Story</span></tt> that should be on this page. A detailed reference of all the methods is in the <a class="reference external" href="http://docs.djangoproject.com/en/dev/topics/pagination/#paginator-objects">Django Paginator docs</a>.</dd>
 </dl>
 <div class="section" id="different-heading-on-first-page">
 <h3>Different heading on first page<a class="headerlink" href="#different-heading-on-first-page" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python"><pre>{% if story_content.has_previous %}
-        &lt;h3&gt;{{ story.headline }}&lt;/h3&gt;
-        &lt;p&gt;&lt;em&gt;continued from page {{ story_content.previous_page_number }}&lt;/em&gt;&lt;/p&gt;
-{% else %}
-        &lt;h1&gt;{{ story.headline }}&lt;/h1&gt;
-        &lt;h2&gt;{{ story.subheadline }}&lt;/h2&gt;
-{% endif %}</pre>
+<div class="highlight-django"><div class="highlight"><pre><span class="cp">{%</span> <span class="k">if</span> <span class="nv">story_content.has_previous</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">    &lt;h3&gt;</span><span class="cp">{{</span> <span class="nv">story.headline</span> <span class="cp">}}</span><span class="x">&lt;/h3&gt;</span>
+<span class="x">    &lt;p&gt;&lt;em&gt;continued from page </span><span class="cp">{{</span> <span class="nv">story_content.previous_page_number</span> <span class="cp">}}</span><span class="x">&lt;/em&gt;&lt;/p&gt;</span>
+<span class="cp">{%</span> <span class="k">else</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">    &lt;h1&gt;</span><span class="cp">{{</span> <span class="nv">story.headline</span> <span class="cp">}}</span><span class="x">&lt;/h1&gt;</span>
+<span class="x">    &lt;h2&gt;</span><span class="cp">{{</span> <span class="nv">story.subheadline</span> <span class="cp">}}</span><span class="x">&lt;/h2&gt;</span>
+<span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span><span class="x"></span>
+</pre></div>
 </div>
 <p>The above template snippet checks to see if this is a page other than 1 (meaning it has a previous page) and displays a small headline with a &#8220;continued from page x&#8221; below it.</p>
 <p>If it is the first page, it displays the headline and subheadline in all their glory.</p>
 </div>
 <div class="section" id="looping-through-the-paragraphs">
 <h3>Looping through the paragraphs<a class="headerlink" href="#looping-through-the-paragraphs" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python"><pre>{% load add_attribute %}
-{% for paragraph in story_content.object_list %}
-        {% ifequal story_content.number 1 %}
-                {% if forloop.first %}
-                        {{ paragraph|add_attribute:"class=dropcap"|safe }}
-                {% else %}
-                        {{ paragraph|safe }}
-                        {% endif %}
-        {% endifequal %}
-{% endfor %}</pre>
+<div class="highlight-django"><div class="highlight"><pre><span class="cp">{%</span> <span class="k">load</span> <span class="nv">add_attribute</span> <span class="cp">%}</span><span class="x"></span>
+<span class="cp">{%</span> <span class="k">for</span> <span class="nv">paragraph</span> <span class="k">in</span> <span class="nv">story_content.object_list</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">ifequal</span> <span class="nv">story_content.number</span> <span class="m">1</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">        </span><span class="cp">{%</span> <span class="k">if</span> <span class="nb">forloop</span><span class="nv">.first</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">            </span><span class="cp">{{</span> <span class="nv">paragraph</span><span class="o">|</span><span class="nf">add_attribute</span><span class="s2">:&quot;class=dropcap&quot;</span><span class="o">|</span><span class="nf">safe</span> <span class="cp">}}</span><span class="x"></span>
+<span class="x">        </span><span class="cp">{%</span> <span class="k">else</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">            </span><span class="cp">{{</span> <span class="nv">paragraph</span><span class="o">|</span><span class="nf">safe</span> <span class="cp">}}</span><span class="x"></span>
+<span class="x">        </span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">endifequal</span> <span class="cp">%}</span><span class="x"></span>
+<span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span><span class="x"></span>
+</pre></div>
 </div>
 <p><tt class="docutils literal"><span class="pre">add_attribute</span></tt> is a filter that is included in Django Stories. It adds any attribute to the paragraph. In this example, it checks if it is the first paragraph and adds the attribute <tt class="docutils literal"><span class="pre">class</span></tt> with a value of <tt class="docutils literal"><span class="pre">dropcap</span></tt> to the <tt class="docutils literal"><span class="pre">&lt;p&gt;</span></tt> tag. That part is unnecessary, but allows you some artistic freedom.</p>
 <p>Don&#8217;t forget the <tt class="docutils literal"><span class="pre">|safe</span></tt> filter at the end. Django will automatically escape all the tags otherwise.</p>
 </div>
 <div class="section" id="leading-them-to-the-next-page">
 <h3>Leading them to the next page<a class="headerlink" href="#leading-them-to-the-next-page" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python"><pre>{% if story_content.has_next %}
-        &lt;p&gt;&lt;a href="?page={{ story_content.next_page_number }}"&gt;&lt;em&gt;Story Continues &amp;rarr;&lt;/em&gt;&lt;/a&gt;
-{% endif %}</pre>
+<div class="highlight-django"><div class="highlight"><pre><span class="cp">{%</span> <span class="k">if</span> <span class="nv">story_content.has_next</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">        &lt;p&gt;&lt;a href=&quot;?page=</span><span class="cp">{{</span> <span class="nv">story_content.next_page_number</span> <span class="cp">}}</span><span class="x">&quot;&gt;&lt;em&gt;Story Continues &amp;rarr;&lt;/em&gt;&lt;/a&gt;</span>
+<span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span><span class="x"></span>
+</pre></div>
 </div>
 <p>Before we hit the typical pagination anchors, it can be nice to add a simple link to the next page, so the reader doesn&#8217;t have to think about which button to click.</p>
 </div>
 <div class="section" id="the-pagination-widget">
 <h3>The pagination widget<a class="headerlink" href="#the-pagination-widget" title="Permalink to this headline">¶</a></h3>
 <p>Django stories includes a template to show a list of pages with previous and next buttons. The template is in <tt class="docutils literal"><span class="pre">stories/pagination_widget.html</span></tt> and you can override it should you wish or simple include some styles in your CSS. Add the following line in your template:</p>
-<div class="highlight-python"><pre>{% include "stories/pagination_widget.html" %}</pre>
+<div class="highlight-django"><div class="highlight"><pre><span class="cp">{%</span> <span class="k">include</span> <span class="s2">&quot;stories/pagination_widget.html&quot;</span> <span class="cp">%}</span><span class="x"></span>
+</pre></div>
 </div>
 <p>and it will generate some HTML similar to:</p>
-<div class="highlight-python"><pre>&lt;div class="pagination"&gt;
-        &lt;a href="?page=1" class="previous"&gt;&amp;larr; Previous&lt;/a&gt;
-        &lt;a href="?page=1" class="page"&gt;1&lt;/a&gt;
-        &lt;span class="current"&gt;2&lt;/span&gt;
-        &lt;a href="?page=3" class="page"&gt;3&lt;/a&gt;
-        &lt;a href="?page=3" class="next"&gt;Next &amp;rarr;&lt;/a&gt;
-&lt;/div&gt;</pre>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;pagination&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;?page=1&quot;</span> <span class="na">class=</span><span class="s">&quot;previous&quot;</span><span class="nt">&gt;</span><span class="ni">&amp;larr;</span> Previous<span class="nt">&lt;/a&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;?page=1&quot;</span> <span class="na">class=</span><span class="s">&quot;page&quot;</span><span class="nt">&gt;</span>1<span class="nt">&lt;/a&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&quot;current&quot;</span><span class="nt">&gt;</span>2<span class="nt">&lt;/span&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;?page=3&quot;</span> <span class="na">class=</span><span class="s">&quot;page&quot;</span><span class="nt">&gt;</span>3<span class="nt">&lt;/a&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;?page=3&quot;</span> <span class="na">class=</span><span class="s">&quot;next&quot;</span><span class="nt">&gt;</span>Next <span class="ni">&amp;rarr;</span><span class="nt">&lt;/a&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
 </div>
 </div>
 <div class="section" id="pagination-widget-css-styles">
@@ -189,7 +196,7 @@
     <div class="footer">
     <p>
       &copy; Copyright 2009, The Washington Times.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.5.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
 	</p>
     </div>
       <div class="clearer"></div>

@@ -119,11 +119,16 @@ TINYMCE_DEFAULT_CONFIG = {
 TINYMCE_ADMIN_FIELDS = {
     'stories.story': ('body',),
 }
-STORY_RELATION_MODELS = (
-    'simpleapp.basicthing',
-    'stories.story',
-)
-STORY_DONT_THROW_404 = True
+STORY_SETTINGS = {
+    'RELATION_MODELS': ('simpleapp.basicthing','stories.story',),
+    'PAGINATION': {
+        'PAGINATE': True,
+        'P_PER_PAGE': 5,
+        'ORPHANS': 1
+    },
+    'THROW_404': False,
+}
+
 AUTH_PROFILE_MODULE = 'simpleprofile.Profile'
 
 try:

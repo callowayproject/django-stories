@@ -28,6 +28,16 @@ Features
 Change Log
 ==========
 
+**New in 0.6**
+
+* A refactoring of the settings to be dictionary-based.
+
+* Added ability to limit choices in the author model
+
+* Added new settings: ``AUTHOR_MODEL``\ , ``USE_CATEGORIES``\ , ``USE_REVERSION``
+
+**New in 0.5**
+
 In 0.5 a new field was added: comment_status. Comment status deprecates the comments flag as it allows for a third state of comments: Frozen (show old comments but don't allow new comments).
 
 There is a SQL script to add the new field and migrate the appropriate values from the old field. The old field is not removed from the table, but all references to it within the app are gone.
