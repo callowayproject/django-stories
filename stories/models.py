@@ -8,22 +8,16 @@ from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
 from datetime import datetime
 from django.contrib.sites.models import Site
-from django.conf import settings as global_settings
 
-if 'staff' in global_settings.INSTALLED_APPS:
-    from staff.models import StaffMember as AuthorModel
-else:
-    from django.contrib.auth.models import User as AuthorModel
+# pylint: disable-msg=E0611
+from settings import (STATUS_CHOICES, PUBLISHED_STATUS, DEFAULT_STATUS, 
+    ORIGIN_CHOICES, DEFAULT_ORIGIN, RELATION_MODELS, RELATIONS, INCLUDE_PRINT,
+    USE_CATEGORIES, USE_REVERSION, AUTHOR_MODEL, AUTHOR_MODEL_LIMIT_CHOICES )
 
-if 'categories' in global_settings.INSTALLED_APPS:
-    HAS_CATEGORIES = True
+AuthorModel = models.get_model(*AUTHOR_MODEL.split("."))
+
+if USE_CATEGORIES:
     from categories.fields import CategoryM2MField, CategoryFKField
-else:
-    HAS_CATEGORIES = False
-
-from settings import STATUS_CHOICES, PUBLISHED_STATUS, \
-                    DEFAULT_STATUS, ORIGIN_CHOICES, DEFAULT_ORIGIN, \
-                    RELATION_MODELS, RELATIONS, INCLUDE_PRINT
 
 COMMENT_STATUSES = (
     (1, _('Comments Enabled')),
@@ -31,17 +25,19 @@ COMMENT_STATUSES = (
     (2, _('Comments Frozen'))
 )
 
-dmp = diff_match_patch.diff_match_patch()
+DMP = diff_match_patch.diff_match_patch()
 
 def diff(txt1, txt2):
     """Create a 'diff' from txt1 to txt2."""
-    patch = dmp.patch_make(txt1, txt2)
-    return dmp.patch_toText(patch)
+    patch = DMP.patch_make(txt1, txt2)
+    return DMP.patch_toText(patch)
 
 class CurrentSitePublishedManager(models.Manager):
     def get_query_set(self):
         queryset = super(CurrentSitePublishedManager, self).get_query_set()
-        return queryset.filter(publish_date__lte=datetime.now()).filter(status__exact=PUBLISHED_STATUS)
+        return queryset.filter(
+            publish_date__lte=datetime.now()).filter(
+                status__exact=PUBLISHED_STATUS)
 
 class Story(models.Model):
     """
@@ -63,12 +59,13 @@ class Story(models.Model):
     authors = models.ManyToManyField(AuthorModel, 
         verbose_name=_('Authors'), 
         blank=True, 
-        null=True)
+        null=True,
+        limit_choices_to=AUTHOR_MODEL_LIMIT_CHOICES)
     non_staff_author = models.CharField(_('Non-staff author(s)'), 
         max_length=200, 
         blank=True, 
         null=True,
-        help_text=_("An HTML-formatted rendering of the author(s) not on staff."))
+        help_text=_("An HTML-formatted rendering of an author(s) not on staff."))
     publish_date = models.DateField(_('Publish Date'),
         help_text=_("The date the original story was published"), 
         blank=True, 
@@ -117,7 +114,7 @@ class Story(models.Model):
         default=DEFAULT_ORIGIN,)
     site = models.ForeignKey(Site, verbose_name=_('Site'))
     
-    if HAS_CATEGORIES:
+    if USE_CATEGORIES:
         primary_category = CategoryFKField(related_name='primary_story_set')
         categories = CategoryM2MField(blank=True)
     
@@ -154,8 +151,10 @@ class Story(models.Model):
         """
         link = '<a href="%s">%s %s</a>'
         if AuthorModel.__module__ == 'django.contrib.auth.models':
-            authors = [link % (i.get_profile().get_absolute_url(), i.first_name, i.last_name)
-                       for i in self.authors.all()]
+            authors = [link % (
+                i.get_profile().get_absolute_url(), 
+                i.first_name, 
+                i.last_name) for i in self.authors.all()]
         else:
             authors = [link % (i.get_absolute_url(), i.first_name, i.last_name)
                        for i in self.authors.all()]
@@ -180,9 +179,16 @@ class Story(models.Model):
     
     if RELATION_MODELS:
         def get_related_content_type(self, content_type):
-            return self.storyrelation_set.filter(content_type__name=content_type)
+            """
+            Get all related items of the specified content type
+            """
+            return self.storyrelation_set.filter(
+                content_type__name=content_type)
         
         def get_relation_type(self, relation_type):
+            """
+            Get all relations of the specified relation type
+            """
             return self.storyrelation_set.filter(relation_type=relation_type)
     
     def __unicode__(self):
@@ -190,13 +196,20 @@ class Story(models.Model):
 
 
 if RELATION_MODELS:
-    story_relation_limits = reduce(lambda x,y: x|y, RELATIONS)
+    STORY_RELATION_LIMITS = reduce(lambda x, y: x|y, RELATIONS)
     class StoryRelationManager(models.Manager):
+        """Basic manager with a few convenience methods"""
         def get_content_type(self, content_type):
+            """
+            Get all the related items with a specific content_type
+            """
             qs = self.get_query_set()
             return qs.filter(content_type__name=content_type)
         
         def get_relation_type(self, relation_type):
+            """
+            Get all the related items with a specific relation_type
+            """
             qs = self.get_query_set()
             return qs.filter(relation_type=relation_type)
     
@@ -204,23 +217,26 @@ if RELATION_MODELS:
     class StoryRelation(models.Model):
         """Related story item"""
         story = models.ForeignKey(Story)
-        content_type = models.ForeignKey(ContentType, limit_choices_to=story_relation_limits)
+        content_type = models.ForeignKey(
+            ContentType, 
+            limit_choices_to=STORY_RELATION_LIMITS)
         object_id = models.PositiveIntegerField()
         content_object = generic.GenericForeignKey('content_type', 'object_id')
         relation_type = models.CharField(_("Relation Type"), 
             max_length="200", 
             blank=True, 
             null=True,
-            help_text=_("A generic text field to tag a relation, like 'leadphoto'."))
+            help_text=_(
+                "A generic text field to tag a relation, like 'leadphoto'."))
         
         objects = StoryRelationManager()
         
         def __unicode__(self):
-            return u"StoryRelation"
+            return unicode(self.content_object)
 
 
 # Reversion integration
-if 'reversion' in global_settings.INSTALLED_APPS:
+if USE_REVERSION:
     import reversion
     try:
         reversion.register(Story)
