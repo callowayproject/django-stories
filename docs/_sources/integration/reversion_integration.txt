@@ -12,4 +12,6 @@ Integrating with Django Reversion
 
 3. ``./manage.py syncdb``
 
-All the hooks are there to notice when reversion is installed. Versions are tracked from when reversion is first installed. 
+4. Set ``STORY_SETTINGS['USE_REVERSION'] = True``
+
+Versions are tracked from when reversion is first installed. 

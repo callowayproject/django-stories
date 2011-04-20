@@ -1,3 +1,4 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -5,26 +6,27 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Welcome to Django Stories’s documentation! &mdash; Django Stories v0.5 documentation</title>
+    <title>Welcome to Django Stories’s documentation! &mdash; Django Stories v0.5.1 documentation</title>
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '#',
-        VERSION:     '0.5',
-        COLLAPSE_MODINDEX: false,
+        URL_ROOT:    '',
+        VERSION:     '0.5.1',
+        COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Django Stories v0.5 documentation" href="#" />
+    <link rel="top" title="Django Stories v0.5.1 documentation" href="#" />
     <link rel="next" title="Installation" href="install.html" /> 
   </head>
   <body>
 <div id="docstitle">
-	<p>Django Stories v0.5 documentation</p>
+	<p>Django Stories v0.5.1 documentation</p>
 </div>
 <div id="header">
 	<div id="title"><h1>Welcome to Django Stories’s documentation!</h1></div>
@@ -32,7 +34,7 @@
 		<li id="toc_button"><div class="headerButton"><a href="#">Table of Contents</a></div></li>
 		<li id="page_buttons">
 			<div class="headerButton"><a href="genindex.html" title="General Index" accesskey="I">index</a></div>
-			<div class="headerButton"><a href="modindex.html" title="Global Module Index" accesskey="M">modules</a></div>
+			<div class="headerButton"><a href="py-modindex.html" title="Python Module Index" >modules</a></div>
 			<div class="headerButton"><a href="install.html" title="Installation" accesskey="N">next</a></div>
 		</li>
 	</ul>
@@ -42,12 +44,12 @@
   <div class="sphinxsidebarwrapper">
 	<ul><li class="toctree-l1"><a href="#">Main Page</a></li></ul>
 	<ul>
-<li class="toctree-l1"><a class="reference external" href="install.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference external" href="settings.html">Settings</a></li>
-<li class="toctree-l1"><a class="reference external" href="pagination.html">Pagination</a></li>
-<li class="toctree-l1"><a class="reference external" href="integration/index.html">Integration with Other Django Applications</a></li>
-<li class="toctree-l1"><a class="reference external" href="user/index.html">User Manual</a></li>
-<li class="toctree-l1"><a class="reference external" href="reference/index.html">Reference Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pagination.html">Pagination</a></li>
+<li class="toctree-l1"><a class="reference internal" href="integration/index.html">Integration with Other Django Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user/index.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference/index.html">Reference Manual</a></li>
 </ul>
 
       <h3>This Page</h3>
@@ -85,48 +87,53 @@
   <div class="section" id="welcome-to-django-stories-s-documentation">
 <h1>Welcome to Django Stories&#8217;s documentation!<a class="headerlink" href="#welcome-to-django-stories-s-documentation" title="Permalink to this headline">¶</a></h1>
 <p>Contents:</p>
+<div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference external" href="install.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference external" href="settings.html">Settings</a><ul>
-<li class="toctree-l2"><a class="reference external" href="settings.html#story-status-choices">STORY_STATUS_CHOICES</a></li>
-<li class="toctree-l2"><a class="reference external" href="settings.html#story-default-status">STORY_DEFAULT_STATUS</a></li>
-<li class="toctree-l2"><a class="reference external" href="settings.html#story-published-status">STORY_PUBLISHED_STATUS</a></li>
-<li class="toctree-l2"><a class="reference external" href="settings.html#story-origin-choices">STORY_ORIGIN_CHOICES</a></li>
-<li class="toctree-l2"><a class="reference external" href="settings.html#story-default-origin">STORY_DEFAULT_ORIGIN</a></li>
-<li class="toctree-l2"><a class="reference external" href="settings.html#story-include-print">STORY_INCLUDE_PRINT</a></li>
-<li class="toctree-l2"><a class="reference external" href="settings.html#story-relation-models">STORY_RELATION_MODELS</a></li>
-<li class="toctree-l2"><a class="reference external" href="settings.html#story-pagination">STORY_PAGINATION</a></li>
-<li class="toctree-l2"><a class="reference external" href="settings.html#story-p-per-page">STORY_P_PER_PAGE</a></li>
-<li class="toctree-l2"><a class="reference external" href="settings.html#story-orphans">STORY_ORPHANS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">Settings</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="settings.html#status-choices">STATUS_CHOICES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="settings.html#default-status">DEFAULT_STATUS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="settings.html#published-status">PUBLISHED_STATUS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="settings.html#origin-choices">ORIGIN_CHOICES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="settings.html#default-origin">DEFAULT_ORIGIN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="settings.html#include-print">INCLUDE_PRINT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="settings.html#relation-models">RELATION_MODELS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="settings.html#pagination">PAGINATION</a></li>
+<li class="toctree-l2"><a class="reference internal" href="settings.html#throw-404">THROW_404</a></li>
+<li class="toctree-l2"><a class="reference internal" href="settings.html#author-model">AUTHOR_MODEL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="settings.html#author-model-limit-choices">AUTHOR_MODEL_LIMIT_CHOICES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="settings.html#use-categories">USE_CATEGORIES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="settings.html#use-reversion">USE_REVERSION</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference external" href="pagination.html">Pagination</a><ul>
-<li class="toctree-l2"><a class="reference external" href="pagination.html#settings-that-affect-pagination">Settings that affect pagination</a></li>
-<li class="toctree-l2"><a class="reference external" href="pagination.html#using-pagination-in-templates">Using pagination in templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pagination.html">Pagination</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pagination.html#pagination-settings">PAGINATION settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pagination.html#using-pagination-in-templates">Using pagination in templates</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference external" href="integration/index.html">Integration with Other Django Applications</a><ul>
-<li class="toctree-l2"><a class="reference external" href="integration/reversion_integration.html">Integrating with Django Reversion</a></li>
-<li class="toctree-l2"><a class="reference external" href="integration/tinymce_integration.html">Integrating with Django TinyMCE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="integration/index.html">Integration with Other Django Applications</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="integration/reversion_integration.html">Integrating with Django Reversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integration/tinymce_integration.html">Integrating with Django TinyMCE</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference external" href="user/index.html">User Manual</a><ul>
-<li class="toctree-l2"><a class="reference external" href="user/storyentry.html">Entering a Story</a></li>
-<li class="toctree-l2"><a class="reference external" href="user/revisions.html">Revisions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user/index.html">User Manual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="user/storyentry.html">Entering a Story</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/revisions.html">Revisions</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference external" href="reference/index.html">Reference Manual</a><ul>
-<li class="toctree-l2"><a class="reference external" href="reference/models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference/index.html">Reference Manual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="reference/models.html">Models</a></li>
 </ul>
 </li>
 </ul>
 </div>
+</div>
 <div class="section" id="indices-and-tables">
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
-<li><a class="reference external" href="genindex.html"><em>Index</em></a></li>
-<li><a class="reference external" href="modindex.html"><em>Module Index</em></a></li>
-<li><a class="reference external" href="search.html"><em>Search Page</em></a></li>
+<li><a class="reference internal" href="genindex.html"><em>Index</em></a></li>
+<li><a class="reference internal" href="py-modindex.html"><em>Module Index</em></a></li>
+<li><a class="reference internal" href="search.html"><em>Search Page</em></a></li>
 </ul>
 </div>
 
@@ -137,7 +144,7 @@
     <div class="footer">
     <p>
       &copy; Copyright 2009, The Washington Times.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.5.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
 	</p>
     </div>
       <div class="clearer"></div>
