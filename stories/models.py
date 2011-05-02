@@ -14,8 +14,6 @@ from settings import (STATUS_CHOICES, PUBLISHED_STATUS, DEFAULT_STATUS,
     ORIGIN_CHOICES, DEFAULT_ORIGIN, RELATION_MODELS, RELATIONS, INCLUDE_PRINT,
     USE_CATEGORIES, USE_REVERSION, AUTHOR_MODEL, AUTHOR_MODEL_LIMIT_CHOICES )
 
-AuthorModel = models.get_model(*AUTHOR_MODEL.split("."))
-
 if USE_CATEGORIES:
     from categories.fields import CategoryM2MField, CategoryFKField
 
@@ -56,7 +54,7 @@ class Story(models.Model):
         null=True)
     slug = models.SlugField(_('Slug'), 
         max_length=50)
-    authors = models.ManyToManyField(AuthorModel, 
+    authors = models.ManyToManyField(AUTHOR_MODEL, 
         verbose_name=_('Authors'), 
         blank=True, 
         null=True,
@@ -149,6 +147,7 @@ class Story(models.Model):
         Easy way to get a combination of authors without having to worry which
         fields are set (author/one-off author)
         """
+        AuthorModel = models.get_model(*AUTHOR_MODEL.split("."))
         link = '<a href="%s">%s %s</a>'
         if AuthorModel.__module__ == 'django.contrib.auth.models':
             authors = [link % (

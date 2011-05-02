@@ -56,7 +56,7 @@ def pag_story_detail(request, year, month, day, slug,
     A detail view for stories that paginates the story by paragraph
     """
     import datetime, time
-    from stories.settings import DONT_THROW_404
+    from stories.settings import THROW_404
     
     try:
         pub_date = datetime.date(*time.strptime(year+month+day, '%Y%b%d')[:3])
@@ -70,7 +70,7 @@ def pag_story_detail(request, year, month, day, slug,
     try:
         story = qs(publish_date=pub_date, slug=slug)
     except Story.DoesNotExist:
-        if DONT_THROW_404:
+        if not THROW_404:
             return render_to_response('stories/story_removed.html',
                                       {},
                                       context_instance=RequestContext(request))
