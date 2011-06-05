@@ -39,7 +39,7 @@ DEFAULT_SETTINGS = {
     'USE_REVERSION': True and 'reversion' in settings.INSTALLED_APPS,
 }
 
-USER_SETTINGS = getattr(settings, 'STORY_SETTINGS')
+USER_SETTINGS = getattr(settings, 'STORY_SETTINGS', {})
 
 DEFAULT_SETTINGS.update(USER_SETTINGS)
 
