@@ -21,7 +21,7 @@ Choices are specified as a ``list`` or ``tuple`` of ``integer`` - ``string`` tup
 
 .. code-block:: python
 
-	DEFAULT_SETTINGS = {
+	STORY_SETTINGS = {
 	    'STATUS_CHOICES': (
 	        (1, 'DRAFT'),
 	        (2, 'READY FOR EDITING'),
@@ -55,7 +55,7 @@ When a story is created, what should the the status default to?
 
 .. code-block:: python
 
-	DEFAULT_SETTINGS = {
+	STORY_SETTINGS = {
 	    'DEFAULT_STATUS': 1 # Draft
 	}
 
@@ -70,7 +70,7 @@ Which one of the possible statuses is considered "Show This On Site."
 
 .. code-block:: python
 
-	DEFAULT_SETTINGS = {
+	STORY_SETTINGS = {
 	    'PUBLISHED_STATUS': 4 # Published
 	}
 
@@ -88,7 +88,7 @@ Choices are specified as a ``list`` or ``tuple`` of ``integer`` - ``string`` tup
 
 .. code-block:: python
 
-	DEFAULT_SETTINGS = {
+	STORY_SETTINGS = {
 	    'ORIGIN_CHOICES': (
 	        (0, 'Admin'),
 	    )
@@ -105,7 +105,7 @@ When a story is created from the Django Admin, which choice of origin should it 
 
 .. code-block:: python
 
-	DEFAULT_SETTINGS = {
+	STORY_SETTINGS = {
 	    'DEFAULT_ORIGIN': 0 # Admin
 	}
 
@@ -120,7 +120,7 @@ Should the fields related to print production be included in the database. The f
 
 .. code-block:: python
 
-	DEFAULT_SETTINGS = {
+	STORY_SETTINGS = {
 	    'INCLUDE_PRINT': False
 	}
 
@@ -139,7 +139,7 @@ If this setting is empty or ``None``\ , the story relations are not available in
 
 .. code-block:: python
 
-	DEFAULT_SETTINGS = {
+	STORY_SETTINGS = {
 	    'RELATION_MODELS': [] # Not enabled
 	}
 
@@ -161,7 +161,7 @@ Should stories be paginated.
 
 .. code-block:: python
 
-	DEFAULT_SETTINGS = {
+	STORY_SETTINGS = {
 	    'PAGINATION': {
 	        'PAGINATE': False
 	    }
@@ -178,7 +178,7 @@ If ``PAGINATE`` is ``True``\ , then this setting sets the number of paragraphs p
 
 .. code-block:: python
 
-	DEFAULT_SETTINGS = {
+	STORY_SETTINGS = {
 	    'PAGINATION': {
 	        'P_PER_PAGE': 20
 	    }
@@ -195,7 +195,7 @@ If ``PAGINATE`` is ``True``\ , then this setting sets the minimum number of para
 
 .. code-block:: python
 
-	DEFAULT_SETTINGS = {
+	STORY_SETTINGS = {
 	    'PAGINATION': {
 	        'ORPHANS': 4
 	    }
@@ -208,7 +208,7 @@ THROW_404
 
 .. code-block:: python
 
-	DEFAULT_SETTINGS = {
+	STORY_SETTINGS = {
 	    'THROW_404': True
 	}
 
@@ -219,7 +219,7 @@ AUTHOR_MODEL
 
 .. code-block:: python
 
-	DEFAULT_SETTINGS = {
+	STORY_SETTINGS = {
 	    'AUTHOR_MODEL': u'auth.User'
 	}
 
@@ -230,7 +230,7 @@ AUTHOR_MODEL_LIMIT_CHOICES
 
 .. code-block:: python
 
-	DEFAULT_SETTINGS = {
+	STORY_SETTINGS = {
 	    'AUTHOR_MODEL_LIMIT_CHOICES': {'is_staff': True}
 	}
 
@@ -242,7 +242,7 @@ USE_CATEGORIES
 
 .. code-block:: python
 
-	DEFAULT_SETTINGS = {
+	STORY_SETTINGS = {
 	    'USE_CATEGORIES': True and 'categories' in settings.INSTALLED_APPS
 	}
 
@@ -253,7 +253,7 @@ USE_REVERSION
 
 .. code-block:: python
 
-	DEFAULT_SETTINGS = {
+	STORY_SETTINGS = {
 	    'USE_REVERSION': True and 'reversion' in settings.INSTALLED_APPS
 	}
 
