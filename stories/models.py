@@ -116,8 +116,8 @@ class Story(models.Model):
         primary_category = CategoryFKField(related_name='primary_story_set')
         categories = CategoryM2MField(blank=True)
     
-    published = CurrentSitePublishedManager()
     objects = models.Manager()
+    published = CurrentSitePublishedManager()
     
     class Meta:
         verbose_name = _("Story")
