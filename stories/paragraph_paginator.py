@@ -14,7 +14,7 @@ class ParagraphPaginator(Paginator):
         """
         text = "<html><head></head><body>" + text + "</body></html>"
         soup = BeautifulSoup(text)
-        blocks = [i for i in soup.body.childGenerator() if isinstance(i, Tag)]
+        blocks = [unicode(i) for i in soup.body.childGenerator() if isinstance(i, Tag)]
         self.object_list = blocks
         self.per_page = per_page
         self.orphans = orphans
