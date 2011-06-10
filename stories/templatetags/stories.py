@@ -2,6 +2,19 @@ from django import template
 
 register = template.Library()
 
+@register.tag('get_related_content')
+def do_get_related_content(parser, token):
+    """
+    Gets all relations to a story
+    
+    {% get_related_content item as var_name %}
+    """
+    try:
+        tag_name, obj, as_txt, var = token.split_contents()
+    except ValueError:
+        raise template.TemplateSyntaxError("'get_related_content' requires an object and a variable name.")
+    return RelatedNode(obj, var)
+
 @register.tag('get_related_content_type')
 def do_get_related_content_type(parser, token):
     """
@@ -33,7 +46,6 @@ def do_get_relation_type(parser, token):
     except ValueError:
         raise template.TemplateSyntaxError("'get_relation_type' requires an object, relation_type and a variable name.")
     return RelatedNode(obj, var, relation_type=relation_type)
-    
 
 class RelatedNode(template.Node):
     def __init__(self, object, var_name, content_type=None, relation_type=None):
@@ -50,7 +62,7 @@ class RelatedNode(template.Node):
             elif self.relation_type:
                 context[self.var_name] = the_obj.get_relation_type(self.relation_type)
             else:
-                context[self.var_name] = []
+                context[self.var_name] = the_obj.storyrelation_set.all()
             return ''
         except template.VariableDoesNotExist:
             return ''
