@@ -12,18 +12,17 @@ def results(cl):
     if cl.formset:
         if qe_form:
             for res, form in zip(cl.result_list, cl.formset.forms):
-                yield {'fields':list(items_for_result(cl, res, form)), 
-                'quickedit':form}
-                #'quickedit':form(instance=res)}
+                yield {
+                    'fields':list(items_for_result(cl, res, form)), 
+                    'quickedit':form,
+                }
         else:
             for res, form in zip(cl.result_list, cl.formset.forms):
                 yield list(items_for_result(cl, res, form))
     else:
         if qe_form:
             for res in cl.result_list:
-                yield {'fields':list(items_for_result(cl, res, None)), 
-                'quickedit':form}
-                #'quickedit':form(instance=res)}
+                yield {'fields':list(items_for_result(cl, res, None)),}
         else:
             for res in cl.result_list:
                 yield list(items_for_result(cl, res, None))
