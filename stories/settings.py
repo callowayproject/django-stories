@@ -37,6 +37,7 @@ DEFAULT_SETTINGS = {
     'AUTHOR_MODEL_LIMIT_CHOICES': {'is_staff': True},
     'USE_CATEGORIES': True and 'categories' in settings.INSTALLED_APPS,
     'USE_REVERSION': True and 'reversion' in settings.INSTALLED_APPS,
+    'STORY_ORDERING': ['-modified_date'],
 }
 
 USER_SETTINGS = getattr(settings, 'STORY_SETTINGS', {})
