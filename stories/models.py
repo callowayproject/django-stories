@@ -12,7 +12,8 @@ from django.contrib.sites.models import Site
 # pylint: disable-msg=E0611
 from settings import (STATUS_CHOICES, PUBLISHED_STATUS, DEFAULT_STATUS, 
     ORIGIN_CHOICES, DEFAULT_ORIGIN, RELATION_MODELS, RELATIONS, INCLUDE_PRINT,
-    USE_CATEGORIES, USE_REVERSION, AUTHOR_MODEL, AUTHOR_MODEL_LIMIT_CHOICES )
+    USE_CATEGORIES, USE_REVERSION, AUTHOR_MODEL, AUTHOR_MODEL_LIMIT_CHOICES,
+    STORY_ORDERING )
 
 if USE_CATEGORIES:
     from categories.fields import CategoryM2MField, CategoryFKField
@@ -122,7 +123,7 @@ class Story(models.Model):
     class Meta:
         verbose_name = _("Story")
         verbose_name_plural = _("Stories")
-        ordering = ['-modified_date']
+        ordering = STORY_ORDERING
         get_latest_by = 'publish_date'
         unique_together = ('publish_date','slug')
     
