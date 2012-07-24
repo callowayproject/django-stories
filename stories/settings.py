@@ -1,8 +1,15 @@
-"""Provides the default settings for the news app
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 """
-from django.conf import settings
-from django.utils.translation import ugettext_lazy as _
+Provides the default settings for the news app
+"""
+
 import warnings
+
+from django.conf import settings
+from django.db.models import Q
+from django.utils.translation import ugettext_lazy as _
 
 DEFAULT_STATUS_CHOICES = (
     (1, _(u'DRAFT')),
@@ -33,17 +40,18 @@ DEFAULT_SETTINGS = {
     'PAGINATION': DEFAULT_PAGINATION,
     'THROW_404': True,
     'RELATION_MODELS': [],
-    'AUTHOR_MODEL': u'auth.User',
+    'AUTHOR_MODEL': 'auth.User',
     'AUTHOR_MODEL_LIMIT_CHOICES': {'is_staff': True},
-    'USE_CATEGORIES': True and 'categories' in settings.INSTALLED_APPS,
-    'USE_REVERSION': True and 'reversion' in settings.INSTALLED_APPS,
+    'AUTHOR_MODEL_FIELDS': ['first_name', 'last_name'],
+    'AUTHOR_MODEL_FORMAT': '%(first_Name)s %(last_name)s',
+    'USE_CATEGORIES': False,
+    'USE_REVERSION': False,
     'STORY_ORDERING': ['-modified_date'],
 }
 
 USER_SETTINGS = getattr(settings, 'STORY_SETTINGS', {})
 
 DEFAULT_SETTINGS.update(USER_SETTINGS)
-
 
 error_str = "settings.%s is deprecated; use settings.STORY_SETTINGS instead."
 
@@ -91,7 +99,7 @@ if hasattr(settings, 'STORY_RELATION_MODELS'):
     warnings.warn(error_str % 'STORY_RELATION_MODELS', DeprecationWarning)
     DEFAULT_SETTINGS['RELATION_MODELS'] = getattr(settings, 'STORY_RELATION_MODELS') or []
 
-from django.db.models import Q
+
 RELATIONS = [Q(app_label=al, model=m) for al, m in [x.split('.') for x in DEFAULT_SETTINGS['RELATION_MODELS']]]
 
 globals().update(DEFAULT_SETTINGS)
