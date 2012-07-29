@@ -42,8 +42,6 @@ DEFAULT_SETTINGS = {
     'RELATION_MODELS': [],
     'AUTHOR_MODEL': 'auth.User',
     'AUTHOR_MODEL_LIMIT_CHOICES': {'is_staff': True},
-    'AUTHOR_MODEL_FIELDS': ['first_name', 'last_name'],
-    'AUTHOR_MODEL_FORMAT': '%(first_Name)s %(last_name)s',
     'USE_CATEGORIES': False,
     'USE_REVERSION': False,
     'STORY_ORDERING': ['-modified_date'],
