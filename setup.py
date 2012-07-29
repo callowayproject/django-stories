@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import os
-from setuptools import setup
+from setuptools import setup, find_packages
 
 def read_file(filename):
     """Read a file into a string"""
