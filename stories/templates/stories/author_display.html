@@ -1,0 +1,14 @@
+{% for author in authors %}
+  <a href="{{ author.get_absolute_url }}">
+    {{ author.first_name }} {{ author.last_name }}
+  </a>
+  {% if forloop.first and not forloop.last %}
+    and
+  {% endif %}
+{% endfor %}
+{% if non_staff_author %}
+  {% if authors %}
+    and
+  {% endif %}
+  {{ non_staff_author }}
+{% endif %}
