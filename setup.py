@@ -19,20 +19,15 @@ setup(name='django-stories',
       version=version,
       description='An application for handling newspaper-like stories on a web site',
       long_description=long_desc,
-      author='Corey Oordt',
+      author='Calloway Project',
       author_email='webmaster@callowayproject.com',
       url='http://github.com/callowayproject/django-stories/',
       packages=['stories'],
       install_requires=reqs,
-      dependency_links=[
-        'http://opensource.washingtontimes.com/simple/',
-        'http://opensource.washingtontimes.com/simple/django-tinymce/',
-        'http://opensource.washingtontimes.com/simple/django-categories/',
-      ],
+      dependency_links=[],
       include_package_data=True,
-      classifiers=['Development Status :: 4 - Beta',
-          'Environment :: Web Environment',
+      classifiers=[
           'Framework :: Django',
           'License :: OSI Approved :: Apache Software License',
-          ],
-      )
+      ]
+)
