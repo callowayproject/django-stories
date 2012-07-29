@@ -1,33 +1,40 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+import os
 from setuptools import setup
 
-import stories
-version = stories.__version__
+def read_file(filename):
+    """Read a file into a string"""
+    path = os.path.abspath(os.path.dirname(__file__))
+    filepath = os.path.join(path, filename)
+    try:
+        return open(filepath).read()
+    except IOError:
+        return ''
 
-try:
-    f = open('README.rst')
-    long_desc = f.read()
-    f.close()
-except:
-    long_desc = ""
+def get_readme():
+    """Return the README file contents. Supports text, rst, and markdown"""
+    for name in ('README','README.rst','README.md'):
+        if os.path.exists(name):
+            return read_file(name)
+    return ''
 
-try:
-    reqs = open('requirements.txt').read()
-except:
-    reqs = ''
+# Use the docstring of the __init__ file to be the description
+DESC = " ".join(__import__('stories').__doc__.splitlines()).strip()
 
 setup(name='django-stories',
-      version=version,
-      description='An application for handling newspaper-like stories on a web site',
-      long_description=long_desc,
+      version= __import__('stories').get_version().replace(' ', '-'),
+      url='http://github.com/callowayproject/django-stories/',
       author='Calloway Project',
       author_email='webmaster@callowayproject.com',
-      url='http://github.com/callowayproject/django-stories/',
-      packages=['stories'],
-      install_requires=reqs,
-      dependency_links=[],
+      description=DESC,
+      long_description=get_readme(),
+      packages=find_packages(),
       include_package_data=True,
+      install_requires=read_file('requirements.txt'),
       classifiers=[
-          'Framework :: Django',
           'License :: OSI Approved :: Apache Software License',
+          'Framework :: Django',
       ]
 )
