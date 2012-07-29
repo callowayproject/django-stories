@@ -1,12 +1,14 @@
 # Django settings for example project.
+import os, sys
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
-import os, sys
+
 APP = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 sys.path.append(APP)
 sys.path.append(PROJECT_ROOT)
+
 ADMINS = (
     # ('Your Name', 'your_email@domain.com'),
 )
@@ -20,6 +22,12 @@ DATABASE_PASSWORD = ''         # Not used with sqlite3.
 DATABASE_HOST = ''             # Set to empty string for localhost. Not used with sqlite3.
 DATABASE_PORT = ''             # Set to empty string for default. Not used with sqlite3.
 
+DATABASES = {
+    'defaut': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'dev.db'
+    }
+}
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
@@ -83,42 +91,10 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'stories',
-    'categories',
-    'editor',
-    'reversion',
-    'tinymce',
-    'mptt',
     'simpleapp',
     'simpleprofile',
 )
-cleanup = """
-tinyMCE.editors['id_body'].onPostProcess.add(
-    function(ed, o) {
-        if (o.get) {
-            o.content = o.content.replace(/"(?=\w|$)/g, "&rdquo;");
-            o.content = o.content.replace(/\b"/g, "&ldquo;");
-            o.content = o.content.replace(/'(?=\w|$)/g, "&rsquo;");
-            o.content = o.content.replace(/\b'/g, "&lsquo;");
-            o.content = o.content.replace(/--/g, "&mdash;");
-}});
-"""
-TINYMCE_DEFAULT_CONFIG = {
-    'theme': "advanced",
-    'relative_urls': False,
-    'plugins': "safari,paste,advimage,advlink,preview,fullscreen,media,searchreplace",
-    'theme_advanced_toolbar_location' : "top",
-    'theme_advanced_toolbar_align' : "left",
-    'theme_advanced_buttons1' : "bold,italic,underline,strikethrough,blockquote,|,bullist,numlist,|,link,unlink,|,charmap,image,media,pastetext,pasteword,search,replace,|,code,fullscreen,preview",
-    'theme_advanced_buttons2' : "",
-    'theme_advanced_buttons3' : "",
-    'theme_advanced_statusbar_location' : "bottom",
-    'width': "600",
-    'height': "600",
-}
 
-TINYMCE_ADMIN_FIELDS = {
-    'stories.story': ('body',),
-}
 STORY_SETTINGS = {
     'RELATION_MODELS': ('simpleapp.basicthing','stories.story',),
     'PAGINATION': {
