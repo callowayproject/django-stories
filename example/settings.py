@@ -23,7 +23,7 @@ DATABASE_HOST = ''             # Set to empty string for localhost. Not used wit
 DATABASE_PORT = ''             # Set to empty string for default. Not used with sqlite3.
 
 DATABASES = {
-    'defaut': {
+    'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': 'dev.db'
     }
