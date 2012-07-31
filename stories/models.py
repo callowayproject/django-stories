@@ -11,6 +11,7 @@ from datetime import datetime
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 from django.contrib.sites.models import Site
+from django.core.exceptions import ImproperlyConfigured
 from django.db import models
 from django.template.loader import select_template
 from django.template import Context
@@ -23,15 +24,17 @@ if settings.USE_CATEGORIES:
     try:
         from categories.fields import CategoryM2MField, CategoryFKField
     except (ImportError, ):
-        raise ConfigurationError("""
-            stories.settings.USE_CATEGORIES is True, but categories app
-            is not installed.""")
+        raise ImproperlyConfigured('stories.settings.USE_CATEGORIES is '\
+                                   'True, but categories app is not installed.')
 
+COMMENTS_DISABLED = 0
+COMMENTS_ENABLED = 1
+COMMENTS_FROZEN = 2
 
 COMMENT_STATUSES = (
-    (0, _('Comments Disabled')),
-    (1, _('Comments Enabled')),
-    (2, _('Comments Frozen'))
+    (COMMENTS_DISABLED, _('Comments Disabled')),
+    (COMMENTS_ENABLED, _('Comments Enabled')),
+    (COMMENTS_FROZEN, _('Comments Frozen'))
 )
 
 class CurrentSitePublishedManager(models.Manager):
@@ -40,6 +43,7 @@ class CurrentSitePublishedManager(models.Manager):
         return queryset.filter(
             publish_date__lte=datetime.now()).filter(
                 status__exact=settings.PUBLISHED_STATUS)
+
 
 class Story(models.Model):
     """
@@ -146,7 +150,7 @@ class Story(models.Model):
         """
         Simplified way to get the comment status == frozen
         """
-        return self.comment_status == 2
+        return self.comment_status == COMMENTS_FROZEN
 
     @property
     def author(self):
