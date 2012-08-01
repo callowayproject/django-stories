@@ -36,7 +36,7 @@ DEFAULT_SETTINGS = {
     'DEFAULT_ORIGIN': 0,
     'DEFAULT_STATUS': 1,
     'INCLUDE_PRINT': False,
-    'ORDERING': ['-modified_data'],
+    'ORDERING': ['-modified_date'],
     'ORIGIN_CHOICES': DEFAULT_ORIGIN_CHOICES,
     'PAGINATION': DEFAULT_PAGINATION,
     'PUBLISHED_STATUS': 4,
