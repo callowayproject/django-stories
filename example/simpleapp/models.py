@@ -22,3 +22,26 @@ class BasicThing(models.Model):
     def get_absolute_url(self):
         return ('basicthing_detail_view_name', [str(self.id)])
 
+
+class BasicPhoto(models.Model):
+    """
+    (BasicPhoto description)
+    """
+
+    title = models.CharField(max_length=255)
+    body = models.TextField(blank=True)
+
+    def __unicode__(self):
+        return self.title
+
+class BasicVideo(models.Model):
+    """
+    (BasicVideo description)
+    """
+
+    title = models.CharField(max_length=255)
+    body = models.TextField(blank=True)
+
+    def __unicode__(self):
+        return self.title
+
