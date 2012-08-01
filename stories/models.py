@@ -21,11 +21,17 @@ from django.utils.translation import ugettext as _
 from stories import settings
 
 if settings.USE_CATEGORIES:
+    error_msg = 'Stories expects django-categories to be installed '\
+                'and in INSTALLED_APPS'
     try:
-        from categories.fields import CategoryM2MField, CategoryFKField
+        import categories
+        from django.conf import settings as ds
+        if not 'categories' in ds.INSTALLED_APPS:
+            raise ImproperlyConfigured(error_msg)
     except (ImportError, ):
-        raise ImproperlyConfigured('stories.settings.USE_CATEGORIES is '\
-                                   'True, but categories app is not installed.')
+        raise ImproperlyConfigured(error_msg)
+
+    from categories.fields import CategoryM2MField, CategoryFKField
 
 COMMENTS_DISABLED = 0
 COMMENTS_ENABLED = 1
