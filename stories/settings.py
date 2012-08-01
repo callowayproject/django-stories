@@ -31,20 +31,22 @@ DEFAULT_PAGINATION = {
 }
 
 DEFAULT_SETTINGS = {
-    'STATUS_CHOICES': DEFAULT_STATUS_CHOICES,
-    'DEFAULT_STATUS': 1,
-    'PUBLISHED_STATUS': 4,
-    'ORIGIN_CHOICES': DEFAULT_ORIGIN_CHOICES,
-    'DEFAULT_ORIGIN': 0,
-    'INCLUDE_PRINT': False,
-    'PAGINATION': DEFAULT_PAGINATION,
-    'THROW_404': True,
-    'RELATION_MODELS': [],
     'AUTHOR_MODEL': 'auth.User',
     'AUTHOR_MODEL_LIMIT_CHOICES': {'is_staff': True},
+    'DEFAULT_ORIGIN': 0,
+    'DEFAULT_STATUS': 1,
+    'INCLUDE_PRINT': False,
+    'ORDERING': ['-modified_data'],
+    'ORIGIN_CHOICES': DEFAULT_ORIGIN_CHOICES,
+    'PAGINATION': DEFAULT_PAGINATION,
+    'PUBLISHED_STATUS': 4,
+    'RELATION_MODELS': [],
+    'STATUS_CHOICES': DEFAULT_STATUS_CHOICES,
+    'THROW_404': True,
     'USE_CATEGORIES': False,
     'USE_REVERSION': False,
-    'STORY_ORDERING': ['-modified_date'],
+    'WIDGET': None,
+    'WIDGET_ATTRS': None
 }
 
 USER_SETTINGS = getattr(settings, 'STORY_SETTINGS', {})
@@ -99,6 +101,10 @@ if hasattr(settings, 'STORY_RELATION_MODELS'):
 
 
 RELATIONS = [Q(app_label=al, model=m) for al, m in [x.split('.') for x in DEFAULT_SETTINGS['RELATION_MODELS']]]
+
+if 'STORY_ORDERING' in DEFAULT_SETTINGS:
+    warnings.warn('STORY_ORDERING is being deprecated; use ORDERING instead.', DeprecationWarning)
+    DEFAULT_SETTINGS['ORDERING'] = DEFAULT_SETTINGS.pop('STORY_ORDERING')
 
 globals().update(DEFAULT_SETTINGS)
 globals().update({'RELATIONS': RELATIONS})
