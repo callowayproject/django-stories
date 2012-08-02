@@ -1,0 +1,18 @@
+[
+    {
+        "fields": {
+            "body": "",
+            "title": "Video #1"
+        },
+        "model": "simpleapp.basicvideo",
+        "pk": 1
+    },
+    {
+        "fields": {
+            "body": "",
+            "title": "Video #2"
+        },
+        "model": "simpleapp.basicvideo",
+        "pk": 2
+    }
+]

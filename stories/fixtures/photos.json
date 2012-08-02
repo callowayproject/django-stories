@@ -1,0 +1,18 @@
+[
+    {
+        "fields": {
+            "body": "",
+            "title": "Photo #1"
+        },
+        "model": "simpleapp.basicphoto",
+        "pk": 1
+    },
+    {
+        "fields": {
+            "body": "",
+            "title": "Photo #2"
+        },
+        "model": "simpleapp.basicphoto",
+        "pk": 2
+    }
+]

@@ -1,0 +1,1 @@
+[{"pk": 1, "model": "simpleprofile.profile", "fields": {"user": 2, "name": "John Doe"}}, {"pk": 2, "model": "simpleprofile.profile", "fields": {"user": 3, "name": "Jane Smith"}}, {"pk": 3, "model": "simpleprofile.profile", "fields": {"user": 4, "name": "Mark Moe"}}, {"pk": 4, "model": "simpleprofile.profile", "fields": {"user": 5, "name": "Frank Foe"}}]
