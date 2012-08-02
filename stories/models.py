@@ -11,6 +11,7 @@ from datetime import datetime
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 from django.contrib.sites.models import Site
+from django.conf import settings as site_settings
 from django.core.exceptions import ImproperlyConfigured
 from django.db import models
 from django.template.loader import select_template
@@ -21,15 +22,14 @@ from django.utils.translation import ugettext as _
 from stories import settings
 
 if settings.USE_CATEGORIES:
-    error_msg = 'Stories expects django-categories to be installed '\
-                'and in INSTALLED_APPS'
+    cat_error_msg = 'Stories expects django-categories to be '\
+                    'installed and in INSTALLED_APPS'
     try:
         import categories
-        from django.conf import settings as ds
-        if not 'categories' in ds.INSTALLED_APPS:
-            raise ImproperlyConfigured(error_msg)
+        if not 'categories' in site_settings.INSTALLED_APPS:
+            raise ImproperlyConfigured(cat_error_msg)
     except (ImportError, ):
-        raise ImproperlyConfigured(error_msg)
+        raise ImproperlyConfigured(cat_error_msg)
 
     from categories.fields import CategoryM2MField, CategoryFKField
 
@@ -266,10 +266,13 @@ if settings.RELATION_MODELS:
 
 # Reversion integration
 if settings.USE_REVERSION:
+    rev_error_msg = 'Stories excepts django-reversion to be '\
+                    'installed and in INSTALLED_APPS'
     try:
         import reversion
-        reversion.register(Story)
+        if not 'reversion' in site_settings.INSTALLED_APPS:
+            raise ImproperlyConfigured(rev_error_msg)
     except (ImportError, ):
-        raise ConfigurationError("""
-            stories.settings.USE_REVERSION is True, but reversion app
-            is not installed.""")
+        raise ImproperlyConfigured(rev_error_msg)
+
+    reversion.register(Story)
