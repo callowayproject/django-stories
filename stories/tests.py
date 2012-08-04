@@ -4,11 +4,14 @@
 import datetime
 
 from django.contrib.contenttypes.models import ContentType
+from django.core.exceptions import ImproperlyConfigured
 from django.template import Template, Context, TemplateSyntaxError
 from django.test import TestCase
 
+from stories import settings
 from stories.models import Story
 from stories.models import COMMENTS_FROZEN, COMMENTS_ENABLED, COMMENTS_DISABLED
+from stories.utils import load_widget
 
 def render(src, ctx=None):
     ctx = ctx or {}
@@ -196,3 +199,11 @@ class CategoryTests(BaseTests):
 
         self.assertTrue(self.cat2.pk in s2_cat_ids)
         self.assertFalse(self.cat3.pk in s2_cat_ids)
+
+
+class WidgetTests(BaseTests):
+    def test_load_widget(self):
+        from example.simpleapp.widgets import CustomTextarea
+
+        self.assertEqual(load_widget(settings.WIDGET), CustomTextarea)
+        self.assertRaises(ImproperlyConfigured, load_widget, path='bad.module')

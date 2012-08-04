@@ -1,23 +1,24 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from django import forms
 from django.contrib import admin
 from django.forms.models import modelformset_factory, modelform_factory
 from django.utils.translation import ugettext_lazy as _
 from django.utils.functional import curry
 
+from stories import settings
 from .forms import StoryForm
 from .genericcollection import GenericCollectionTabularInline
 from .models import Story, StoryRelation
-from .settings import (RELATION_MODELS, INCLUDE_PRINT, STATUS_CHOICES,
-    USE_CATEGORIES, USE_REVERSION)
+from .utils import load_widget
 
-if RELATION_MODELS:
+if settings.RELATION_MODELS:
     class InlineStoryRelation(GenericCollectionTabularInline):
         model = StoryRelation
 
 
-if USE_REVERSION:
+if settings.USE_REVERSION:
     from reversion.admin import VersionAdmin
     AdminModel = VersionAdmin
 else:
@@ -43,7 +44,7 @@ class ChangeStatus(object):
                 message_bit, self.status_name))
 
 
-admin_actions = [ChangeStatus(x, y) for x, y in STATUS_CHOICES]
+admin_actions = [ChangeStatus(x, y) for x, y in settings.STATUS_CHOICES]
 
 class StoryOptions(AdminModel):
     """
@@ -85,11 +86,11 @@ class StoryOptions(AdminModel):
 
     filter_horizontal = ('authors',)
 
-    if USE_CATEGORIES:
+    if settings.USE_CATEGORIES:
         list_filter += ('categories',)
         filter_horizontal = filter_horizontal + ('categories',)
 
-    if RELATION_MODELS:
+    if settings.RELATION_MODELS:
         inlines = [InlineStoryRelation,]
 
     fieldsets = (
@@ -103,14 +104,14 @@ class StoryOptions(AdminModel):
         }),)
 
     # Inlcude the category fieldset if needed
-    if USE_CATEGORIES:
+    if settings.USE_CATEGORIES:
         fieldsets = fieldsets + (
             (_('Categories'), {
                 'fields': ('primary_category','categories')
             }),
         )
     # Include the print fieldsets if needed
-    if INCLUDE_PRINT:
+    if settings.INCLUDE_PRINT:
         fieldsets = fieldsets + (_('Print Information'), {
             'fields': ('print_pub_date', 'print_section', 'print_page'),
             'classes': ('collapse',),
@@ -122,10 +123,22 @@ class StoryOptions(AdminModel):
         }),)
 
     change_list_template = 'admin/stories/change_list.html'
-    revision_form_template = "admin/stories/reversion_form.html"
+    revision_form_template = 'admin/stories/reversion_form.html'
 
     class Media:
         js = ('js/genericcollections.js',)
+
+
+    def _get_widget(self):
+        attrs = settings.WIDGET_ATTRS
+        return load_widget(settings.WIDGET)(
+            attrs=attrs) or forms.Textarea(attrs=attrs)
+
+    def formfield_for_dbfield(self, db_field, **kwargs):
+        """Supply the widget to the body field"""
+        if db_field.name == 'body':
+            return db_field.formfield(widget=self._get_widget())
+        return super(StoryOptions, self).formfield_for_dbfield(db_field, **kwargs)
 
     def queryset(self, request):
         """
@@ -143,7 +156,7 @@ class StoryOptions(AdminModel):
         Returns the quickedit formset for the row
         """
         defaults = {
-            "formfield_callback": curry(
+            'formfield_callback': curry(
                 self.formfield_for_dbfield,
                 request=request),
         }
