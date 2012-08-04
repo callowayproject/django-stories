@@ -1,11 +1,18 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 import datetime
 
-from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
+from django.template import Template, Context, TemplateSyntaxError
 from django.test import TestCase
 
 from stories.models import Story
 from stories.models import COMMENTS_FROZEN, COMMENTS_ENABLED, COMMENTS_DISABLED
+
+def render(src, ctx=None):
+    ctx = ctx or {}
+    return Template(src).render(Context(ctx))
 
 class BaseTests(TestCase):
     fixtures = ['auth.json', 'profile.json', 'stories.json']
@@ -64,37 +71,74 @@ class RelationTests(BaseTests):
         self.photo_ctype = ContentType.objects.get_for_model(BasicPhoto)
         self.video_ctype = ContentType.objects.get_for_model(BasicVideo)
 
-    def test_has_relation_attrs(self):
-        self.assertTrue(hasattr(self.story1, 'get_related_content_type'))
-        self.assertTrue(hasattr(self.story1, 'get_relation_type'))
-
-    def test_add_relations(self):
-        from stories.models import StoryRelation
-        rel1, created = StoryRelation.objects.get_or_create(
-            story=self.story1,
-            content_type=self.photo_ctype, object_id=1)
-        self.assertTrue(created)
-
-    def test_related_methods(self):
+    def _create_rels(self):
         from stories.models import StoryRelation
         rel1 = StoryRelation.objects.create(
             story=self.story1,
             content_type=self.photo_ctype, object_id=1)
-
-        items = self.story1.get_related_content_type('basic photo')
-        manager_items = StoryRelation.objects.get_content_type('basic photo')
-        self.assertEqual(list(items), [rel1])
-        self.assertEqual(list(manager_items), [rel1])
 
         rel2 = StoryRelation.objects.create(
             story=self.story2,
             content_type=self.video_ctype, object_id=1,
             relation_type="Regular")
 
+        rel3 = StoryRelation.objects.create(
+            story=self.story2,
+            content_type=self.video_ctype, object_id=2,
+            relation_type="Regular")
+
+        return rel1, rel2, rel3
+
+    def test_has_relation_attrs(self):
+        self.assertTrue(hasattr(self.story1, 'get_related_content_type'))
+        self.assertTrue(hasattr(self.story1, 'get_relation_type'))
+
+    def test_related_methods(self):
+        from stories.models import StoryRelation
+        rel1, rel2, rel3 = self._create_rels()
+
+        items = self.story1.get_related_content_type('basic photo')
+        manager_items = StoryRelation.objects.get_content_type('basic photo')
+        self.assertEqual(list(items), [rel1])
+        self.assertEqual(list(manager_items), [rel1])
+
         items = self.story2.get_relation_type("Regular")
         manager_items = StoryRelation.objects.get_relation_type('Regular')
-        self.assertEqual(list(items), [rel2])
-        self.assertEqual(list(manager_items), [rel2])
+        self.assertEqual(list(items), [rel2, rel3])
+        self.assertEqual(list(manager_items), [rel2, rel3])
+
+    def test_tt_get_related_content(self):
+        self._create_rels()
+        tmpl = '{% load stories %}'\
+               '{% get_related_content story as story_rels %}'\
+               '{% for rel in story_rels %}'\
+                   '{{ rel.content_object.pk }},'\
+               '{% endfor %}'
+
+        ctx = {'story': self.story2}
+        self.assertEqual(render(tmpl, ctx), '1,2,')
+
+    def test_tt_get_related_content_type(self):
+        self._create_rels()
+        tmpl = '{% load stories %}'\
+               '{% get_related_content_type story "basic photo" as photos %}'\
+               '{% for photo in photos %}'\
+                   '{{ photo.pk }},'\
+               '{% endfor %}'
+
+        ctx = {'story': self.story1}
+        self.assertEqual(render(tmpl, ctx), '1,')
+
+    def test_tt_get_relation_type(self):
+        self._create_rels()
+        tmpl = '{% load stories %}'\
+               '{% get_relation_type story Regular as reg_items %}'\
+               '{% for item in reg_items %}'\
+                   '{{ item.pk }},'\
+               '{% endfor %}'
+
+        ctx = {'story': self.story2}
+        self.assertEqual(render(tmpl, ctx), '2,3,')
 
 
 class PrintTests(BaseTests):
