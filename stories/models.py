@@ -144,7 +144,7 @@ class Story(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('story_detail', (
+        return ('news_detail', (
             self.publish_date.year,
             self.publish_date.strftime('%b').lower(),
             self.publish_date.day,
