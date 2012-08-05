@@ -7,6 +7,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ImproperlyConfigured
 from django.template import Template, Context, TemplateSyntaxError
 from django.test import TestCase
+from django.test.client import Client
 
 from stories import settings
 from stories.models import Story
@@ -25,6 +26,10 @@ class BaseTests(TestCase):
 
 
 class StoryTests(BaseTests):
+    def setUp(self):
+        super(StoryTests, self).setUp()
+        self.client = Client()
+
     def test_comments(self):
         self.assertFalse(self.story1.comments_frozen)
         self.story1.comment_status = COMMENTS_DISABLED
@@ -57,6 +62,22 @@ class StoryTests(BaseTests):
         self.assertEqual(len(Story.objects.all()), 2)
         # Only one of these is marked as published
         self.assertEqual(len(Story.published.all()), 1)
+
+    def test_views(self):
+        # Archive views
+        self.assertEqual(self.client.get('/news/').status_code, 200)
+        self.assertEqual(self.client.get('/news/2012/').status_code, 200)
+        self.assertEqual(self.client.get('/news/2012/jul/').status_code, 200)
+        self.assertEqual(self.client.get('/news/2012/32/').status_code, 200)
+        self.assertEqual(self.client.get('/news/2012/jul/30/').status_code, 200)
+        self.assertEqual(self.client.get('/news/today/').status_code, 200)
+
+        self.assertEqual(self.client.get(
+            self.story1.get_absolute_url()).status_code, 200)
+        self.assertEqual(self.client.get(
+            self.story1.get_absolute_url() + 'print/').status_code, 200)
+        self.assertEqual(self.client.get(
+            self.story1.get_absolute_url() + 'comments/').status_code, 200)
 
 
 class RelationTests(BaseTests):
