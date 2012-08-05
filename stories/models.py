@@ -164,6 +164,10 @@ class Story(models.Model):
         Easy way to get a combination of authors without having to worry which
         fields are set (author/one-off author)
         """
+        import warnings
+        warnings.warn('Story.author property is being deprecated, use '\
+                      '`Story.author_display` instead', DeprecationWarning)
+
         AuthorModel = models.get_model(*settings.AUTHOR_MODEL.split("."))
         link = '<a href="%s">%s %s</a>'
         if AuthorModel.__module__ == 'django.contrib.auth.models':
