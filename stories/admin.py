@@ -131,8 +131,8 @@ class StoryOptions(AdminModel):
 
     def _get_widget(self):
         attrs = settings.WIDGET_ATTRS
-        return load_widget(settings.WIDGET)(
-            attrs=attrs) or forms.Textarea(attrs=attrs)
+        widget = load_widget(settings.WIDGET) or forms.Textarea
+        return widget(attrs=attrs)
 
     def formfield_for_dbfield(self, db_field, **kwargs):
         """Supply the widget to the body field"""
