@@ -106,16 +106,12 @@ INSTALLED_APPS = (
 )
 
 STORY_SETTINGS = {
-    'RELATION_MODELS': ('simpleapp.basicthing','stories.story',),
     'PAGINATION': {
         'PAGINATE': True,
         'P_PER_PAGE': 5,
         'ORPHANS': 1
     },
     'THROW_404': False,
-    'RELATION_MODELS': [
-        'simpleapp.basicphoto',
-        'simpleapp.basicvideo']
 }
 
 AUTH_PROFILE_MODULE = 'simpleprofile.Profile'
