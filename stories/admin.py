@@ -9,11 +9,13 @@ from django.utils.functional import curry
 
 from stories import settings
 from .forms import StoryForm
-from .genericcollection import GenericCollectionTabularInline
-from .models import Story, StoryRelation
+from .models import Story
 from .utils import load_widget
 
 if settings.RELATION_MODELS:
+    from .genericcollection import GenericCollectionTabularInline
+    from .models import StoryRelation
+
     class InlineStoryRelation(GenericCollectionTabularInline):
         model = StoryRelation
 
