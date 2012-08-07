@@ -191,7 +191,12 @@ class Story(models.Model):
     @property
     def author_display(self):
         """
-        Presentation of the story author(s)
+        Presentation of the story author(s). Renders the template
+        `stories/author_display.html` suppling it with the following context
+
+        * **instance** - the story instance
+        * **authors** - all the authors (`authors.objects.all()`)
+        * **non_staff_author** - text value that can be used in place of `authors`
         """
         template = "stories/author_display.html"
         ctx = Context()
@@ -206,7 +211,7 @@ class Story(models.Model):
     @property
     def paragraphs(self):
         """
-        Return the paragraphs as a list
+        Return the `story.body` as paragraphs by finding all `<p>` tags
         """
         return re.findall("(<p>.+?</p>)", self.body, re.I | re.S)
 
