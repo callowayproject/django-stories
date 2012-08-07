@@ -13,7 +13,7 @@ def results(cl):
         if qe_form:
             for res, form in zip(cl.result_list, cl.formset.forms):
                 yield {
-                    'fields':list(items_for_result(cl, res, form)), 
+                    'fields':list(items_for_result(cl, res, form)),
                     'quickedit':form,
                 }
         else:
@@ -36,4 +36,5 @@ def qe_result_list(context, cl):
             'result_headers': list(result_headers(cl)),
             'results': list(results(cl)),
             'STATIC_URL': context[static_url]}
-qe_result_list = register.inclusion_tag("admin/qe_change_list_results.html", takes_context=True)(qe_result_list)
+qe_result_list = register.inclusion_tag(
+    'admin/qe_change_list_results.html', takes_context=True)(qe_result_list)
