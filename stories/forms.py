@@ -27,7 +27,7 @@ class StoryForm(forms.ModelForm):
         max_length=50, required=False)
     non_staff_author = forms.CharField(
         widget=forms.TextInput(attrs=WIDGET_ATTRS),
-        help_text=_("An HTML-formatted rendering of the author(s) not on staff."),
+        help_text=_('An HTML-formatted rendering of the author(s) not on staff.'),
         max_length=200,
         required=False)
 
@@ -61,9 +61,9 @@ class StoryForm(forms.ModelForm):
                     publish_date__month=publish_date.month,
                     publish_date__day=publish_date.day)
                 raise forms.ValidationError(
-                    """Please enter a different slug. The one you
-                     entered is already being used for {0}""".format(
-                         publish_date.strftime("%Y-%m-%d")))
+                    'Please enter a different slug. The one you'\
+                    'entered is already being used for {0}'.format(
+                         publish_date.strftime("%Y-%b-%d")))
             except Story.DoesNotExist:
                 pass
 
