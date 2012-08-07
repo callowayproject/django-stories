@@ -8,7 +8,7 @@
 	{% else %}
 		<h1>{{ story.headline }}</h1>
 		{% if story.subheadline %}<h2>{{ story.subheadline }}</h2>{% endif %}
-		<p class="byline">By {{ story.author }}</p>
+		<p class="byline">By {{ story.author_display }}</p>
 	{% endif %}
 	{% for paragraph in story_content.object_list %}
 		{% if forloop.first %}
