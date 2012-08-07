@@ -59,7 +59,31 @@ def pag_story_detail(request, year, month, day, slug,
         p_object_name="story_content", template_object_name="story",
         template_name="stories/pag_story.html", extra_context={}):
     """
-    A detail view for stories that paginates the story by paragraph
+    A detail view for stories that can paginates the story by paragraph.
+    If a story is not found a 404 or a custom template can be rendered
+    by setting `THROW_404` to `False`.
+
+    By default, template `stories/pag_story.html` is used to render the
+    story which expects the story to be paginated by paragraphs. If the
+    paragraph paginator is not used, the template `stories/story_detail.html`
+    is used to render the story.
+
+    There is two main variables passed to the template `p_object_name`, which
+    is the stories body field, and `template_object_name` which is the
+    story instance it self.
+
+    Argument List:
+
+    * **year** - Four digets, `2012`, `1997`, `2004`
+    * **month** - `jul` `jan` `aug`
+    * **day** - Two digits, `01` `23`, `31`
+    * **slug** - slugified string, `this-is-a-slug`
+    * **p_per_page** - pagination setting, paragraphs per page
+    * **orphans** - pagination setting, number of orphans
+    * **p_object_name** - the story body variable name
+    * **template_object_name** - the story variable name
+    * **template_name** - the name of the template
+    * **extra_context** - dictionary containing any extra context
     """
     try:
         pub_date = datetime.date(*time.strptime(year+month+day, '%Y%b%d')[:3])

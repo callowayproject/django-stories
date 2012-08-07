@@ -10,9 +10,9 @@ class RelatedNode(Node):
     """
     Main related object node that handles multiple template tags:
 
-    * get_related_content
-    * get_related_content_type
-    * get_relation_type
+    * **get_related_content**
+    * **get_related_content_type**
+    * **get_relation_type**
 
     """
     def __init__(self, obj, var_name, content_type=None,
@@ -45,7 +45,14 @@ def do_get_related_content(parser, token):
     """
     Gets all relations to a story
 
-    {% get_related_content item as var_name %}
+    **Syntax**::
+
+        {% get_related_content item as var_name %}
+
+    **Example**::
+
+        {% get_related_content story as story_rels %}
+
     """
     try:
         tag_name, obj, as_txt, var = token.split_contents()
@@ -61,9 +68,13 @@ def do_get_related_content_type(parser, token):
     """
     Gets relations to a story based on the content type
 
-    {% get_related_content_type item content_type as var_name %}
+    **Syntax**::
 
-    {% get_related_content_type object Image as photo %}
+        {% get_related_content_type item content_type as var_name %}
+
+    **Example**::
+
+        {% get_related_content_type story Image as story_photos %}
     """
     try:
         tag_name, obj, content_type, as_txt, var = token.split_contents()
@@ -80,9 +91,13 @@ def do_get_relation_type(parser, token):
     """
     Gets the relations to a story based on the relation type
 
-    {% get_relation_type item relation_type as var_name %}
+    **Syntax**::
 
-    {% get_relation_type object leadphoto as leadphoto %}
+        {% get_relation_type item relation_type as var_name %}
+
+    **Example**::
+
+        {% get_relation_type story leadphoto as leadphoto %}
     """
     try:
         tag_name, obj, relation_type, as_txt, var = token.split_contents()
