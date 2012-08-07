@@ -72,12 +72,20 @@ class StoryTests(BaseTests):
         self.assertEqual(self.client.get('/news/2012/jul/30/').status_code, 200)
         self.assertEqual(self.client.get('/news/today/').status_code, 200)
 
+        # story2 is marked as published, story1 is not
         self.assertEqual(self.client.get(
-            self.story1.get_absolute_url()).status_code, 200)
+            self.story1.get_absolute_url()).status_code, 404)
         self.assertEqual(self.client.get(
-            self.story1.get_absolute_url() + 'print/').status_code, 200)
+            self.story2.get_absolute_url()).status_code, 200)
+
         self.assertEqual(self.client.get(
-            self.story1.get_absolute_url() + 'comments/').status_code, 200)
+            self.story1.get_absolute_url() + 'print/').status_code, 404)
+        self.assertEqual(self.client.get(
+            self.story2.get_absolute_url() + 'print/').status_code, 200)
+        self.assertEqual(self.client.get(
+            self.story1.get_absolute_url() + 'comments/').status_code, 404)
+        self.assertEqual(self.client.get(
+            self.story2.get_absolute_url() + 'comments/').status_code, 200)
 
 
 class RelationTests(BaseTests):

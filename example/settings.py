@@ -105,14 +105,7 @@ INSTALLED_APPS = (
     'simpleprofile',
 )
 
-STORY_SETTINGS = {
-    'PAGINATION': {
-        'PAGINATE': True,
-        'P_PER_PAGE': 5,
-        'ORPHANS': 1
-    },
-    'THROW_404': False,
-}
+STORY_SETTINGS = {}
 
 AUTH_PROFILE_MODULE = 'simpleprofile.Profile'
 
