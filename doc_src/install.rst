@@ -2,26 +2,31 @@
 Installation
 ============
 
+Using PIP
 
-### * Add javascript for advanced and simple modes of editing ### Maybe not
+.. code-block:: bash
 
-* Move authors to own section and below content.
+    $ pip install django-stories
 
-* Auto-add the user if it is a new story
+or download the app `here <http://pypi.python.org/pypi/django-stories/>`_
 
-* Remove pluggable markups from settings and models
+.. code-block:: bash
 
-* Super Users can see everything!
-
-* new templates for reversion to make it not editable, and show changes (optionally?)
-
-Dependencies:
-
-  diff_match_patch (included in lib)
+    $ python setup.py install
 
 
-Integration with django-tinymce
+Add **stories** to your settings **INSTALLED_APPS**
 
-Integration with django-reversion
+.. code-block:: python
 
-Integration with django-categories
+    INSTALLED_APPS = (
+        ...
+        'stories',
+        ...
+    )
+
+Run syncdb
+
+.. code-block:: bash
+
+    $ ./manage.py syncdb

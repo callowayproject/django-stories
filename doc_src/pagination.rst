@@ -4,9 +4,13 @@
 Pagination
 ==========
 
-Many sites wish to paginate long stories over multiple pages. Paginating text is a bit different from paginating a list of objects. Django Stories has a :class:`Paginator` subclass that takes an HTML-formatted string instead of a :class:`QuerySet`\ .
+Many sites wish to paginate long stories over multiple pages. Paginating text is
+a bit different from paginating a list of objects. Django Stories has
+a :class:`Paginator` subclass that takes an HTML-formatted string instead of
+a :class:`QuerySet`\ .
 
-The simplest way to use pagination with stories is to set :ref:`PAGINATE` to ``True``\ , which changes the view that handles the story rendering.
+The simplest way to use pagination with stories is to set :ref:`PAGINATE`
+to ``True``\ , which changes the view that handles the story rendering.
 
 PAGINATION settings
 ===================

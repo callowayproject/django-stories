@@ -40,7 +40,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'Django Stories'
-copyright = u'2009, The Washington Times'
+copyright = u'2012, The Calloway Project'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -175,7 +175,7 @@ htmlhelp_basename = 'DjangoStoriesdoc'
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
   ('index', 'DjangoStories.tex', u'Django Stories Documentation',
-   u'The Washington Times', 'manual'),
+   'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
