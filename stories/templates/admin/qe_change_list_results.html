@@ -1,122 +1,132 @@
 {% if results %}
-<style type="text/css" media="screen">
-	#changelist.filtered table.qe-table {
-		width: 100%;
-		color: red;
-		border: 0 !important;
-		float: left;
-		clear: left;
-		margin-right: 0 !important;
-	}
-	table.qe-table tr {
-		width: 100%;
-		border: 0;
-		float: left;
-	}
-	#changelist.filtered table.qe-table tr td {
-		border: 0;
-	}
-	.qe-table label {
-		width: 100px;
-		display: block;
-		float: left;
-	}
-	table.qe-table td.qe-long input[type="text"] {
-		width: 500px;
-	}
-	table.qe-table td.qe-long  textarea {
-		width: 500px;
-	}
-	.qe-button {
-		float:right;
-	}
-	div.qe-buttons {
-		display: block; 
-		float: left;
-	}
-</style>
-<script src="http://www.google.com/jsapi"></script>
-<script type="text/javascript">
-	if (typeof jQuery == 'undefined') {
-		google.load("jquery", "1.4.2");
-	}
-</script>
-<script type="text/javascript">
-	$(function(){
-		$('.quickedit').each(function(){
-			$(this).click(function(){
-				var target = "#qe-form-" + $(this).attr('id').replace('quickedit-','');
-				$(target).show();
-				$('.qe-reset',target).click(function(){
-					$(target).hide();
-				})
-			})
-		});
-	})
-</script>
-<table cellspacing="0">
-<thead>
-<tr>
-<th>Actions</th>
-{% for header in result_headers %}<th{{ header.class_attrib }}>
-{% if header.sortable %}<a href="{{ header.url }}">{% endif %}
-{{ header.text|capfirst }}
-{% if header.sortable %}</a>{% endif %}</th>{% endfor %}
-</tr>
-</thead>
-<tbody>
-{% for result in results %}
-{% url admin:stories_story_change result.quickedit.instance.pk as change_url %}
-<tr class="{% cycle 'row1' 'row2' %}">
-	<td>
-		<div class="qe-buttons">
-			<a href="{{ change_url }}"><img src="{{ STATIC_URL }}img/019.png" alt="Edit" title="Edit this item" width="10" height="10"></a> 
-			<a href="#" class="quickedit" id="quickedit-{{result.quickedit.instance.pk}}"><img src="{{STATIC_URL }}img/133.png" alt="Quick Edit" title="Show Quick Edit form" width="10" height="10"></a> 
-			<a href="{{result.quickedit.instance.get_absolute_url}}" target="_blank"><img src="{{ STATIC_URL }}img/049.png" alt="View on site" title="View on site" width="10" height="10"></a>
-		</div>
-	</td>{% for item in result.fields %}{{ item }}{% endfor %}
-</tr>
-<tr class="quickedit-row" id="qe-form-{{result.quickedit.instance.pk}}" style="display: None">
-	<td colspan="{{result.fields|length}}" >
-		<table border="0" class="qe-table">
-		<tr>
-			<td colspan="2" class="qe-long">
-				{{ result.quickedit.headline.label_tag }}
-				{{ result.quickedit.headline }}
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2" class="qe-long">
-				{{ result.quickedit.subhead.label_tag }}
-				{{ result.quickedit.subhead }}
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2" class="qe-long">
-				{{ result.quickedit.teaser.label_tag }}
-				{{ result.quickedit.teaser }}
-			</td>
-		</tr>
-		<tr>
-			<td>
-				{{ result.quickedit.kicker.label_tag }}
-				{{ result.quickedit.kicker }}
-			</td>
-			<td>
-				{{ result.quickedit.status.label_tag }}
-				{{ result.quickedit.status }}
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2">
-				<input type="reset" value="Reset" class="qe-reset left" style="margin-right:10px;">
-				<input type="submit" value="Save" class="qe-button left" name="_save">
-			</td>
-		</tr>
-		</table>
-	</td>
-</tr>
-{% endfor %}
-</tbody>
-</table>
+  <style type="text/css" media="screen">
+    #changelist.filtered table.qe-table {
+      width: 100%;
+      color: red;
+      border: 0 !important;
+      float: left;
+      clear: left;
+      margin-right: 0 !important;
+    }
+    table.qe-table tr {
+      width: 100%;
+      border: 0;
+      float: left;
+    }
+    #changelist.filtered table.qe-table tr td {
+      border: 0;
+    }
+    .qe-table label {
+      width: 100px;
+      display: block;
+      float: left;
+    }
+    table.qe-table td.qe-long input[type="text"] {
+      width: 500px;
+    }
+    table.qe-table td.qe-long  textarea {
+      width: 500px;
+    }
+    .qe-button {
+      float:right;
+    }
+    div.qe-buttons {
+      display: block;
+      float: left;
+    }
+  </style>
+  <script src="http://www.google.com/jsapi"></script>
+  <script type="text/javascript">
+    if (typeof jQuery == 'undefined') {
+      google.load("jquery", "1.4.2");
+    }
+  </script>
+  <script type="text/javascript">
+    $(function(){
+      $('.quickedit').each(function(){
+        $(this).click(function(){
+          var target = "#qe-form-" + $(this).attr('id').replace('quickedit-','');
+          $(target).show();
+          $('.qe-reset',target).click(function(){
+            $(target).hide();
+          });
+        });
+      });
+    });
+  </script>
+  <table cellspacing="0">
+    <thead>
+      <tr>
+        <th>Actions</th>
+        {% for header in result_headers %}
+          <th{{ header.class_attrib }}>
+            {% if header.sortable %} <a href="{{ header.url }}">{% endif %}
+            {{ header.text|capfirst }}
+            {% if header.sortable %}</a>{% endif %}
+          </th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for result in results %}
+        {% url admin:stories_story_change result.quickedit.instance.pk as change_url %}
+        <tr class="{% cycle 'row1' 'row2' %}">
+          <td>
+            <div class="qe-buttons">
+              <a href="{{ change_url }}">
+                <img src="{{ STATIC_URL }}img/019.png" alt="Edit" title="Edit this item" width="10" height="10">
+              </a>
+              <a href="#" class="quickedit" id="quickedit-{{ result.quickedit.instance.pk }}">
+                <img src="{{ STATIC_URL }}img/133.png" alt="Quick Edit" title="Show Quick Edit form" width="10" height="10">
+              </a>
+              <a href="{{ result.quickedit.instance.get_absolute_url }}" target="_blank">
+                <img src="{{ STATIC_URL }}img/049.png" alt="View on site" title="View on site" width="10" height="10">
+              </a>
+            </div>
+          </td>
+          {% for item in result.fields %}{{ item }}{% endfor %}
+        </tr>
+        <tr class="quickedit-row" id="qe-form-{{ result.quickedit.instance.pk }}" style="display: None">
+          <td colspan="{{ result.fields|length }}" >
+            <table border="0" class="qe-table">
+              <tr>
+                <td colspan="2" class="qe-long">
+                  {{ result.quickedit.headline.label_tag }}
+                  {{ result.quickedit.headline }}
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" class="qe-long">
+                  {{ result.quickedit.subhead.label_tag }}
+                  {{ result.quickedit.subhead }}
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" class="qe-long">
+                  {{ result.quickedit.teaser.label_tag }}
+                  {{ result.quickedit.teaser }}
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  {{ result.quickedit.kicker.label_tag }}
+                  {{ result.quickedit.kicker }}
+                </td>
+                <td>
+                  {{ result.quickedit.status.label_tag }}
+                  {{ result.quickedit.status }}
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2">
+                  <input type="reset" value="Reset" class="qe-reset left" style="margin-right:10px;float:left;">
+                  <input type="submit" value="Save" class="qe-button left" name="_save">
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 {% endif %}
