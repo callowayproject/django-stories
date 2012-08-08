@@ -1,4 +1,5 @@
-from django.contrib.admin.templatetags.admin_list import items_for_result, result_headers
+from django.contrib.admin.templatetags.admin_list import items_for_result, \
+     result_headers, result_hidden_fields
 from django.template import Library
 from django.forms.models import modelform_factory
 
@@ -33,6 +34,7 @@ def qe_result_list(context, cl):
     else:
         static_url = 'MEDIA_URL'
     return {'cl': cl,
+            'result_hidden_fields': list(result_hidden_fields(cl)),
             'result_headers': list(result_headers(cl)),
             'results': list(results(cl)),
             'STATIC_URL': context[static_url]}
