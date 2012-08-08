@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>User Manual &mdash; Django Stories 1.0 documentation</title>
+    <title>Paginator &mdash; Django Stories 1.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -24,19 +24,24 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Django Stories 1.0 documentation" href="../index.html" /> 
+    <link rel="top" title="Django Stories 1.0 documentation" href="../index.html" />
+    <link rel="up" title="Reference Manual" href="index.html" />
+    <link rel="next" title="Template Tags" href="templatetags.html" />
+    <link rel="prev" title="Views" href="views.html" /> 
   </head>
   <body>
 <div id="docstitle">
 	<p>Django Stories 1.0 documentation</p>
 </div>
 <div id="header">
-	<div id="title"><h1>User Manual</h1></div>
+	<div id="title"><h1>Paginator</h1></div>
 	<ul id="headerButtons">
 		<li id="toc_button"><div class="headerButton"><a href="#">Table of Contents</a></div></li>
 		<li id="page_buttons">
 			<div class="headerButton"><a href="../genindex.html" title="General Index" accesskey="I">index</a></div>
 			<div class="headerButton"><a href="../py-modindex.html" title="Python Module Index" >modules</a></div>
+			<div class="headerButton"><a href="templatetags.html" title="Template Tags" accesskey="N">next</a></div>
+			<div class="headerButton"><a href="views.html" title="Views" accesskey="P">previous</a></div>
 		</li>
 	</ul>
 </div>
@@ -44,17 +49,24 @@
 <div id="sphinxsidebar">
   <div class="sphinxsidebarwrapper">
 	<ul><li class="toctree-l1"><a href="../index.html">Main Page</a></li></ul>
-	<ul>
+	<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../settings.html">Settings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pagination.html">Pagination</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../integration/index.html">Integration with Other Django Applications</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Manual</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Reference Manual</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="models.html">Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="views.html">Views</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Paginator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="templatetags.html">Template Tags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="urls.html">Urls</a></li>
+</ul>
+</li>
 </ul>
 
       <h3>This Page</h3>
       <ul class="this-page-menu">
-        <li><a href="../_sources/user/index.txt"
+        <li><a href="../_sources/reference/paginator.txt"
                rel="nofollow">Show Source</a></li>
       </ul>
     <div id="searchbox" style="display: none">
@@ -84,22 +96,16 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="user-manual">
-<span id="user-index"></span><h1>User Manual<a class="headerlink" href="#user-manual" title="Permalink to this headline">¶</a></h1>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="storyentry.html">Entering a Story</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="storyentry.html#field-description">Field Description</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="revisions.html">Revisions</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="revisions.html#accessing-revisions">Accessing Revisions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="revisions.html#reverting-to-a-previous-version">Reverting to a Previous Version</a></li>
-<li class="toctree-l2"><a class="reference internal" href="revisions.html#recovering-a-deleted-story">Recovering a Deleted Story</a></li>
-</ul>
-</li>
-</ul>
-</div>
+  <div class="section" id="paginator">
+<span id="id1"></span><h1>Paginator<a class="headerlink" href="#paginator" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-stories.paragraph_paginator"></span><dl class="class">
+<dt id="stories.paragraph_paginator.ParagraphPaginator">
+<em class="property">class </em><tt class="descclassname">stories.paragraph_paginator.</tt><tt class="descname">ParagraphPaginator</tt><big>(</big><em>text</em>, <em>per_page</em>, <em>orphans=0</em>, <em>allow_empty_first_page=True</em><big>)</big><a class="headerlink" href="#stories.paragraph_paginator.ParagraphPaginator" title="Permalink to this definition">¶</a></dt>
+<dd><p>A paginator that takes HTML-formatted text, and returns lists of paragraphs.
+This allows articles to keep paragraphs together. Working with some custom
+filters, it also allows for dynamically adding attributes to paragraph tags</p>
+</dd></dl>
+
 </div>
 
 
@@ -115,7 +121,8 @@
       <div class="clearer"></div>
     </div>
 	<div id="breadcrumbs">
-		User Manual
+		<a href="index.html" accesskey="U">Reference Manual</a><img src="../_static/triangle_closed.png" height="9" width="9" alt="&gt;">
+		Paginator
 		</ul>
 	</div>
 	<script type="text/javascript" charset="utf-8" src="../_static/toc.js"></script>

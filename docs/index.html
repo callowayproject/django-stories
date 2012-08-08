@@ -2,17 +2,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Welcome to Django Stories’s documentation! &mdash; Django Stories v0.5.1 documentation</title>
+    <title>Welcome to Django Stories’s documentation! &mdash; Django Stories 1.0 documentation</title>
+    
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '0.5.1',
+        VERSION:     '1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -21,12 +24,12 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Django Stories v0.5.1 documentation" href="#" />
+    <link rel="top" title="Django Stories 1.0 documentation" href="#" />
     <link rel="next" title="Installation" href="install.html" /> 
   </head>
   <body>
 <div id="docstitle">
-	<p>Django Stories v0.5.1 documentation</p>
+	<p>Django Stories 1.0 documentation</p>
 </div>
 <div id="header">
 	<div id="title"><h1>Welcome to Django Stories’s documentation!</h1></div>
@@ -48,7 +51,6 @@
 <li class="toctree-l1"><a class="reference internal" href="settings.html">Settings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pagination.html">Pagination</a></li>
 <li class="toctree-l1"><a class="reference internal" href="integration/index.html">Integration with Other Django Applications</a></li>
-<li class="toctree-l1"><a class="reference internal" href="user/index.html">User Manual</a></li>
 <li class="toctree-l1"><a class="reference internal" href="reference/index.html">Reference Manual</a></li>
 </ul>
 
@@ -86,7 +88,35 @@
             
   <div class="section" id="welcome-to-django-stories-s-documentation">
 <h1>Welcome to Django Stories&#8217;s documentation!<a class="headerlink" href="#welcome-to-django-stories-s-documentation" title="Permalink to this headline">¶</a></h1>
-<p>Contents:</p>
+<p>This app is designed to be flexible to configure, but still simple to
+the writers and editors.</p>
+</div>
+<div class="section" id="design-goals">
+<h1>Design Goals<a class="headerlink" href="#design-goals" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>Reduced dependencies: Checks for optional packages and only creates the
+fields if they are there.</li>
+<li>Rich content embedding from GUI: For embedded content, the markup language&#8217;s
+GUI can do everything it needs.</li>
+<li>Flexible dependencies: Can pick from several applications that provide
+similar service, for example django-staff vs. User, massmedia vs. photologue</li>
+</ul>
+</div>
+<div class="section" id="features">
+<h1>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><strong>Revision tracking:</strong> Keeps track of saved versions and allows a user to
+revert to a previous version.</li>
+<li><strong>Related items:</strong> Can set any configured item to be related to the story.
+These are for Photos, Videos, other stories, etc.</li>
+<li><strong>Quick Edit:</strong> Several fields can be changed in the list view including
+Headline, Subheadline, Teaser, Kicker and Published Status. A form is used
+and can be overridden by your project to include what ever fields you want.</li>
+<li><strong>Optional 404 supressing:</strong> Sometimes you may have to take down content.
+You can now return a page with an explanation instead of returning a 404 error.</li>
+</ul>
+<div class="section" id="contents">
+<h2>Contents:<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
@@ -104,7 +134,9 @@
 <li class="toctree-l2"><a class="reference internal" href="settings.html#author-model-limit-choices">AUTHOR_MODEL_LIMIT_CHOICES</a></li>
 <li class="toctree-l2"><a class="reference internal" href="settings.html#use-categories">USE_CATEGORIES</a></li>
 <li class="toctree-l2"><a class="reference internal" href="settings.html#use-reversion">USE_REVERSION</a></li>
-<li class="toctree-l2"><a class="reference internal" href="settings.html#story-ordering">STORY_ORDERING</a></li>
+<li class="toctree-l2"><a class="reference internal" href="settings.html#ordering">ORDERING</a></li>
+<li class="toctree-l2"><a class="reference internal" href="settings.html#widget">WIDGET</a></li>
+<li class="toctree-l2"><a class="reference internal" href="settings.html#widget-attrs">WIDGET_ATTRS</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="pagination.html">Pagination</a><ul>
@@ -117,17 +149,24 @@
 <li class="toctree-l2"><a class="reference internal" href="integration/tinymce_integration.html">Integrating with Django TinyMCE</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="user/index.html">User Manual</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="user/storyentry.html">Entering a Story</a></li>
-<li class="toctree-l2"><a class="reference internal" href="user/revisions.html">Revisions</a></li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="reference/index.html">Reference Manual</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="reference/models.html">Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/views.html">Views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/paginator.html">Paginator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/templatetags.html">Template Tags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/urls.html">Urls</a></li>
 </ul>
 </li>
 </ul>
 </div>
+</div>
+</div>
+<div class="section" id="helping-out">
+<h1>Helping Out<a class="headerlink" href="#helping-out" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/callowayproject/django-stories">Source</a></li>
+<li><a class="reference external" href="https://github.com/callowayproject/django-stories/issues">Issues</a></li>
+</ul>
 </div>
 <div class="section" id="indices-and-tables">
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
@@ -144,8 +183,8 @@
       </div>
     <div class="footer">
     <p>
-      &copy; Copyright 2009, The Washington Times.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+      &copy; Copyright 2012, The Calloway Project.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
 	</p>
     </div>
       <div class="clearer"></div>

@@ -1,0 +1,160 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Views &mdash; Django Stories 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Django Stories 1.0 documentation" href="../index.html" />
+    <link rel="up" title="Reference Manual" href="index.html" />
+    <link rel="next" title="Paginator" href="paginator.html" />
+    <link rel="prev" title="Models" href="models.html" /> 
+  </head>
+  <body>
+<div id="docstitle">
+	<p>Django Stories 1.0 documentation</p>
+</div>
+<div id="header">
+	<div id="title"><h1>Views</h1></div>
+	<ul id="headerButtons">
+		<li id="toc_button"><div class="headerButton"><a href="#">Table of Contents</a></div></li>
+		<li id="page_buttons">
+			<div class="headerButton"><a href="../genindex.html" title="General Index" accesskey="I">index</a></div>
+			<div class="headerButton"><a href="../py-modindex.html" title="Python Module Index" >modules</a></div>
+			<div class="headerButton"><a href="paginator.html" title="Paginator" accesskey="N">next</a></div>
+			<div class="headerButton"><a href="models.html" title="Models" accesskey="P">previous</a></div>
+		</li>
+	</ul>
+</div>
+
+<div id="sphinxsidebar">
+  <div class="sphinxsidebarwrapper">
+	<ul><li class="toctree-l1"><a href="../index.html">Main Page</a></li></ul>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../settings.html">Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pagination.html">Pagination</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../integration/index.html">Integration with Other Django Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Reference Manual</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="models.html">Models</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="paginator.html">Paginator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="templatetags.html">Template Tags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="urls.html">Urls</a></li>
+</ul>
+</li>
+</ul>
+
+      <h3>This Page</h3>
+      <ul class="this-page-menu">
+        <li><a href="../_sources/reference/views.txt"
+               rel="nofollow">Show Source</a></li>
+      </ul>
+    <div id="searchbox" style="display: none">
+      
+        <form class="search" action="../search.html" method="get">
+			<div class="search-wrapper">
+			<span class="search-left"></span>
+			<input class="prettysearch" type="text" name="q" size="18" />
+			<span class="search-right">&nbsp;</span>
+			</div>
+          <input type="submit" value="Search" class="searchbutton" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </form>
+        <p class="searchtip" style="font-size: 90%">
+        Enter search terms or a module, class or function name.
+        </p>
+    </div>
+    <script type="text/javascript">$('#searchbox').show(0);</script>
+  </div>
+</div>
+
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="views">
+<span id="id1"></span><h1>Views<a class="headerlink" href="#views" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-stories.views"></span><dl class="function">
+<dt id="stories.views.pag_story_detail">
+<tt class="descclassname">stories.views.</tt><tt class="descname">pag_story_detail</tt><big>(</big><em>request</em>, <em>year</em>, <em>month</em>, <em>day</em>, <em>slug</em>, <em>p_per_page=20</em>, <em>orphans=4</em>, <em>p_object_name='story_content'</em>, <em>template_object_name='story'</em>, <em>template_name='stories/pag_story.html'</em>, <em>extra_context={}</em><big>)</big><a class="headerlink" href="#stories.views.pag_story_detail" title="Permalink to this definition">¶</a></dt>
+<dd><p>A detail view for stories that can paginates the story by paragraph.
+If a story is not found a 404 or a custom template can be rendered
+by setting <cite>THROW_404</cite> to <cite>False</cite>.</p>
+<p>By default, template <cite>stories/pag_story.html</cite> is used to render the
+story which expects the story to be paginated by paragraphs. If the
+paragraph paginator is not used, the template <cite>stories/story_detail.html</cite>
+is used to render the story.</p>
+<p>There is two main variables passed to the template <cite>p_object_name</cite>, which
+is the stories body field, and <cite>template_object_name</cite> which is the
+story instance it self.</p>
+<p>Argument List:</p>
+<ul class="simple">
+<li><strong>year</strong> - Four digets, <cite>2012</cite>, <cite>1997</cite>, <cite>2004</cite></li>
+<li><strong>month</strong> - <cite>jul</cite> <cite>jan</cite> <cite>aug</cite></li>
+<li><strong>day</strong> - Two digits, <cite>01</cite> <cite>23</cite>, <cite>31</cite></li>
+<li><strong>slug</strong> - slugified string, <cite>this-is-a-slug</cite></li>
+<li><strong>p_per_page</strong> - pagination setting, paragraphs per page</li>
+<li><strong>orphans</strong> - pagination setting, number of orphans</li>
+<li><strong>p_object_name</strong> - the story body variable name</li>
+<li><strong>template_object_name</strong> - the story variable name</li>
+<li><strong>template_name</strong> - the name of the template</li>
+<li><strong>extra_context</strong> - dictionary containing any extra context</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="stories.views.admin_changeset_list">
+<tt class="descclassname">stories.views.</tt><tt class="descname">admin_changeset_list</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#stories.views.admin_changeset_list" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="stories.views.admin_changeset_revert">
+<tt class="descclassname">stories.views.</tt><tt class="descname">admin_changeset_revert</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#stories.views.admin_changeset_revert" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+
+
+          </div> 
+        </div>
+      </div>
+    <div class="footer">
+    <p>
+      &copy; Copyright 2012, The Calloway Project.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+	</p>
+    </div>
+      <div class="clearer"></div>
+    </div>
+	<div id="breadcrumbs">
+		<a href="index.html" accesskey="U">Reference Manual</a><img src="../_static/triangle_closed.png" height="9" width="9" alt="&gt;">
+		Views
+		</ul>
+	</div>
+	<script type="text/javascript" charset="utf-8" src="../_static/toc.js"></script>
+  </body>
+</html>
