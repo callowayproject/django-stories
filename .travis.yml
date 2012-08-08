@@ -13,7 +13,6 @@ script:
   - ./run_tests.py
 branches:
   only:
-    - master
     - 1.0
 notifications:
   email:
