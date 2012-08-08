@@ -8,10 +8,13 @@ env:
 install:
   - pip install Django==$DJANGO_VERSION
   - pip install -e .
-  - pip install BeautifulSoup
-  - pip install django-categories
+  - pip install BeautifulSoup django-categories
 script:
   - ./run_tests.py
 branches:
   only:
+    - master
     - 1.0
+notifications:
+  email:
+    - ci@callowayproject.com
