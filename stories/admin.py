@@ -75,7 +75,7 @@ class StoryOptions(AdminModel):
     list_editable = ('status',)
     list_filter = ('site', 'publish_date', 'origin')
     list_per_page = 25
-    quick_editable = ('id', 'headline', 'subhead', 'kicker', 'status', 'teaser')
+    quick_editable = ('headline', 'subhead', 'kicker', 'status', 'teaser')
 
     search_fields = ('headline',)
     date_hierarchy = 'publish_date'
@@ -128,7 +128,9 @@ class StoryOptions(AdminModel):
     revision_form_template = 'admin/stories/reversion_form.html'
 
     class Media:
-        js = ('js/genericcollections.js',)
+        js = ('js/genericcollections.js',
+              'js/quickedit.js')
+        css = {'all': ('css/quickedit.css',)}
 
 
     def _get_widget(self):

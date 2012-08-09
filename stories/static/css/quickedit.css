@@ -1,0 +1,39 @@
+/*
+This file contains all the css needed for the quickedit
+functionality on the story admin change list.
+*/
+
+#changelist.filtered table.qe-table {
+  width: 100%;
+  color: red;
+  border: 0 !important;
+  float: left;
+  clear: left;
+  margin-right: 0 !important;
+}
+table.qe-table tr {
+  width: 100%;
+  border: 0;
+  float: left;
+}
+#changelist.filtered table.qe-table tr td {
+  border: 0;
+}
+.qe-table label {
+  width: 100px;
+  display: block;
+  float: left;
+}
+table.qe-table td.qe-long input[type="text"] {
+  width: 500px;
+}
+table.qe-table td.qe-long  textarea {
+  width: 500px;
+}
+.qe-button {
+  float:right;
+}
+div.qe-buttons {
+  display: block;
+  float: left;
+}
