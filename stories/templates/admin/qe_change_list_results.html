@@ -4,10 +4,10 @@
 </div>
 {% endif %}
 {% if results %}
-  <table cellspacing="0">
+  <table cellspacing="0" id="result_list">
     <thead>
       <tr>
-        <th>Actions</th>
+        <th>Quick Links</th>
         {% for header in result_headers %}
           <th{{ header.class_attrib }}>
             {% if header.sortable %} <a href="{{ header.url }}">{% endif %}
@@ -19,6 +19,9 @@
     </thead>
     <tbody>
       {% for result in results %}
+        {% if result.form.non_field_errors %}
+          <tr><td colspan="{{ result|length }}">{{ result.form.non_field_errors }}</td></tr>
+        {% endif %}
         {% url admin:stories_story_change result.quickedit.instance.pk as change_url %}
         <tr class="{% cycle 'row1' 'row2' %}">
           <td>
@@ -36,16 +39,30 @@
           </td>
           {% for item in result.fields %}{{ item }}{% endfor %}
         </tr>
-        <tr class="quickedit-row {% cycle 'row1' 'row2' %}" id="qe-form-{{ result.quickedit.instance.pk }}" style="display: None;">
+        <tr class="quickedit-row {% cycle 'row1' 'row2' %}" id="qe-form-{{ result.quickedit.instance.pk }}"{% if not result.quickedit.errors %} style="display: none;{% endif %}">
+          <td>&nbsp;</td>
           <td colspan="{{ result.fields|length }}" >
             <table border="0" class="qe-table">
               <tr>
-                <td>{{ result.quickedit.as_p }}</td>
+                <td>
+                  {% if result.quickedit.non_field_errors %}
+                    {{ result.quickedit.non_field_errors }}
+                  {% endif %}
+                  <fieldset class="module aligned">
+                    {% for field in result.quickedit.visible_fields %}
+                      <div class="form-row{% if field.errors %} errors{% endif %} {{ field.name }}">
+                        {{ field.errors }}
+                        {{ field.label_tag }}
+                        {{ field }}
+                      </div>
+                    {% endfor %}
+                  </fieldset>
+                </td>
               </tr>
               <tr>
                 <td>
-                  <input type="reset" value="Reset" class="qe-reset left" style="margin-right:10px;float:left;">
-                  <input type="submit" value="Save" class="qe-button left" name="_save">
+                  <input type="reset" value="Reset" class="qe-reset">
+                  <input type="submit" value="Save" class="qe-button" name="_save">
                 </td>
               </tr>
             </table>
