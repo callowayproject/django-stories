@@ -29,6 +29,13 @@ DEFAULT_PAGINATION = {
     'P_PER_PAGE': 20,
     'ORPHANS': 4
 }
+DEFAULT_QUICKEDIT_FIELDS = (
+    'headline',
+    'subhead',
+    'kicker',
+    'status',
+    'teaser'
+)
 
 DEFAULT_SETTINGS = {
     'AUTHOR_MODEL': 'auth.User',
@@ -36,10 +43,11 @@ DEFAULT_SETTINGS = {
     'DEFAULT_ORIGIN': 0,
     'DEFAULT_STATUS': 1,
     'INCLUDE_PRINT': False,
-    'ORDERING': ['-modified_date'],
+    'ORDERING': ['-publish_date'],
     'ORIGIN_CHOICES': DEFAULT_ORIGIN_CHOICES,
     'PAGINATION': DEFAULT_PAGINATION,
     'PUBLISHED_STATUS': 4,
+    'QUICKEDIT_FIELDS': DEFAULT_QUICKEDIT_FIELDS,
     'RELATION_MODELS': [],
     'STATUS_CHOICES': DEFAULT_STATUS_CHOICES,
     'THROW_404': True,
