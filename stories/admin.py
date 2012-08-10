@@ -72,10 +72,11 @@ class StoryOptions(AdminModel):
     """
     list_display = ('headline', 'status', 'publish_date',
                     'modified_date', 'origin')
-    list_editable = ('status',)
     list_filter = ('site', 'publish_date', 'origin')
     list_per_page = 25
-    quick_editable = ('headline', 'subhead', 'kicker', 'status', 'teaser')
+
+    list_editable = ()
+    quick_editable = settings.QUICKEDIT_FIELDS
 
     search_fields = ('headline',)
     date_hierarchy = 'publish_date'
@@ -132,7 +133,6 @@ class StoryOptions(AdminModel):
               'js/quickedit.js')
         css = {'all': ('css/quickedit.css',)}
 
-
     def _get_widget(self):
         attrs = settings.WIDGET_ATTRS
         widget = load_widget(settings.WIDGET) or forms.Textarea
@@ -154,6 +154,10 @@ class StoryOptions(AdminModel):
         if ordering:
             qs = qs.order_by(*ordering)
         return qs
+
+    def changelist_view(self, *args, **kwargs):
+        self.list_editable = True
+        return super(StoryOptions, self).changelist_view(*args, **kwargs)
 
     def get_changelist_formset(self, request, **kwargs):
         """
