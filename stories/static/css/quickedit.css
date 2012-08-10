@@ -18,3 +18,6 @@ input.qe-reset {
 div.qe-buttons img{
   margin-right:5px;
 }
+table#result_list {
+  width: 85%;
+}
