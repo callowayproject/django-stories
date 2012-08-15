@@ -72,13 +72,6 @@ ADMIN_MEDIA_PREFIX = '/static/admin/'
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'g2_39yupn*6j4p*cg2%w643jiq-1n_annua*%i8+rq0dx9p=$n'
 
-# List of callables that know how to import templates from various sources.
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.load_template_source',
-    'django.template.loaders.app_directories.load_template_source',
-#     'django.template.loaders.eggs.load_template_source',
-)
-
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -98,13 +91,19 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
-    'django.contrib.staticfiles',
     'django.contrib.sessions',
     'django.contrib.sites',
     'stories',
     'simpleapp',
     'simpleprofile',
 )
+
+import django
+# Little hack for static files
+if django.VERSION[1] > 2:
+    INSTALLED_APPS += ('django.contrib.staticfiles',)
+else:
+    INSTALLED_APPS += ('staticfiles',)
 
 STORY_SETTINGS = {}
 
