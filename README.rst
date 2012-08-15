@@ -51,6 +51,15 @@ Change Log
 
 * Setting ``STORY_ORDERING`` was renamed to ``ORDERING``. Using ``STORY_ORDERING`` is still possible, but a warning will be displayed.
 
+* Fixed issues with Quick Edit functionality on the stories changelist
+
+* Fixes to the Quick Edit functionality
+
+    * QuickEdit now works =)
+    * Removed external jQuery references for Quick Edit. Now uses ``django.jQuery`
+    * Removed inline css/js, these are now in seperate files
+    * The js was rewritten in coffeescript
+
 
 **New in 0.6**
 
