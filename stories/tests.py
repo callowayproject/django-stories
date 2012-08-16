@@ -28,7 +28,6 @@ class BaseTests(TestCase):
 class StoryTests(BaseTests):
     def setUp(self):
         super(StoryTests, self).setUp()
-        self.client = Client()
 
     def test_comments(self):
         self.assertFalse(self.story1.comments_frozen)
@@ -86,6 +85,112 @@ class StoryTests(BaseTests):
             self.story1.get_absolute_url() + 'comments/').status_code, 404)
         self.assertEqual(self.client.get(
             self.story2.get_absolute_url() + 'comments/').status_code, 200)
+
+    def test_change_form(self):
+
+        self.assertTrue(self.client.login(username='admin', password='pass'))
+        self.assertEqual(
+            self.client.get('/admin/stories/story/1/').status_code, 200)
+
+        change_dict = {
+            'headline': 'Changed',
+            'slug': 'changed',
+            'body': "<p>This is the body</p>",
+            'status': '1',
+            'origin': '0',
+            'comment_status': '0',
+            'site': '1',
+            'publish_date': '2012-03-14',
+            'publish_time': '00:00:00'
+        }
+
+        cf_post = self.client.post('/admin/stories/story/1/', change_dict)
+        self.assertRedirects(cf_post, '/admin/stories/story/')
+        self.assertEqual(Story.objects.get(pk=1).headline, 'Changed')
+
+    def test_change_list(self):
+
+        self.assertTrue(self.client.login(username='admin', password='pass'))
+        self.assertEqual(
+            self.client.get('/admin/stories/').status_code, 200)
+        self.assertEqual(
+            self.client.get('/admin/stories/story/').status_code, 200)
+
+        change_dict = {
+            'form-TOTAL_FORMS': '2',
+            'form-INITIAL_FORMS': '2',
+            'form-MAX_NUM_FORMS': '',
+            'action': '',
+            'select_across': '0',
+            'form-0-id': '1',
+            'form-1-id': '2',
+            'form-0-status': '3',
+            'form-0-headline': 'Changed 1',
+            'form-0-subhead': '',
+            'form-0-kicker': '',
+            'form-0-status': '3',
+            'form-0-teaser': '',
+            'form-1-status': '3',
+            'form-1-headline': 'Changed 2',
+            'form-1-subhead' : '',
+            'form-1-kicker': '',
+            'form-1-status': '3',
+            'form-1-teaser': '',
+            '_save': 'Save',
+        }
+
+        cl_post = self.client.post('/admin/stories/story/', change_dict)
+        self.assertRedirects(cl_post, '/admin/stories/story/')
+        self.assertEqual(Story.objects.get(pk=1).headline, 'Changed 1')
+        self.assertEqual(Story.objects.get(pk=2).headline, 'Changed 2')
+
+    def _post_admin_action(self, action):
+        change_dict = {
+            'form-TOTAL_FORMS': '2',
+            'form-INITIAL_FORMS': '2',
+            'form-MAX_NUM_FORMS': '',
+            'action': 'set_status_to_%s' % action,
+            'select_across': '0',
+            '_selected_action': '1',
+            'index': '0',
+            'form-0-id': '1',
+            'form-1-id': '2',
+            'form-0-status': '3',
+            'form-0-headline': 'Changed 1',
+            'form-0-subhead': '',
+            'form-0-kicker': '',
+            'form-0-status': '3',
+            'form-0-teaser': '',
+            'form-1-status': '3',
+            'form-1-headline': 'Changed 2',
+            'form-1-subhead' : '',
+            'form-1-kicker': '',
+            'form-1-status': '3',
+            'form-1-teaser': '',
+        }
+        return self.client.post('/admin/stories/story/', change_dict)
+
+    def test_admin_actions(self):
+        self.assertTrue(self.client.login(username='admin', password='pass'))
+
+        post = self._post_admin_action('DRAFT')
+        self.assertRedirects(post, '/admin/stories/story/')
+        self.assertEquals(Story.objects.get(pk=1).status, 1)
+        post = self._post_admin_action('READY FOR EDITING')
+        self.assertRedirects(post, '/admin/stories/story/')
+        self.assertEquals(Story.objects.get(pk=1).status, 2)
+        post = self._post_admin_action('READY TO PUBLISH')
+        self.assertRedirects(post, '/admin/stories/story/')
+        self.assertEquals(Story.objects.get(pk=1).status, 3)
+        post = self._post_admin_action('PUBLISHED')
+        self.assertRedirects(post, '/admin/stories/story/')
+        self.assertEquals(Story.objects.get(pk=1).status, 4)
+        post = self._post_admin_action('REJECTED')
+        self.assertRedirects(post, '/admin/stories/story/')
+        self.assertEquals(Story.objects.get(pk=1).status, 5)
+        post = self._post_admin_action('UN-PUBLISHED')
+        self.assertRedirects(post, '/admin/stories/story/')
+        self.assertEquals(Story.objects.get(pk=1).status, 6)
 
 
 class RelationTests(BaseTests):

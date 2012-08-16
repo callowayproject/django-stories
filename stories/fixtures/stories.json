@@ -21,7 +21,7 @@
             "subhead": "",
             "tease_headline": "",
             "teaser": "",
-            "update_date": null
+            "update_date": "2012-07-29"
         },
         "model": "stories.story",
         "pk": 2
@@ -48,7 +48,7 @@
             "subhead": "Yub, just a simple test story",
             "tease_headline": "Want to see a sample story?",
             "teaser": "Sed ac scelerisque quis nonummy senectus mollis convallis molestie neque natoque id. Amet posuere ipsum. Ullamcorper dolor dolor. Nisl viverra vitae arcu id integer massa dignissimos neque. Eu eros etiam volutpat consequat nunc. Odio massa venenatis. Lectus mauris nec senectus praesent sed. Dignissim commodo tellus aenean pede placerat. Diam ut massa at erat sociis. Magna sed neque lectus risus nulla.",
-            "update_date": null
+            "update_date": "2012-07-29"
         },
         "model": "stories.story",
         "pk": 1

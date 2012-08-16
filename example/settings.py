@@ -101,7 +101,11 @@ INSTALLED_APPS = (
 import django
 # Little hack for static files
 if django.VERSION[1] > 2:
-    INSTALLED_APPS += ('django.contrib.staticfiles',)
+    INSTALLED_APPS += (
+        'django.contrib.staticfiles',
+        'django.contrib.messages')
+    MIDDLEWARE_CLASSES += (
+        'django.contrib.messages.middleware.MessageMiddleware',)
 else:
     INSTALLED_APPS += ('staticfiles',)
 
