@@ -6,3 +6,5 @@ STORY_SETTINGS.update({
         'simpleapp.basicvideo'
     ],
 })
+
+INSTALLED_APPS += ('stories.relations',)

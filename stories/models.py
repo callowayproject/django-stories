@@ -8,8 +8,6 @@ import re
 
 from datetime import datetime
 
-from django.contrib.contenttypes.models import ContentType
-from django.contrib.contenttypes import generic
 from django.contrib.sites.models import Site
 from django.conf import settings as site_settings
 from django.core.exceptions import ImproperlyConfigured
@@ -20,18 +18,6 @@ from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
 
 from stories import settings
-
-if settings.USE_CATEGORIES:
-    cat_error_msg = 'Stories expects django-categories to be '\
-                    'installed and in INSTALLED_APPS'
-    try:
-        import categories
-        if not 'categories' in site_settings.INSTALLED_APPS:
-            raise ImproperlyConfigured(cat_error_msg)
-    except (ImportError, ):
-        raise ImproperlyConfigured(cat_error_msg)
-
-    from categories.fields import CategoryM2MField, CategoryFKField
 
 COMMENTS_DISABLED = 0
 COMMENTS_ENABLED = 1
@@ -95,18 +81,17 @@ class Story(models.Model):
         blank=True,
         editable=False)
 
-    if settings.INCLUDE_PRINT:
-        print_pub_date = models.DateTimeField(_('Print Publish Date'),
-            blank=True,
-            null=True),
-        print_section = models.CharField(_('Print Section'),
-            max_length=30,
-            blank=True,
-            null=True),
-        print_page = models.CharField(_('Print Page'),
-            max_length=5,
-            blank=True,
-            null=True),
+    print_pub_date = models.DateTimeField(_('Print Publish Date'),
+        blank=True,
+        null=True),
+    print_section = models.CharField(_('Print Section'),
+        max_length=30,
+        blank=True,
+        null=True),
+    print_page = models.CharField(_('Print Page'),
+        max_length=5,
+        blank=True,
+        null=True),
 
     comments = models.BooleanField(_('Enable Comments?'),
         default=True)
@@ -127,10 +112,6 @@ class Story(models.Model):
         choices=settings.ORIGIN_CHOICES,
         default=settings.DEFAULT_ORIGIN,)
     site = models.ForeignKey(Site, verbose_name=_('Site'))
-
-    if settings.USE_CATEGORIES:
-        primary_category = CategoryFKField(related_name='primary_story_set')
-        categories = CategoryM2MField(blank=True)
 
     objects = models.Manager()
     published = CurrentSitePublishedManager()
@@ -215,7 +196,7 @@ class Story(models.Model):
         """
         return re.findall("(<p>.+?</p>)", self.body, re.I | re.S)
 
-    if settings.RELATION_MODELS:
+    if 'stories.relations' in site_settings.INSTALLED_APPS:
         def get_related_content_type(self, content_type):
             """
             Get all related items of the specified content type
@@ -231,46 +212,6 @@ class Story(models.Model):
 
     def __unicode__(self):
         return "%s : %s" % (self.headline, self.publish_date)
-
-
-if settings.RELATION_MODELS:
-    STORY_RELATION_LIMITS = reduce(lambda x, y: x|y, settings.RELATIONS)
-    class StoryRelationManager(models.Manager):
-        """Basic manager with a few convenience methods"""
-        def get_content_type(self, content_type):
-            """
-            Get all the related items with a specific content_type
-            """
-            qs = self.get_query_set()
-            return qs.filter(content_type__name=content_type)
-
-        def get_relation_type(self, relation_type):
-            """
-            Get all the related items with a specific relation_type
-            """
-            qs = self.get_query_set()
-            return qs.filter(relation_type=relation_type)
-
-
-    class StoryRelation(models.Model):
-        """Related story item"""
-        story = models.ForeignKey(Story)
-        content_type = models.ForeignKey(
-            ContentType,
-            limit_choices_to=STORY_RELATION_LIMITS)
-        object_id = models.PositiveIntegerField()
-        content_object = generic.GenericForeignKey('content_type', 'object_id')
-        relation_type = models.CharField(_("Relation Type"),
-            max_length="200",
-            blank=True,
-            null=True,
-            help_text=_(
-                "A generic text field to tag a relation, like 'leadphoto'."))
-
-        objects = StoryRelationManager()
-
-        def __unicode__(self):
-            return unicode(self.content_object)
 
 
 # Reversion integration

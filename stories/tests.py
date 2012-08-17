@@ -209,7 +209,7 @@ class RelationTests(BaseTests):
         self.video_ctype = ContentType.objects.get_for_model(BasicVideo)
 
     def _create_rels(self):
-        from stories.models import StoryRelation
+        from stories.relations.models import StoryRelation
         rel1 = StoryRelation.objects.create(
             story=self.story1,
             content_type=self.photo_ctype, object_id=1)
@@ -231,7 +231,7 @@ class RelationTests(BaseTests):
         self.assertTrue(hasattr(self.story1, 'get_relation_type'))
 
     def test_related_methods(self):
-        from stories.models import StoryRelation
+        from stories.relations.models import StoryRelation
         rel1, rel2, rel3 = self._create_rels()
 
         items = self.story1.get_related_content_type('basic photo')
@@ -246,7 +246,7 @@ class RelationTests(BaseTests):
 
     def test_tt_get_related_content(self):
         self._create_rels()
-        tmpl = '{% load stories %}'\
+        tmpl = '{% load story_relation_tags %}'\
                '{% get_related_content story as story_rels %}'\
                '{% for rel in story_rels %}'\
                    '{{ rel.content_object.pk }},'\
@@ -257,7 +257,7 @@ class RelationTests(BaseTests):
 
     def test_tt_get_related_content_type(self):
         self._create_rels()
-        tmpl = '{% load stories %}'\
+        tmpl = '{% load story_relation_tags %}'\
                '{% get_related_content_type story "basic photo" as photos %}'\
                '{% for photo in photos %}'\
                    '{{ photo.pk }},'\
@@ -268,7 +268,7 @@ class RelationTests(BaseTests):
 
     def test_tt_get_relation_type(self):
         self._create_rels()
-        tmpl = '{% load stories %}'\
+        tmpl = '{% load story_relation_tags %}'\
                '{% get_relation_type story Regular as reg_items %}'\
                '{% for item in reg_items %}'\
                    '{{ item.pk }},'\
