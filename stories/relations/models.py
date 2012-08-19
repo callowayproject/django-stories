@@ -9,7 +9,10 @@ from django.utils.translation import ugettext as _
 from stories import settings as story_settings
 from stories.models import Story
 
-STORY_RELATION_LIMITS = reduce(lambda x, y: x|y, story_settings.RELATIONS)
+STORY_RELATION_LIMITS = []
+if story_settings.RELATIONS:
+    STORY_RELATION_LIMITS = reduce(lambda x, y: x|y, story_settings.RELATIONS)
+
 
 class StoryRelationManager(models.Manager):
     """Basic manager with a few convenience methods"""
