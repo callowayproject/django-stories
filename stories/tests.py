@@ -244,6 +244,44 @@ class RelationTests(BaseTests):
         self.assertEqual(list(items), [rel2, rel3])
         self.assertEqual(list(manager_items), [rel2, rel3])
 
+    def test_change_form(self):
+        from stories.relations.models import StoryRelation
+
+        rel1, rel2, rel3 = self._create_rels()
+
+        self.assertTrue(self.client.login(username='admin', password='pass'))
+        self.assertEqual(
+            self.client.get('/admin/stories/story/1/').status_code, 200)
+
+        change_dict = {
+            'headline': 'Changed',
+            'slug': 'changed',
+            'body': "<p>This is the body</p>",
+            'status': '1',
+            'origin': '0',
+            'comment_status': '0',
+            'site': '1',
+            'publish_date': '2012-03-14',
+            'publish_time': '00:00:00',
+
+            # The required story relation form data
+            'storyrelation_set-TOTAL_FORMS': '4',
+            'storyrelation_set-INITIAL_FORMS': '1',
+            'storyrelation_set-MAX_NUM_FORMS': '',
+
+            'storyrelation_set-0-id': rel1.pk,
+            'storyrelation_set-0-story': rel1.story.pk,
+            'storyrelation_set-0-content_type': rel1.content_type.pk,
+            'storyrelation_set-0-object_id': rel1.object_id,
+            'storyrelation_set-0-relation_type': 'Changed',
+        }
+
+        cf_post = self.client.post('/admin/stories/story/1/', change_dict)
+        self.assertRedirects(cf_post, '/admin/stories/story/')
+        self.assertEqual(Story.objects.get(pk=1).headline, 'Changed')
+
+        self.assertEqual(StoryRelation.objects.get(pk=1).relation_type, 'Changed')
+
     def test_tt_get_related_content(self):
         self._create_rels()
         tmpl = '{% load story_relation_tags %}'\

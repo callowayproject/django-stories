@@ -13,7 +13,7 @@ from .forms import StoryForm
 from .models import Story
 from .utils import load_widget
 
-HAS_RELATIONS = 'stories.relations' in site_settings.INSTALLED_APPS
+HAS_RELATIONS = 'stories.relations' in site_settings.INSTALLED_APPS and settings.RELATIONS
 
 if HAS_RELATIONS:
     from stories.relations.genericcollection import GenericCollectionTabularInline

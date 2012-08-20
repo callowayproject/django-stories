@@ -10,7 +10,7 @@ from stories import settings as story_settings
 from stories.models import Story
 
 STORY_RELATION_LIMITS = []
-if story_settings.RELATIONS:
+if story_settings.RELATION_MODELS:
     STORY_RELATION_LIMITS = reduce(lambda x, y: x|y, story_settings.RELATIONS)
 
 
