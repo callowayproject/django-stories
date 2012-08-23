@@ -41,6 +41,10 @@ Change Log
 
 * Code refactor
 
+* South migrations
+
+* ``Relations`` are now a seperate inner app of ``stories``
+
 * Tests
 
 * New ``author_display`` property to replace te current ``author`` property
