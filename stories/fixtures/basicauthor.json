@@ -1,0 +1,42 @@
+[
+    {
+        "fields": {
+            "user": 1,
+            "name": "Admin"
+        },
+        "model": "simpleapp.basicauthor",
+        "pk": 1
+    },
+    {
+        "fields": {
+            "user": 2,
+            "name": "John"
+        },
+        "model": "simpleapp.basicauthor",
+        "pk": 2
+    },
+    {
+        "fields": {
+            "user": 3,
+            "name": "Jane"
+        },
+        "model": "simpleapp.basicauthor",
+        "pk": 3
+    },
+    {
+        "fields": {
+            "user": 4,
+            "name": "Mark"
+        },
+        "model": "simpleapp.basicauthor",
+        "pk": 4
+    },
+    {
+        "fields": {
+            "user": 5,
+            "name": "Franke"
+        },
+        "model": "simpleapp.basicauthor",
+        "pk": 5
+    }
+]

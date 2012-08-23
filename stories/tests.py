@@ -3,6 +3,7 @@
 
 import datetime
 
+from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ImproperlyConfigured
 from django.template import Template, Context, TemplateSyntaxError
@@ -191,6 +192,33 @@ class StoryTests(BaseTests):
         post = self._post_admin_action('UN-PUBLISHED')
         self.assertRedirects(post, '/admin/stories/story/')
         self.assertEquals(Story.objects.get(pk=1).status, 6)
+
+
+class AuthorTests(BaseTests):
+    fixtures = ['auth.json', 'profile.json', 'basicauthor.json', 'stories.json']
+    def test_field_type(self):
+        from simpleapp.models import BasicAuthor
+        field, a, b, c = Story._meta.get_field_by_name('authors')
+        self.assertEqual(field.rel.to, BasicAuthor)
+
+    def test_field_meta(self):
+        """This test is here to test getting some meta values that
+        is used on the initial south migration"""
+        field, a, b, c = Story._meta.get_field_by_name('authors')
+        self.assertEqual(field.m2m_reverse_name(), 'basicauthor_id')
+        self.assertEqual(field.m2m_reverse_field_name(), 'basicauthor')
+
+    def test_field_query(self):
+        self.assertEqual(self.story1.authors.all().count(), 2)
+        self.assertEqual(self.story2.authors.all().count(), 2)
+
+        users = User.objects.filter(pk__in=[2,4])
+        for author in self.story1.authors.all():
+            self.assertIn(author.user, users)
+
+        users = User.objects.filter(pk__in=[3, 5])
+        for author in self.story2.authors.all():
+            self.assertIn(author.user, users)
 
 
 class RelationTests(BaseTests):
