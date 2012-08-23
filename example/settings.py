@@ -93,9 +93,11 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
-    'stories',
+    'south',
     'simpleapp',
     'simpleprofile',
+
+    'stories',
 )
 
 import django
@@ -110,7 +112,6 @@ else:
     INSTALLED_APPS += ('staticfiles',)
 
 STORY_SETTINGS = {}
-
 AUTH_PROFILE_MODULE = 'simpleprofile.Profile'
 
 try:
