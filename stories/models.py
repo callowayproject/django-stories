@@ -226,3 +226,22 @@ if settings.USE_REVERSION:
         raise ImproperlyConfigured(rev_error_msg)
 
     reversion.register(Story)
+
+# If categories is available as well as south migrations
+# we need to ensure the post_syncdb signal is setup for
+# us from categories. This is only when using django-categories
+# <= 1.1.2, which does not setup the signal correctly
+try:
+    if 'categories' in site_settings.INSTALLED_APPS and \
+       'south' in site_settings.INSTALLED_APPS:
+        import categories
+        from distutils.version import LooseVersion
+        categories_version = LooseVersion(categories.__version__)
+        compare_version = LooseVersion('1.1.2')
+        if categories_version <= compare_version:
+            from categories.migration import migrate_app
+            from django.db.models.signals import post_syncdb
+            post_syncdb.connect(migrate_app)
+except (ImportError, ValueError):
+    pass
+
