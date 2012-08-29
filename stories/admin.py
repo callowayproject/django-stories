@@ -104,11 +104,6 @@ class StoryAdmin(AdminModel):
                        'status', 'origin', 'comment_status', )
         }),)
 
-    if settings.CATEGORY_FIELDS:
-        fieldsets += (_('Categories'), {
-            'fields': settings.CATEGORY_FIELDS}
-        )
-
     if settings.INCLUDE_PRINT:
         fieldsets = fieldsets + (_('Print Information'), {
             'fields': ('print_pub_date', 'print_section', 'print_page'),
