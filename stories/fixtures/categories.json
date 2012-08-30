@@ -1,0 +1,71 @@
+[
+    {
+        "fields": {
+            "active": true,
+            "alternate_title": "Home",
+            "alternate_url": "",
+            "description": "",
+            "level": 0,
+            "lft": 1,
+            "meta_extra": "",
+            "meta_keywords": "",
+            "name": "Home",
+            "order": 0,
+            "parent": null,
+            "rght": 2,
+            "slug": "home",
+            "thumbnail": "",
+            "thumbnail_height": null,
+            "thumbnail_width": null,
+            "tree_id": 1
+        },
+        "model": "categories.category",
+        "pk": 1
+    },
+    {
+        "fields": {
+            "active": true,
+            "alternate_title": "News",
+            "alternate_url": "",
+            "description": "",
+            "level": 0,
+            "lft": 1,
+            "meta_extra": "",
+            "meta_keywords": "",
+            "name": "News",
+            "order": 0,
+            "parent": null,
+            "rght": 4,
+            "slug": "news",
+            "thumbnail": "",
+            "thumbnail_height": null,
+            "thumbnail_width": null,
+            "tree_id": 2
+        },
+        "model": "categories.category",
+        "pk": 2
+    },
+    {
+        "fields": {
+            "active": true,
+            "alternate_title": "Politics",
+            "alternate_url": "",
+            "description": "",
+            "level": 1,
+            "lft": 2,
+            "meta_extra": "",
+            "meta_keywords": "",
+            "name": "Politics",
+            "order": 0,
+            "parent": 2,
+            "rght": 3,
+            "slug": "politics",
+            "thumbnail": "",
+            "thumbnail_height": null,
+            "thumbnail_width": null,
+            "tree_id": 2
+        },
+        "model": "categories.category",
+        "pk": 3
+    }
+]

@@ -1,0 +1,186 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Template Tags &mdash; Django Stories 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Django Stories 1.0 documentation" href="../index.html" />
+    <link rel="up" title="Reference Manual" href="index.html" />
+    <link rel="next" title="Urls" href="urls.html" />
+    <link rel="prev" title="Paginator" href="paginator.html" /> 
+  </head>
+  <body>
+<div id="docstitle">
+	<p>Django Stories 1.0 documentation</p>
+</div>
+<div id="header">
+	<div id="title"><h1>Template Tags</h1></div>
+	<ul id="headerButtons">
+		<li id="toc_button"><div class="headerButton"><a href="#">Table of Contents</a></div></li>
+		<li id="page_buttons">
+			<div class="headerButton"><a href="../genindex.html" title="General Index" accesskey="I">index</a></div>
+			<div class="headerButton"><a href="../py-modindex.html" title="Python Module Index" >modules</a></div>
+			<div class="headerButton"><a href="urls.html" title="Urls" accesskey="N">next</a></div>
+			<div class="headerButton"><a href="paginator.html" title="Paginator" accesskey="P">previous</a></div>
+		</li>
+	</ul>
+</div>
+
+<div id="sphinxsidebar">
+  <div class="sphinxsidebarwrapper">
+	<ul><li class="toctree-l1"><a href="../index.html">Main Page</a></li></ul>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../upgrading.html">Upgrading to 1.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../author_guide.html">Custom Author Model Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../settings.html">Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pagination.html">Pagination</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../integration/index.html">Integration with Other Django Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Reference Manual</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="models.html">Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="views.html">Views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="paginator.html">Paginator</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Template Tags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="urls.html">Urls</a></li>
+</ul>
+</li>
+</ul>
+
+      <h3>This Page</h3>
+      <ul class="this-page-menu">
+        <li><a href="../_sources/reference/templatetags.txt"
+               rel="nofollow">Show Source</a></li>
+      </ul>
+    <div id="searchbox" style="display: none">
+      
+        <form class="search" action="../search.html" method="get">
+			<div class="search-wrapper">
+			<span class="search-left"></span>
+			<input class="prettysearch" type="text" name="q" size="18" />
+			<span class="search-right">&nbsp;</span>
+			</div>
+          <input type="submit" value="Search" class="searchbutton" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </form>
+        <p class="searchtip" style="font-size: 90%">
+        Enter search terms or a module, class or function name.
+        </p>
+    </div>
+    <script type="text/javascript">$('#searchbox').show(0);</script>
+  </div>
+</div>
+
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-stories.relations.templatetags.story_relation_tags">
+<span id="template-tags"></span><span id="templatetags"></span><h1>Template Tags<a class="headerlink" href="#module-stories.relations.templatetags.story_relation_tags" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="stories.relations.templatetags.story_relation_tags.RelatedNode">
+<em class="property">class </em><tt class="descclassname">stories.relations.templatetags.story_relation_tags.</tt><tt class="descname">RelatedNode</tt><big>(</big><em>obj</em>, <em>var_name</em>, <em>content_type=None</em>, <em>relation_type=None</em><big>)</big><a class="headerlink" href="#stories.relations.templatetags.story_relation_tags.RelatedNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Main related object node that handles multiple template tags:</p>
+<ul class="simple">
+<li><strong>get_related_content</strong></li>
+<li><strong>get_related_content_type</strong></li>
+<li><strong>get_relation_type</strong></li>
+</ul>
+<dl class="method">
+<dt id="stories.relations.templatetags.story_relation_tags.RelatedNode.render">
+<tt class="descname">render</tt><big>(</big><em>context</em><big>)</big><a class="headerlink" href="#stories.relations.templatetags.story_relation_tags.RelatedNode.render" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="stories.relations.templatetags.story_relation_tags.do_get_related_content">
+<tt class="descclassname">stories.relations.templatetags.story_relation_tags.</tt><tt class="descname">do_get_related_content</tt><big>(</big><em>parser</em>, <em>token</em><big>)</big><a class="headerlink" href="#stories.relations.templatetags.story_relation_tags.do_get_related_content" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets all relations to a story</p>
+<p><strong>Syntax</strong>:</p>
+<div class="highlight-python"><pre>{% get_related_content item as var_name %}</pre>
+</div>
+<p><strong>Example</strong>:</p>
+<div class="highlight-python"><pre>{% get_related_content story as story_rels %}</pre>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="stories.relations.templatetags.story_relation_tags.do_get_related_content_type">
+<tt class="descclassname">stories.relations.templatetags.story_relation_tags.</tt><tt class="descname">do_get_related_content_type</tt><big>(</big><em>parser</em>, <em>token</em><big>)</big><a class="headerlink" href="#stories.relations.templatetags.story_relation_tags.do_get_related_content_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets relations to a story based on the content type</p>
+<p><strong>Syntax</strong>:</p>
+<div class="highlight-python"><pre>{% get_related_content_type item content_type as var_name %}</pre>
+</div>
+<p><strong>Example</strong>:</p>
+<div class="highlight-python"><pre>{% get_related_content_type story Image as story_photos %}</pre>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="stories.relations.templatetags.story_relation_tags.do_get_relation_type">
+<tt class="descclassname">stories.relations.templatetags.story_relation_tags.</tt><tt class="descname">do_get_relation_type</tt><big>(</big><em>parser</em>, <em>token</em><big>)</big><a class="headerlink" href="#stories.relations.templatetags.story_relation_tags.do_get_relation_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the relations to a story based on the relation type</p>
+<p><strong>Syntax</strong>:</p>
+<div class="highlight-python"><pre>{% get_relation_type item relation_type as var_name %}</pre>
+</div>
+<p><strong>Example</strong>:</p>
+<div class="highlight-python"><pre>{% get_relation_type story leadphoto as leadphoto %}</pre>
+</div>
+</dd></dl>
+
+<span class="target" id="module-stories.templatetags.quickedit"></span><dl class="function">
+<dt id="stories.templatetags.quickedit.results">
+<tt class="descclassname">stories.templatetags.quickedit.</tt><tt class="descname">results</tt><big>(</big><em>cl</em><big>)</big><a class="headerlink" href="#stories.templatetags.quickedit.results" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="stories.templatetags.quickedit.qe_result_list">
+<tt class="descclassname">stories.templatetags.quickedit.</tt><tt class="descname">qe_result_list</tt><big>(</big><em>context</em>, <em>cl</em><big>)</big><a class="headerlink" href="#stories.templatetags.quickedit.qe_result_list" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+
+
+          </div> 
+        </div>
+      </div>
+    <div class="footer">
+    <p>
+      &copy; Copyright 2012, The Calloway Project.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+	</p>
+    </div>
+      <div class="clearer"></div>
+    </div>
+	<div id="breadcrumbs">
+		<a href="index.html" accesskey="U">Reference Manual</a><img src="../_static/triangle_closed.png" height="9" width="9" alt="&gt;">
+		Template Tags
+		</ul>
+	</div>
+	<script type="text/javascript" charset="utf-8" src="../_static/toc.js"></script>
+  </body>
+</html>

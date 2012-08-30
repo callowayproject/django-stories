@@ -2,17 +2,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Installation &mdash; Django Stories v0.5.1 documentation</title>
+    <title>Installation &mdash; Django Stories 1.0 documentation</title>
+    
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '0.5.1',
+        VERSION:     '1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -21,13 +24,13 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Django Stories v0.5.1 documentation" href="index.html" />
-    <link rel="next" title="Settings" href="settings.html" />
+    <link rel="top" title="Django Stories 1.0 documentation" href="index.html" />
+    <link rel="next" title="Upgrading to 1.0" href="upgrading.html" />
     <link rel="prev" title="Welcome to Django Stories’s documentation!" href="index.html" /> 
   </head>
   <body>
 <div id="docstitle">
-	<p>Django Stories v0.5.1 documentation</p>
+	<p>Django Stories 1.0 documentation</p>
 </div>
 <div id="header">
 	<div id="title"><h1>Installation</h1></div>
@@ -36,7 +39,7 @@
 		<li id="page_buttons">
 			<div class="headerButton"><a href="genindex.html" title="General Index" accesskey="I">index</a></div>
 			<div class="headerButton"><a href="py-modindex.html" title="Python Module Index" >modules</a></div>
-			<div class="headerButton"><a href="settings.html" title="Settings" accesskey="N">next</a></div>
+			<div class="headerButton"><a href="upgrading.html" title="Upgrading to 1.0" accesskey="N">next</a></div>
 			<div class="headerButton"><a href="index.html" title="Welcome to Django Stories’s documentation!" accesskey="P">previous</a></div>
 		</li>
 	</ul>
@@ -46,11 +49,19 @@
   <div class="sphinxsidebarwrapper">
 	<ul><li class="toctree-l1"><a href="index.html">Main Page</a></li></ul>
 	<ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#using-pip">Using PIP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#download">Download</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id1">Install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#run-syncdb">Run syncdb</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="upgrading.html">Upgrading to 1.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="author_guide.html">Custom Author Model Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="settings.html">Settings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pagination.html">Pagination</a></li>
 <li class="toctree-l1"><a class="reference internal" href="integration/index.html">Integration with Other Django Applications</a></li>
-<li class="toctree-l1"><a class="reference internal" href="user/index.html">User Manual</a></li>
 <li class="toctree-l1"><a class="reference internal" href="reference/index.html">Reference Manual</a></li>
 </ul>
 
@@ -87,21 +98,78 @@
           <div class="body">
             
   <div class="section" id="installation">
-<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
-<p>### * Add javascript for advanced and simple modes of editing ### Maybe not</p>
+<span id="install"></span><h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="using-pip">
+<h2>Using PIP<a class="headerlink" href="#using-pip" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>pip install django-stories
+</pre></div>
+</div>
+</div>
+<div class="section" id="download">
+<h2>Download<a class="headerlink" href="#download" title="Permalink to this headline">¶</a></h2>
+<p>Download the app <a class="reference external" href="http://pypi.python.org/pypi/django-stories/">here</a>
+and run...</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>python setup.py install
+</pre></div>
+</div>
+</div>
+<div class="section" id="id1">
+<h2>Install<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>Add <strong>stories</strong> to your settings <strong>INSTALLED_APPS</strong>,</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="o">...</span>
+    <span class="s">&#39;stories&#39;</span><span class="p">,</span>
+    <span class="o">...</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>If you want to use <em class="xref std std-ref">story_relations</em>, add the app to
+<strong>INSTALLED_APPS</strong> as well.</p>
+<p class="versionadded">
+<span class="versionmodified">New in version 1.0.</span></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="o">...</span>
+    <span class="s">&#39;stories&#39;</span><span class="p">,</span>
+    <span class="s">&#39;stories.relations&#39;</span><span class="p">,</span>
+    <span class="o">...</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<p class="versionchanged">
+<span class="versionmodified">Changed in version 1.0: </span>The only requirement is <cite>BeautifulSoup</cite> for pagination</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>pip install BeautifulSoup
+</pre></div>
+</div>
+<div class="section" id="other-requirements">
+<h3>Other Requirements<a class="headerlink" href="#other-requirements" title="Permalink to this headline">¶</a></h3>
+<p><cite>Stories</cite> may also require a couple <cite>django</cite> apps to be installed.</p>
 <ul class="simple">
-<li>Move authors to own section and below content.</li>
-<li>Auto-add the user if it is a new story</li>
-<li>Remove pluggable markups from settings and models</li>
-<li>Super Users can see everything!</li>
-<li>new templates for reversion to make it not editable, and show changes (optionally?)</li>
+<li><strong>sites</strong></li>
+<li><strong>contenttypes</strong> <em>(required if you use story relations)</em></li>
+<li><strong>auth</strong> <em>(required, unless you specify a custom author model)</em></li>
 </ul>
-<p>Dependencies:</p>
-<blockquote>
-<div>diff_match_patch (included in lib)</div></blockquote>
-<p>Integration with django-tinymce</p>
-<p>Integration with django-reversion</p>
-<p>Integration with django-categories</p>
+</div>
+</div>
+<div class="section" id="run-syncdb">
+<h2>Run syncdb<a class="headerlink" href="#run-syncdb" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>./manage.py syncdb
+</pre></div>
+</div>
+<p>If your using <tt class="docutils literal"><span class="pre">South</span></tt> run</p>
+<p class="versionadded">
+<span class="versionmodified">New in version 1.0.</span></p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>./manage.py syncdb --migrate
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The initial migration for <cite>stories</cite> is a little special, if you plan
+to use a custom author model, please consult <a class="reference internal" href="author_guide.html#author-guide"><em>Custom Author Model Guide</em></a></p>
+</div>
+</div>
 </div>
 
 
@@ -110,8 +178,8 @@
       </div>
     <div class="footer">
     <p>
-      &copy; Copyright 2009, The Washington Times.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+      &copy; Copyright 2012, The Calloway Project.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
 	</p>
     </div>
       <div class="clearer"></div>

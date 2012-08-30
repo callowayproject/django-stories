@@ -1,9 +1,12 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
-"""URL definitions for news stories
+
+"""
+URL definitions for news stories
 """
 
 from django.conf.urls.defaults import *
-from models import Story
+from .models import Story
 
 info_dict = {
     'queryset': Story.published.all(),
@@ -19,7 +22,7 @@ comment_info_dict = dict(info_dict.items() + [('template_name','stories/story_co
 comment_info_dict.pop('allow_empty')
 
 urlpatterns = patterns('',
-                      
+
     # news archive index
     url(
         regex  = '^$',
@@ -82,5 +85,5 @@ urlpatterns = patterns('',
         kwargs = comment_info_dict,
         name   = 'news_detail_comments',
     ),
-    
+
 )

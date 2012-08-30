@@ -1,0 +1,224 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Upgrading to 1.0 &mdash; Django Stories 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Django Stories 1.0 documentation" href="index.html" />
+    <link rel="next" title="Custom Author Model Guide" href="author_guide.html" />
+    <link rel="prev" title="Installation" href="install.html" /> 
+  </head>
+  <body>
+<div id="docstitle">
+	<p>Django Stories 1.0 documentation</p>
+</div>
+<div id="header">
+	<div id="title"><h1>Upgrading to 1.0</h1></div>
+	<ul id="headerButtons">
+		<li id="toc_button"><div class="headerButton"><a href="#">Table of Contents</a></div></li>
+		<li id="page_buttons">
+			<div class="headerButton"><a href="genindex.html" title="General Index" accesskey="I">index</a></div>
+			<div class="headerButton"><a href="py-modindex.html" title="Python Module Index" >modules</a></div>
+			<div class="headerButton"><a href="author_guide.html" title="Custom Author Model Guide" accesskey="N">next</a></div>
+			<div class="headerButton"><a href="install.html" title="Installation" accesskey="P">previous</a></div>
+		</li>
+	</ul>
+</div>
+
+<div id="sphinxsidebar">
+  <div class="sphinxsidebarwrapper">
+	<ul><li class="toctree-l1"><a href="index.html">Main Page</a></li></ul>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Upgrading to 1.0</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ensureing-story-models-are-correctly-configured">Ensureing story models are correctly configured</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ensuring-functionality">Ensuring functionality</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="author_guide.html">Custom Author Model Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pagination.html">Pagination</a></li>
+<li class="toctree-l1"><a class="reference internal" href="integration/index.html">Integration with Other Django Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference/index.html">Reference Manual</a></li>
+</ul>
+
+      <h3>This Page</h3>
+      <ul class="this-page-menu">
+        <li><a href="_sources/upgrading.txt"
+               rel="nofollow">Show Source</a></li>
+      </ul>
+    <div id="searchbox" style="display: none">
+      
+        <form class="search" action="search.html" method="get">
+			<div class="search-wrapper">
+			<span class="search-left"></span>
+			<input class="prettysearch" type="text" name="q" size="18" />
+			<span class="search-right">&nbsp;</span>
+			</div>
+          <input type="submit" value="Search" class="searchbutton" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </form>
+        <p class="searchtip" style="font-size: 90%">
+        Enter search terms or a module, class or function name.
+        </p>
+    </div>
+    <script type="text/javascript">$('#searchbox').show(0);</script>
+  </div>
+</div>
+
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="upgrading-to-1-0">
+<span id="upgrading"></span><h1>Upgrading to 1.0<a class="headerlink" href="#upgrading-to-1-0" title="Permalink to this headline">¶</a></h1>
+<p>Version <tt class="docutils literal"><span class="pre">1.0</span></tt> includes of bunch of changes, some of which are not backwards
+compatible. This migration guide will try to help you upgrade your stories
+to <tt class="docutils literal"><span class="pre">1.0</span></tt>.</p>
+<p>Before we install the new version of <tt class="docutils literal"><span class="pre">stories</span></tt>, we need to determine which
+parts will need your attention. While there are no schema changes to <tt class="docutils literal"><span class="pre">stories</span></tt>
+and <tt class="docutils literal"><span class="pre">relations</span></tt> in <tt class="docutils literal"><span class="pre">1.0</span></tt>, there are, however, some steps that need to be taken
+to ensure everything stays the same.</p>
+<div class="section" id="ensureing-story-models-are-correctly-configured">
+<h2>Ensureing story models are correctly configured<a class="headerlink" href="#ensureing-story-models-are-correctly-configured" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="if-you-using-django-categories">
+<h3>If you using django-categories<a class="headerlink" href="#if-you-using-django-categories" title="Permalink to this headline">¶</a></h3>
+<p>The setting <tt class="docutils literal"><span class="pre">USE_CATEGORIES</span></tt> has been removed, instead you will need
+to use the <tt class="docutils literal"><span class="pre">categories</span></tt> to register the fields you once had. These fields
+were hard coded into stories as <tt class="docutils literal"><span class="pre">primary_category</span></tt> and <tt class="docutils literal"><span class="pre">categories</span></tt>. Here is
+an example of what you can do</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">CATEGORIES_SETTINGS</span> <span class="o">=</span> <span class="p">{</span>
+   <span class="s">&#39;FK_REGISTRY&#39;</span><span class="p">:</span> <span class="p">{</span>
+       <span class="s">&#39;stories.story&#39;</span><span class="p">:</span> <span class="p">{</span>
+           <span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="s">&#39;primary_category&#39;</span><span class="p">,</span> <span class="s">&#39;related_name&#39;</span><span class="p">:</span> <span class="s">&#39;primary_category&#39;</span>
+           <span class="p">}</span>
+       <span class="p">},</span>
+       <span class="s">&#39;M2M_REGISTRY&#39;</span><span class="p">:</span> <span class="p">{</span>
+           <span class="s">&#39;stories.story&#39;</span><span class="p">:</span> <span class="p">{</span>
+           <span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="s">&#39;categories&#39;</span><span class="p">,</span> <span class="s">&#39;related_name&#39;</span><span class="p">:</span> <span class="s">&#39;categories&#39;</span>
+           <span class="p">}</span>
+       <span class="p">}</span>
+   <span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="if-you-using-story-relations">
+<h3>If you using story relations<a class="headerlink" href="#if-you-using-story-relations" title="Permalink to this headline">¶</a></h3>
+<p><tt class="docutils literal"><span class="pre">relations</span></tt> are now a seperate app within <tt class="docutils literal"><span class="pre">stories</span></tt>, you must add
+<tt class="docutils literal"><span class="pre">stories.relations</span></tt> to your <tt class="docutils literal"><span class="pre">INSTALLED_APPS</span></tt></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">(</span>
+     <span class="o">...</span>
+     <span class="s">&#39;stories&#39;</span><span class="p">,</span>
+     <span class="s">&#39;stories.relations&#39;</span><span class="p">,</span>
+     <span class="o">...</span>
+ <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="if-you-using-django-south">
+<span id="upgrading-with-south"></span><h3>If you using django-south<a class="headerlink" href="#if-you-using-django-south" title="Permalink to this headline">¶</a></h3>
+<p><tt class="docutils literal"><span class="pre">stories</span></tt> is now <tt class="docutils literal"><span class="pre">south</span></tt> enabled, however, there are some things you will
+need to know about how the initial migration runs. While you will be
+faking the initial migration, since your upgrading, these points are good
+to know.</p>
+<ol class="arabic simple">
+<li>In order to sync the configurable <tt class="docutils literal"><span class="pre">authors</span></tt> model, the initial migration
+contains some custom bits. Bascially, the db columns that are created, need
+to be what <tt class="docutils literal"><span class="pre">django</span></tt> expects them to be. By default, <tt class="docutils literal"><span class="pre">auth.User</span></tt> model is
+used, which makes a table with fields <tt class="docutils literal"><span class="pre">user_id</span></tt> and <tt class="docutils literal"><span class="pre">story_id</span></tt>. If we use
+a custom model called <tt class="docutils literal"><span class="pre">BasicUser</span></tt>, for example, django expects the db
+columns to be <tt class="docutils literal"><span class="pre">basicuser_id</span></tt> and <tt class="docutils literal"><span class="pre">story_id</span></tt>.</li>
+<li>It is now the responsability of <tt class="docutils literal"><span class="pre">django-categories</span></tt> to sync the category
+fields and not <tt class="docutils literal"><span class="pre">stories</span></tt>. There is nothing special you have to do to get
+the fields to sync, <tt class="docutils literal"><span class="pre">categories</span></tt> includes a <tt class="docutils literal"><span class="pre">post_syncdb</span></tt> signal to sync
+the fields for you. <em>Note: this signal is only run when using south</em>.</li>
+<li><tt class="docutils literal"><span class="pre">Relations</span></tt> have there own migrations. The models for <tt class="docutils literal"><span class="pre">relations</span></tt> set the
+<tt class="docutils literal"><span class="pre">db_table</span></tt> meta attribute to <tt class="docutils literal"><span class="pre">stories_storyrelation</span></tt> and not what it
+would normally (because of the location of the app being inside stories).</li>
+</ol>
+</div>
+</div>
+<div class="section" id="ensuring-functionality">
+<h2>Ensuring functionality<a class="headerlink" href="#ensuring-functionality" title="Permalink to this headline">¶</a></h2>
+<p>The only requirement now is BeautifullSoup, all the others were removed.
+If you expect <tt class="docutils literal"><span class="pre">reversion</span></tt>, <tt class="docutils literal"><span class="pre">tinymce</span></tt> or <tt class="docutils literal"><span class="pre">categories</span></tt> to be installed via
+<tt class="docutils literal"><span class="pre">stories</span></tt> requirements, please update any site specific requirements file
+to include these packages.</p>
+<div class="section" id="if-you-using-tinymce">
+<h3>If you using TinyMCE<a class="headerlink" href="#if-you-using-tinymce" title="Permalink to this headline">¶</a></h3>
+<p><tt class="docutils literal"><span class="pre">django-tinymce</span></tt> was removed as a dependance of <tt class="docutils literal"><span class="pre">stories</span></tt> and
+therefore removed as the default widget for the <tt class="docutils literal"><span class="pre">body</span></tt> field. In order
+to get <tt class="docutils literal"><span class="pre">TinyMCE</span></tt> to render the <tt class="docutils literal"><span class="pre">body</span></tt> field you will need to supply
+<tt class="docutils literal"><span class="pre">WIDGET</span></tt> setting.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">STORY_SETTINGS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="o">...</span>
+    <span class="s">&#39;WIDGET&#39;</span><span class="p">:</span> <span class="s">&#39;path.to.TinyMCEWIdget&#39;</span><span class="p">,</span>
+    <span class="o">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="if-your-using-relations">
+<h3>If your using Relations<a class="headerlink" href="#if-your-using-relations" title="Permalink to this headline">¶</a></h3>
+<p>The relation template tags have moved into the <tt class="docutils literal"><span class="pre">relations</span></tt> app within <tt class="docutils literal"><span class="pre">stories</span></tt>.
+Any instance of <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">load</span> <span class="pre">stories</span> <span class="pre">%}</span></tt> needs to be replaced with
+<tt class="docutils literal"><span class="pre">{%</span> <span class="pre">load</span> <span class="pre">story_relation_tags</span> <span class="pre">%}</span></tt>. The tag names are still the same and function
+the same</p>
+</div>
+<div class="section" id="if-your-using-story-ordering-setting">
+<h3>If your using STORY_ORDERING setting<a class="headerlink" href="#if-your-using-story-ordering-setting" title="Permalink to this headline">¶</a></h3>
+<p>The setting <tt class="docutils literal"><span class="pre">STORY_ORDERING</span></tt> was renamed to simply <tt class="docutils literal"><span class="pre">ORDERING</span></tt></p>
+</div>
+<div class="section" id="if-your-using-the-author-property-of-the-story-model">
+<h3>If your using the author property of the story model<a class="headerlink" href="#if-your-using-the-author-property-of-the-story-model" title="Permalink to this headline">¶</a></h3>
+<p>While the property stil exists and functions the same, it was rather dumb
+in the way it worked. There is a new property called <tt class="docutils literal"><span class="pre">author_display</span></tt> which
+renders out a template you can use. This will be if you want to use a custom
+author model</p>
+</div>
+</div>
+</div>
+
+
+          </div> 
+        </div>
+      </div>
+    <div class="footer">
+    <p>
+      &copy; Copyright 2012, The Calloway Project.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+	</p>
+    </div>
+      <div class="clearer"></div>
+    </div>
+	<div id="breadcrumbs">
+		Upgrading to 1.0
+		</ul>
+	</div>
+	<script type="text/javascript" charset="utf-8" src="_static/toc.js"></script>
+  </body>
+</html>

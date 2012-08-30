@@ -2,8 +2,8 @@
 {% load add_attribute %}
 
 {% block content %}
-	<h1>{{ story.headline }}</h1>
-	{% if story.subheadline %}<h2>{{ story.subheadline }}</h2>{% endif %}
-	<p class="byline">By {{ story.author }}</p>
-	{{ story.body|safe }}
+  <h1>{{ story.headline }}</h1>
+  {% if story.subheadline %}<h2>{{ story.subheadline }}</h2>{% endif %}
+  <p class="byline">By {{ story.author_display }}</p>
+  {{ story.body|safe }}
 {% endblock %}

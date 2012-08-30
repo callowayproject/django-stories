@@ -1,0 +1,138 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Custom Author Model Guide &mdash; Django Stories 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Django Stories 1.0 documentation" href="index.html" />
+    <link rel="next" title="Settings" href="settings.html" />
+    <link rel="prev" title="Upgrading to 1.0" href="upgrading.html" /> 
+  </head>
+  <body>
+<div id="docstitle">
+	<p>Django Stories 1.0 documentation</p>
+</div>
+<div id="header">
+	<div id="title"><h1>Custom Author Model Guide</h1></div>
+	<ul id="headerButtons">
+		<li id="toc_button"><div class="headerButton"><a href="#">Table of Contents</a></div></li>
+		<li id="page_buttons">
+			<div class="headerButton"><a href="genindex.html" title="General Index" accesskey="I">index</a></div>
+			<div class="headerButton"><a href="py-modindex.html" title="Python Module Index" >modules</a></div>
+			<div class="headerButton"><a href="settings.html" title="Settings" accesskey="N">next</a></div>
+			<div class="headerButton"><a href="upgrading.html" title="Upgrading to 1.0" accesskey="P">previous</a></div>
+		</li>
+	</ul>
+</div>
+
+<div id="sphinxsidebar">
+  <div class="sphinxsidebarwrapper">
+	<ul><li class="toctree-l1"><a href="index.html">Main Page</a></li></ul>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="upgrading.html">Upgrading to 1.0</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Custom Author Model Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pagination.html">Pagination</a></li>
+<li class="toctree-l1"><a class="reference internal" href="integration/index.html">Integration with Other Django Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference/index.html">Reference Manual</a></li>
+</ul>
+
+      <h3>This Page</h3>
+      <ul class="this-page-menu">
+        <li><a href="_sources/author_guide.txt"
+               rel="nofollow">Show Source</a></li>
+      </ul>
+    <div id="searchbox" style="display: none">
+      
+        <form class="search" action="search.html" method="get">
+			<div class="search-wrapper">
+			<span class="search-left"></span>
+			<input class="prettysearch" type="text" name="q" size="18" />
+			<span class="search-right">&nbsp;</span>
+			</div>
+          <input type="submit" value="Search" class="searchbutton" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </form>
+        <p class="searchtip" style="font-size: 90%">
+        Enter search terms or a module, class or function name.
+        </p>
+    </div>
+    <script type="text/javascript">$('#searchbox').show(0);</script>
+  </div>
+</div>
+
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="custom-author-model-guide">
+<span id="author-guide"></span><h1>Custom Author Model Guide<a class="headerlink" href="#custom-author-model-guide" title="Permalink to this headline">¶</a></h1>
+<p>By default the <tt class="docutils literal"><span class="pre">authors</span></tt> of a story is a many to many field using
+<tt class="docutils literal"><span class="pre">auth.User</span></tt> as the model. However you can also specify your own
+custom author model to be used. There are some things you will need
+to know about change the author model.</p>
+<p>1. The initial migration using <tt class="docutils literal"><span class="pre">South</span></tt> was changed to allow for
+this custom many to many field be possible.</p>
+<p>2. If your intent is to use a custom model, but have yet to
+defined this model, your inital migration uses <tt class="docutils literal"><span class="pre">auth.User</span></tt> as
+the authors many to many model. Later, when your custom author
+model is created, you will have to determine your self if the
+database table that was created needs to be changed as well.</p>
+<p>This is usually the case if your custom model is named anything
+other the <tt class="docutils literal"><span class="pre">User</span></tt>. For example, the table name created using <tt class="docutils literal"><span class="pre">auth.User</span></tt>
+would be <strong>stories_storyauthor</strong> with 2 fields <strong>user_id</strong> and <strong>story_id</strong>.
+While <strong>story_id</strong> is obvious, <strong>user_id</strong> is the field that may
+change depending on the model name. The example app that is part of
+<tt class="docutils literal"><span class="pre">stories</span></tt> defines a authors model named <tt class="docutils literal"><span class="pre">BasicAuthor</span></tt>. The table
+name is still <strong>stories_storyauthor</strong>, however, the columnes it
+needs are <strong>basicauthor_id</strong> and <strong>story_id</strong>.</p>
+<p>The initial <tt class="docutils literal"><span class="pre">South</span></tt> migration, takes this in account and will
+supply the name of the custom field for you. However if you changed the
+<tt class="docutils literal"><span class="pre">authors</span></tt> many to many model after the migration, you will need
+to determine the new column names and manually adjust them as needed.</p>
+</div>
+
+
+          </div> 
+        </div>
+      </div>
+    <div class="footer">
+    <p>
+      &copy; Copyright 2012, The Calloway Project.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+	</p>
+    </div>
+      <div class="clearer"></div>
+    </div>
+	<div id="breadcrumbs">
+		Custom Author Model Guide
+		</ul>
+	</div>
+	<script type="text/javascript" charset="utf-8" src="_static/toc.js"></script>
+  </body>
+</html>

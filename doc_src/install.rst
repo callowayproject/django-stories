@@ -1,27 +1,95 @@
+
+.. _install:
+
 ============
 Installation
 ============
 
+Using PIP
+=========
 
-### * Add javascript for advanced and simple modes of editing ### Maybe not
+.. code-block:: bash
 
-* Move authors to own section and below content.
-
-* Auto-add the user if it is a new story
-
-* Remove pluggable markups from settings and models
-
-* Super Users can see everything!
-
-* new templates for reversion to make it not editable, and show changes (optionally?)
-
-Dependencies:
-
-  diff_match_patch (included in lib)
+    $ pip install django-stories
 
 
-Integration with django-tinymce
+Download
+========
 
-Integration with django-reversion
+Download the app `here <http://pypi.python.org/pypi/django-stories/>`_
+and run...
 
-Integration with django-categories
+.. code-block:: bash
+
+    $ python setup.py install
+
+
+Install
+=======
+
+Add **stories** to your settings **INSTALLED_APPS**,
+
+.. code-block:: python
+
+    INSTALLED_APPS = (
+        ...
+        'stories',
+        ...
+    )
+
+If you want to use :ref:`story_relations`, add the app to
+**INSTALLED_APPS** as well.
+
+.. versionadded:: 1.0
+
+.. code-block:: python
+
+    INSTALLED_APPS = (
+        ...
+        'stories',
+        'stories.relations',
+        ...
+    )
+
+
+
+Requirements
+============
+
+.. versionchanged:: 1.0
+   The only requirement is `BeautifulSoup` for pagination
+
+.. code-block:: bash
+
+    $ pip install BeautifulSoup
+
+
+Other Requirements
+------------------
+
+`Stories` may also require a couple `django` apps to be installed.
+
+* **sites**
+* **contenttypes** *(required if you use story relations)*
+* **auth** *(required, unless you specify a custom author model)*
+
+
+Run syncdb
+==========
+
+.. code-block:: bash
+
+    $ ./manage.py syncdb
+
+If your using ``South`` run
+
+.. versionadded:: 1.0
+
+.. code-block:: bash
+
+    $ ./manage.py syncdb --migrate
+
+.. note::
+
+    The initial migration for `stories` is a little special, if you plan
+    to use a custom author model, please consult :ref:`author_guide`

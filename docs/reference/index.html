@@ -2,17 +2,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Reference Manual &mdash; Django Stories v0.5.1 documentation</title>
+    <title>Reference Manual &mdash; Django Stories 1.0 documentation</title>
+    
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.5.1',
+        VERSION:     '1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -21,13 +24,13 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Django Stories v0.5.1 documentation" href="../index.html" />
+    <link rel="top" title="Django Stories 1.0 documentation" href="../index.html" />
     <link rel="next" title="Models" href="models.html" />
-    <link rel="prev" title="Revisions" href="../user/revisions.html" /> 
+    <link rel="prev" title="Integrating with Django TinyMCE" href="../integration/tinymce_integration.html" /> 
   </head>
   <body>
 <div id="docstitle">
-	<p>Django Stories v0.5.1 documentation</p>
+	<p>Django Stories 1.0 documentation</p>
 </div>
 <div id="header">
 	<div id="title"><h1>Reference Manual</h1></div>
@@ -37,7 +40,7 @@
 			<div class="headerButton"><a href="../genindex.html" title="General Index" accesskey="I">index</a></div>
 			<div class="headerButton"><a href="../py-modindex.html" title="Python Module Index" >modules</a></div>
 			<div class="headerButton"><a href="models.html" title="Models" accesskey="N">next</a></div>
-			<div class="headerButton"><a href="../user/revisions.html" title="Revisions" accesskey="P">previous</a></div>
+			<div class="headerButton"><a href="../integration/tinymce_integration.html" title="Integrating with Django TinyMCE" accesskey="P">previous</a></div>
 		</li>
 	</ul>
 </div>
@@ -47,12 +50,17 @@
 	<ul><li class="toctree-l1"><a href="../index.html">Main Page</a></li></ul>
 	<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../upgrading.html">Upgrading to 1.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../author_guide.html">Custom Author Model Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../settings.html">Settings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pagination.html">Pagination</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../integration/index.html">Integration with Other Django Applications</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../user/index.html">User Manual</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">Reference Manual</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="models.html">Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="views.html">Views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="paginator.html">Paginator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="templatetags.html">Template Tags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="urls.html">Urls</a></li>
 </ul>
 </li>
 </ul>
@@ -93,7 +101,15 @@
 <span id="reference-index"></span><h1>Reference Manual<a class="headerlink" href="#reference-manual" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="models.html">Models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="models.html#module-stories.models">Stories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models.html#module-stories.relations.models">Relations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="views.html">Views</a></li>
+<li class="toctree-l1"><a class="reference internal" href="paginator.html">Paginator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templatetags.html">Template Tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="urls.html">Urls</a></li>
 </ul>
 </div>
 </div>
@@ -104,8 +120,8 @@
       </div>
     <div class="footer">
     <p>
-      &copy; Copyright 2009, The Washington Times.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+      &copy; Copyright 2012, The Calloway Project.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
 	</p>
     </div>
       <div class="clearer"></div>

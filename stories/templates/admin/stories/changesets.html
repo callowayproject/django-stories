@@ -3,60 +3,67 @@
 {% load i18n %}
 
 {% block breadcrumbs %}
-	<ul id="crumbs">
-		<li><a href="/">Home</a></li>
-		<li><a href="../../../">Stories</a></li>
-		<li><a href="../../">Stories</a></li>
-		<li><a href="../">{{ story.headline }}</a></li>
-		<li>Change Sets</li>
-	</ul>
+  <ul id="crumbs">
+    <li><a href="/">Home</a></li>
+    <li><a href="../../../">Stories</a></li>
+    <li><a href="../../">Stories</a></li>
+    <li><a href="../">{{ story.headline }}</a></li>
+    <li>Change Sets</li>
+  </ul>
 {% endblock %}
 
 {% block content_title %}
-	<h1>Revisions for: {{ story.headline }} : {{ story.publish_date }}</h1>
+  <h1>Revisions for: {{ story.headline }} : {{ story.publish_date }}</h1>
 {% endblock %}
 
 {% block footerscripts %}
-	<script type="text/javascript">
-		$("#changesets").accordion({autoHeight:false});
-	</script>
+  <script type="text/javascript">
+    $("#changesets").accordion({autoHeight:false});
+  </script>
 {% endblock %}
 
 {% block cols %}
-	13
+  13
 {% endblock %}
 
 {% block content %}
-	<div class="grid_13">
-		{% block object-tools %}
-			{% if not is_popup %}
-				<ul class="object-tools">
-					<li><a href="../">Add/Edit {{ app_label|capfirst }}</a></li>
-					<li class="active">Content Revisions</li>
-					<li><a href="../history/">{% trans "History" %}</a></li>
-	  				{% if has_absolute_url %}
-						<li><a href="../../../r/{{ content_type_id }}/{{ object_id }}/" class="viewsitelink">{% trans "View on site" %}</a></li>
-					{% endif%}
-				</ul>
-			{% endif %}
-		{% endblock %}
-		<div class="inner module">
-			<div class="toppad">
-		<div id="changesets">
-			{% for change in changesets %}
-				<h5>
-					{% if forloop.first %}
-						Latest Revision
-					{% else %}
-						Revision {{ change.revision }}
-					{% endif %}
-				</h5>
-				<div>
-					<div>{% if not forloop.first %} <span><a href="../revert_to/{{ change.revision }}/">revert to these changes</a></span>{% endif %}</div>
-					{{ change.display_diff|safe }}
-				</div>
-			{% endfor %}
-		</div>
-		</div>
-	</div>
+  <div class="grid_13">
+    {% block object-tools %}
+      {% if not is_popup %}
+        <ul class="object-tools">
+          <li><a href="../">Add/Edit {{ app_label|capfirst }}</a></li>
+          <li class="active">Content Revisions</li>
+          <li><a href="../history/">{% trans "History" %}</a></li>
+          {% if has_absolute_url %}
+            <li><a href="../../../r/{{ content_type_id }}/{{ object_id }}/" class="viewsitelink">{% trans "View on site" %}</a></li>
+          {% endif%}
+        </ul>
+      {% endif %}
+    {% endblock %}
+    <div class="inner module">
+      <div class="toppad">
+        <div id="changesets">
+          {% for change in changesets %}
+            <h5>
+              {% if forloop.first %}
+                Latest Revision
+              {% else %}
+                Revision {{ change.revision }}
+              {% endif %}
+            </h5>
+            <div>
+              <div>
+                {% if not forloop.first %}
+                  <span>
+                    <a href="../revert_to/{{ change.revision }}/">revert to these changes</a>
+                  </span>
+                {% endif %}
+              </div>
+              {{ change.display_diff|safe }}
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}

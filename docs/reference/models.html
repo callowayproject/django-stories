@@ -2,17 +2,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Models &mdash; Django Stories v0.5.1 documentation</title>
+    <title>Models &mdash; Django Stories 1.0 documentation</title>
+    
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.5.1',
+        VERSION:     '1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -21,13 +24,14 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Django Stories v0.5.1 documentation" href="../index.html" />
+    <link rel="top" title="Django Stories 1.0 documentation" href="../index.html" />
     <link rel="up" title="Reference Manual" href="index.html" />
+    <link rel="next" title="Views" href="views.html" />
     <link rel="prev" title="Reference Manual" href="index.html" /> 
   </head>
   <body>
 <div id="docstitle">
-	<p>Django Stories v0.5.1 documentation</p>
+	<p>Django Stories 1.0 documentation</p>
 </div>
 <div id="header">
 	<div id="title"><h1>Models</h1></div>
@@ -36,6 +40,7 @@
 		<li id="page_buttons">
 			<div class="headerButton"><a href="../genindex.html" title="General Index" accesskey="I">index</a></div>
 			<div class="headerButton"><a href="../py-modindex.html" title="Python Module Index" >modules</a></div>
+			<div class="headerButton"><a href="views.html" title="Views" accesskey="N">next</a></div>
 			<div class="headerButton"><a href="index.html" title="Reference Manual" accesskey="P">previous</a></div>
 		</li>
 	</ul>
@@ -46,12 +51,17 @@
 	<ul><li class="toctree-l1"><a href="../index.html">Main Page</a></li></ul>
 	<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../upgrading.html">Upgrading to 1.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../author_guide.html">Custom Author Model Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../settings.html">Settings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pagination.html">Pagination</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../integration/index.html">Integration with Other Django Applications</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../user/index.html">User Manual</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Reference Manual</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="">Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="views.html">Views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="paginator.html">Paginator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="templatetags.html">Template Tags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="urls.html">Urls</a></li>
 </ul>
 </li>
 </ul>
@@ -88,13 +98,21 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="module-stories.models">
-<span id="models"></span><span id="reference-models"></span><h1>Models<a class="headerlink" href="#module-stories.models" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="models">
+<span id="reference-models"></span><h1>Models<a class="headerlink" href="#models" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#module-stories.models" id="id1">Stories</a></li>
+<li><a class="reference internal" href="#module-stories.relations.models" id="id2">Relations</a></li>
+</ul>
+</div>
+<div class="section" id="module-stories.models">
+<span id="stories"></span><h2><a class="toc-backref" href="#id1">Stories</a><a class="headerlink" href="#module-stories.models" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="stories.models.Story">
 <em class="property">class </em><tt class="descclassname">stories.models.</tt><tt class="descname">Story</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#stories.models.Story" title="Permalink to this definition">¶</a></dt>
-<dd><p>A newspaper or magazine type story or document that was possibly also printed
-in a periodical.</p>
+<dd><p>A newspaper or magazine type story or document that was possibly also
+printed in a periodical.</p>
 <dl class="exception">
 <dt id="stories.models.Story.DoesNotExist">
 <em class="property">exception </em><tt class="descname">DoesNotExist</tt><a class="headerlink" href="#stories.models.Story.DoesNotExist" title="Permalink to this definition">¶</a></dt>
@@ -113,13 +131,20 @@ fields are set (author/one-off author)</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="stories.models.Story.authors">
-<tt class="descclassname">Story.</tt><tt class="descname">authors</tt><a class="headerlink" href="#stories.models.Story.authors" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dt id="stories.models.Story.author_display">
+<tt class="descclassname">Story.</tt><tt class="descname">author_display</tt><a class="headerlink" href="#stories.models.Story.author_display" title="Permalink to this definition">¶</a></dt>
+<dd><p>Presentation of the story author(s). Renders the template
+<cite>stories/author_display.html</cite> suppling it with the following context</p>
+<ul class="simple">
+<li><strong>instance</strong> - the story instance</li>
+<li><strong>authors</strong> - all the authors (<cite>authors.objects.all()</cite>)</li>
+<li><strong>non_staff_author</strong> - text value that can be used in place of <cite>authors</cite></li>
+</ul>
+</dd></dl>
 
 <dl class="attribute">
-<dt id="stories.models.Story.categories">
-<tt class="descclassname">Story.</tt><tt class="descname">categories</tt><a class="headerlink" href="#stories.models.Story.categories" title="Permalink to this definition">¶</a></dt>
+<dt id="stories.models.Story.authors">
+<tt class="descclassname">Story.</tt><tt class="descname">authors</tt><a class="headerlink" href="#stories.models.Story.authors" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -154,31 +179,39 @@ fields are set (author/one-off author)</p>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="stories.models.Story.get_related_content_type">
-<tt class="descclassname">Story.</tt><tt class="descname">get_related_content_type</tt><big>(</big><em>content_type</em><big>)</big><a class="headerlink" href="#stories.models.Story.get_related_content_type" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get all related items of the specified content type</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="stories.models.Story.get_relation_type">
-<tt class="descclassname">Story.</tt><tt class="descname">get_relation_type</tt><big>(</big><em>relation_type</em><big>)</big><a class="headerlink" href="#stories.models.Story.get_relation_type" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get all relations of the specified relation type</p>
-</dd></dl>
-
-<dl class="method">
 <dt id="stories.models.Story.get_status_display">
 <tt class="descclassname">Story.</tt><tt class="descname">get_status_display</tt><big>(</big><em>*moreargs</em>, <em>**morekwargs</em><big>)</big><a class="headerlink" href="#stories.models.Story.get_status_display" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
+<dt id="stories.models.Story.objects">
+<tt class="descclassname">Story.</tt><tt class="descname">objects</tt><em class="property"> = &lt;django.db.models.manager.Manager object at 0x2c575d0&gt;</em><a class="headerlink" href="#stories.models.Story.objects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
 <dt id="stories.models.Story.paragraphs">
 <tt class="descclassname">Story.</tt><tt class="descname">paragraphs</tt><a class="headerlink" href="#stories.models.Story.paragraphs" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the paragraphs as a list</p>
+<dd><p>Return the <cite>story.body</cite> as paragraphs by finding all <cite>&lt;p&gt;</cite> tags</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="stories.models.Story.primary_category">
-<tt class="descclassname">Story.</tt><tt class="descname">primary_category</tt><a class="headerlink" href="#stories.models.Story.primary_category" title="Permalink to this definition">¶</a></dt>
+<dt id="stories.models.Story.print_page">
+<tt class="descclassname">Story.</tt><tt class="descname">print_page</tt><em class="property"> = (&lt;django.db.models.fields.CharField object at 0x2c57290&gt;,)</em><a class="headerlink" href="#stories.models.Story.print_page" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="stories.models.Story.print_pub_date">
+<tt class="descclassname">Story.</tt><tt class="descname">print_pub_date</tt><em class="property"> = (&lt;django.db.models.fields.DateTimeField object at 0x2c571d0&gt;,)</em><a class="headerlink" href="#stories.models.Story.print_pub_date" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="stories.models.Story.print_section">
+<tt class="descclassname">Story.</tt><tt class="descname">print_section</tt><em class="property"> = (&lt;django.db.models.fields.CharField object at 0x2c57210&gt;,)</em><a class="headerlink" href="#stories.models.Story.print_section" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="stories.models.Story.published">
+<tt class="descclassname">Story.</tt><tt class="descname">published</tt><em class="property"> = &lt;stories.models.CurrentSitePublishedManager object at 0x2c57610&gt;</em><a class="headerlink" href="#stories.models.Story.published" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -186,13 +219,50 @@ fields are set (author/one-off author)</p>
 <tt class="descclassname">Story.</tt><tt class="descname">site</tt><a class="headerlink" href="#stories.models.Story.site" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
+</dd></dl>
+
+</div>
+<div class="section" id="module-stories.relations.models">
+<span id="relations"></span><h2><a class="toc-backref" href="#id2">Relations</a><a class="headerlink" href="#module-stories.relations.models" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="stories.relations.models.StoryRelation">
+<em class="property">class </em><tt class="descclassname">stories.relations.models.</tt><tt class="descname">StoryRelation</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#stories.relations.models.StoryRelation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Related story item</p>
+<dl class="exception">
+<dt id="stories.relations.models.StoryRelation.DoesNotExist">
+<em class="property">exception </em><tt class="descname">DoesNotExist</tt><a class="headerlink" href="#stories.relations.models.StoryRelation.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="exception">
+<dt id="stories.relations.models.StoryRelation.MultipleObjectsReturned">
+<em class="property">exception </em><tt class="descclassname">StoryRelation.</tt><tt class="descname">MultipleObjectsReturned</tt><a class="headerlink" href="#stories.relations.models.StoryRelation.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="attribute">
-<dt id="stories.models.Story.storyrelation_set">
-<tt class="descclassname">Story.</tt><tt class="descname">storyrelation_set</tt><a class="headerlink" href="#stories.models.Story.storyrelation_set" title="Permalink to this definition">¶</a></dt>
+<dt id="stories.relations.models.StoryRelation.content_object">
+<tt class="descclassname">StoryRelation.</tt><tt class="descname">content_object</tt><a class="headerlink" href="#stories.relations.models.StoryRelation.content_object" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provides a generic relation to any object through content-type/object-id
+fields.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="stories.relations.models.StoryRelation.content_type">
+<tt class="descclassname">StoryRelation.</tt><tt class="descname">content_type</tt><a class="headerlink" href="#stories.relations.models.StoryRelation.content_type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="stories.relations.models.StoryRelation.objects">
+<tt class="descclassname">StoryRelation.</tt><tt class="descname">objects</tt><em class="property"> = &lt;stories.relations.models.StoryRelationManager object at 0x30e9610&gt;</em><a class="headerlink" href="#stories.relations.models.StoryRelation.objects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="stories.relations.models.StoryRelation.story">
+<tt class="descclassname">StoryRelation.</tt><tt class="descname">story</tt><a class="headerlink" href="#stories.relations.models.StoryRelation.story" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
+</div>
 </div>
 
 
@@ -201,8 +271,8 @@ fields are set (author/one-off author)</p>
       </div>
     <div class="footer">
     <p>
-      &copy; Copyright 2009, The Washington Times.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+      &copy; Copyright 2012, The Calloway Project.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
 	</p>
     </div>
       <div class="clearer"></div>

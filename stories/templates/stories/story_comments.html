@@ -1,10 +1,12 @@
 {% extends "stories/stories_base.html" %}
+{% comment %}
 {% load comments %}
 {% block content %}
-	{% get_comment_list for story as comment_list %}
-	{% for comment in comment_list %}
-		<a name="c{{comment.id}}"></a>
-		<a href="{{ story.get_absolute_url }}comments/#c{{comment.id}}">Link to this comment</a>
-		{{comment}}
-	{% endfor %}
+  {% get_comment_list for story as comment_list %}
+  {% for comment in comment_list %}
+    <a name="c{{ comment.id }}"></a>
+    <a href="{{ story.get_absolute_url }}comments/#c{{ comment.id }}">Link to this comment</a>
+      {{ comment }}
+  {% endfor %}
 {% endblock %}
+{% endcomment %}

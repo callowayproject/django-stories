@@ -1,0 +1,23 @@
+/*
+This file contains all the css needed for the quickedit
+functionality on the story admin change list.
+*/
+
+table.qe-table, table.qe-table tr table.qe-table tr td, table.qe-table fieldset {
+  width:75%;
+  border: 1 !important;
+}
+.qe-table label {
+  width: 100px;
+  display: block;
+  float: left;
+}
+input.qe-reset {
+  margin-right: 20px;
+}
+div.qe-buttons img{
+  margin-right:5px;
+}
+table#result_list {
+  width: 85%;
+}

@@ -2,17 +2,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Integrating with Django Reversion &mdash; Django Stories v0.5.1 documentation</title>
+    <title>Integrating with Django Reversion &mdash; Django Stories 1.0 documentation</title>
+    
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.5.1',
+        VERSION:     '1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -21,14 +24,14 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Django Stories v0.5.1 documentation" href="../index.html" />
+    <link rel="top" title="Django Stories 1.0 documentation" href="../index.html" />
     <link rel="up" title="Integration with Other Django Applications" href="index.html" />
     <link rel="next" title="Integrating with Django TinyMCE" href="tinymce_integration.html" />
-    <link rel="prev" title="Integration with Other Django Applications" href="index.html" /> 
+    <link rel="prev" title="Integrating with Django Categories" href="categories_integration.html" /> 
   </head>
   <body>
 <div id="docstitle">
-	<p>Django Stories v0.5.1 documentation</p>
+	<p>Django Stories 1.0 documentation</p>
 </div>
 <div id="header">
 	<div id="title"><h1>Integrating with Django Reversion</h1></div>
@@ -38,7 +41,7 @@
 			<div class="headerButton"><a href="../genindex.html" title="General Index" accesskey="I">index</a></div>
 			<div class="headerButton"><a href="../py-modindex.html" title="Python Module Index" >modules</a></div>
 			<div class="headerButton"><a href="tinymce_integration.html" title="Integrating with Django TinyMCE" accesskey="N">next</a></div>
-			<div class="headerButton"><a href="index.html" title="Integration with Other Django Applications" accesskey="P">previous</a></div>
+			<div class="headerButton"><a href="categories_integration.html" title="Integrating with Django Categories" accesskey="P">previous</a></div>
 		</li>
 	</ul>
 </div>
@@ -48,14 +51,16 @@
 	<ul><li class="toctree-l1"><a href="../index.html">Main Page</a></li></ul>
 	<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../upgrading.html">Upgrading to 1.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../author_guide.html">Custom Author Model Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../settings.html">Settings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pagination.html">Pagination</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Integration with Other Django Applications</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="categories_integration.html">Integrating with Django Categories</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="">Integrating with Django Reversion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tinymce_integration.html">Integrating with Django TinyMCE</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../user/index.html">User Manual</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Manual</a></li>
 </ul>
 
@@ -94,15 +99,32 @@
   <div class="section" id="integrating-with-django-reversion">
 <span id="reversion-integration"></span><h1>Integrating with Django Reversion<a class="headerlink" href="#integrating-with-django-reversion" title="Permalink to this headline">¶</a></h1>
 <ol class="arabic">
-<li><p class="first">Install <a class="reference external" href="http://code.google.com/p/django-reversion/">django-reversion</a></p>
-<div class="highlight-python"><pre>pip install django-reversion</pre>
+<li><p class="first">Install <cite>django-reversion</cite></p>
+<blockquote>
+<div><div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>pip install django-reversion
+</pre></div>
 </div>
+</div></blockquote>
 </li>
 <li><p class="first">Add <tt class="docutils literal"><span class="pre">reversion</span></tt> to your <tt class="docutils literal"><span class="pre">INSTALLED_APPS</span></tt> setting.</p>
+<blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="o">...</span>
+    <span class="s">&#39;reversion&#39;</span><span class="p">,</span>
+    <span class="o">...</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
 </li>
 <li><p class="first"><tt class="docutils literal"><span class="pre">./manage.py</span> <span class="pre">syncdb</span></tt></p>
 </li>
-<li><p class="first">Set <tt class="docutils literal"><span class="pre">STORY_SETTINGS['USE_REVERSION']</span> <span class="pre">=</span> <span class="pre">True</span></tt></p>
+<li><p class="first">Set story settings</p>
+<blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span class="n">STORY_SETTINGS</span><span class="p">[</span><span class="s">&#39;USE_REVERSION&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+</pre></div>
+</div>
+</div></blockquote>
 </li>
 </ol>
 <p>Versions are tracked from when reversion is first installed.</p>
@@ -114,8 +136,8 @@
       </div>
     <div class="footer">
     <p>
-      &copy; Copyright 2009, The Washington Times.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+      &copy; Copyright 2012, The Calloway Project.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
 	</p>
     </div>
       <div class="clearer"></div>

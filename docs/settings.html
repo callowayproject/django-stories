@@ -2,17 +2,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Settings &mdash; Django Stories v0.5.1 documentation</title>
+    <title>Settings &mdash; Django Stories 1.0 documentation</title>
+    
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '0.5.1',
+        VERSION:     '1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -21,13 +24,13 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Django Stories v0.5.1 documentation" href="index.html" />
+    <link rel="top" title="Django Stories 1.0 documentation" href="index.html" />
     <link rel="next" title="Pagination" href="pagination.html" />
-    <link rel="prev" title="Installation" href="install.html" /> 
+    <link rel="prev" title="Custom Author Model Guide" href="author_guide.html" /> 
   </head>
   <body>
 <div id="docstitle">
-	<p>Django Stories v0.5.1 documentation</p>
+	<p>Django Stories 1.0 documentation</p>
 </div>
 <div id="header">
 	<div id="title"><h1>Settings</h1></div>
@@ -37,7 +40,7 @@
 			<div class="headerButton"><a href="genindex.html" title="General Index" accesskey="I">index</a></div>
 			<div class="headerButton"><a href="py-modindex.html" title="Python Module Index" >modules</a></div>
 			<div class="headerButton"><a href="pagination.html" title="Pagination" accesskey="N">next</a></div>
-			<div class="headerButton"><a href="install.html" title="Installation" accesskey="P">previous</a></div>
+			<div class="headerButton"><a href="author_guide.html" title="Custom Author Model Guide" accesskey="P">previous</a></div>
 		</li>
 	</ul>
 </div>
@@ -47,6 +50,8 @@
 	<ul><li class="toctree-l1"><a href="index.html">Main Page</a></li></ul>
 	<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="upgrading.html">Upgrading to 1.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="author_guide.html">Custom Author Model Guide</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">Settings</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#status-choices">STATUS_CHOICES</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#default-status">DEFAULT_STATUS</a></li>
@@ -59,13 +64,15 @@
 <li class="toctree-l2"><a class="reference internal" href="#throw-404">THROW_404</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#author-model">AUTHOR_MODEL</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#author-model-limit-choices">AUTHOR_MODEL_LIMIT_CHOICES</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#use-categories">USE_CATEGORIES</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#use-reversion">USE_REVERSION</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ordering">ORDERING</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#widget">WIDGET</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#widget-attrs">WIDGET_ATTRS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#admin-extras">ADMIN_EXTRAS</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="pagination.html">Pagination</a></li>
 <li class="toctree-l1"><a class="reference internal" href="integration/index.html">Integration with Other Django Applications</a></li>
-<li class="toctree-l1"><a class="reference internal" href="user/index.html">User Manual</a></li>
 <li class="toctree-l1"><a class="reference internal" href="reference/index.html">Reference Manual</a></li>
 </ul>
 
@@ -103,17 +110,48 @@
             
   <div class="section" id="settings">
 <span id="id1"></span><h1>Settings<a class="headerlink" href="#settings" title="Permalink to this headline">¶</a></h1>
-<p>Here are several settings that you can use to customize Stories. Each of the following are keys in <tt class="docutils literal"><span class="pre">STORY_SETTINGS</span></tt>.</p>
+<p>Here are several settings that you can use to customize Stories. Each of the
+following are keys in <tt class="docutils literal"><span class="pre">STORY_SETTINGS</span></tt>.</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#status-choices" id="id17">STATUS_CHOICES</a></li>
+<li><a class="reference internal" href="#default-status" id="id18">DEFAULT_STATUS</a></li>
+<li><a class="reference internal" href="#published-status" id="id19">PUBLISHED_STATUS</a></li>
+<li><a class="reference internal" href="#origin-choices" id="id20">ORIGIN_CHOICES</a></li>
+<li><a class="reference internal" href="#default-origin" id="id21">DEFAULT_ORIGIN</a></li>
+<li><a class="reference internal" href="#include-print" id="id22">INCLUDE_PRINT</a></li>
+<li><a class="reference internal" href="#relation-models" id="id23">RELATION_MODELS</a></li>
+<li><a class="reference internal" href="#pagination" id="id24">PAGINATION</a><ul>
+<li><a class="reference internal" href="#paginate" id="id25">PAGINATE</a></li>
+<li><a class="reference internal" href="#p-per-page" id="id26">P_PER_PAGE</a></li>
+<li><a class="reference internal" href="#orphans" id="id27">ORPHANS</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#throw-404" id="id28">THROW_404</a></li>
+<li><a class="reference internal" href="#author-model" id="id29">AUTHOR_MODEL</a></li>
+<li><a class="reference internal" href="#author-model-limit-choices" id="id30">AUTHOR_MODEL_LIMIT_CHOICES</a></li>
+<li><a class="reference internal" href="#use-reversion" id="id31">USE_REVERSION</a></li>
+<li><a class="reference internal" href="#ordering" id="id32">ORDERING</a></li>
+<li><a class="reference internal" href="#widget" id="id33">WIDGET</a></li>
+<li><a class="reference internal" href="#widget-attrs" id="id34">WIDGET_ATTRS</a></li>
+<li><a class="reference internal" href="#admin-extras" id="id35">ADMIN_EXTRAS</a></li>
+</ul>
+</div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">The settings have been refactored in version 0.8. The old settings still work, but raise a <tt class="docutils literal"><span class="pre">DeprecationWarning</span></tt>.</p>
+<p class="last">The settings have been refactored in version 0.8. The old
+settings still work, but raise a <tt class="docutils literal"><span class="pre">DeprecationWarning</span></tt>.</p>
 </div>
 <div class="section" id="status-choices">
-<span id="id2"></span><h2>STATUS_CHOICES<a class="headerlink" href="#status-choices" title="Permalink to this headline">¶</a></h2>
-<p>A story can be in several different states, for example draft vs. live. Your workflow might have several states that a story goes through, but there can only be one choice that is considered &#8220;Published&#8221;.</p>
-<p>Choices are specified as a <tt class="docutils literal"><span class="pre">list</span></tt> or <tt class="docutils literal"><span class="pre">tuple</span></tt> of <tt class="docutils literal"><span class="pre">integer</span></tt> - <tt class="docutils literal"><span class="pre">string</span></tt> tuples. The <tt class="docutils literal"><span class="pre">integer</span></tt> is the code for the choice and the <tt class="docutils literal"><span class="pre">string</span></tt> is the description that the user sees.</p>
+<span id="id2"></span><h2><a class="toc-backref" href="#id17">STATUS_CHOICES</a><a class="headerlink" href="#status-choices" title="Permalink to this headline">¶</a></h2>
+<p>A story can be in several different states, for example draft vs. live.
+Your workflow might have several states that a story goes through, but
+there can only be one choice that is considered &#8220;Published&#8221;.</p>
+<p>Choices are specified as a <tt class="docutils literal"><span class="pre">list</span></tt> or <tt class="docutils literal"><span class="pre">tuple</span></tt> of <tt class="docutils literal"><span class="pre">integer</span></tt> -
+<tt class="docutils literal"><span class="pre">string</span></tt> tuples. The <tt class="docutils literal"><span class="pre">integer</span></tt> is the code for the choice and the
+<tt class="docutils literal"><span class="pre">string</span></tt> is the description that the user sees.</p>
 <p><strong>Defaults:</strong></p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">DEFAULT_SETTINGS</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">STORY_SETTINGS</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s">&#39;STATUS_CHOICES&#39;</span><span class="p">:</span> <span class="p">(</span>
         <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s">&#39;DRAFT&#39;</span><span class="p">),</span>
         <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s">&#39;READY FOR EDITING&#39;</span><span class="p">),</span>
@@ -127,37 +165,46 @@
 </div>
 <p><em>Draft:</em> A work-in-progress.</p>
 <p><em>Ready for Editing:</em> The story is ready for an editor&#8217;s touch.</p>
-<p><em>Ready to Publish:</em> The editing is finished and the story is ready to go on to the web site.</p>
-<p><em>Published:</em> The story is on the web site, as long as it is past the story&#8217;s publish date and time.</p>
-<p><em>Rejected:</em> The editor didn&#8217;t like something and the author needs to work on it some more.</p>
+<p><em>Ready to Publish:</em> The editing is finished and the story is ready to go
+on to the web site.</p>
+<p><em>Published:</em> The story is on the web site, as long as it is past the
+story&#8217;s publish date and time.</p>
+<p><em>Rejected:</em> The editor didn&#8217;t like something and the author needs to
+work on it some more.</p>
 <p><em>Un-published:</em> The story has been removed from the site for some reason.</p>
 </div>
 <div class="section" id="default-status">
-<span id="id3"></span><h2>DEFAULT_STATUS<a class="headerlink" href="#default-status" title="Permalink to this headline">¶</a></h2>
+<span id="id3"></span><h2><a class="toc-backref" href="#id18">DEFAULT_STATUS</a><a class="headerlink" href="#default-status" title="Permalink to this headline">¶</a></h2>
 <p>When a story is created, what should the the status default to?</p>
 <p><strong>Default:</strong></p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">DEFAULT_SETTINGS</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">STORY_SETTINGS</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s">&#39;DEFAULT_STATUS&#39;</span><span class="p">:</span> <span class="mi">1</span> <span class="c"># Draft</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="published-status">
-<span id="id4"></span><h2>PUBLISHED_STATUS<a class="headerlink" href="#published-status" title="Permalink to this headline">¶</a></h2>
+<span id="id4"></span><h2><a class="toc-backref" href="#id19">PUBLISHED_STATUS</a><a class="headerlink" href="#published-status" title="Permalink to this headline">¶</a></h2>
 <p>Which one of the possible statuses is considered &#8220;Show This On Site.&#8221;</p>
 <p><strong>Default:</strong></p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">DEFAULT_SETTINGS</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">STORY_SETTINGS</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s">&#39;PUBLISHED_STATUS&#39;</span><span class="p">:</span> <span class="mi">4</span> <span class="c"># Published</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="origin-choices">
-<span id="id5"></span><h2>ORIGIN_CHOICES<a class="headerlink" href="#origin-choices" title="Permalink to this headline">¶</a></h2>
-<p>It is possible that stories could be coming in from several sources, such as a wire service, an editorial front end, or an FTP site. This settings allows you to mark which stories originated from which source, so you can potentially do something different depending on the source. For example, include all stories in the RSS feed, except ones that came from a wire service.</p>
-<p>Choices are specified as a <tt class="docutils literal"><span class="pre">list</span></tt> or <tt class="docutils literal"><span class="pre">tuple</span></tt> of <tt class="docutils literal"><span class="pre">integer</span></tt> - <tt class="docutils literal"><span class="pre">string</span></tt> tuples. The <tt class="docutils literal"><span class="pre">integer</span></tt> is the code for the choice and the <tt class="docutils literal"><span class="pre">string</span></tt> is the description that the user sees.</p>
+<span id="id5"></span><h2><a class="toc-backref" href="#id20">ORIGIN_CHOICES</a><a class="headerlink" href="#origin-choices" title="Permalink to this headline">¶</a></h2>
+<p>It is possible that stories could be coming in from several sources, such
+as a wire service, an editorial front end, or an FTP site. This settings
+allows you to mark which stories originated from which source, so you can
+potentially do something different depending on the source. For example,
+include all stories in the RSS feed, except ones that came from a wire service.</p>
+<p>Choices are specified as a <tt class="docutils literal"><span class="pre">list</span></tt> or <tt class="docutils literal"><span class="pre">tuple</span></tt> of <tt class="docutils literal"><span class="pre">integer</span></tt> - <tt class="docutils literal"><span class="pre">string</span></tt>
+tuples. The <tt class="docutils literal"><span class="pre">integer</span></tt> is the code for the choice and the <tt class="docutils literal"><span class="pre">string</span></tt> is the
+description that the user sees.</p>
 <p><strong>Default:</strong></p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">DEFAULT_SETTINGS</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">STORY_SETTINGS</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s">&#39;ORIGIN_CHOICES&#39;</span><span class="p">:</span> <span class="p">(</span>
         <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s">&#39;Admin&#39;</span><span class="p">),</span>
     <span class="p">)</span>
@@ -166,45 +213,59 @@
 </div>
 </div>
 <div class="section" id="default-origin">
-<span id="id6"></span><h2>DEFAULT_ORIGIN<a class="headerlink" href="#default-origin" title="Permalink to this headline">¶</a></h2>
-<p>When a story is created from the Django Admin, which choice of origin should it default to?</p>
+<span id="id6"></span><h2><a class="toc-backref" href="#id21">DEFAULT_ORIGIN</a><a class="headerlink" href="#default-origin" title="Permalink to this headline">¶</a></h2>
+<p>When a story is created from the Django Admin, which choice of origin should
+it default to?</p>
 <p><strong>Default:</strong></p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">DEFAULT_SETTINGS</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">STORY_SETTINGS</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s">&#39;DEFAULT_ORIGIN&#39;</span><span class="p">:</span> <span class="mi">0</span> <span class="c"># Admin</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="include-print">
-<span id="id7"></span><h2>INCLUDE_PRINT<a class="headerlink" href="#include-print" title="Permalink to this headline">¶</a></h2>
-<p>Should the fields related to print production be included in the database. The fields are <tt class="docutils literal"><span class="pre">print_pub_date</span></tt>, <tt class="docutils literal"><span class="pre">print_section</span></tt>, and <tt class="docutils literal"><span class="pre">print_page</span></tt>.</p>
+<span id="id7"></span><h2><a class="toc-backref" href="#id22">INCLUDE_PRINT</a><a class="headerlink" href="#include-print" title="Permalink to this headline">¶</a></h2>
+<p>Should the fields related to print production be included in the database.
+The fields are <tt class="docutils literal"><span class="pre">print_pub_date</span></tt>, <tt class="docutils literal"><span class="pre">print_section</span></tt>, and <tt class="docutils literal"><span class="pre">print_page</span></tt>.</p>
 <p><strong>Default:</strong></p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">DEFAULT_SETTINGS</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">STORY_SETTINGS</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s">&#39;INCLUDE_PRINT&#39;</span><span class="p">:</span> <span class="bp">False</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="relation-models">
-<span id="id8"></span><h2>RELATION_MODELS<a class="headerlink" href="#relation-models" title="Permalink to this headline">¶</a></h2>
-<p>A story can relate to several other things, such as other stories, photographs, photo galleries, and external links. Stories links to the Django Content Types application, which would normally show all sorts of things that don&#8217;t matter to the author and end users. This setting specifies which specific models are relatable to a story.</p>
+<span id="id8"></span><h2><a class="toc-backref" href="#id23">RELATION_MODELS</a><a class="headerlink" href="#relation-models" title="Permalink to this headline">¶</a></h2>
+<p class="versionchanged">
+<span class="versionmodified">Changed in version 1.0: </span><cite>relations</cite> is now a seperate app within <tt class="docutils literal"><span class="pre">stories</span></tt></p>
+<p>A story can relate to several other things, such as other stories,
+photographs, photo galleries, and external links. Relations links to the
+Django Content Types application, which would normally show all sorts of
+things that don&#8217;t matter to the author and end users. This setting
+specifies which specific models are relatable to a story.</p>
 <p>The value should be a tuple of <cite>&#8216;appname.modelname&#8217;</cite> strings.</p>
-<p>If this setting is empty or <tt class="xref docutils literal"><span class="pre">None</span></tt>, the story relations are not available in the admin. If at a later time you decide to set this, you must <tt class="docutils literal"><span class="pre">syncdb</span></tt> before it will work properly.</p>
+<p>In order to use <cite>Relations</cite>, you must add <cite>stories.relations</cite> to your
+<strong>INSTALLED_APPS</strong> and also</p>
 <p><strong>Default:</strong></p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">DEFAULT_SETTINGS</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">STORY_SETTINGS</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s">&#39;RELATION_MODELS&#39;</span><span class="p">:</span> <span class="p">[]</span> <span class="c"># Not enabled</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="pagination">
-<span id="id9"></span><h2>PAGINATION<a class="headerlink" href="#pagination" title="Permalink to this headline">¶</a></h2>
-<p>Django Stories has a built-in <tt class="xref py py-class docutils literal"><span class="pre">Paginator</span></tt> subclass that splits HTML-formatted text into paragraphs for paginating. The <tt class="docutils literal"><span class="pre">DEFAULT_SETTINGS['PAGINATION]</span></tt> contains several sub-settings to manage the process. See <a class="reference internal" href="#pagination"><em>PAGINATION</em></a> for more information, and the <a class="reference external" href="http://docs.djangoproject.com/en/dev/topics/pagination/#paginator-objects">Django Paginator docs</a> for more about pagination is general.</p>
+<span id="id9"></span><h2><a class="toc-backref" href="#id24">PAGINATION</a><a class="headerlink" href="#pagination" title="Permalink to this headline">¶</a></h2>
+<p>Django Stories has a built-in <tt class="xref py py-class docutils literal"><span class="pre">Paginator</span></tt> subclass that splits
+HTML-formatted text into paragraphs for paginating. The
+<tt class="docutils literal"><span class="pre">DEFAULT_SETTINGS['PAGINATION]</span></tt> contains several sub-settings to manage
+the process. See <a class="reference internal" href="#pagination"><em>PAGINATION</em></a> for more information, and the
+<a class="reference external" href="http://docs.djangoproject.com/en/dev/topics/pagination/#paginator-objects">Django Paginator docs</a>
+for more about pagination is general.</p>
 <div class="section" id="paginate">
-<span id="id10"></span><h3>PAGINATE<a class="headerlink" href="#paginate" title="Permalink to this headline">¶</a></h3>
+<span id="id10"></span><h3><a class="toc-backref" href="#id25">PAGINATE</a><a class="headerlink" href="#paginate" title="Permalink to this headline">¶</a></h3>
 <p>Should stories be paginated.</p>
 <p><strong>Default:</strong></p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">DEFAULT_SETTINGS</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">STORY_SETTINGS</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s">&#39;PAGINATION&#39;</span><span class="p">:</span> <span class="p">{</span>
         <span class="s">&#39;PAGINATE&#39;</span><span class="p">:</span> <span class="bp">False</span>
     <span class="p">}</span>
@@ -213,10 +274,11 @@
 </div>
 </div>
 <div class="section" id="p-per-page">
-<span id="id11"></span><h3>P_PER_PAGE<a class="headerlink" href="#p-per-page" title="Permalink to this headline">¶</a></h3>
-<p>If <tt class="docutils literal"><span class="pre">PAGINATE</span></tt> is <tt class="xref docutils literal"><span class="pre">True</span></tt>, then this setting sets the number of paragraphs per page for pagination.</p>
+<span id="id11"></span><h3><a class="toc-backref" href="#id26">P_PER_PAGE</a><a class="headerlink" href="#p-per-page" title="Permalink to this headline">¶</a></h3>
+<p>If <tt class="docutils literal"><span class="pre">PAGINATE</span></tt> is <tt class="docutils literal"><span class="pre">True</span></tt>, then this setting sets the number of paragraphs
+per page for pagination.</p>
 <p><strong>Default:</strong></p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">DEFAULT_SETTINGS</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">STORY_SETTINGS</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s">&#39;PAGINATION&#39;</span><span class="p">:</span> <span class="p">{</span>
         <span class="s">&#39;P_PER_PAGE&#39;</span><span class="p">:</span> <span class="mi">20</span>
     <span class="p">}</span>
@@ -225,10 +287,13 @@
 </div>
 </div>
 <div class="section" id="orphans">
-<span id="id12"></span><h3>ORPHANS<a class="headerlink" href="#orphans" title="Permalink to this headline">¶</a></h3>
-<p>If <tt class="docutils literal"><span class="pre">PAGINATE</span></tt> is <tt class="xref docutils literal"><span class="pre">True</span></tt>, then this setting sets the minimum number of paragraphs allowed on the last page for pagination. This means that with <tt class="docutils literal"><span class="pre">P_PER_PAGE</span> <span class="pre">=</span> <span class="pre">20</span></tt> and <tt class="docutils literal"><span class="pre">ORPHANS</span> <span class="pre">=</span> <span class="pre">4</span></tt> a story with 24 paragraphs would only have one page, but a story with 25 paragraphs would have two pages.</p>
+<span id="id12"></span><h3><a class="toc-backref" href="#id27">ORPHANS</a><a class="headerlink" href="#orphans" title="Permalink to this headline">¶</a></h3>
+<p>If <tt class="docutils literal"><span class="pre">PAGINATE</span></tt> is <tt class="docutils literal"><span class="pre">True</span></tt>, then this setting sets the minimum number of
+paragraphs allowed on the last page for pagination. This means that with
+<tt class="docutils literal"><span class="pre">P_PER_PAGE</span> <span class="pre">=</span> <span class="pre">20</span></tt> and <tt class="docutils literal"><span class="pre">ORPHANS</span> <span class="pre">=</span> <span class="pre">4</span></tt> a story with 24 paragraphs would
+only have one page, but a story with 25 paragraphs would have two pages.</p>
 <p><strong>Default:</strong></p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">DEFAULT_SETTINGS</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">STORY_SETTINGS</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s">&#39;PAGINATION&#39;</span><span class="p">:</span> <span class="p">{</span>
         <span class="s">&#39;ORPHANS&#39;</span><span class="p">:</span> <span class="mi">4</span>
     <span class="p">}</span>
@@ -238,58 +303,137 @@
 </div>
 </div>
 <div class="section" id="throw-404">
-<h2>THROW_404<a class="headerlink" href="#throw-404" title="Permalink to this headline">¶</a></h2>
+<span id="id13"></span><h2><a class="toc-backref" href="#id28">THROW_404</a><a class="headerlink" href="#throw-404" title="Permalink to this headline">¶</a></h2>
+<p>Choose to throw a normal 404 page or a custom story not found template. If
+<tt class="docutils literal"><span class="pre">False</span></tt>, the template <cite>stories/story_removed.html</cite> will be rendered.</p>
 <p><strong>Default:</strong></p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">DEFAULT_SETTINGS</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">STORY_SETTINGS</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s">&#39;THROW_404&#39;</span><span class="p">:</span> <span class="bp">True</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="author-model">
-<h2>AUTHOR_MODEL<a class="headerlink" href="#author-model" title="Permalink to this headline">¶</a></h2>
+<span id="id14"></span><h2><a class="toc-backref" href="#id29">AUTHOR_MODEL</a><a class="headerlink" href="#author-model" title="Permalink to this headline">¶</a></h2>
+<p>Path to a Author model. This can be any valid model.</p>
 <p><strong>Default:</strong></p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">DEFAULT_SETTINGS</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">STORY_SETTINGS</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s">&#39;AUTHOR_MODEL&#39;</span><span class="p">:</span> <span class="s">u&#39;auth.User&#39;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you plan on using a custom author model, please see <a class="reference internal" href="author_guide.html#author-guide"><em>Custom Author Model Guide</em></a>
+before you set this setting.</p>
+</div>
 </div>
 <div class="section" id="author-model-limit-choices">
-<h2>AUTHOR_MODEL_LIMIT_CHOICES<a class="headerlink" href="#author-model-limit-choices" title="Permalink to this headline">¶</a></h2>
+<span id="id15"></span><h2><a class="toc-backref" href="#id30">AUTHOR_MODEL_LIMIT_CHOICES</a><a class="headerlink" href="#author-model-limit-choices" title="Permalink to this headline">¶</a></h2>
+<p>Used in conjuction with <tt class="docutils literal"><span class="pre">AUTHOR_MODEL</span></tt>, on the <tt class="docutils literal"><span class="pre">limit_choices_to</span></tt> argument.</p>
 <p><strong>Default:</strong></p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">DEFAULT_SETTINGS</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">STORY_SETTINGS</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s">&#39;AUTHOR_MODEL_LIMIT_CHOICES&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;is_staff&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="use-categories">
-<h2>USE_CATEGORIES<a class="headerlink" href="#use-categories" title="Permalink to this headline">¶</a></h2>
-<p><strong>Default:</strong></p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">DEFAULT_SETTINGS</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s">&#39;USE_CATEGORIES&#39;</span><span class="p">:</span> <span class="bp">True</span> <span class="ow">and</span> <span class="s">&#39;categories&#39;</span> <span class="ow">in</span> <span class="n">settings</span><span class="o">.</span><span class="n">INSTALLED_APPS</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
 <div class="section" id="use-reversion">
-<h2>USE_REVERSION<a class="headerlink" href="#use-reversion" title="Permalink to this headline">¶</a></h2>
+<span id="id16"></span><h2><a class="toc-backref" href="#id31">USE_REVERSION</a><a class="headerlink" href="#use-reversion" title="Permalink to this headline">¶</a></h2>
+<p class="versionchanged">
+<span class="versionmodified">Changed in version 1.0: </span>Default is now <tt class="docutils literal"><span class="pre">False</span></tt></p>
+<p>This setting expects <tt class="docutils literal"><span class="pre">django-reversion</span></tt> to be installed and in your
+<tt class="docutils literal"><span class="pre">INSTALLED_APPS</span></tt></p>
 <p><strong>Default:</strong></p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">DEFAULT_SETTINGS</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s">&#39;USE_REVERSION&#39;</span><span class="p">:</span> <span class="bp">True</span> <span class="ow">and</span> <span class="s">&#39;reversion&#39;</span> <span class="ow">in</span> <span class="n">settings</span><span class="o">.</span><span class="n">INSTALLED_APPS</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">STORY_SETTINGS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">&#39;USE_REVERSION&#39;</span><span class="p">:</span> <span class="bp">False</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="story-ordering">
-<h2>STORY_ORDERING<a class="headerlink" href="#story_ordering" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="ordering">
+<h2><a class="toc-backref" href="#id32">ORDERING</a><a class="headerlink" href="#ordering" title="Permalink to this headline">¶</a></h2>
+<p class="versionchanged">
+<span class="versionmodified">Changed in version 1.0: </span>This setting used to be called <tt class="docutils literal"><span class="pre">STORY_ORDERING</span></tt></p>
+<p>The default <tt class="docutils literal"><span class="pre">ordering</span></tt> for stories</p>
 <p><strong>Default:</strong></p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">DEFAULT_SETTINGS</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s">&#39;STORY_ORDERING&#39;</span><span class="p">:</span> <span class="bp">['-modified_date']</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">STORY_SETTINGS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">&#39;ORDERING&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;-modified_data&#39;</span><span class="p">],</span>
 <span class="p">}</span>
 </pre></div>
 </div>
+</div>
+<div class="section" id="widget">
+<h2><a class="toc-backref" href="#id33">WIDGET</a><a class="headerlink" href="#widget" title="Permalink to this headline">¶</a></h2>
+<p class="versionadded">
+<span class="versionmodified">New in version 1.0.</span></p>
+<p>Path of the widget module to use for <tt class="docutils literal"><span class="pre">story.body</span></tt></p>
+<p><strong>Default:</strong></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">STORY_SETTINGS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">&#39;WIDGET&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="widget-attrs">
+<h2><a class="toc-backref" href="#id34">WIDGET_ATTRS</a><a class="headerlink" href="#widget-attrs" title="Permalink to this headline">¶</a></h2>
+<p class="versionadded">
+<span class="versionmodified">New in version 1.0.</span></p>
+<p>Dictionary of the attributes to supply the widget for <tt class="docutils literal"><span class="pre">story.body</span></tt>. This
+also includes suppling the default widget <tt class="docutils literal"><span class="pre">Textarea</span></tt></p>
+<p><strong>Default:</strong></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">STORY_SETTINGS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">&#39;WIDGET_ATTRS&#39;</span><span class="p">:</span> <span class="bp">None</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="admin-extras">
+<h2><a class="toc-backref" href="#id35">ADMIN_EXTRAS</a><a class="headerlink" href="#admin-extras" title="Permalink to this headline">¶</a></h2>
+<p class="versionadded">
+<span class="versionmodified">New in version 1.0.</span></p>
+<p>This is a dictionary of configurable admin attributes of the <tt class="docutils literal"><span class="pre">StoryAdmin</span></tt>
+class. Here are list of the configurable attributes.</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">EXTRA_FIELDSETS</span></tt> - Allows for adding any extra fieldsets</li>
+<li><tt class="docutils literal"><span class="pre">RAW_ID_FIELDS</span></tt> - A list/tuple of any fields you want act <cite>raw_id</cite>,
+default is <tt class="docutils literal"><span class="pre">()</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">FILTER_HORIZONTAL_FIELDS</span></tt> - A list/tuple of fields you want to be,
+added to <tt class="docutils literal"><span class="pre">FILTER_HORIZONTAL</span></tt>, default is <tt class="docutils literal"><span class="pre">('authors',)</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">SEARCH_FIELDS</span></tt> - A list/tuple of the fields you want to be searchable,
+default is <tt class="docutils literal"><span class="pre">('headline',)</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">LIST_PER_PAGE</span></tt> - A integer of the number of stories per page,
+default is <tt class="docutils literal"><span class="pre">25</span></tt></li>
+</ul>
+<p>The <tt class="docutils literal"><span class="pre">EXTRA_FIELDSETS</span></tt> is a tuple of any extra <tt class="docutils literal"><span class="pre">story</span></tt> admin fieldsets.
+This setting is useful when external apps, such as <tt class="docutils literal"><span class="pre">tagging</span></tt> or
+<tt class="docutils literal"><span class="pre">categories</span></tt>, add fields to <tt class="docutils literal"><span class="pre">stories</span></tt>. Here is an example of the setting.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">STORY_SETTINGS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="o">...</span>
+    <span class="s">&#39;ADMIN_EXTRAS&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">&#39;EXTRA_FIELDSETS&#39;</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="p">{</span>
+                <span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="s">&#39;Categories&#39;</span><span class="p">,</span>
+                <span class="s">&#39;fields&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s">&#39;primary_category&#39;</span><span class="p">,</span> <span class="s">&#39;categories&#39;</span><span class="p">)</span>
+                <span class="s">&#39;classes&#39;</span><span class="p">:</span> <span class="p">(),</span>
+                <span class="s">&#39;description&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span>
+                <span class="s">&#39;position&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="s">&#39;Tagging&#39;</span><span class="p">,</span>
+                <span class="s">&#39;fields&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s">&#39;tags&#39;</span><span class="p">,)</span>
+                <span class="s">&#39;classes&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s">&#39;collapse&#39;</span><span class="p">,),</span>
+                <span class="s">&#39;position&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="p">}</span>
+    <span class="o">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>While <tt class="docutils literal"><span class="pre">name</span></tt>, <tt class="docutils literal"><span class="pre">fields</span></tt>, <tt class="docutils literal"><span class="pre">classes</span></tt> and <tt class="docutils literal"><span class="pre">description</span></tt> should be
+<a class="reference external" href="https://docs.djangoproject.com/en/1.4/ref/contrib/admin/#django.contrib.admin.ModelAdmin.fieldsets">obvious</a>,
+<tt class="docutils literal"><span class="pre">position</span></tt> allows you to speicify the index where the fieldset will be
+inserted. By default, these extra fieldsets will be appended.</p>
 </div>
 </div>
 
@@ -299,8 +443,8 @@
       </div>
     <div class="footer">
     <p>
-      &copy; Copyright 2009, The Washington Times.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+      &copy; Copyright 2012, The Calloway Project.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
 	</p>
     </div>
       <div class="clearer"></div>

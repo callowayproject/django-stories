@@ -1,6 +1,15 @@
+
+|BUILD|_
+
+.. |BUILD| image::
+   https://secure.travis-ci.org/callowayproject/django-stories.png?branch=1.0
+.. _BUILD: http://travis-ci.org/#!/callowayproject/django-stories
+
 ==============
 Django Stories
 ==============
+
+
 
 This app is designed to be flexible to configure, but still simple to the writers and editors.
 
@@ -27,6 +36,34 @@ Features
 
 Change Log
 ==========
+
+-**New in 1.0**
+
+* Code refactor
+
+* South migrations
+
+* ``Relations`` are now a seperate inner app of ``stories``
+
+* Tests
+
+* New ``author_display`` property to replace te current ``author`` property
+
+* Removed most requirements as they are not really "Required". ``BeautifulSoup`` remains a requirement.
+
+* New settings: ``WIDGET``, ``WIDGET_ATTRS``. Since TinyMCE was removed as a requirement, these we settings will be used to supply the widget for the ``story.body`` field.
+
+* Setting ``STORY_ORDERING`` was renamed to ``ORDERING``. Using ``STORY_ORDERING`` is still possible, but a warning will be displayed.
+
+* Fixed issues with Quick Edit functionality on the stories changelist
+
+* Fixes to the Quick Edit functionality
+
+    * QuickEdit now works =)
+    * Removed external jQuery references for Quick Edit. Now uses ``django.jQuery`
+    * Removed inline css/js, these are now in seperate files
+    * The js was rewritten in coffeescript
+
 
 **New in 0.6**
 

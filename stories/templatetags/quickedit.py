@@ -1,4 +1,5 @@
-from django.contrib.admin.templatetags.admin_list import items_for_result, result_headers
+from django.contrib.admin.templatetags.admin_list import items_for_result, \
+     result_headers, result_hidden_fields
 from django.template import Library
 from django.forms.models import modelform_factory
 
@@ -13,7 +14,7 @@ def results(cl):
         if qe_form:
             for res, form in zip(cl.result_list, cl.formset.forms):
                 yield {
-                    'fields':list(items_for_result(cl, res, form)), 
+                    'fields':list(items_for_result(cl, res, form)),
                     'quickedit':form,
                 }
         else:
@@ -33,7 +34,9 @@ def qe_result_list(context, cl):
     else:
         static_url = 'MEDIA_URL'
     return {'cl': cl,
+            'result_hidden_fields': list(result_hidden_fields(cl)),
             'result_headers': list(result_headers(cl)),
             'results': list(results(cl)),
             'STATIC_URL': context[static_url]}
-qe_result_list = register.inclusion_tag("admin/qe_change_list_results.html", takes_context=True)(qe_result_list)
+qe_result_list = register.inclusion_tag(
+    'admin/qe_change_list_results.html', takes_context=True)(qe_result_list)
