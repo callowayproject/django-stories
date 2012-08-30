@@ -18,7 +18,7 @@ install:
   - pip install -e .
   - pip install BeautifulSoup django-staticfiles south
 script:
-  - ./run_tests.py
+  - ./run_tests.sh
 notifications:
   email:
     - ci@callowayproject.com
