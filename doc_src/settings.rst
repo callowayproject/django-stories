@@ -356,3 +356,37 @@ also includes suppling the default widget ``Textarea``
     STORY_SETTINGS = {
         'WIDGET_ATTRS': None
     }
+
+EXTRA_FIELDSETS
+===============
+
+.. versionadded:: 1.0
+
+Tuple of any extra ``story`` admin fieldsets. This setting is useful
+when external apps, such as ``tagging`` or ``categories``, add fields to
+``stories``.
+
+.. code-block:: python
+
+    STORY_SETTINGS = {
+        ...
+        'EXTRA_FIELDSETS' = (
+            {
+                'name': 'Categories',
+                'fields': ('primary_category', 'categories')
+                'classes': (),
+                'description': None,
+                'position': None,
+            },
+            {
+                'name': 'Tagging',
+                'fields': ('tags',)
+                'classes': ('collapse',),
+                'position': 3,
+        )
+        ...
+    }
+
+While ``name``, ``fields``, ``classes`` and ``description`` should be fimilar,
+``position`` allows you to speicify the index where the fieldset will be
+inserted. By default the fieldsets will be appended.
