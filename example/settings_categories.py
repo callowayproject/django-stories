@@ -15,3 +15,11 @@ CATEGORIES_SETTINGS = {
     }
 }
 
+STORY_SETTINGS = {
+    'EXTRA_FIELDSETS': (
+        {'name': 'Categories',
+         'fields': ('primary_category', 'categories'),
+         'position': 1
+        },
+    )
+}

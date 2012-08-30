@@ -42,6 +42,7 @@ DEFAULT_SETTINGS = {
     'AUTHOR_MODEL_LIMIT_CHOICES': {'is_staff': True},
     'DEFAULT_ORIGIN': 0,
     'DEFAULT_STATUS': 1,
+    'EXTRA_FIELDSETS': (),
     'INCLUDE_PRINT': False,
     'ORDERING': ['-publish_date'],
     'ORIGIN_CHOICES': DEFAULT_ORIGIN_CHOICES,

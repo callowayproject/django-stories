@@ -126,6 +126,23 @@ class StoryAdmin(AdminModel):
 
         css = {'all': ('css/quickedit.css',)}
 
+    def __init__(self, *args, **kwargs):
+        super(StoryAdmin, self).__init__(*args, **kwargs)
+
+        # Add in any extra fielsets
+        self.fieldsets = list(self.fieldsets)
+        for extra_fs in settings.EXTRA_FIELDSETS:
+            fs = (extra_fs.get('name', None), {
+                    'fields': extra_fs['fields'],
+                    'classes': extra_fs.get('classes', ()),
+                    'description': extra_fs.get('description', None)
+                 })
+
+            if 'position' in extra_fs:
+                self.fieldsets.insert(extra_fs.get('position'), fs)
+            else:
+                self.fieldsets.append(fs)
+
     def _get_widget(self):
         attrs = settings.WIDGET_ATTRS
         widget = load_widget(settings.WIDGET) or forms.Textarea
