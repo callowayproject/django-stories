@@ -357,36 +357,53 @@ also includes suppling the default widget ``Textarea``
         'WIDGET_ATTRS': None
     }
 
-EXTRA_FIELDSETS
-===============
+ADMIN_EXTRAS
+============
 
 .. versionadded:: 1.0
 
-Tuple of any extra ``story`` admin fieldsets. This setting is useful
-when external apps, such as ``tagging`` or ``categories``, add fields to
-``stories``.
+This is a dictionary of configurable admin attributes of the ``StoryAdmin``
+class. Here are list of the configurable attributes.
+
+* ``EXTRA_FIELDSETS`` - Allows for adding any extra fieldsets
+* ``RAW_ID_FIELDS`` - A list/tuple of any fields you want act `raw_id`,
+  default is ``()``
+* ``FILTER_HORIZONTAL_FIELDS`` - A list/tuple of fields you want to be,
+  added to ``FILTER_HORIZONTAL``, default is ``('authors',)``
+* ``SEARCH_FIELDS`` - A list/tuple of the fields you want to be searchable,
+  default is ``('headline',)``
+* ``LIST_PER_PAGE`` - A integer of the number of stories per page,
+  default is ``25``
+
+
+The ``EXTRA_FIELDSETS`` is a tuple of any extra ``story`` admin fieldsets.
+This setting is useful when external apps, such as ``tagging`` or
+``categories``, add fields to ``stories``. Here is an example of the setting.
 
 .. code-block:: python
 
     STORY_SETTINGS = {
         ...
-        'EXTRA_FIELDSETS' = (
-            {
-                'name': 'Categories',
-                'fields': ('primary_category', 'categories')
-                'classes': (),
-                'description': None,
-                'position': None,
-            },
-            {
-                'name': 'Tagging',
-                'fields': ('tags',)
-                'classes': ('collapse',),
-                'position': 3,
-        )
+        'ADMIN_EXTRAS': {
+            'EXTRA_FIELDSETS' = (
+                {
+                    'name': 'Categories',
+                    'fields': ('primary_category', 'categories')
+                    'classes': (),
+                    'description': None,
+                    'position': None,
+                },
+                {
+                    'name': 'Tagging',
+                    'fields': ('tags',)
+                    'classes': ('collapse',),
+                    'position': 3,
+            )
+        }
         ...
     }
 
-While ``name``, ``fields``, ``classes`` and ``description`` should be fimilar,
+While ``name``, ``fields``, ``classes`` and ``description`` should be
+`obvious <https://docs.djangoproject.com/en/1.4/ref/contrib/admin/#django.contrib.admin.ModelAdmin.fieldsets>`_,
 ``position`` allows you to speicify the index where the fieldset will be
-inserted. By default the fieldsets will be appended.
+inserted. By default, these extra fieldsets will be appended.

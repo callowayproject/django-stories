@@ -16,10 +16,14 @@ CATEGORIES_SETTINGS = {
 }
 
 STORY_SETTINGS = {
-    'EXTRA_FIELDSETS': (
-        {'name': 'Categories',
-         'fields': ('primary_category', 'categories'),
-         'position': 1
-        },
-    )
+    'ADMIN_EXTRAS': {
+        'RAW_ID_FIELDS': ('primary_category',),
+        'FILTER_HORIZONTAL_FIELDS': ('categories', 'authors',),
+        'EXTRA_FIELDSETS': (
+            {'name': 'Categories',
+             'fields': ('primary_category', 'categories'),
+             'position': 1
+            },
+        )
+    }
 }

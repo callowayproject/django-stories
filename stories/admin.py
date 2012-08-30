@@ -75,12 +75,12 @@ class StoryAdmin(AdminModel):
     list_display = ('headline', 'status', 'publish_date',
                     'modified_date', 'origin')
     list_filter = ('site', 'publish_date', 'origin')
-    list_per_page = 25
+    list_per_page = settings.ADMIN_EXTRAS.get('LIST_PER_PAGE', 25)
 
     list_editable = ()
     quick_editable = settings.QUICKEDIT_FIELDS
 
-    search_fields = ('headline',)
+    search_fields = settings.ADMIN_EXTRAS.get('SEARCH_FIELDS', ('headline',))
     date_hierarchy = 'publish_date'
     prepopulated_fields = {'slug': ('headline',)}
 
@@ -89,7 +89,10 @@ class StoryAdmin(AdminModel):
     actions = admin_actions
     actions_on_bottom = True
 
-    filter_horizontal = ('authors',)
+    raw_id_fields = settings.ADMIN_EXTRAS.get('RAW_ID_FIELDS', ())
+
+    filter_horizontal = settings.ADMIN_EXTRAS.get(
+        'FILTER_HORIZONTAL_FIELDS', ('authors',))
 
     if HAS_RELATIONS:
         inlines = [InlineStoryRelation,]
@@ -131,7 +134,7 @@ class StoryAdmin(AdminModel):
 
         # Add in any extra fielsets
         self.fieldsets = list(self.fieldsets)
-        for extra_fs in settings.EXTRA_FIELDSETS:
+        for extra_fs in settings.ADMIN_EXTRAS.get('EXTRA_FIELDSETS', ()):
             fs = (extra_fs.get('name', None), {
                     'fields': extra_fs['fields'],
                     'classes': extra_fs.get('classes', ()),
