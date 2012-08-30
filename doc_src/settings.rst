@@ -7,6 +7,10 @@ Settings
 Here are several settings that you can use to customize Stories. Each of the
 following are keys in ``STORY_SETTINGS``\ .
 
+.. contents::
+   :local:
+
+
 .. note:: The settings have been refactored in version 0.8. The old
           settings still work, but raise a ``DeprecationWarning``\ .
 
@@ -146,17 +150,19 @@ The fields are ``print_pub_date``\ , ``print_section``\ , and ``print_page``\ .
 RELATION_MODELS
 ===============
 
+.. versionchanged:: 1.0
+   `relations` is now a seperate app within ``stories``
+
 A story can relate to several other things, such as other stories,
-photographs, photo galleries, and external links. Stories links to the
+photographs, photo galleries, and external links. Relations links to the
 Django Content Types application, which would normally show all sorts of
 things that don't matter to the author and end users. This setting
 specifies which specific models are relatable to a story.
 
 The value should be a tuple of `'appname.modelname'` strings.
 
-If this setting is empty or ``None``\ , the story relations are not
-available in the admin. If at a later time you decide to set this,
-you must ``syncdb`` before it will work properly.
+In order to use `Relations`, you must add `stories.relations` to your
+**INSTALLED_APPS** and also
 
 **Default:**
 
@@ -239,7 +245,7 @@ THROW_404
 =========
 
 Choose to throw a normal 404 page or a custom story not found template. If
-`False`, the template `stories/story_removed.html` will be rendered.
+``False``, the template `stories/story_removed.html` will be rendered.
 
 **Default:**
 
@@ -264,12 +270,17 @@ Path to a Author model. This can be any valid model.
 	    'AUTHOR_MODEL': u'auth.User'
 	}
 
+.. note::
+
+    If you plan on using a custom author model, please see :ref:`author_guide`
+    before you set this setting.
+
 .. _author_model_limit_choices:
 
 AUTHOR_MODEL_LIMIT_CHOICES
 ==========================
 
-Used in conjuction with `AUTHOR_MODEL`, on the `limit_choices_to` argument.
+Used in conjuction with ``AUTHOR_MODEL``, on the ``limit_choices_to`` argument.
 
 **Default:**
 
@@ -279,31 +290,16 @@ Used in conjuction with `AUTHOR_MODEL`, on the `limit_choices_to` argument.
 	    'AUTHOR_MODEL_LIMIT_CHOICES': {'is_staff': True}
 	}
 
-.. _use_categories:
-
-USE_CATEGORIES
-==============
-
-.. note::
-
-     Changed in 1.0; Default is now `False`
-
-**Default:**
-
-.. code-block:: python
-
-	STORY_SETTINGS = {
-	    'USE_CATEGORIES': False
-	}
-
 .. _use_reversion:
 
 USE_REVERSION
 =============
 
-.. note::
+.. versionchanged:: 1.0
+   Default is now ``False``
 
-    Changed in 1.0; Default is now `False`
+This setting expects ``django-reversion`` to be installed and in your
+``INSTALLED_APPS``
 
 **Default:**
 
@@ -316,11 +312,10 @@ USE_REVERSION
 ORDERING
 ========
 
-.. note::
+.. versionchanged:: 1.0
+    This setting used to be called ``STORY_ORDERING``
 
-    Changed in 1.0; This setting used to be called `STORY_ORDERING`
-
-The default `ordering` for stories
+The default ``ordering`` for stories
 
 **Default:**
 
@@ -334,11 +329,9 @@ The default `ordering` for stories
 WIDGET
 ======
 
-.. note::
+.. versionadded:: 1.0
 
-    New in 1.0
-
-Path of the widget module to use for `story.body`
+Path of the widget module to use for ``story.body``
 
 **Default:**
 
@@ -351,12 +344,10 @@ Path of the widget module to use for `story.body`
 WIDGET_ATTRS
 ============
 
-.. note::
+.. versionadded:: 1.0
 
-    New in 1.0
-
-Dictionary of the attributes to supply the widget for `story.body`. This
-also includes suppling the default widget `Textarea`
+Dictionary of the attributes to supply the widget for ``story.body``. This
+also includes suppling the default widget ``Textarea``
 
 **Default:**
 

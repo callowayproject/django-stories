@@ -46,6 +46,8 @@ Contents:
    :maxdepth: 2
 
    install
+   upgrading
+   author_guide
    settings
    pagination
    integration/index

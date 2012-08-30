@@ -48,6 +48,8 @@
 	<ul><li class="toctree-l1"><a href="#">Main Page</a></li></ul>
 	<ul>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="upgrading.html">Upgrading to 1.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="author_guide.html">Custom Author Model Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="settings.html">Settings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pagination.html">Pagination</a></li>
 <li class="toctree-l1"><a class="reference internal" href="integration/index.html">Integration with Other Django Applications</a></li>
@@ -119,7 +121,20 @@ You can now return a page with an explanation instead of returning a 404 error.<
 <h2>Contents:<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="install.html#using-pip">Using PIP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#download">Download</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#id1">Install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#run-syncdb">Run syncdb</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="upgrading.html">Upgrading to 1.0</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="upgrading.html#ensureing-story-models-are-correctly-configured">Ensureing story models are correctly configured</a></li>
+<li class="toctree-l2"><a class="reference internal" href="upgrading.html#ensuring-functionality">Ensuring functionality</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="author_guide.html">Custom Author Model Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="settings.html">Settings</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="settings.html#status-choices">STATUS_CHOICES</a></li>
 <li class="toctree-l2"><a class="reference internal" href="settings.html#default-status">DEFAULT_STATUS</a></li>
@@ -132,7 +147,6 @@ You can now return a page with an explanation instead of returning a 404 error.<
 <li class="toctree-l2"><a class="reference internal" href="settings.html#throw-404">THROW_404</a></li>
 <li class="toctree-l2"><a class="reference internal" href="settings.html#author-model">AUTHOR_MODEL</a></li>
 <li class="toctree-l2"><a class="reference internal" href="settings.html#author-model-limit-choices">AUTHOR_MODEL_LIMIT_CHOICES</a></li>
-<li class="toctree-l2"><a class="reference internal" href="settings.html#use-categories">USE_CATEGORIES</a></li>
 <li class="toctree-l2"><a class="reference internal" href="settings.html#use-reversion">USE_REVERSION</a></li>
 <li class="toctree-l2"><a class="reference internal" href="settings.html#ordering">ORDERING</a></li>
 <li class="toctree-l2"><a class="reference internal" href="settings.html#widget">WIDGET</a></li>
@@ -145,6 +159,7 @@ You can now return a page with an explanation instead of returning a 404 error.<
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="integration/index.html">Integration with Other Django Applications</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="integration/categories_integration.html">Integrating with Django Categories</a></li>
 <li class="toctree-l2"><a class="reference internal" href="integration/reversion_integration.html">Integrating with Django Reversion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="integration/tinymce_integration.html">Integrating with Django TinyMCE</a></li>
 </ul>

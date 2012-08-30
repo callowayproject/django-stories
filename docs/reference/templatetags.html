@@ -51,6 +51,8 @@
 	<ul><li class="toctree-l1"><a href="../index.html">Main Page</a></li></ul>
 	<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../upgrading.html">Upgrading to 1.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../author_guide.html">Custom Author Model Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../settings.html">Settings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pagination.html">Pagination</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../integration/index.html">Integration with Other Django Applications</a></li>
@@ -96,11 +98,11 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="module-stories.templatetags.stories">
-<span id="template-tags"></span><span id="templatetags"></span><h1>Template Tags<a class="headerlink" href="#module-stories.templatetags.stories" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-stories.relations.templatetags.story_relation_tags">
+<span id="template-tags"></span><span id="templatetags"></span><h1>Template Tags<a class="headerlink" href="#module-stories.relations.templatetags.story_relation_tags" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
-<dt id="stories.templatetags.stories.RelatedNode">
-<em class="property">class </em><tt class="descclassname">stories.templatetags.stories.</tt><tt class="descname">RelatedNode</tt><big>(</big><em>obj</em>, <em>var_name</em>, <em>content_type=None</em>, <em>relation_type=None</em><big>)</big><a class="headerlink" href="#stories.templatetags.stories.RelatedNode" title="Permalink to this definition">¶</a></dt>
+<dt id="stories.relations.templatetags.story_relation_tags.RelatedNode">
+<em class="property">class </em><tt class="descclassname">stories.relations.templatetags.story_relation_tags.</tt><tt class="descname">RelatedNode</tt><big>(</big><em>obj</em>, <em>var_name</em>, <em>content_type=None</em>, <em>relation_type=None</em><big>)</big><a class="headerlink" href="#stories.relations.templatetags.story_relation_tags.RelatedNode" title="Permalink to this definition">¶</a></dt>
 <dd><p>Main related object node that handles multiple template tags:</p>
 <ul class="simple">
 <li><strong>get_related_content</strong></li>
@@ -108,15 +110,15 @@
 <li><strong>get_relation_type</strong></li>
 </ul>
 <dl class="method">
-<dt id="stories.templatetags.stories.RelatedNode.render">
-<tt class="descname">render</tt><big>(</big><em>context</em><big>)</big><a class="headerlink" href="#stories.templatetags.stories.RelatedNode.render" title="Permalink to this definition">¶</a></dt>
+<dt id="stories.relations.templatetags.story_relation_tags.RelatedNode.render">
+<tt class="descname">render</tt><big>(</big><em>context</em><big>)</big><a class="headerlink" href="#stories.relations.templatetags.story_relation_tags.RelatedNode.render" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="function">
-<dt id="stories.templatetags.stories.do_get_related_content">
-<tt class="descclassname">stories.templatetags.stories.</tt><tt class="descname">do_get_related_content</tt><big>(</big><em>parser</em>, <em>token</em><big>)</big><a class="headerlink" href="#stories.templatetags.stories.do_get_related_content" title="Permalink to this definition">¶</a></dt>
+<dt id="stories.relations.templatetags.story_relation_tags.do_get_related_content">
+<tt class="descclassname">stories.relations.templatetags.story_relation_tags.</tt><tt class="descname">do_get_related_content</tt><big>(</big><em>parser</em>, <em>token</em><big>)</big><a class="headerlink" href="#stories.relations.templatetags.story_relation_tags.do_get_related_content" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets all relations to a story</p>
 <p><strong>Syntax</strong>:</p>
 <div class="highlight-python"><pre>{% get_related_content item as var_name %}</pre>
@@ -127,8 +129,8 @@
 </dd></dl>
 
 <dl class="function">
-<dt id="stories.templatetags.stories.do_get_related_content_type">
-<tt class="descclassname">stories.templatetags.stories.</tt><tt class="descname">do_get_related_content_type</tt><big>(</big><em>parser</em>, <em>token</em><big>)</big><a class="headerlink" href="#stories.templatetags.stories.do_get_related_content_type" title="Permalink to this definition">¶</a></dt>
+<dt id="stories.relations.templatetags.story_relation_tags.do_get_related_content_type">
+<tt class="descclassname">stories.relations.templatetags.story_relation_tags.</tt><tt class="descname">do_get_related_content_type</tt><big>(</big><em>parser</em>, <em>token</em><big>)</big><a class="headerlink" href="#stories.relations.templatetags.story_relation_tags.do_get_related_content_type" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets relations to a story based on the content type</p>
 <p><strong>Syntax</strong>:</p>
 <div class="highlight-python"><pre>{% get_related_content_type item content_type as var_name %}</pre>
@@ -139,8 +141,8 @@
 </dd></dl>
 
 <dl class="function">
-<dt id="stories.templatetags.stories.do_get_relation_type">
-<tt class="descclassname">stories.templatetags.stories.</tt><tt class="descname">do_get_relation_type</tt><big>(</big><em>parser</em>, <em>token</em><big>)</big><a class="headerlink" href="#stories.templatetags.stories.do_get_relation_type" title="Permalink to this definition">¶</a></dt>
+<dt id="stories.relations.templatetags.story_relation_tags.do_get_relation_type">
+<tt class="descclassname">stories.relations.templatetags.story_relation_tags.</tt><tt class="descname">do_get_relation_type</tt><big>(</big><em>parser</em>, <em>token</em><big>)</big><a class="headerlink" href="#stories.relations.templatetags.story_relation_tags.do_get_relation_type" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets the relations to a story based on the relation type</p>
 <p><strong>Syntax</strong>:</p>
 <div class="highlight-python"><pre>{% get_relation_type item relation_type as var_name %}</pre>

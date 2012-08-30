@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Integrating with Django TinyMCE &mdash; Django Stories 1.0 documentation</title>
+    <title>Integrating with Django Categories &mdash; Django Stories 1.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -26,22 +26,22 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="Django Stories 1.0 documentation" href="../index.html" />
     <link rel="up" title="Integration with Other Django Applications" href="index.html" />
-    <link rel="next" title="Reference Manual" href="../reference/index.html" />
-    <link rel="prev" title="Integrating with Django Reversion" href="reversion_integration.html" /> 
+    <link rel="next" title="Integrating with Django Reversion" href="reversion_integration.html" />
+    <link rel="prev" title="Integration with Other Django Applications" href="index.html" /> 
   </head>
   <body>
 <div id="docstitle">
 	<p>Django Stories 1.0 documentation</p>
 </div>
 <div id="header">
-	<div id="title"><h1>Integrating with Django TinyMCE</h1></div>
+	<div id="title"><h1>Integrating with Django Categories</h1></div>
 	<ul id="headerButtons">
 		<li id="toc_button"><div class="headerButton"><a href="#">Table of Contents</a></div></li>
 		<li id="page_buttons">
 			<div class="headerButton"><a href="../genindex.html" title="General Index" accesskey="I">index</a></div>
 			<div class="headerButton"><a href="../py-modindex.html" title="Python Module Index" >modules</a></div>
-			<div class="headerButton"><a href="../reference/index.html" title="Reference Manual" accesskey="N">next</a></div>
-			<div class="headerButton"><a href="reversion_integration.html" title="Integrating with Django Reversion" accesskey="P">previous</a></div>
+			<div class="headerButton"><a href="reversion_integration.html" title="Integrating with Django Reversion" accesskey="N">next</a></div>
+			<div class="headerButton"><a href="index.html" title="Integration with Other Django Applications" accesskey="P">previous</a></div>
 		</li>
 	</ul>
 </div>
@@ -56,9 +56,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../settings.html">Settings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pagination.html">Pagination</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Integration with Other Django Applications</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="categories_integration.html">Integrating with Django Categories</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Integrating with Django Categories</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reversion_integration.html">Integrating with Django Reversion</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="">Integrating with Django TinyMCE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tinymce_integration.html">Integrating with Django TinyMCE</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Manual</a></li>
@@ -66,7 +66,7 @@
 
       <h3>This Page</h3>
       <ul class="this-page-menu">
-        <li><a href="../_sources/integration/tinymce_integration.txt"
+        <li><a href="../_sources/integration/categories_integration.txt"
                rel="nofollow">Show Source</a></li>
       </ul>
     <div id="searchbox" style="display: none">
@@ -96,51 +96,61 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="integrating-with-django-tinymce">
-<span id="tinymce-integration"></span><h1>Integrating with Django TinyMCE<a class="headerlink" href="#integrating-with-django-tinymce" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="install-django-tinymce">
-<h2>Install django-tinymce<a class="headerlink" href="#install-django-tinymce" title="Permalink to this headline">¶</a></h2>
-<p>Django-tinymce makes it very easy to include a GUI text editor for any textarea.</p>
+  <div class="section" id="integrating-with-django-categories">
+<span id="categories-integration"></span><h1>Integrating with Django Categories<a class="headerlink" href="#integrating-with-django-categories" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="install-django-categories">
+<h2>Install django-categories<a class="headerlink" href="#install-django-categories" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
-<li><p class="first">Install <cite>django-tinymce</cite></p>
+<li><p class="first">Install <tt class="docutils literal"><span class="pre">django-categories</span></tt></p>
 <blockquote>
-<div><div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>pip install <span class="sb">`</span>django-tinymce<span class="sb">`</span>
+<div><div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>pip install django-categories
 </pre></div>
 </div>
 </div></blockquote>
 </li>
-<li><p class="first">Add <tt class="docutils literal"><span class="pre">tinymce</span></tt> to your <tt class="docutils literal"><span class="pre">INSTALLED_APPS</span></tt> setting.</p>
+<li><p class="first">Add <tt class="docutils literal"><span class="pre">categories</span></tt> to your <tt class="docutils literal"><span class="pre">INSTALLED_APPS</span></tt> setting.</p>
 <blockquote>
 <div><div class="highlight-python"><div class="highlight"><pre><span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">(</span>
     <span class="o">...</span>
-    <span class="s">&#39;tinymce&#39;</span><span class="p">,</span>
+    <span class="s">&#39;categories&#39;</span><span class="p">,</span>
     <span class="o">...</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 </div></blockquote>
 </li>
-<li><p class="first">Add <tt class="docutils literal"><span class="pre">(r'^tinymce/',</span> <span class="pre">include('tinymce.urls')),</span></tt> to your <tt class="docutils literal"><span class="pre">urls.py</span></tt>.</p>
+<li><p class="first">Supply the fields you want to be added to the <tt class="docutils literal"><span class="pre">Story</span></tt> model.</p>
 <blockquote>
-<div><div class="highlight-python"><div class="highlight"><pre><span class="n">urlpatterns</span> <span class="o">=</span> <span class="n">patterns</span><span class="p">(</span><span class="s">&#39;&#39;</span><span class="p">,</span>
+<div><div class="highlight-python"><div class="highlight"><pre><span class="n">CATEGORIES_SETTINGS</span> <span class="o">=</span> <span class="p">{</span>
     <span class="o">...</span>
-    <span class="p">(</span><span class="s">r&#39;^tinymce/&#39;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="s">&#39;tinymce.urls&#39;</span><span class="p">)),</span>
+    <span class="s">&#39;FK_REGISTRY&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">&#39;stories.story&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="s">&#39;primary_category&#39;</span><span class="p">,</span> <span class="s">&#39;related_name&#39;</span><span class="p">:</span> <span class="s">&#39;primary_category&#39;</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="s">&#39;M2M_REGISTRY&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">&#39;stories.story&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="s">&#39;categories&#39;</span><span class="p">,</span> <span class="s">&#39;related_name&#39;</span><span class="p">:</span> <span class="s">&#39;categories&#39;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
     <span class="o">...</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div></blockquote>
-</li>
-<li><p class="first">Add the <tt class="docutils literal"><span class="pre">WIDGET</span></tt> setting</p>
-<blockquote>
-<div><div class="highlight-python"><div class="highlight"><pre><span class="n">STORY_SETTINGS</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s">&#39;WIDGET&#39;</span><span class="p">:</span> <span class="s">&#39;tinymce.widgets.TinyMCEWidget&#39;</span><span class="p">,</span>
 <span class="p">}</span>
 </pre></div>
 </div>
+<p>In this case, 2 fields are setup, one <tt class="docutils literal"><span class="pre">ForeignKey</span></tt> field called
+<strong>primary_category</strong> and one <tt class="docutils literal"><span class="pre">ManyToMany</span></tt> field called <strong>categories</strong></p>
 </div></blockquote>
 </li>
-<li><p class="first">Finally run <cite>./manage.py collectstatic</cite></p>
+<li><p class="first">Sync your database</p>
+<blockquote>
+<div><div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>./manage.py syncdb
+</pre></div>
+</div>
+<p>or if your using <tt class="docutils literal"><span class="pre">South</span></tt></p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>./manage.py syncdb --migrate
+</pre></div>
+</div>
+</div></blockquote>
 </li>
 </ol>
 </div>
@@ -160,7 +170,7 @@
     </div>
 	<div id="breadcrumbs">
 		<a href="index.html" accesskey="U">Integration with Other Django Applications</a><img src="../_static/triangle_closed.png" height="9" width="9" alt="&gt;">
-		Integrating with Django TinyMCE
+		Integrating with Django Categories
 		</ul>
 	</div>
 	<script type="text/javascript" charset="utf-8" src="../_static/toc.js"></script>

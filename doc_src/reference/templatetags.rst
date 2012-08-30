@@ -3,7 +3,7 @@
 Template Tags
 =============
 
-.. module:: stories.templatetags.stories
+.. module:: stories.relations.templatetags.story_relation_tags
 
 .. autoclass:: RelatedNode
    :members:
