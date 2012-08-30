@@ -7,5 +7,8 @@ recursive-include doc_src *.rst *.html *.css *.js *.png *.gif
 recursive-include docs *.html *.css *.js *.png *.gif
 
 recursive-include stories *.py
-recursive-include stories/media *.png *.js
+recursive-include stories/static *.png *.js *.css
+recursive-include stories/relations/static *.js
 recursive-include stories/templates *.html
+
+prune example
