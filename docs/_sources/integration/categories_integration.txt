@@ -13,6 +13,11 @@ Install django-categories
 
         $ pip install django-categories
 
+.. note::
+
+    ``Stories`` requires ``django-categories`` version >= ``1.1.2``
+
+
 #. Add ``categories`` to your ``INSTALLED_APPS`` setting.
 
     .. code-block:: python
