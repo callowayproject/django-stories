@@ -2,7 +2,7 @@
 |BUILD|_
 
 .. |BUILD| image::
-   https://secure.travis-ci.org/callowayproject/django-stories.png?branch=1.0
+   https://secure.travis-ci.org/callowayproject/django-stories.png?branch=master
 .. _BUILD: http://travis-ci.org/#!/callowayproject/django-stories
 
 ==============
