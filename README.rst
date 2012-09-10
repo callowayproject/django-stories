@@ -9,7 +9,10 @@
 Django Stories
 ==============
 
-
+:Version: 1.0beta1 (DEVEL)
+:Docs: http://django-stories.readthedocs.org/
+:Download: http://pypi.python.org/pypi/django-stories/
+:Source: http://github.com/callowayproject/django-stories/
 
 This app is designed to be flexible to configure, but still simple to the writers and editors.
 
