@@ -1,9 +1,9 @@
-from django.contrib.admin.templatetags.admin_list import items_for_result, \
-     result_headers, result_hidden_fields
+from django.contrib.admin.templatetags.admin_list import (items_for_result,
+     result_headers, result_hidden_fields)
 from django.template import Library
-from django.forms.models import modelform_factory
 
 register = Library()
+
 
 def results(cl):
     if hasattr(cl.model_admin, 'quick_editable'):
@@ -14,8 +14,8 @@ def results(cl):
         if qe_form:
             for res, form in zip(cl.result_list, cl.formset.forms):
                 yield {
-                    'fields':list(items_for_result(cl, res, form)),
-                    'quickedit':form,
+                    'fields': list(items_for_result(cl, res, form)),
+                    'quickedit': form,
                 }
         else:
             for res, form in zip(cl.result_list, cl.formset.forms):
@@ -23,20 +23,21 @@ def results(cl):
     else:
         if qe_form:
             for res in cl.result_list:
-                yield {'fields':list(items_for_result(cl, res, None)),}
+                yield {
+                    'fields': list(items_for_result(cl, res, None)),
+                }
         else:
             for res in cl.result_list:
                 yield list(items_for_result(cl, res, None))
 
+
+@register.inclusion_tag("admin/qe_change_list_results.html", takes_context=True)
 def qe_result_list(context, cl):
-    if context.has_key('STATIC_URL'):
-        static_url = 'STATIC_URL'
-    else:
-        static_url = 'MEDIA_URL'
+    from django.conf import settings
     return {'cl': cl,
             'result_hidden_fields': list(result_hidden_fields(cl)),
             'result_headers': list(result_headers(cl)),
             'results': list(results(cl)),
-            'STATIC_URL': context[static_url]}
+            'STATIC_URL': context[settings.STATIC_URL]}
 qe_result_list = register.inclusion_tag(
     'admin/qe_change_list_results.html', takes_context=True)(qe_result_list)

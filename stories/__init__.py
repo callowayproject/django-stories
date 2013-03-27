@@ -10,6 +10,7 @@ __version_info__ = {
     'serial': 1
 }
 
+
 def get_version():
     vers = ["%(major)i.%(minor)i" % __version_info__, ]
 

@@ -67,52 +67,15 @@ USER_SETTINGS = getattr(settings, 'STORY_SETTINGS', {})
 
 DEFAULT_SETTINGS.update(USER_SETTINGS)
 
-error_str = "settings.%s is deprecated; use settings.STORY_SETTINGS instead."
+COMMENTS_DISABLED = 0
+COMMENTS_ENABLED = 1
+COMMENTS_FROZEN = 2
 
-if hasattr(settings, 'STORY_STATUS_CHOICES'):
-    warnings.warn(error_str % 'STORY_STATUS_CHOICES', DeprecationWarning)
-    DEFAULT_SETTINGS['STATUS_CHOICES'] = getattr(settings, 'STORY_STATUS_CHOICES')
-
-if hasattr(settings, 'STORY_DEFAULT_STATUS'):
-    warnings.warn(error_str % 'STORY_DEFAULT_STATUS', DeprecationWarning)
-    DEFAULT_SETTINGS['DEFAULT_STATUS'] = getattr(settings, 'STORY_DEFAULT_STATUS')
-
-if hasattr(settings, 'STORY_PUBLISHED_STATUS'):
-    warnings.warn(error_str % 'STORY_PUBLISHED_STATUS', DeprecationWarning)
-    DEFAULT_SETTINGS['PUBLISHED_STATUS'] = getattr(settings, 'STORY_PUBLISHED_STATUS')
-
-if hasattr(settings, 'STORY_ORIGIN_CHOICES'):
-    warnings.warn(error_str % 'STORY_ORIGIN_CHOICES', DeprecationWarning)
-    DEFAULT_SETTINGS['ORIGIN_CHOICES'] = getattr(settings, 'STORY_ORIGIN_CHOICES')
-
-if hasattr(settings, 'STORY_INCLUDE_PRINT'):
-    warnings.warn(error_str % 'STORY_INCLUDE_PRINT', DeprecationWarning)
-    DEFAULT_SETTINGS['INCLUDE_PRINT'] = getattr(settings, 'STORY_INCLUDE_PRINT')
-
-if hasattr(settings, 'STORY_DEFAULT_ORIGIN'):
-    warnings.warn(error_str % 'STORY_DEFAULT_ORIGIN', DeprecationWarning)
-    DEFAULT_SETTINGS['DEFAULT_ORIGIN'] = getattr(settings, 'STORY_DEFAULT_ORIGIN')
-
-if hasattr(settings, 'STORY_PAGINATION'):
-    warnings.warn(error_str % 'STORY_PAGINATION', DeprecationWarning)
-    DEFAULT_SETTINGS['PAGINATION']['PAGINATE'] = getattr(settings, 'STORY_PAGINATION')
-
-if hasattr(settings, 'STORY_P_PER_PAGE'):
-    warnings.warn(error_str % 'STORY_P_PER_PAGE', DeprecationWarning)
-    DEFAULT_SETTINGS['PAGINATION']['P_PER_PAGE'] = getattr(settings, 'STORY_P_PER_PAGE')
-
-if hasattr(settings, 'STORY_ORPHANS'):
-    warnings.warn(error_str % 'STORY_ORPHANS', DeprecationWarning)
-    DEFAULT_SETTINGS['PAGINATION']['ORPHANS'] = getattr(settings, 'STORY_ORPHANS')
-
-if hasattr(settings, 'STORY_DONT_THROW_404'):
-    warnings.warn(error_str % 'STORY_DONT_THROW_404', DeprecationWarning)
-    DEFAULT_SETTINGS['THROW_404'] = not getattr(settings, 'STORY_DONT_THROW_404')
-
-if hasattr(settings, 'STORY_RELATION_MODELS'):
-    warnings.warn(error_str % 'STORY_RELATION_MODELS', DeprecationWarning)
-    DEFAULT_SETTINGS['RELATION_MODELS'] = getattr(settings, 'STORY_RELATION_MODELS') or []
-
+COMMENT_STATUSES = (
+    (COMMENTS_DISABLED, _('Comments Disabled')),
+    (COMMENTS_ENABLED, _('Comments Enabled')),
+    (COMMENTS_FROZEN, _('Comments Frozen'))
+)
 
 RELATIONS = [Q(app_label=al, model=m) for al, m in [x.split('.') for x in DEFAULT_SETTINGS['RELATION_MODELS']]]
 
