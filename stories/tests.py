@@ -6,21 +6,23 @@ import datetime
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ImproperlyConfigured
-from django.template import Template, Context, TemplateSyntaxError
+from django.template import Template, Context
 from django.test import TestCase
-from django.test.client import Client
 
 from stories import settings
 from stories.models import Story
-from stories.models import COMMENTS_FROZEN, COMMENTS_ENABLED, COMMENTS_DISABLED
+from stories.settings import COMMENTS_FROZEN, COMMENTS_DISABLED
 from stories.utils import load_widget
+
 
 def render(src, ctx=None):
     ctx = ctx or {}
     return Template(src).render(Context(ctx))
 
+
 class BaseTests(TestCase):
     fixtures = ['auth.json', 'profile.json', 'stories.json']
+
     def setUp(self):
         self.story1 = Story.objects.get(pk=1)
         self.story2 = Story.objects.get(pk=2)

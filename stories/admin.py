@@ -28,6 +28,7 @@ if settings.USE_REVERSION:
 else:
     AdminModel = admin.ModelAdmin
 
+
 class ChangeStatus(object):
     """A class to create objects that can dynamically set status
        from the admin"""
@@ -49,6 +50,7 @@ class ChangeStatus(object):
 
 
 admin_actions = [ChangeStatus(x, y) for x, y in settings.STATUS_CHOICES]
+
 
 class StoryAdmin(AdminModel):
     """
@@ -95,10 +97,10 @@ class StoryAdmin(AdminModel):
         'FILTER_HORIZONTAL_FIELDS', ('authors',))
 
     if HAS_RELATIONS:
-        inlines = [InlineStoryRelation,]
+        inlines = [InlineStoryRelation, ]
 
     fieldsets = (
-        (None,{
+        (None, {
             'fields': ('headline', 'subhead', 'tease_headline',
                        'teaser', 'body')
         }),
@@ -114,7 +116,7 @@ class StoryAdmin(AdminModel):
         })
 
     fieldsets = fieldsets + ((_('Advanced Options'), {
-            'fields': ('slug',('publish_date', 'publish_time'),
+            'fields': ('slug', ('publish_date', 'publish_time'),
                        'update_date', 'site', ),
             'classes': ('collapse',),
         }),)
@@ -163,7 +165,7 @@ class StoryAdmin(AdminModel):
         only shows published stories
         """
         qs = self.model.objects.get_query_set()
-        ordering = self.ordering or () # otherwise we will try to *None
+        ordering = self.ordering or ()  # otherwise we might try to *None, which is bad ;)
         if ordering:
             qs = qs.order_by(*ordering)
         return qs

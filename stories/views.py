@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import datetime, time
-
 from django.contrib.admin.views.decorators import staff_member_required
 from django.core.paginator import EmptyPage, InvalidPage
 from django.http import HttpResponseRedirect, Http404
@@ -24,11 +22,11 @@ def admin_changeset_list(request, story_id,
 
     chsets = story.changeset_set.all().order_by('-revision')
 
-
     return render_to_response(template_name,
                               {'story': story,
                                'changesets': chsets},
                               context_instance=RequestContext(request))
+
 
 @staff_member_required
 def admin_changeset_revert(request, story_id, revision_id,
@@ -52,6 +50,7 @@ def admin_changeset_revert(request, story_id, revision_id,
                               {'story': story,
                                'changeset': changeset},
                               context_instance=RequestContext(request))
+
 
 def pag_story_detail(request, year, month, day, slug,
         p_per_page=settings.PAGINATION['P_PER_PAGE'],
@@ -85,8 +84,11 @@ def pag_story_detail(request, year, month, day, slug,
     * **template_name** - the name of the template
     * **extra_context** - dictionary containing any extra context
     """
+    import datetime
+    import time
+
     try:
-        pub_date = datetime.date(*time.strptime(year+month+day, '%Y%b%d')[:3])
+        pub_date = datetime.date(*time.strptime(year + month + day, '%Y%b%d')[:3])
     except ValueError:
         raise Http404
 
@@ -113,6 +115,7 @@ def pag_story_detail(request, year, month, day, slug,
         except ValueError:
             page = 1
 
+        # If page request (9999) is out of range, deliver last page of results.
         try:
             story_content = paginator.page(page)
         except (EmptyPage, InvalidPage):
@@ -124,12 +127,12 @@ def pag_story_detail(request, year, month, day, slug,
         # template
         if template_name == "stories/pag_story.html":
             template_name = "stories/story_detail.html"
-
-    context = {p_object_name: story_content,
-               template_object_name: story}
+    context = {
+        p_object_name: story_content,
+        template_object_name: story
+    }
     if extra_context:
         context.update(extra_context)
 
     return render_to_response(template_name, context,
                               context_instance=RequestContext(request))
-

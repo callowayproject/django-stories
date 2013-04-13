@@ -19,15 +19,6 @@ from django.utils.translation import ugettext as _
 
 from stories import settings
 
-COMMENTS_DISABLED = 0
-COMMENTS_ENABLED = 1
-COMMENTS_FROZEN = 2
-
-COMMENT_STATUSES = (
-    (COMMENTS_DISABLED, _('Comments Disabled')),
-    (COMMENTS_ENABLED, _('Comments Enabled')),
-    (COMMENTS_FROZEN, _('Comments Frozen'))
-)
 
 class CurrentSitePublishedManager(models.Manager):
     def get_query_set(self):
@@ -96,7 +87,7 @@ class Story(models.Model):
     comments = models.BooleanField(_('Enable Comments?'),
         default=True)
     comment_status = models.IntegerField(_('Comment Status'),
-        choices=COMMENT_STATUSES,
+        choices=settings.COMMENT_STATUSES,
         default=1
     )
     status = models.IntegerField(_('Published Status'),
@@ -121,7 +112,7 @@ class Story(models.Model):
         verbose_name_plural = _("Stories")
         ordering = settings.ORDERING
         get_latest_by = 'publish_date'
-        unique_together = ('publish_date','slug')
+        unique_together = ('publish_date', 'slug')
 
     @models.permalink
     def get_absolute_url(self):
@@ -137,7 +128,7 @@ class Story(models.Model):
         """
         Simplified way to get the comment status == frozen
         """
-        return self.comment_status == COMMENTS_FROZEN
+        return self.comment_status == settings.COMMENTS_FROZEN
 
     @property
     def author(self):
@@ -244,4 +235,3 @@ try:
             post_syncdb.connect(migrate_app)
 except (ImportError, ValueError):
     pass
-
