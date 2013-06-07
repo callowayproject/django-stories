@@ -155,7 +155,7 @@ class StoryAdmin(AdminModel):
 
     def formfield_for_dbfield(self, db_field, **kwargs):
         """Supply the widget to the body field"""
-        if db_field.name == 'body':
+        if db_field.name in settings.WIDGET_FIELDS:
             return db_field.formfield(widget=self._get_widget())
         return super(StoryAdmin, self).formfield_for_dbfield(db_field, **kwargs)
 
