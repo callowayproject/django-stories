@@ -30,6 +30,18 @@ class CurrentSitePublishedManager(CurrentSiteManager):
                 status__exact=settings.PUBLISHED_STATUS)
 
 
+class AlternateManager(CurrentSiteManager):
+    """
+    This is the default manager. In some cases, if you only have access to the
+    default manager, you can use the published() method to get the right stuff
+    """
+    def published(self):
+        queryset = super(AlternateManager, self).get_query_set()
+        return queryset.filter(
+            publish_date__lte=datetime.now()).filter(
+                status__exact=settings.PUBLISHED_STATUS)
+
+
 class Story(models.Model):
     """
     A newspaper or magazine type story or document that was possibly also
@@ -106,7 +118,7 @@ class Story(models.Model):
         default=settings.DEFAULT_ORIGIN,)
     site = models.ForeignKey(Site, verbose_name=_('Site'))
 
-    objects = models.Manager()
+    objects = AlternateManager()
     published = CurrentSitePublishedManager()
 
     class Meta:
