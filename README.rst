@@ -9,7 +9,7 @@
 Django Stories
 ==============
 
-:Version: 1.0.1
+:Version: 1.0.3
 :Docs: http://django-stories.readthedocs.org/
 :Download: http://pypi.python.org/pypi/django-stories/
 :Source: http://github.com/callowayproject/django-stories/
