@@ -40,13 +40,22 @@ Features
 Change Log
 ==========
 
-- **New in 1.0.1**
+- **New in 1.0.3**
 
 * `django 1.5` support
 * tested with `django-categories 1.2.*`
 * dropped support for `django 1.2`
 
-- **New in 1.0**
+- **1.0.2**
+
+* Added a default manager
+
+- **1.0.1**
+
+* New `CurrentSiteManager`
+* Widget fields can now be specified with `settings.WIDGET_FIELDS`
+
+- **1.0**
 
 * Code refactor
 
