@@ -9,7 +9,7 @@
 Django Stories
 ==============
 
-:Version: 1.0beta1 (DEVEL)
+:Version: 1.0.1
 :Docs: http://django-stories.readthedocs.org/
 :Download: http://pypi.python.org/pypi/django-stories/
 :Source: http://github.com/callowayproject/django-stories/
@@ -40,7 +40,13 @@ Features
 Change Log
 ==========
 
--**New in 1.0**
+- **New in 1.0.1**
+
+* `django 1.5` support
+* tested with `django-categories 1.2.*`
+* dropped support for `django 1.2`
+
+- **New in 1.0**
 
 * Code refactor
 

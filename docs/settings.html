@@ -1,4 +1,3 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -7,15 +6,15 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Settings &mdash; Django Stories 1.0beta1 documentation</title>
+    <title>Settings &mdash; Django Stories 1.0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
-        VERSION:     '1.0beta1',
+        URL_ROOT:    './',
+        VERSION:     '1.0.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,13 +23,13 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Django Stories 1.0beta1 documentation" href="index.html" />
+    <link rel="top" title="Django Stories 1.0.1 documentation" href="index.html" />
     <link rel="next" title="Pagination" href="pagination.html" />
     <link rel="prev" title="Custom Author Model Guide" href="author_guide.html" /> 
   </head>
   <body>
 <div id="docstitle">
-	<p>Django Stories 1.0beta1 documentation</p>
+	<p>Django Stories 1.0.1 documentation</p>
 </div>
 <div id="header">
 	<div id="title"><h1>Settings</h1></div>
@@ -236,8 +235,9 @@ The fields are <tt class="docutils literal"><span class="pre">print_pub_date</sp
 </div>
 <div class="section" id="relation-models">
 <span id="id8"></span><h2><a class="toc-backref" href="#id23">RELATION_MODELS</a><a class="headerlink" href="#relation-models" title="Permalink to this headline">¶</a></h2>
-<p class="versionchanged">
-<span class="versionmodified">Changed in version 1.0: </span><cite>relations</cite> is now a seperate app within <tt class="docutils literal"><span class="pre">stories</span></tt></p>
+<div class="versionchanged">
+<p><span>Changed in version 1.0: </span><cite>relations</cite> is now a seperate app within <tt class="docutils literal"><span class="pre">stories</span></tt></p>
+</div>
 <p>A story can relate to several other things, such as other stories,
 photographs, photo galleries, and external links. Relations links to the
 Django Content Types application, which would normally show all sorts of
@@ -340,8 +340,9 @@ before you set this setting.</p>
 </div>
 <div class="section" id="use-reversion">
 <span id="id16"></span><h2><a class="toc-backref" href="#id31">USE_REVERSION</a><a class="headerlink" href="#use-reversion" title="Permalink to this headline">¶</a></h2>
-<p class="versionchanged">
-<span class="versionmodified">Changed in version 1.0: </span>Default is now <tt class="docutils literal"><span class="pre">False</span></tt></p>
+<div class="versionchanged">
+<p><span>Changed in version 1.0: </span>Default is now <tt class="docutils literal"><span class="pre">False</span></tt></p>
+</div>
 <p>This setting expects <tt class="docutils literal"><span class="pre">django-reversion</span></tt> to be installed and in your
 <tt class="docutils literal"><span class="pre">INSTALLED_APPS</span></tt></p>
 <p><strong>Default:</strong></p>
@@ -353,8 +354,9 @@ before you set this setting.</p>
 </div>
 <div class="section" id="ordering">
 <h2><a class="toc-backref" href="#id32">ORDERING</a><a class="headerlink" href="#ordering" title="Permalink to this headline">¶</a></h2>
-<p class="versionchanged">
-<span class="versionmodified">Changed in version 1.0: </span>This setting used to be called <tt class="docutils literal"><span class="pre">STORY_ORDERING</span></tt></p>
+<div class="versionchanged">
+<p><span>Changed in version 1.0: </span>This setting used to be called <tt class="docutils literal"><span class="pre">STORY_ORDERING</span></tt></p>
+</div>
 <p>The default <tt class="docutils literal"><span class="pre">ordering</span></tt> for stories</p>
 <p><strong>Default:</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">STORY_SETTINGS</span> <span class="o">=</span> <span class="p">{</span>
@@ -365,8 +367,9 @@ before you set this setting.</p>
 </div>
 <div class="section" id="widget">
 <h2><a class="toc-backref" href="#id33">WIDGET</a><a class="headerlink" href="#widget" title="Permalink to this headline">¶</a></h2>
-<p class="versionadded">
-<span class="versionmodified">New in version 1.0.</span></p>
+<div class="versionadded">
+<p><span>New in version 1.0.</span></p>
+</div>
 <p>Path of the widget module to use for <tt class="docutils literal"><span class="pre">story.body</span></tt></p>
 <p><strong>Default:</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">STORY_SETTINGS</span> <span class="o">=</span> <span class="p">{</span>
@@ -377,8 +380,9 @@ before you set this setting.</p>
 </div>
 <div class="section" id="widget-attrs">
 <h2><a class="toc-backref" href="#id34">WIDGET_ATTRS</a><a class="headerlink" href="#widget-attrs" title="Permalink to this headline">¶</a></h2>
-<p class="versionadded">
-<span class="versionmodified">New in version 1.0.</span></p>
+<div class="versionadded">
+<p><span>New in version 1.0.</span></p>
+</div>
 <p>Dictionary of the attributes to supply the widget for <tt class="docutils literal"><span class="pre">story.body</span></tt>. This
 also includes suppling the default widget <tt class="docutils literal"><span class="pre">Textarea</span></tt></p>
 <p><strong>Default:</strong></p>
@@ -390,8 +394,9 @@ also includes suppling the default widget <tt class="docutils literal"><span cla
 </div>
 <div class="section" id="admin-extras">
 <h2><a class="toc-backref" href="#id35">ADMIN_EXTRAS</a><a class="headerlink" href="#admin-extras" title="Permalink to this headline">¶</a></h2>
-<p class="versionadded">
-<span class="versionmodified">New in version 1.0.</span></p>
+<div class="versionadded">
+<p><span>New in version 1.0.</span></p>
+</div>
 <p>This is a dictionary of configurable admin attributes of the <tt class="docutils literal"><span class="pre">StoryAdmin</span></tt>
 class. Here are list of the configurable attributes.</p>
 <ul class="simple">
@@ -444,7 +449,7 @@ inserted. By default, these extra fieldsets will be appended.</p>
     <div class="footer">
     <p>
       &copy; Copyright 2012, The Calloway Project.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2b1.
 	</p>
     </div>
       <div class="clearer"></div>

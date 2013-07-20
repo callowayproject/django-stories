@@ -1,4 +1,3 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -7,15 +6,15 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Installation &mdash; Django Stories 1.0beta1 documentation</title>
+    <title>Installation &mdash; Django Stories 1.0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
-        VERSION:     '1.0beta1',
+        URL_ROOT:    './',
+        VERSION:     '1.0.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,13 +23,13 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Django Stories 1.0beta1 documentation" href="index.html" />
+    <link rel="top" title="Django Stories 1.0.1 documentation" href="index.html" />
     <link rel="next" title="Upgrading to 1.0" href="upgrading.html" />
     <link rel="prev" title="Welcome to Django Stories’s documentation!" href="index.html" /> 
   </head>
   <body>
 <div id="docstitle">
-	<p>Django Stories 1.0beta1 documentation</p>
+	<p>Django Stories 1.0.1 documentation</p>
 </div>
 <div id="header">
 	<div id="title"><h1>Installation</h1></div>
@@ -125,8 +124,9 @@ and run...</p>
 </div>
 <p>If you want to use <em class="xref std std-ref">story_relations</em>, add the app to
 <strong>INSTALLED_APPS</strong> as well.</p>
-<p class="versionadded">
-<span class="versionmodified">New in version 1.0.</span></p>
+<div class="versionadded">
+<p><span>New in version 1.0.</span></p>
+</div>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">(</span>
     <span class="o">...</span>
     <span class="s">&#39;stories&#39;</span><span class="p">,</span>
@@ -138,8 +138,9 @@ and run...</p>
 </div>
 <div class="section" id="requirements">
 <h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
-<p class="versionchanged">
-<span class="versionmodified">Changed in version 1.0: </span>The only requirement is <cite>BeautifulSoup</cite> for pagination</p>
+<div class="versionchanged">
+<p><span>Changed in version 1.0: </span>The only requirement is <cite>BeautifulSoup</cite> for pagination</p>
+</div>
 <div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>pip install BeautifulSoup
 </pre></div>
 </div>
@@ -159,8 +160,9 @@ and run...</p>
 </pre></div>
 </div>
 <p>If your using <tt class="docutils literal"><span class="pre">South</span></tt> run</p>
-<p class="versionadded">
-<span class="versionmodified">New in version 1.0.</span></p>
+<div class="versionadded">
+<p><span>New in version 1.0.</span></p>
+</div>
 <div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>./manage.py syncdb --migrate
 </pre></div>
 </div>
@@ -179,7 +181,7 @@ to use a custom author model, please consult <a class="reference internal" href=
     <div class="footer">
     <p>
       &copy; Copyright 2012, The Calloway Project.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2b1.
 	</p>
     </div>
       <div class="clearer"></div>
