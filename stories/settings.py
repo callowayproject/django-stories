@@ -60,7 +60,8 @@ DEFAULT_SETTINGS = {
     'THROW_404': True,
     'USE_REVERSION': False,
     'WIDGET': None,
-    'WIDGET_ATTRS': None
+    'WIDGET_ATTRS': None,
+    'WIDGET_FIELDS': ['body', ]
 }
 
 USER_SETTINGS = getattr(settings, 'STORY_SETTINGS', {})

@@ -9,8 +9,10 @@ import re
 from datetime import datetime
 
 from django.contrib.sites.models import Site
+from django.contrib.sites.managers import CurrentSiteManager
 from django.conf import settings as site_settings
 from django.core.exceptions import ImproperlyConfigured
+from django.core.urlresolvers import reverse
 from django.db import models
 from django.template.loader import select_template
 from django.template import Context
@@ -20,9 +22,21 @@ from django.utils.translation import ugettext as _
 from stories import settings
 
 
-class CurrentSitePublishedManager(models.Manager):
+class CurrentSitePublishedManager(CurrentSiteManager):
     def get_query_set(self):
         queryset = super(CurrentSitePublishedManager, self).get_query_set()
+        return queryset.filter(
+            publish_date__lte=datetime.now()).filter(
+                status__exact=settings.PUBLISHED_STATUS)
+
+
+class AlternateManager(CurrentSiteManager):
+    """
+    This is the default manager. In some cases, if you only have access to the
+    default manager, you can use the published() method to get the right stuff
+    """
+    def published(self):
+        queryset = super(AlternateManager, self).get_query_set()
         return queryset.filter(
             publish_date__lte=datetime.now()).filter(
                 status__exact=settings.PUBLISHED_STATUS)
@@ -104,7 +118,7 @@ class Story(models.Model):
         default=settings.DEFAULT_ORIGIN,)
     site = models.ForeignKey(Site, verbose_name=_('Site'))
 
-    objects = models.Manager()
+    objects = AlternateManager()
     published = CurrentSitePublishedManager()
 
     class Meta:
@@ -114,14 +128,13 @@ class Story(models.Model):
         get_latest_by = 'publish_date'
         unique_together = ('publish_date', 'slug')
 
-    @models.permalink
     def get_absolute_url(self):
-        return ('news_detail', (
-            self.publish_date.year,
-            self.publish_date.strftime('%b').lower(),
-            self.publish_date.day,
-            self.slug
-        ))
+        return reverse('news_detail', args=tuple(), kwargs={
+            'year': self.publish_date.year,
+            'month': self.publish_date.strftime('%b').lower(),
+            'day': self.publish_date.day,
+            'slug': self.slug
+        })
 
     @property
     def comments_frozen(self):
