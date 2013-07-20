@@ -38,6 +38,6 @@ def qe_result_list(context, cl):
             'result_hidden_fields': list(result_hidden_fields(cl)),
             'result_headers': list(result_headers(cl)),
             'results': list(results(cl)),
-            'STATIC_URL': context[settings.STATIC_URL]}
+            'STATIC_URL': context['STATIC_URL']}
 qe_result_list = register.inclusion_tag(
     'admin/qe_change_list_results.html', takes_context=True)(qe_result_list)
