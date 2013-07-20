@@ -22,7 +22,7 @@
         {% if result.form.non_field_errors %}
           <tr><td colspan="{{ result|length }}">{{ result.form.non_field_errors }}</td></tr>
         {% endif %}
-        {% url admin:stories_story_change result.quickedit.instance.pk as change_url %}
+        {% url 'admin:stories_story_change' result.quickedit.instance.pk as change_url %}
         <tr class="{% cycle 'row1' 'row2' %}">
           <td>
             <div class="qe-buttons">
