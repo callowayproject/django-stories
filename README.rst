@@ -9,7 +9,7 @@
 Django Stories
 ==============
 
-:Version: 1.0.3
+:Version: 1.0.4
 :Docs: http://django-stories.readthedocs.org/
 :Download: http://pypi.python.org/pypi/django-stories/
 :Source: http://github.com/callowayproject/django-stories/
@@ -40,7 +40,12 @@ Features
 Change Log
 ==========
 
-- **New in 1.0.3**
+- **New in 1.0.4**
+
+* Story ensures that a publish date and time is set automatically if the status is set to publish.
+* ``get_absolute_url`` now returns an empty string if there is no publish date, instead of raising an exception.
+
+- **1.0.3**
 
 * `django 1.5` support
 * tested with `django-categories 1.2.*`

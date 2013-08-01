@@ -64,6 +64,21 @@ class StoryTests(BaseTests):
         self.assertEqual(len(Story.objects.all()), 2)
         # Only one of these is marked as published
         self.assertEqual(len(Story.published.all()), 1)
+        # Mark them all published and make sure they all have a publish_date/time
+        unpub = Story.objects.exclude(status=4)[0]
+        unpub.publish_date = None
+        unpub.publish_time = None
+        unpub.save()
+        self.assertEqual(unpub.publish_date, None)
+        self.assertEqual(unpub.publish_time, None)
+        unpub.status = 4
+        unpub.save()
+        self.assertNotEqual(unpub.publish_date, None)
+        self.assertNotEqual(unpub.publish_time, None)
+        unpub.status = 1
+        unpub.publish_date = None
+        unpub.publish_time = None
+        unpub.save()
 
     def test_views(self):
         # Archive views
@@ -75,6 +90,8 @@ class StoryTests(BaseTests):
         self.assertEqual(self.client.get('/news/today/').status_code, 200)
 
         # story2 is marked as published, story1 is not
+        self.story1.publish_date = None
+        self.story1.publish_time = None
         self.assertEqual(self.client.get(
             self.story1.get_absolute_url()).status_code, 404)
         self.assertEqual(self.client.get(
