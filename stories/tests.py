@@ -90,6 +90,8 @@ class StoryTests(BaseTests):
         self.assertEqual(self.client.get('/news/today/').status_code, 200)
 
         # story2 is marked as published, story1 is not
+        self.story1.publish_date = None
+        self.story1.publish_time = None
         self.assertEqual(self.client.get(
             self.story1.get_absolute_url()).status_code, 404)
         self.assertEqual(self.client.get(

@@ -157,6 +157,8 @@ class Story(models.Model):
         unique_together = ('publish_date', 'slug')
 
     def get_absolute_url(self):
+        if self.publish_date is None:
+            return ""
         return reverse('news_detail', args=tuple(), kwargs={
             'year': self.publish_date.year,
             'month': self.publish_date.strftime('%b').lower(),
