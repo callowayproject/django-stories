@@ -35,6 +35,34 @@ class AlternateManager(CurrentSiteManager):
     This is the default manager. In some cases, if you only have access to the
     default manager, you can use the published() method to get the right stuff
     """
+    def unique_slug(self, publish_date, slug):
+        """
+        Check if the date/slug combination is unique
+        """
+        query_params = {
+            'slug': slug[:50],
+            'publish_date__year': publish_date.year,
+            'publish_date__month': publish_date.month,
+            'publish_date__day': publish_date.day
+        }
+        return self.get_query_set().filter(**query_params).count() == 0
+
+    def get_unique_slug(self, publish_date, slug):
+        """
+        Return a unique slug by adding a digit to the end
+        """
+        query_params = {
+            'publish_date__year': publish_date.year,
+            'publish_date__month': publish_date.month,
+            'publish_date__day': publish_date.day
+        }
+        if not self.unique_slug(publish_date, slug):
+            # Allow up to 10,000 versions on the same date
+            query_params['slug__startswith'] = slug[:46]
+            num = self.get_query_set().filter(**query_params).count()
+            slug = '%s%s' % (slug[:46], str(num + 1))
+        return slug
+
     def published(self):
         queryset = super(AlternateManager, self).get_query_set()
         return queryset.filter(
@@ -135,6 +163,16 @@ class Story(models.Model):
             'day': self.publish_date.day,
             'slug': self.slug
         })
+
+    def save(self, *args, **kwargs):
+        """
+        Enforce setting of publish date and time if it is published.
+        """
+        if self.status == settings.PUBLISHED_STATUS:
+            self.publish_date = datetime.now().date()
+            self.publish_time = datetime.now().time()
+            self.slug = Story.objects.get_unique_slug(self.publish_date, self.slug)
+        super(Story, self).save(*args, **kwargs)
 
     @property
     def comments_frozen(self):
