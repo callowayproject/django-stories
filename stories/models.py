@@ -64,7 +64,7 @@ class AlternateManager(CurrentSiteManager):
         return slug
 
     def published(self):
-        queryset = super(AlternateManager, self).get_query_set()
+        queryset = self.get_query_set()
         return queryset.filter(
             publish_date__lte=datetime.now()).filter(
                 status__exact=settings.PUBLISHED_STATUS)
