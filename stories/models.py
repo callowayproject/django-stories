@@ -171,9 +171,9 @@ class Story(models.Model):
         Enforce setting of publish date and time if it is published.
         """
         if self.status == settings.PUBLISHED_STATUS:
-            if not self.published_date:
+            if not self.publish_date:
                 self.publish_date = datetime.now().date()
-            if not self.published_time:
+            if not self.publish_time:
                 self.publish_time = datetime.now().time()
             self.slug = Story.objects.get_unique_slug(self.publish_date, self.slug)
         super(Story, self).save(*args, **kwargs)
