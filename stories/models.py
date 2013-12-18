@@ -26,8 +26,10 @@ class CurrentSitePublishedManager(CurrentSiteManager):
     def get_query_set(self):
         queryset = super(CurrentSitePublishedManager, self).get_query_set()
         return queryset.filter(
-            publish_date__lte=datetime.now()).filter(
-                status__exact=settings.PUBLISHED_STATUS)
+            publish_date__lte=datetime.now()
+        ).filter(
+            status__exact=settings.PUBLISHED_STATUS
+        )
 
 
 class AlternateManager(CurrentSiteManager):
@@ -35,19 +37,20 @@ class AlternateManager(CurrentSiteManager):
     This is the default manager. In some cases, if you only have access to the
     default manager, you can use the published() method to get the right stuff
     """
-    def unique_slug(self, publish_date, slug):
+    def unique_slug(self, publish_date, slug, exclude_id=None):
         """
         Check if the date/slug combination is unique
         """
         query_params = {
             'slug': slug[:50],
-            'publish_date__year': publish_date.year,
-            'publish_date__month': publish_date.month,
-            'publish_date__day': publish_date.day
+            'publish_date': publish_date,
         }
-        return self.get_query_set().filter(**query_params).count() == 0
+        qset = self.get_query_set().filter(**query_params)
+        if exclude_id:
+            qset = qset.exclude(id=exclude_id)
+        return qset.count() == 0
 
-    def get_unique_slug(self, publish_date, slug):
+    def get_unique_slug(self, publish_date, slug, story_id=None):
         """
         Return a unique slug by adding a digit to the end
         """
@@ -56,7 +59,7 @@ class AlternateManager(CurrentSiteManager):
             'publish_date__month': publish_date.month,
             'publish_date__day': publish_date.day
         }
-        if not self.unique_slug(publish_date, slug):
+        if not self.unique_slug(publish_date, slug, story_id):
             # Allow up to 10,000 versions on the same date
             query_params['slug__startswith'] = slug[:46]
             num = self.get_query_set().filter(**query_params).count()
@@ -66,8 +69,9 @@ class AlternateManager(CurrentSiteManager):
     def published(self):
         queryset = self.get_query_set()
         return queryset.filter(
-            publish_date__lte=datetime.now()).filter(
-                status__exact=settings.PUBLISHED_STATUS)
+            publish_date__lte=datetime.now()
+        ).filter(
+            status__exact=settings.PUBLISHED_STATUS)
 
 
 class Story(models.Model):
@@ -75,73 +79,91 @@ class Story(models.Model):
     A newspaper or magazine type story or document that was possibly also
     printed in a periodical.
     """
-    headline = models.CharField(_("Headline"),
+    headline = models.CharField(
+        _("Headline"),
         max_length=100)
-    tease_headline = models.CharField(_("Tease Headline"),
+    tease_headline = models.CharField(
+        _("Tease Headline"),
         max_length=100,
         default="",
         blank=True)
-    subhead = models.CharField(_("Subheadline"),
+    subhead = models.CharField(
+        _("Subheadline"),
         max_length=200,
         blank=True,
         null=True)
-    slug = models.SlugField(_('Slug'),
+    slug = models.SlugField(
+        _('Slug'),
         max_length=50)
-    authors = models.ManyToManyField(settings.AUTHOR_MODEL,
+    authors = models.ManyToManyField(
+        settings.AUTHOR_MODEL,
         verbose_name=_('Authors'),
         blank=True,
         null=True,
         limit_choices_to=settings.AUTHOR_MODEL_LIMIT_CHOICES)
-    non_staff_author = models.CharField(_('Non-staff author(s)'),
+    non_staff_author = models.CharField(
+        _('Non-staff author(s)'),
         max_length=200,
         blank=True,
         null=True,
         help_text=_("An HTML-formatted rendering of an author(s) not on staff."))
-    publish_date = models.DateField(_('Publish Date'),
+    publish_date = models.DateField(
+        _('Publish Date'),
         help_text=_("The date the original story was published"),
         blank=True,
         null=True)
-    publish_time = models.TimeField(_('Publish Time'),
+    publish_time = models.TimeField(
+        _('Publish Time'),
         help_text=_("The time the original story was published"),
         blank=True,
         null=True)
-    update_date = models.DateTimeField(_('Update Date'),
+    update_date = models.DateTimeField(
+        _('Update Date'),
         help_text=_("The update date/time to display to the user"),
         blank=True,
         null=True)
-    modified_date = models.DateTimeField(_("Date Modified"),
+    modified_date = models.DateTimeField(
+        _("Date Modified"),
         auto_now=True,
         blank=True,
         editable=False)
 
-    print_pub_date = models.DateTimeField(_('Print Publish Date'),
+    print_pub_date = models.DateTimeField(
+        _('Print Publish Date'),
         blank=True,
         null=True),
-    print_section = models.CharField(_('Print Section'),
+    print_section = models.CharField(
+        _('Print Section'),
         max_length=30,
         blank=True,
         null=True),
-    print_page = models.CharField(_('Print Page'),
+    print_page = models.CharField(
+        _('Print Page'),
         max_length=5,
         blank=True,
         null=True),
 
-    comments = models.BooleanField(_('Enable Comments?'),
+    comments = models.BooleanField(
+        _('Enable Comments?'),
         default=True)
-    comment_status = models.IntegerField(_('Comment Status'),
+    comment_status = models.IntegerField(
+        _('Comment Status'),
         choices=settings.COMMENT_STATUSES,
         default=1
     )
-    status = models.IntegerField(_('Published Status'),
+    status = models.IntegerField(
+        _('Published Status'),
         choices=settings.STATUS_CHOICES,
         default=settings.DEFAULT_STATUS)
     teaser = models.TextField(_("Teaser Text"), blank=True)
-    kicker = models.CharField(_('Kicker'),
+    kicker = models.CharField(
+        _('Kicker'),
         max_length=50,
         blank=True,
         null=True)
     body = models.TextField(_("Body"))
-    origin = models.IntegerField(_("Origin"),
+    origin = models.IntegerField(
+        _("Origin"),
         choices=settings.ORIGIN_CHOICES,
         default=settings.DEFAULT_ORIGIN,)
     site = models.ForeignKey(Site, verbose_name=_('Site'))
@@ -175,7 +197,7 @@ class Story(models.Model):
                 self.publish_date = datetime.now().date()
             if not self.publish_time:
                 self.publish_time = datetime.now().time()
-            self.slug = Story.objects.get_unique_slug(self.publish_date, self.slug)
+            self.slug = Story.objects.get_unique_slug(self.publish_date, self.slug, self.id)
         super(Story, self).save(*args, **kwargs)
 
     @property
@@ -192,7 +214,7 @@ class Story(models.Model):
         fields are set (author/one-off author)
         """
         import warnings
-        warnings.warn('Story.author property is being deprecated, use '\
+        warnings.warn('Story.author property is being deprecated, use '
                       '`Story.author_display` instead', DeprecationWarning)
 
         AuthorModel = models.get_model(*settings.AUTHOR_MODEL.split("."))
