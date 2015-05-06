@@ -11,4 +11,4 @@ recursive-include stories/static *.png *.js *.css
 recursive-include stories/relations/static *.js
 recursive-include stories/templates *.html
 
-prune example
+prune example/
