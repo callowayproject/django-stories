@@ -4,9 +4,9 @@ An application for handling newspaper-like stories on a web site
 
 __version_info__ = {
     'major': 1,
-    'minor': 0,
-    'micro': 8,
-    'releaselevel': 'final',
+    'minor': 1,
+    'micro': 0,
+    'releaselevel': 'beta',
     'serial': 1
 }
 

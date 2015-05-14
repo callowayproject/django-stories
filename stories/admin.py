@@ -107,19 +107,24 @@ class StoryAdmin(AdminModel):
         (_('Story data'), {
             'fields': ('kicker', 'authors', 'non_staff_author',
                        'status', 'origin', 'comment_status', )
-        }),)
+        }),
+    )
 
     if settings.INCLUDE_PRINT:
-        fieldsets = fieldsets + (_('Print Information'), {
-            'fields': ('print_pub_date', 'print_section', 'print_page'),
-            'classes': ('collapse',),
-        })
+        fieldsets = fieldsets + (
+            (_('Print Information'), {
+                'fields': ('print_pub_date', 'print_section', 'print_page'),
+                'classes': ('collapse',),
+            }),
+        )
 
-    fieldsets = fieldsets + ((_('Advanced Options'), {
+    fieldsets = fieldsets + (
+        (_('Advanced Options'), {
             'fields': ('slug', ('publish_date', 'publish_time'),
                        'update_date', 'site', ),
             'classes': ('collapse',),
-        }),)
+        }),
+    )
 
     change_list_template = 'admin/stories/change_list.html'
     revision_form_template = 'admin/stories/reversion_form.html'
@@ -138,10 +143,10 @@ class StoryAdmin(AdminModel):
         self.fieldsets = list(self.fieldsets)
         for extra_fs in settings.ADMIN_EXTRAS.get('EXTRA_FIELDSETS', ()):
             fs = (extra_fs.get('name', None), {
-                    'fields': extra_fs['fields'],
-                    'classes': extra_fs.get('classes', ()),
-                    'description': extra_fs.get('description', None)
-                 })
+                'fields': extra_fs['fields'],
+                'classes': extra_fs.get('classes', ()),
+                'description': extra_fs.get('description', None)
+            })
 
             if 'position' in extra_fs:
                 self.fieldsets.insert(extra_fs.get('position'), fs)
@@ -159,12 +164,12 @@ class StoryAdmin(AdminModel):
             return db_field.formfield(widget=self._get_widget())
         return super(StoryAdmin, self).formfield_for_dbfield(db_field, **kwargs)
 
-    def queryset(self, request):
+    def get_queryset(self, request):
         """
         Need to override to show all the stories. Default manager
         only shows published stories
         """
-        qs = self.model.objects.get_query_set()
+        qs = self.model.objects.get_queryset()
         ordering = self.ordering or ()  # otherwise we might try to *None, which is bad ;)
         if ordering:
             qs = qs.order_by(*ordering)
@@ -184,7 +189,7 @@ class StoryAdmin(AdminModel):
                 request=request),
         }
         defaults.update(kwargs)
-        QEForm = modelform_factory(self.model)
+        QEForm = modelform_factory(self.model, fields=settings.QUICKEDIT_FIELDS)  # NOQA
         return modelformset_factory(
             self.model,
             QEForm,
