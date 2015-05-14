@@ -1,14 +1,12 @@
 language: python
 python:
-  - "2.6"
   - "2.7"
 env:
-  - DV=1.3.7 CV=1.1.4
-  - DV=1.3.7 CV=1.1.2
-  - DV=1.4.5 CV=1.1.4
-  - DV=1.4.5 CV=1.1.2
   - DV=1.5.1 CV=1.2.1
   - DV=1.5.1 CV=1.2.2
+  - DV=1.5.1 CV=1.2.2
+  - DV=1.6.11 CV=1.2.2
+  - DV=1.7.8 CV=1.3b1
 install:
   - pip install django-categories==$CV
   - pip install Django==$DV
