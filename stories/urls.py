@@ -2,10 +2,8 @@
 # -*- coding: utf-8 -*-
 """URL definitions for news stories
 """
-try:
-    from django.conf.urls.defaults import patterns, url
-except ImportError:
-    from django.conf.urls import patterns, url
+
+from django.conf.urls import patterns, url
 from django.views.generic import (ArchiveIndexView, YearArchiveView,
     MonthArchiveView, WeekArchiveView, DayArchiveView, TodayArchiveView,
     DateDetailView)

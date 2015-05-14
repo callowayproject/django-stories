@@ -33,6 +33,7 @@ class StoryForm(forms.ModelForm):
 
     class Meta:
         model = Story
+        exclude = ('modified_date', )
 
     def __init__(self, *args, **kwargs):
         initial = kwargs.get('initial', {})

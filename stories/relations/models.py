@@ -11,7 +11,7 @@ from stories.models import Story
 
 STORY_RELATION_LIMITS = []
 if story_settings.RELATION_MODELS:
-    STORY_RELATION_LIMITS = reduce(lambda x, y: x|y, story_settings.RELATIONS)
+    STORY_RELATION_LIMITS = reduce(lambda x, y: x | y, story_settings.RELATIONS)
 
 
 class StoryRelationManager(models.Manager):
@@ -21,14 +21,14 @@ class StoryRelationManager(models.Manager):
         """
         Get all the related items with a specific content_type
         """
-        qs = self.get_query_set()
+        qs = self.get_queryset()
         return qs.filter(content_type__name=content_type)
 
     def get_relation_type(self, relation_type):
         """
         Get all the related items with a specific relation_type
         """
-        qs = self.get_query_set()
+        qs = self.get_queryset()
         return qs.filter(relation_type=relation_type)
 
 

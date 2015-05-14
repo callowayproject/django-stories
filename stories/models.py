@@ -23,8 +23,8 @@ from stories import settings
 
 
 class CurrentSitePublishedManager(CurrentSiteManager):
-    def get_query_set(self):
-        queryset = super(CurrentSitePublishedManager, self).get_query_set()
+    def get_queryset(self):
+        queryset = super(CurrentSitePublishedManager, self).get_queryset()
         return queryset.filter(
             publish_date__lte=datetime.now()
         ).filter(
@@ -45,7 +45,7 @@ class AlternateManager(CurrentSiteManager):
             'slug': slug[:50],
             'publish_date': publish_date,
         }
-        qset = self.get_query_set().filter(**query_params)
+        qset = self.get_queryset().filter(**query_params)
         if exclude_id:
             qset = qset.exclude(id=exclude_id)
         return qset.count() == 0
@@ -62,12 +62,12 @@ class AlternateManager(CurrentSiteManager):
         if not self.unique_slug(publish_date, slug, story_id):
             # Allow up to 10,000 versions on the same date
             query_params['slug__startswith'] = slug[:46]
-            num = self.get_query_set().filter(**query_params).count()
+            num = self.get_queryset().filter(**query_params).count()
             slug = '%s%s' % (slug[:46], str(num + 1))
         return slug
 
     def published(self):
-        queryset = self.get_query_set()
+        queryset = self.get_queryset()
         return queryset.filter(
             publish_date__lte=datetime.now()
         ).filter(
@@ -100,7 +100,7 @@ class Story(models.Model):
         verbose_name=_('Authors'),
         blank=True,
         null=True,
-        limit_choices_to=settings.AUTHOR_MODEL_LIMIT_CHOICES)
+        limit_choices_to=settings.AUTHOR_MODEL_LIMIT_CHOICES,)
     non_staff_author = models.CharField(
         _('Non-staff author(s)'),
         max_length=200,
@@ -288,7 +288,7 @@ if settings.USE_REVERSION:
                     'installed and in INSTALLED_APPS'
     try:
         import reversion
-        if not 'reversion' in site_settings.INSTALLED_APPS:
+        if 'reversion' not in site_settings.INSTALLED_APPS:
             raise ImproperlyConfigured(rev_error_msg)
     except (ImportError, ):
         raise ImproperlyConfigured(rev_error_msg)
@@ -310,5 +310,5 @@ try:
             from categories.migration import migrate_app
             from django.db.models.signals import post_syncdb
             post_syncdb.connect(migrate_app)
-except (ImportError, ValueError):
+except (ImportError, ValueError, ):
     pass
