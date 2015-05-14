@@ -11,3 +11,5 @@ media/css/*.r*.css
 *.egg-info
 example/media/js/*
 doc_src/_build/*
+dist/
+MANIFEST
