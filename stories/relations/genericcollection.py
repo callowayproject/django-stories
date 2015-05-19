@@ -3,6 +3,8 @@
 
 from django.contrib import admin
 from django.contrib.contenttypes.models import ContentType
+from django.core.urlresolvers import reverse, NoReverseMatch
+import json
 
 
 class GenericCollectionInlineModelAdmin(admin.options.InlineModelAdmin):
@@ -10,12 +12,15 @@ class GenericCollectionInlineModelAdmin(admin.options.InlineModelAdmin):
     ct_fk_field = "object_id"
 
     def __init__(self, parent_model, admin_site):
-        super(GenericCollectionInlineModelAdmin, self).__init__(
-            parent_model, admin_site)
-        ctypes = ContentType.objects.all().order_by('id').values_list(
-            'id', 'app_label', 'model')
-        elements = ["%s: '%s/%s'" % (x, y, z) for x, y, z in ctypes]
-        self.content_types = "{%s}" % ",".join(elements)
+        super(GenericCollectionInlineModelAdmin, self).__init__(parent_model, admin_site)
+        ctypes = ContentType.objects.all().order_by('id').values_list('id', 'app_label', 'model')
+        elements = {}
+        for x, y, z in ctypes:
+            try:
+                elements[x] = reverse("admin:%s_%s_changelist" % (y, z))
+            except NoReverseMatch:
+                continue
+        self.content_types = json.dumps(elements)
 
     def get_formset(self, request, obj=None, **kwargs):
         result = super(GenericCollectionInlineModelAdmin, self).get_formset(
