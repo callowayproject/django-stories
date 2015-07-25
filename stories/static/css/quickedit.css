@@ -21,3 +21,6 @@ div.qe-buttons img{
 table#result_list {
   width: 85%;
 }
+.controls input[type="text"] {
+    width: 95%;
+}

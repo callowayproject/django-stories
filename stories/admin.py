@@ -101,8 +101,15 @@ class StoryAdmin(AdminModel):
 
     fieldsets = (
         (None, {
-            'fields': ('headline', 'subhead', 'tease_headline',
-                       'teaser', 'body')
+            'fields': ('headline', 'subhead', 'tease_headline',)
+        }),
+        (_('Teaser'), {
+            'fields': ('teaser', ),
+            'classes': ('full-width', )
+        }),
+        (_('Body'), {
+            'fields': ('body', ),
+            'classes': ('full-width', )
         }),
         (_('Story data'), {
             'fields': ('kicker', 'authors', 'non_staff_author',
