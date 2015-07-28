@@ -31,9 +31,9 @@ function showRelObjectLookupPopup(name, triggeringLink, ctItem) {
     var href = triggeringLink.href = '../../../' + ctItem + '/';
 
     if (href.search(/\?/) >= 0) {
-        href = href + '&pop=1';
+        href = href + '&_popup=1&_to_field=id';
     } else {
-        href = href + '?pop=1';
+        href = href + '?_popup=1&_to_field=id';
     }
     var win = window.open(href, name, 'height=500,width=800,resizable=yes,scrollbars=yes');
     win.focus();
