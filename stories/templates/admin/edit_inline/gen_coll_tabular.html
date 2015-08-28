@@ -52,7 +52,7 @@
                                             {{ field.field.errors.as_ul }}
                                          {% if field.field.name == inline_admin_formset.formset.ct_fk_field %}
                                                 {{ field.field }}
-                                                <a id="lookup_id_{{field.field.html_name}}" class="related-lookup" onclick="return showGenericRelatedObjectLookupPopup(this, {{ inline_admin_formset.formset.content_types }});" href=".">
+                                                <a id="lookup_id_{{field.field.html_name}}" class="gen-related-lookup" href=".">
                                                     <img width="16" height="16" alt="Lookup" src="{% static "admin/img/selector-search.gif" %}"/>
                                                 </a>
                                                 {% if inline_admin_form.original %}
@@ -89,6 +89,10 @@
     adminStaticPrefix: '{% static "admin/" %}',
     addText: "{% blocktrans with inline_admin_formset.opts.verbose_name|capfirst as verbose_name %}Add another {{ verbose_name }}{% endblocktrans %}",
     deleteText: "{% trans 'Remove' %}"
+  });
+  $("a.gen-related-lookup").on('click', function(e) {
+    showGenericRelatedObjectLookupPopup(this, {{ inline_admin_formset.formset.content_types }});
+    e.preventDefault();
   });
 })(django.jQuery);
 </script>

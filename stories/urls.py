@@ -49,7 +49,7 @@ urlpatterns = patterns('',
     ),
     # news archive day list
     url(
-        r'^(?P<year>\d{4})/(?P<month>\w{3})/(?P<day>\d{2})/$',
+        r'^(?P<year>\d{4})/(?P<month>\w{3})/(?P<day>\d{1,2})/$',
         DayArchiveView.as_view(**info_dict),
         name='news_archive_day'
     ),
@@ -65,13 +65,13 @@ urlpatterns = patterns('',
         'stories.views.pag_story_detail',
         name='news_detail'
     ),
-    #story print detail
+    # story print detail
     url(
         r'^(?P<year>\d{4})/(?P<month>\w{3})/(?P<day>\d{1,2})/(?P<slug>[-\w]+)/print/$',
         DateDetailView.as_view(**print_info_dict),
         name='news_detail_print',
     ),
-    #story comments
+    # story comments
     url(
         r'^(?P<year>\d{4})/(?P<month>\w{3})/(?P<day>\d{1,2})/(?P<slug>[-\w]+)/comments/$',
         DateDetailView.as_view(**comment_info_dict),

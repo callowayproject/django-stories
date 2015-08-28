@@ -1,9 +1,9 @@
 function showGenericRelatedObjectLookupPopup(triggeringLink, ctArray) {
+
     var realName = triggeringLink.id.replace(/^lookup_/, '');
     var name = id_to_windowname(realName);
     realName = realName.replace(/object_id/, 'content_type');
     var select = document.getElementById(realName);
-    // return false;
     if (select.selectedIndex === 0) {
         alert("Select a content type first.");
         return false;
