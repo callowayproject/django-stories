@@ -94,7 +94,7 @@ class Story(models.Model):
         null=True)
     slug = models.SlugField(
         _('Slug'),
-        max_length=50)
+        max_length=255)
     authors = models.ManyToManyField(
         settings.AUTHOR_MODEL,
         verbose_name=_('Authors'),

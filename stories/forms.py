@@ -11,6 +11,7 @@ from .models import Story
 
 WIDGET_ATTRS = {'size': '85'}
 
+
 class StoryForm(forms.ModelForm):
     headline = forms.CharField(
         widget=forms.TextInput(attrs=WIDGET_ATTRS),
@@ -40,11 +41,11 @@ class StoryForm(forms.ModelForm):
         instance = kwargs.get('instance', None)
 
         # Set a default publish time and the current site if it is a new object
-        if not instance and not 'publish_date' in initial:
+        if not instance and 'publish_date' not in initial:
             initial['publish_date'] = datetime.datetime.now().date()
-        if not instance and not 'publish_time' in initial:
+        if not instance and 'publish_time' not in initial:
             initial['publish_time'] = datetime.datetime.now().time().strftime('%H:%M:%S')
-        if not instance and not 'site' in initial:
+        if not instance and 'site' not in initial:
             initial['site'] = Site.objects.get_current().id
 
         kwargs.update({'initial': initial})
@@ -62,9 +63,9 @@ class StoryForm(forms.ModelForm):
                     publish_date__month=publish_date.month,
                     publish_date__day=publish_date.day)
                 raise forms.ValidationError(
-                    'Please enter a different slug. The one you'\
+                    'Please enter a different slug. The one you'
                     'entered is already being used for {0}'.format(
-                         publish_date.strftime("%Y-%b-%d")))
+                        publish_date.strftime("%Y-%b-%d")))
             except Story.DoesNotExist:
                 pass
 
